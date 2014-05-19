@@ -1,4 +1,4 @@
-application: giftbookfront
+application: nusbridge
 version: 1
 runtime: python27
 api_version: 1
@@ -8,24 +8,13 @@ handlers:
 - url: /stylesheets
   static_dir: stylesheets
 
-# - url: /images
-#  static_dir: images
-
 - url: /scripts
   static_dir: scripts
 
-# Twitter Bootstrap
-# - url: /bootstrap
-#  static_dir: bootstrap
 
-Handler for front page
+# Handler for front page
 - url: /
   script: nusbridge.app
-
-# All other pages require login
-#- url: /.*
-#  script: nusbridge.app
-#  login: required
 
 libraries:
 - name: jinja2
