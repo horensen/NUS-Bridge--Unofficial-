@@ -10,9 +10,9 @@ from urllib2 import urlopen
 from urlparse import urlparse
 from random import randint
 
-# Tell this application to look for views inside the templates folder
+# Global variables
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + "/templates"), autoescape=True)
-
+ivle_uri_template_prefix = 'https://ivle.nus.edu.sg/api/Lapi.svc/'
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
