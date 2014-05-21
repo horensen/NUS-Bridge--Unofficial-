@@ -20,11 +20,12 @@ class MainPage(webapp2.RequestHandler):
         self.response.out.write(template.render())
 
 class StudentProfile(webapp2.RequestHandler):
-    # Front page for those logged in
+    # Front page for logged in users
     def get(self):
-        user = users.get_current_user()
-        if user:  # signed in already
+        user_has_logged_in = users.get_current_user()
+        if user_has_logged_in:  # signed in already
             template_values = {
+                'student_name': users.get_current_user().nickname(),
                 'student_email': users.get_current_user().email(),
                 'logout': users.create_logout_url(self.request.host_url),
             }
