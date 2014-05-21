@@ -11,10 +11,14 @@ handlers:
 - url: /scripts
   static_dir: scripts
 
-
 # Handler for front page
 - url: /
   script: nusbridge.app
+
+ All other pages require login
+- url: /.*
+  script: nusbridge.app
+  login: required
 
 libraries:
 - name: jinja2
