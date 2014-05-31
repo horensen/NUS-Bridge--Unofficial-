@@ -10,7 +10,7 @@ handlers:
 
 - url: /scripts
   static_dir: scripts
-
+  
 # Handler for front page
 - url: /
   script: nusbridge.app

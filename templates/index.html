@@ -1,70 +1,90 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<link rel="shortcut icon" href="favicon.ico">
-	<link href="../stylesheets/bootstrap.css" rel="stylesheet">
-	<title>NUS Bridge</title>   
+  <head>
+  	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<meta name="description" content="">
+  	<meta name="author" content="">
+  	<link rel="shortcut icon" href="favicon.ico">
+  	<link href="../stylesheets/bootstrap.css" rel="stylesheet">
+  	<title>NUS Bridge</title>   
+  	<!-- Just for debugging purposes. Don't actually copy this line! -->
+  	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
-	<!-- Just for debugging purposes. Don't actually copy this line! -->
-	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-      <![endif]-->
+  	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+      <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
   </head>
 
   <body>
-  	<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  		<div class="container">
-  			<div class="navbar-header">
-  				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-  					<span class="sr-only">Toggle navigation</span>
-  					<span class="icon-bar"></span>
-  					<span class="icon-bar"></span>
-  					<span class="icon-bar"></span>
-  				</button>
-  				<a class="navbar-brand" href="#">NUS Bridge (Experimental)</a>
-  			</div>
-  			<div class="navbar-collapse collapse">
-  				<ul class="nav navbar-nav">
-  				</ul>
-  				<form class="navbar-form navbar-right" role="form">
-            <div class="form-group">
-              <input type="text" placeholder="NUSNET ID" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-          </form>
-  			</div>
-  		</div>
-  	</div>
+    <header id="navbar-top" class="banner navbar navbar-default" role="banner" style="display: block;">
+      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle btn-primary" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span>Sign in with NUSNET ID</span>
+            </button>
+            <a class="navbar-brand" href="/">NUS Bridge</a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <form class="navbar-form navbar-right" role="form" method="get" action="/profile">
+              <div class="form-group">
+                <input type="text" placeholder="NUSNET ID" class="form-control">
+              </div>
+              <div class="form-group">
+                <input type="password" placeholder="Password" class="form-control">
+              </div>
+              <button type="submit" class="btn btn-success">Sign In</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </header>
 
     <div class="jumbotron">
       <div class="container">
-        <br/>
-        <h1>Collective wisdom for your aspiration</h1>
-        <br/>
-        <p>NUS Bridge supports you with answers for uncertainties that may arise in your journey to your dreams, by putting together the minds of everyone in NUS.</p>
-
-        <p>All we need for that to happen is your contribution.</p>
+        <h1>What will your journey look like for your aspiration?</h1>
+        <p>Everyone has their own. Discover who you may know and find out what you might want to learn from them who have the same aspirations as yours.</p>
       </div>
     </div>
-  	<div class="container">
-        <h1>This site is still under development.</h1>
-  		
-  	</div>
 
-  	<script src="../scripts/jquery.js"></script>
-  	<script src="../scripts/bootstrap.js"></script>
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Because relationship matters</h1>
+        <p>We all know how important connections are. However, the value is not always obvious. It takes a little bit of intuition. Now you can visualise your social capital.</p>
+      </div>
+    </div>
+
+    <div class="jumbotron">
+      <div class="container">
+        <h1>The process of analysis</h1>
+        <p>We use your aspirations, your current education, your cumulative experience and a personality test to evaluate who are similar to you and who are complementary to you. Both could be valuable for your aspirations. Based on your personality results, we would suggest to you how you can understand others by understanding yourself.</p>
+      </div>
+    </div>
+
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Collective wisdom for everyone</h1>
+        <p>An ambitious person like you love to learn new things. Discover people who are like you and learn what they know. People who are not like you might want to know you. Diversify your perspective of your aspiration.</p>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            <h1>About</h1>
+            <p>Your connections are the most important assets for your personal well-being and professional success. It can be challenging to understand the value of your connections in an academic setting. What is not obvious could be valuable; it might be overlooked. Our mission is to make it as clear as possible by putting the minds of everyone in NUS so that we can bring you collective wisdom for your aspiration. Who knows that you might make new connections. All we need for our mission and clarity for your aspiration is your contribution.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../scripts/jquery.js"></script>
+    <script src="../scripts/bootstrap.js"></script>
   </body>
-  </html>
+</html>
