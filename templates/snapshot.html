@@ -30,7 +30,7 @@
   					<span class="icon-bar"></span>
   					<span class="icon-bar"></span>
   				</button>
-  				<a class="navbar-brand" href="#">NUS Bridge</a>
+  				<a class="navbar-brand" href="/snapshot">NUS Bridge</a>
   			</div>
   			<div class="navbar-collapse collapse">
   				<ul class="nav navbar-nav">
@@ -38,18 +38,18 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Questionnaires <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="">Aspirations</a></li>
-                <li><a href="">Education</a></li>
-                <li><a href="">Experience</a></li>
-                <li><a href="">Personality</a></li>
+                <li><a href="/aspirations">Aspirations</a></li>
+                <li><a href="/education">Education</a></li>
+                <li><a href="/experience">Experience</a></li>
+                <li><a href="/personality">Personality</a></li>
               </ul>
             </li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Collective Wisdom For You<b class="caret"></b></a>
+              <a href="" class="dropdown-toggle" data-toggle="dropdown">Collective Wisdom For You<b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="">Symmetrical Connections</a></li>
-                <li><a href="">Complementary Connections</a></li>
-                <li><a href="">Improvement Advisory</a></li>
+                <li><a href="/symmetrical-connections">Symmetrical Connections</a></li>
+                <li><a href="/complementary-connections">Complementary Connections</a></li>
+                <li><a href="/improvement-advisory">Improvement Advisory</a></li>
               </ul>
             </li>
   				</ul>
@@ -59,8 +59,8 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">{{ student_email }}</li>
                 <li class="divider"></li>
-                <li><a href="">Profile</a></li>
-                <li><a href="">Account Settings</a></li>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/account">Account Settings</a></li>
                 <li><a href="{{ logout }}">Log out</a></li>
               </ul>
             </li>
@@ -72,53 +72,91 @@
   	<div class="jumbotron">
   		<div class="container">
   			<div class="row">
-  				<div class="col-md-3">
+  				<div class="col-md-3 text-center">
   					<img data-src="holder.js/200x200/auto/sky" class="img-circle" alt="{{ student_name }}" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzBEOEZEQiIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjEwMCIgeT0iMTAwIiBzdHlsZT0iZmlsbDojZmZmO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjEzcHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MjAweDIwMDwvdGV4dD48L3N2Zz4=">
   				</div>
-  				<div class="col-md-9">
-		  			<h1>Student Name</h1>
-		  			<p>Matriculated in 20##</p>
-		  			<h2>Major, Faculty</h2>
+  				<div class="col-md-9 text-center">
+		  			<h1>(Student Name)</h1>
+		  			<p>Matriculated in (Year)</p>
+		  			<h2>(Major), (Faculty)</h2>
   				</div>
   			</div>
   		</div>
   	</div>
 
   	<div class="container">
+
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h3><span id="greeting"></span> Help us to get to know you better.</h3>
+          <script>
+            var now = new Date();
+            var greeting = "";
+            if (now.getHours() < 12 ) { 
+              greeting = "Good morning.";
+            } else if (now.getHours() >= 12 && now.getHours() <= 17 ) { 
+              greeting = "Good afternoon.";
+            } else if (now.getHours() > 17 && now.getHours() <= 24 ) { 
+              greeting = "Good evening.";
+            }
+            document.getElementById("greeting").innerHTML = greeting;
+          </script>
+          <br/>
+        </div>
+      </div>
+
   		<div class="row">
-  			<div class="col-md-6">
-  				<div class="panel panel-default">
+  			<div class="col-md-3">
+  				<div class="panel panel-info">
   					<div class="panel-heading">Your Aspirations</div>
-  					<div class="panel-body">List of aspirations</div>
+  					<div class="panel-body">
+                <button type="button" class="btn btn-success btn-lg btn-block" disabled="disabled">Completed</button>
+            </div>
 				</div>
   			</div>
-  			<div class="col-md-6">
+  			<div class="col-md-3">
   				<div class="panel panel-default">
   					<div class="panel-heading">Your Education</div>
-  					<div class="panel-body">List of best performing modules</div>
-				</div>
+  					<div class="panel-body">
+            <button type="button" class="btn btn-primary btn-lg btn-block">Begin Questionnaire</button>
+            </div>
+				  </div>
   			</div>
+        <div class="col-md-3">
+          <div class="panel panel-default">
+            <div class="panel-heading">Your Experience</div>
+            <div class="panel-body">
+              <button type="button" class="btn btn-primary btn-lg btn-block">Begin Questionnaire</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="panel panel-default">
+            <div class="panel-heading">Your Personality</div>
+            <div class="panel-body"><button type="button" class="btn btn-primary btn-lg btn-block">Begin Questionnaire</button>
+              </div>
+          </div>
+        </div>
   		</div>
   		<div class="row">
-  			<div class="col-md-6">
-  				<div class="panel panel-default">
-  					<div class="panel-heading">Your Experience</div>
-  					<div class="panel-body">List of skills or areas of knowledge. Most recent advice. List of interests. Most recent activity or achievement.</div>
-				</div>
-  			</div>
-  			<div class="col-md-6">
-  				<div class="panel panel-default">
-  					<div class="panel-heading">Your Personality</div>
-  					<div class="panel-body">Two dominant temperaments.
-  					Definition.</div>
-				</div>
-  			</div>
+  			
   		</div>
-	- show progress bar
-	- do not show analysis if there are uncompleted questionnaires
   	</div>
 
-
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-2">
+            NUS Bridge
+          </div>
+          <div class="col-md-7">
+          </div>
+          <div class="col-md-3 text-right">
+            <p>About</p>
+          </div>
+        </div>
+      </div>
+    </footer>
 
   	<script src="../scripts/jquery.js"></script>
   	<script src="../scripts/bootstrap.js"></script>

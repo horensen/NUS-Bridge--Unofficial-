@@ -78,32 +78,30 @@ class ImprovementAdvisory(webapp2.RequestHandler):
     def get(self):
         template = jinja_environment.get_template('improvement.html')
         self.response.out.write(template.render())
-
+	
 class UserName(ndb.Model):
 	name=ndb.StringProperty()
 	
 class UserDisplay(webapp2.RequestHandler):
-	"""user1=UserName(name="Peter")
-	user1.put()
-	user2=UserName(name="John")
-	user2.put()
-	user3=UserName(name="Sandy")
-	user3.put()"""
-	
+	#user1=UserName(parent=ndb.Key("NUSBridge","User Acc"), name="Mary")
+	#user1.put()
+	global template
+	template = jinja_environment.get_template('testingNdb.html')
 	def get(self):
-		template = jinja_environment.get_template('testingNdb.html')
+		global template
 		self.response.out.write(template.render())
 	def post(self):
+		global template
 		user_name=self.request.get('username')
 		if(user_name!=None):
-			result=UserName.query(name=user_name).fetch()
-			if result:
-				self.response.out.write('%s is a registered user'%(result))
+			key=ndb.Key("NUSBridge","User Acc")
+			results=UserName.query(UserName.name==user_name).fetch()
+			if results:
+				for result in results:
+					self.response.out.write('<blockquote>%s is a registered user</blockquote>'%(result.name))
 			else:
-				self.response.out.write('%s is a not a registered user'%(result))
-		else:
-			self.response.out.write('No input is detected.')
-
+				self.response.out.write('<blockquote>%s is a not a registered user</blockquote>'%(user_name))
+		self.response.out.write(template.render())
 # add more links like this ,('/wishlist', WishList) inside the square brackets []
 app = webapp2.WSGIApplication([('/', MainPage),
                                ('/account', Account),
