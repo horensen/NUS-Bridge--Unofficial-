@@ -16,8 +16,10 @@ ivle_uri_template_prefix = 'https://ivle.nus.edu.sg/api/Lapi.svc/'
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
+	first = self.request.get('token')
         template = jinja_environment.get_template('index.html')
         self.response.out.write(template.render())
+	self.response.out.write(first)
 
 class Account(webapp2.RequestHandler):
     def get(self):
