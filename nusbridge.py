@@ -1,25 +1,36 @@
-# Import relevant libraries
-import urllib
+# Libraries
+import urllib2
+import json
 import webapp2
 import jinja2
 import os
 import datetime
 from google.appengine.ext import ndb
 from google.appengine.api import users
-from urllib2 import urlopen
 from urlparse import urlparse
 from random import randint
 
 # Global variables
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + "/templates"), autoescape=True)
-ivle_uri_template_prefix = 'https://ivle.nus.edu.sg/api/Lapi.svc/'
+app_domain = 'http://nusbridge.appspot.com/'
+ivle_domain = 'https://ivle.nus.edu.sg/'
+ivle_api_key = 'O3nIU9c7l8jqYXfBMJlJN'
+ivle_token = ''
+user_is_validated = False
+student_name = ''
+student_email = ''
+matriculation_year = ''
+first_major = ''
+second_major = ''
+faculty = ''
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
-	first = self.request.get('token')
+        template_values = {
+            'login_url': ivle_domain + 'api/login/?apikey=' + ivle_api_key + '&url=' + app_domain + 'snapshot'
+        }
         template = jinja_environment.get_template('index.html')
-        self.response.out.write(template.render())
-	self.response.out.write(first)
+        self.response.out.write(template.render(template_values))
 
 class Account(webapp2.RequestHandler):
     def get(self):
@@ -27,24 +38,42 @@ class Account(webapp2.RequestHandler):
         self.response.out.write(template.render())
 
 class Profile(webapp2.RequestHandler):
-    # Front page for logged in users
     def get(self):
-        user_has_logged_in = users.get_current_user()
-        if user_has_logged_in:  # signed in already
-            template_values = {
-                'student_name': users.get_current_user().nickname(),
-                'student_email': users.get_current_user().email(),
-                'logout': users.create_logout_url(self.request.host_url),
-            }
-            template = jinja_environment.get_template('profile.html')
-            self.response.out.write(template.render(template_values))
-        else:
-            self.redirect(self.request.host_url)
+        template_values = {
+            'student_name': users.get_current_user().nickname(),
+            'student_email': users.get_current_user().email(),
+            'logout': users.create_logout_url(self.request.host_url),
+        }
+        template = jinja_environment.get_template('profile.html')
+        self.response.out.write(template.render(template_values))
 
 class Snapshot(webapp2.RequestHandler):
     def get(self):
-        template = jinja_environment.get_template('snapshot.html')
-        self.response.out.write(template.render())
+        ivle_token = self.request.get('token')
+        user_is_validated = json.load(urllib2.urlopen(ivle_domain + 'api/Lapi.svc/Validate?APIKey=' + ivle_api_key + '&Token=' + ivle_token))['Success']
+        
+        if user_is_validated:
+            student_profile = json.load(urllib2.urlopen(ivle_domain + 'api/Lapi.svc/Profile_View?APIKey=' + ivle_api_key + '&AuthToken=' + ivle_token))['Results'][0]
+            student_name = student_profile['Name']
+            student_email = student_profile['Email']
+            matriculation_year = student_profile['MatriculationYear']
+            first_major = student_profile['FirstMajor']
+            second_major = student_profile['SecondMajor']
+            faculty = student_profile['Faculty']
+
+            template_values = {
+                'student_name': student_name,
+                'student_email': student_email,
+                'matriculation_year': matriculation_year,
+                'first_major': first_major,
+                'second_major': second_major,
+                'faculty': faculty
+            }
+
+            template = jinja_environment.get_template('snapshot.html')
+            self.response.out.write(template.render(template_values))
+        else:
+            self.redirect(app_domain)
 
 class Aspirations(webapp2.RequestHandler):
     def get(self):
@@ -104,7 +133,8 @@ class UserDisplay(webapp2.RequestHandler):
 			else:
 				self.response.out.write('<blockquote>%s is a not a registered user</blockquote>'%(user_name))
 		self.response.out.write(template.render())
-# add more links like this ,('/wishlist', WishList) inside the square brackets []
+
+# Add more links like this ,('/wishlist', WishList) in the square brackets []
 app = webapp2.WSGIApplication([('/', MainPage),
                                ('/account', Account),
                                ('/profile', Profile),

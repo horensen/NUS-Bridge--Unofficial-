@@ -76,9 +76,9 @@
   					<img data-src="holder.js/200x200/auto/sky" class="img-circle" alt="{{ student_name }}" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzBEOEZEQiIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjEwMCIgeT0iMTAwIiBzdHlsZT0iZmlsbDojZmZmO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjEzcHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MjAweDIwMDwvdGV4dD48L3N2Zz4=">
   				</div>
   				<div class="col-md-9 text-center">
-		  			<h1>(Student Name)</h1>
-		  			<p>Matriculated in (Year)</p>
-		  			<h2>(Major), (Faculty)</h2>
+		  			<h1>{{ student_name }}</h1>
+		  			<p>Matriculated in {{ matriculation_year }}</p>
+		  			<h2>{{ first_major }}{% if second_major != '' %}{{ " and " + second_major }}{% endif %}, {{ faculty }}</h2>
   				</div>
   			</div>
   		</div>
