@@ -26,7 +26,8 @@ faculty = ''
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
-        ivle_token = ''
+        global user_is_validated
+        
         user_is_validated = False
         template_values = {
             'login_url': ivle_domain + 'api/login/?apikey=' + ivle_api_key + '&url=' + app_domain + 'snapshot'
@@ -51,8 +52,12 @@ class Profile(webapp2.RequestHandler):
 
 class Snapshot(webapp2.RequestHandler):
     def get(self):
-        ivle_token = self.request.get('token')
-        user_is_validated = json.load(urllib2.urlopen(ivle_domain + 'api/Lapi.svc/Validate?APIKey=' + ivle_api_key + '&Token=' + ivle_token))['Success']
+        global user_is_validated
+        global ivle_token
+
+        if user_is_validated == False:
+            ivle_token = self.request.get('token')
+            user_is_validated = json.load(urllib2.urlopen(ivle_domain + 'api/Lapi.svc/Validate?APIKey=' + ivle_api_key + '&Token=' + ivle_token))['Success']
         
         if user_is_validated:
             student_profile = json.load(urllib2.urlopen(ivle_domain + 'api/Lapi.svc/Profile_View?APIKey=' + ivle_api_key + '&AuthToken=' + ivle_token))['Results'][0]
