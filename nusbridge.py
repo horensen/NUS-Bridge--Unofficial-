@@ -26,6 +26,8 @@ faculty = ''
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
+        ivle_token = ''
+        user_is_validated = False
         template_values = {
             'login_url': ivle_domain + 'api/login/?apikey=' + ivle_api_key + '&url=' + app_domain + 'snapshot'
         }
