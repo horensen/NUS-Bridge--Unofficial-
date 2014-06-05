@@ -37,15 +37,20 @@ class MainPage(webapp2.RequestHandler):
 
 class Account(webapp2.RequestHandler):
     def get(self):
+        global student_name
+
+        template_values = {
+            'student_name': student_name
+        }
         template = jinja_environment.get_template('account.html')
-        self.response.out.write(template.render())
+        self.response.out.write(template.render(template_values))
 
 class Profile(webapp2.RequestHandler):
     def get(self):
+        global student_name
+
         template_values = {
-            'student_name': users.get_current_user().nickname(),
-            'student_email': users.get_current_user().email(),
-            'logout': users.create_logout_url(self.request.host_url),
+            'student_name': student_name
         }
         template = jinja_environment.get_template('profile.html')
         self.response.out.write(template.render(template_values))
@@ -54,6 +59,12 @@ class Snapshot(webapp2.RequestHandler):
     def get(self):
         global user_is_validated
         global ivle_token
+        global student_name
+        global student_email
+        global matriculation_year
+        global first_major
+        global second_major
+        global faculty
 
         if user_is_validated == False:
             ivle_token = self.request.get('token')
@@ -104,8 +115,13 @@ class Personality(webapp2.RequestHandler):
 
 class SymmetricalConnections(webapp2.RequestHandler):
     def get(self):
+        global student_name
+
+        template_values = {
+            'student_name': student_name
+        }
         template = jinja_environment.get_template('symmetrical.html')
-        self.response.out.write(template.render())
+        self.response.out.write(template.render(template_values))
 
 class ComplementaryConnections(webapp2.RequestHandler):
     def get(self):
@@ -153,5 +169,5 @@ app = webapp2.WSGIApplication([('/', MainPage),
                                ('/symmetrical-connections', SymmetricalConnections),
                                ('/complementary-connections', ComplementaryConnections),
                                ('/improvement-advisory', ImprovementAdvisory),
-							                 ('/testingNdb', UserDisplay)],
+							   ('/testingNdb', UserDisplay)],
                               debug=True)
