@@ -6,7 +6,6 @@ import jinja2
 import os
 import datetime
 from google.appengine.ext import ndb
-from google.appengine.api import users
 from urlparse import urlparse
 from random import randint
 
@@ -17,6 +16,7 @@ ivle_domain = 'https://ivle.nus.edu.sg/'
 ivle_api_key = 'O3nIU9c7l8jqYXfBMJlJN'
 ivle_token = ''
 user_is_validated = False
+student_id = ''
 student_name = ''
 student_email = ''
 matriculation_year = ''
@@ -38,9 +38,11 @@ class MainPage(webapp2.RequestHandler):
 class Account(webapp2.RequestHandler):
     def get(self):
         global student_name
+        global student_email
 
         template_values = {
-            'student_name': student_name
+            'student_name': student_name,
+            'student_email': student_email
         }
         template = jinja_environment.get_template('account.html')
         self.response.out.write(template.render(template_values))
@@ -48,9 +50,11 @@ class Account(webapp2.RequestHandler):
 class Profile(webapp2.RequestHandler):
     def get(self):
         global student_name
+        global student_email
 
         template_values = {
-            'student_name': student_name
+            'student_name': student_name,
+            'student_email': student_email
         }
         template = jinja_environment.get_template('profile.html')
         self.response.out.write(template.render(template_values))
@@ -59,6 +63,7 @@ class Snapshot(webapp2.RequestHandler):
     def get(self):
         global user_is_validated
         global ivle_token
+        global student_id
         global student_name
         global student_email
         global matriculation_year
@@ -72,6 +77,7 @@ class Snapshot(webapp2.RequestHandler):
         
         if user_is_validated:
             student_profile = json.load(urllib2.urlopen(ivle_domain + 'api/Lapi.svc/Profile_View?APIKey=' + ivle_api_key + '&AuthToken=' + ivle_token))['Results'][0]
+            student_id = student_profile['UserID']
             student_name = student_profile['Name']
             student_email = student_profile['Email']
             matriculation_year = student_profile['MatriculationYear']
@@ -95,49 +101,93 @@ class Snapshot(webapp2.RequestHandler):
 
 class Aspirations(webapp2.RequestHandler):
     def get(self):
+        global student_name
+        global student_email
+
+        template_values = {
+            'student_name': student_name,
+            'student_email': student_email
+        }
         template = jinja_environment.get_template('aspirations.html')
-        self.response.out.write(template.render())
+        self.response.out.write(template.render(template_values))
 
 class Education(webapp2.RequestHandler):
     def get(self):
+        global student_name
+        global student_email
+
+        template_values = {
+            'student_name': student_name,
+            'student_email': student_email
+        }
         template = jinja_environment.get_template('education.html')
-        self.response.out.write(template.render())
+        self.response.out.write(template.render(template_values))
 
 class Experience(webapp2.RequestHandler):
     def get(self):
+        global student_name
+        global student_email
+
+        template_values = {
+            'student_name': student_name,
+            'student_email': student_email
+        }
         template = jinja_environment.get_template('experience.html')
-        self.response.out.write(template.render())
+        self.response.out.write(template.render(template_values))
 
 class Personality(webapp2.RequestHandler):
     def get(self):
+        global student_name
+        global student_email
+
+        template_values = {
+            'student_name': student_name,
+            'student_email': student_email
+        }
         template = jinja_environment.get_template('personality.html')
-        self.response.out.write(template.render())
+        self.response.out.write(template.render(template_values))
 
 class SymmetricalConnections(webapp2.RequestHandler):
     def get(self):
         global student_name
+        global student_email
 
         template_values = {
-            'student_name': student_name
+            'student_name': student_name,
+            'student_email': student_email
         }
         template = jinja_environment.get_template('symmetrical.html')
         self.response.out.write(template.render(template_values))
 
 class ComplementaryConnections(webapp2.RequestHandler):
     def get(self):
+        global student_name
+        global student_email
+
+        template_values = {
+            'student_name': student_name,
+            'student_email': student_email
+        }
         template = jinja_environment.get_template('complementary.html')
-        self.response.out.write(template.render())
+        self.response.out.write(template.render(template_values))
 
 class ImprovementAdvisory(webapp2.RequestHandler):
     def get(self):
+        global student_name
+        global student_email
+
+        template_values = {
+            'student_name': student_name,
+            'student_email': student_email
+        }
         template = jinja_environment.get_template('improvement.html')
-        self.response.out.write(template.render())
+        self.response.out.write(template.render(template_values))
 	
 class UserName(ndb.Model):
 	name=ndb.StringProperty()
 	
 class UserDisplay(webapp2.RequestHandler):
-	#user1=UserName(parent=ndb.Key("NUSBridge","User Acc"), name="Mary")
+	#user1=UserName(parent=ndb.Key("NUSBridge",user_name), major="sci")
 	#user1.put()
 	global template
 	template = jinja_environment.get_template('testingNdb.html')

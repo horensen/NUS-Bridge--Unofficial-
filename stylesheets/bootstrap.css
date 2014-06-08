@@ -3936,8 +3936,14 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-default {
-  background-color: #dd4814;
+  /*background-color: #dd4814;*/
+  background: -webkit-linear-gradient(orange, #dd4814); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(orange, #dd4814); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(orange, #dd4814); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(orange, #dd4814); /* Standard syntax (must be last) */
   border-color: #bf3e11;
+  -webkit-box-shadow: 0 0px 20px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 0px 20px rgba(0, 0, 0, 0.175);
 }
 .navbar-default .navbar-brand {
   color: #ffffff;

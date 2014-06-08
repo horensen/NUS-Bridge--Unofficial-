@@ -36,7 +36,7 @@
   			</div>
   			<div class="navbar-collapse collapse">
   				<ul class="nav navbar-nav">
-            <li class="active"><a href="/snapshot">My Snapshot</a></li>
+            <li class="active"><a href="/snapshot">Snapshot</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Questionnaires <b class="caret"></b></a>
               <ul class="dropdown-menu">
@@ -75,7 +75,7 @@
   		<div class="container">
   			<div class="row">
   				<div class="col-md-3 text-center">
-  					<img data-src="holder.js/200x200/auto/sky" class="img-circle" alt="{{ student_name }}" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzBEOEZEQiIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjEwMCIgeT0iMTAwIiBzdHlsZT0iZmlsbDojZmZmO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjEzcHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+MjAweDIwMDwvdGV4dD48L3N2Zz4=">
+            <img src="../images/icon_961.png" class="img-circle" style="height:200px; width:200px; border:3px solid gray;">
   				</div>
   				<div class="col-md-9 text-center">
 		  			<h1>{{ student_name }}</h1>
@@ -86,64 +86,93 @@
   		</div>
   	</div>
 
-  	<div class="container">
-
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <h3><span id="greeting"></span> Help us to get to know you better.</h3>
-          <script>
-            var now = new Date();
-            var greeting = "";
-            if (now.getHours() < 12 ) { 
-              greeting = "Good morning.";
-            } else if (now.getHours() >= 12 && now.getHours() <= 17 ) { 
-              greeting = "Good afternoon.";
-            } else if (now.getHours() > 17 && now.getHours() <= 24 ) { 
-              greeting = "Good evening.";
-            }
-            document.getElementById("greeting").innerHTML = greeting;
-          </script>
+    <div class="well" style="border-radius: 0px;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h4>Complete all questionnaires to see a dynamically generated summary about you so that we can analyse it for interesting connections for your goals.</h4>
           <br/>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3">
+            <button type="button" class="btn btn-primary btn-lg btn-block">Your Aspirations</button>
+          </div>
+          <div class="col-md-3">
+            <button type="button" class="btn btn-primary btn-lg btn-block">Your Education</button>
+          </div>
+          <div class="col-md-3">
+            <button type="button" class="btn btn-primary btn-lg btn-block">Your Experience</button>
+          </div>
+          <div class="col-md-3">
+            <button type="button" class="btn btn-primary btn-lg btn-block">Your Personality</button>
+          </div>
         </div>
       </div>
+    </div>
 
-  		<div class="row">
-  			<div class="col-md-3">
-  				<div class="panel panel-info">
-  					<div class="panel-heading">Your Aspirations</div>
-  					<div class="panel-body">
-                <button type="button" class="btn btn-success btn-lg btn-block" disabled="disabled">Completed</button>
-            </div>
-				</div>
-  			</div>
-  			<div class="col-md-3">
-  				<div class="panel panel-default">
-  					<div class="panel-heading">Your Education</div>
-  					<div class="panel-body">
-            <button type="button" class="btn btn-primary btn-lg btn-block">Begin Questionnaire</button>
-            </div>
-				  </div>
-  			</div>
-        <div class="col-md-3">
-          <div class="panel panel-default">
-            <div class="panel-heading">Your Experience</div>
-            <div class="panel-body">
-              <button type="button" class="btn btn-primary btn-lg btn-block">Begin Questionnaire</button>
-            </div>
+  	<div class="container">
+      <div class="row">
+         <div class="col-md-8">
+              <h2><span id="greeting"></span>, {{ student_name }}.</h2>
+              <script>
+                var now = new Date();
+                var greeting = "";
+                if (now.getHours() < 12 ) { 
+                  greeting = "Good morning";
+                } else if (now.getHours() >= 12 && now.getHours() <= 17 ) { 
+                  greeting = "Good afternoon";
+                } else if (now.getHours() > 17 && now.getHours() <= 24 ) { 
+                  greeting = "Good evening";
+                }
+                document.getElementById("greeting").innerHTML = greeting;
+              </script>
+              <p>
+                You feel that you have done well in {{ three_or_less_modules }} and {{ remaining_module_count }} other modules. This is probably related to any of your {{ number_of_interests }} interests and {{ number_of_skills }} skills.
+              </p>
+              <p>
+                As you appreciate learning about {{ interests }} and you are good at {{ skills }}, you aspire to be {{ aspirations }} after your graduation. One of your strengths professionally is that you {{ strength_at_work }}. You would probably use what you have learned from {{ activities }} at work.
+              </p>
+              <p>
+                You are also probably known for {{ known_for_as_a_friend }}. You are best in {{ best_of_personality }}. If someone looks up to you for general academic survival advice or what you stand for strongly, one of the things you might want people to know is {{ advice }}.
+              </p>
           </div>
-        </div>
-        <div class="col-md-3">
-          <div class="panel panel-default">
-            <div class="panel-heading">Your Personality</div>
-            <div class="panel-body"><button type="button" class="btn btn-primary btn-lg btn-block">Begin Questionnaire</button>
+          <div class="col-md-4">
+            <div class="panel panel-default">
+              <div class="panel-heading">Personal Information</div>
+              <div class="panel-body">
+                <p>Gender</p>
+                <p>{{ gender }}</p>
+                <p>Nationality</p>
+                <p>{{ nationality }}</p>
+                <p>Age</p>
+                <p>{{ age }} (born in {{ date_of_birth }})</p>
               </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">Presence</div>
+              <div class="panel-body">
+                <p>Social Networks</p>
+                <ul>
+                  {{ social_networks }}
+                </ul>
+                <p>Websites</p>
+                <ul>
+                  {{ websites }}
+                </ul>
+                <p>Associations</p>
+                <ul>
+                  {{ associations }}
+                </ul>                                
+              </div>
+            </div>
           </div>
-        </div>
-  		</div>
-  		<div class="row">
-  			
-  		</div>
-  	</div>
+      </div>     
+    </div>
+
+
+  	
     <hr class="featurette-divider">
     <footer>
       <div class="container">
