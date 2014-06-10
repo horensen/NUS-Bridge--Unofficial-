@@ -40,24 +40,30 @@ class Account(webapp2.RequestHandler):
         global student_name
         global student_email
 
-        template_values = {
-            'student_name': student_name,
-            'student_email': student_email
-        }
-        template = jinja_environment.get_template('account.html')
-        self.response.out.write(template.render(template_values))
+        if user_is_validated:
+            template_values = {
+                'student_name': student_name,
+                'student_email': student_email
+            }
+            template = jinja_environment.get_template('account.html')
+            self.response.out.write(template.render(template_values))
+        else:
+            self.redirect(app_domain)
 
 class Profile(webapp2.RequestHandler):
     def get(self):
         global student_name
         global student_email
 
-        template_values = {
-            'student_name': student_name,
-            'student_email': student_email
-        }
-        template = jinja_environment.get_template('profile.html')
-        self.response.out.write(template.render(template_values))
+        if user_is_validated:
+            template_values = {
+                'student_name': student_name,
+                'student_email': student_email
+            }
+            template = jinja_environment.get_template('profile.html')
+            self.response.out.write(template.render(template_values))
+        else:
+            self.redirect(app_domain)
 
 class Snapshot(webapp2.RequestHandler):
     def get(self):
@@ -104,84 +110,105 @@ class Aspirations(webapp2.RequestHandler):
         global student_name
         global student_email
 
-        template_values = {
-            'student_name': student_name,
-            'student_email': student_email
-        }
-        template = jinja_environment.get_template('aspirations.html')
-        self.response.out.write(template.render(template_values))
+        if user_is_validated:
+            template_values = {
+                'student_name': student_name,
+                'student_email': student_email
+            }
+            template = jinja_environment.get_template('aspirations.html')
+            self.response.out.write(template.render(template_values))
+        else:
+            self.redirect(app_domain)
 
 class Education(webapp2.RequestHandler):
     def get(self):
         global student_name
         global student_email
 
-        template_values = {
-            'student_name': student_name,
-            'student_email': student_email
-        }
-        template = jinja_environment.get_template('education.html')
-        self.response.out.write(template.render(template_values))
+        if user_is_validated:
+            template_values = {
+                'student_name': student_name,
+                'student_email': student_email
+            }
+            template = jinja_environment.get_template('education.html')
+            self.response.out.write(template.render(template_values))
+        else:
+            self.redirect(app_domain)
 
 class Experience(webapp2.RequestHandler):
     def get(self):
         global student_name
         global student_email
 
-        template_values = {
-            'student_name': student_name,
-            'student_email': student_email
-        }
-        template = jinja_environment.get_template('experience.html')
-        self.response.out.write(template.render(template_values))
+        if user_is_validated:
+            template_values = {
+                'student_name': student_name,
+                'student_email': student_email
+            }
+            template = jinja_environment.get_template('experience.html')
+            self.response.out.write(template.render(template_values))
+        else:
+            self.redirect(app_domain)
 
 class Personality(webapp2.RequestHandler):
     def get(self):
         global student_name
         global student_email
 
-        template_values = {
-            'student_name': student_name,
-            'student_email': student_email
-        }
-        template = jinja_environment.get_template('personality.html')
-        self.response.out.write(template.render(template_values))
+        if user_is_validated:
+            template_values = {
+                'student_name': student_name,
+                'student_email': student_email
+            }
+            template = jinja_environment.get_template('personality.html')
+            self.response.out.write(template.render(template_values))
+        else:
+            self.redirect(app_domain)
 
 class SymmetricalConnections(webapp2.RequestHandler):
     def get(self):
         global student_name
         global student_email
 
-        template_values = {
-            'student_name': student_name,
-            'student_email': student_email
-        }
-        template = jinja_environment.get_template('symmetrical.html')
-        self.response.out.write(template.render(template_values))
+        if user_is_validated:
+            template_values = {
+                'student_name': student_name,
+                'student_email': student_email
+            }
+            template = jinja_environment.get_template('symmetrical.html')
+            self.response.out.write(template.render(template_values))
+        else:
+            self.redirect(app_domain)
 
 class ComplementaryConnections(webapp2.RequestHandler):
     def get(self):
         global student_name
         global student_email
 
-        template_values = {
-            'student_name': student_name,
-            'student_email': student_email
-        }
-        template = jinja_environment.get_template('complementary.html')
-        self.response.out.write(template.render(template_values))
+        if user_is_validated:
+            template_values = {
+                'student_name': student_name,
+                'student_email': student_email
+            }
+            template = jinja_environment.get_template('complementary.html')
+            self.response.out.write(template.render(template_values))
+        else:
+            self.redirect(app_domain)
 
 class ImprovementAdvisory(webapp2.RequestHandler):
     def get(self):
         global student_name
         global student_email
 
-        template_values = {
-            'student_name': student_name,
-            'student_email': student_email
-        }
-        template = jinja_environment.get_template('improvement.html')
-        self.response.out.write(template.render(template_values))
+        if user_is_validated:
+            template_values = {
+                'student_name': student_name,
+                'student_email': student_email
+            }
+            template = jinja_environment.get_template('improvement.html')
+            self.response.out.write(template.render(template_values))
+        else:
+            self.redirect(app_domain)
 	
 class UserName(ndb.Model):
 	name=ndb.StringProperty()
