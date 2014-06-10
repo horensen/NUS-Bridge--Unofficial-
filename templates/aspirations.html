@@ -8,9 +8,73 @@
   <meta name="author" content="">
   <link rel="shortcut icon" href="favicon.ico">
   <link href="../stylesheets/bootstrap.css" rel="stylesheet">
+  <link href="../stylesheets/jquery-ui.css" rel="stylesheet">
+  <link href="../stylesheets/jquery.tagit.css" rel="stylesheet">
   <script src="../scripts/jquery.js"></script>
+  <script src="../scripts/jquery-ui.js"></script>
   <script src="../scripts/bootstrap.js"></script>
-  <script src="../scripts/chart.js"></script>
+  <script src="../scripts/tag-it.js"></script>
+  <script>
+    $(document).ready(function(){
+      // References:
+      // - https://github.com/aehlke/tag-it
+      // - http://jqueryui.com/autocomplete/#remote
+
+      var listOfAspirations = [
+          "entrepreneur",
+          "interaction designer",
+          "business developer",
+          "electrical engineer",
+          "architect",
+          "doctor",
+          "lawyer",
+          "banker",
+          "accountant"
+      ];
+
+      $("#myTags").tagit({
+        // Options
+        fieldName: "aspirations",
+        availableTags: listOfAspirations,
+        autocomplete: {
+          delay: 0,
+          minLength: 2
+        },
+        showAutocompleteOnFocus: false,
+        removeConfirmation: true,
+        caseSensitive: false,
+        allowDuplicates: false,
+        allowSpaces: true,
+        readOnly: false,
+        tagLimit: null,
+        singleField: true,
+        singleFieldDelimiter: ',',
+        singleFieldNode: null,
+        tabIndex: null,
+        placeholderText: null,
+
+        // Events
+        beforeTagAdded: function(event, ui) {
+            console.log(ui.tag);
+        },
+        afterTagAdded: function(event, ui) {
+            console.log(ui.tag);
+        },
+        beforeTagRemoved: function(event, ui) {
+            console.log(ui.tag);
+        },
+        onTagExists: function(event, ui) {
+            console.log(ui.tag);
+        },
+        onTagClicked: function(event, ui) {
+            console.log(ui.tag);
+        },
+        onTagLimitExceeded: function(event, ui) {
+            console.log(ui.tag);
+        }
+      });
+    });
+  </script>
   <title>NUS Bridge</title>   
 
   <!-- Just for debugging purposes. Don't actually copy this line! -->
@@ -78,8 +142,21 @@
           <div class="col-md-12 text-center">
             <h1>Your Aspirations</h1>
             <br/>
-            <p>If doubt is not in the equation, what do you want or want to be?</p>
+            <p>Where do you see yourself in the future? Or what would you like to be?</p>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-mg-12 text-center">
+          <form method="post" action="/aspirations">
+            <ul id="myTags">
+            </ul>
+            <!-- hidden here is an input textbox named 'aspirations' with values delimited with commas -->
+            <button class="btn btn-primary btn-lg" type="submit">Submit</button>
+          </form>
         </div>
       </div>
     </div>
