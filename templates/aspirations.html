@@ -142,7 +142,7 @@
           <div class="col-md-12 text-center">
             <h1>Your Aspirations</h1>
             <br/>
-            <p>Where do you see yourself in the future? Or what would you like to be?</p>
+            <p>Where do you see yourself after graduation? If you are very certain, type in one otherwise type in a few.</p>
           </div>
         </div>
       </div>
@@ -150,14 +150,16 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-mg-12 text-center">
-          <form method="post" action="/aspirations">
+        <form method="post" action="/aspirations">
+        <div class="col-md-10 text-center">
             <ul id="myTags">
             </ul>
             <!-- hidden here is an input textbox named 'aspirations' with values delimited with commas -->
-            <button class="btn btn-primary btn-lg" type="submit">Submit</button>
-          </form>
         </div>
+        <div class="col-md-2 text-center">
+          <button class="btn btn-success btn-lg btn-block" type="submit">Next <span class="glyphicon glyphicon-chevron-right"></button>
+        </div>
+        </form>
       </div>
     </div>
     
