@@ -5,6 +5,7 @@ import webapp2
 import jinja2
 import os
 import datetime
+import HTMLParser
 from google.appengine.ext import ndb
 from urlparse import urlparse
 from random import randint
@@ -126,9 +127,22 @@ class Education(webapp2.RequestHandler):
         global student_email
 
         if user_is_validated:
+            modules_taken_obj = json.load(urllib2.urlopen(ivle_domain + 'api/Lapi.svc/Modules_Taken?APIKey=' + ivle_api_key + '&AuthToken=' + ivle_token + '&StudentID=' + student_id))['Results']
+            list_of_modules_taken = ''
+            number_of_modules_taken = 0
+            
+            for module in modules_taken_obj:
+                if number_of_modules_taken is 0:
+                    list_of_modules_taken += module['ModuleCode'] + " " + module['ModuleTitle']
+                else:
+                    list_of_modules_taken += "," + module['ModuleCode'] + " " + module['ModuleTitle']
+                number_of_modules_taken += 1
+
             template_values = {
                 'student_name': student_name,
-                'student_email': student_email
+                'student_email': student_email,
+                'list_of_modules_taken': list_of_modules_taken,
+                'number_of_modules_taken': number_of_modules_taken
             }
             template = jinja_environment.get_template('education.html')
             self.response.out.write(template.render(template_values))

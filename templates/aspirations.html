@@ -40,7 +40,7 @@
           delay: 0,
           minLength: 2
         },
-        showAutocompleteOnFocus: false,
+        showAutocompleteOnFocus: true,
         removeConfirmation: true,
         caseSensitive: false,
         allowDuplicates: false,
@@ -51,7 +51,7 @@
         singleFieldDelimiter: ',',
         singleFieldNode: null,
         tabIndex: null,
-        placeholderText: null,
+        placeholderText: 'your burning desire',
 
         // Events
         beforeTagAdded: function(event, ui) {
@@ -140,9 +140,9 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12 text-center">
-            <h1>Your Aspirations</h1>
+            <h1>What is your dream?</h1>
             <br/>
-            <p>Where do you see yourself after graduation? If you are very certain, type in one otherwise type in a few.</p>
+            <p>Where do you see yourself after your graduation? Or what do you hope to become or achieve?</p>
           </div>
         </div>
       </div>
@@ -150,9 +150,10 @@
 
     <div class="container">
       <div class="row">
-        <form method="post" action="/aspirations">
+        <form method="get" action="/education">
         <div class="col-md-10 text-center">
             <ul id="myTags">
+              
             </ul>
             <!-- hidden here is an input textbox named 'aspirations' with values delimited with commas -->
         </div>
