@@ -10,7 +10,7 @@
 	<link href="../stylesheets/bootstrap.css" rel="stylesheet">
   <script src="../scripts/jquery.js"></script>
   <script src="../scripts/bootstrap.js"></script>
-  <title>NUS Bridge</title>   
+  <title>Snapshot | NUS Bridge</title>   
 
 	<!-- Just for debugging purposes. Don't actually copy this line! -->
 	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -61,8 +61,7 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">{{ student_email }}</li>
                 <li class="divider"></li>
-                <li><a href="/profile">Profile</a></li>
-                <li><a href="/account">Account Settings</a></li>
+                <li><a href="/profile">Edit profile</a></li>
                 <li><a href="/">Log out</a></li>
               </ul>
             </li>
@@ -132,13 +131,13 @@
                 }
                 document.getElementById("greeting").innerHTML = greeting;
               </script>
-              <p>
+              <p class="lead">
                 You feel that you have done well in {{ three_or_less_modules }} and {{ remaining_module_count }} other modules. This is probably related to any of your {{ number_of_interests }} interests and {{ number_of_skills }} skills.
               </p>
-              <p>
+              <p class="lead">
                 As you appreciate learning about {{ interests }} and you are good at {{ skills }}, you aspire to be {{ aspirations }} after your graduation. At work, you {{ two_strengths_from_two_traits_at_work }}. You would probably use what you have learned from {{ activities }}.
               </p>
-              <p>
+              <p class="lead">
                 It seems that you {{ two_stengths_from_two_traits_as_a_friend }}. You are best in {{ two_best_from_two_traits }}. If someone looks up to you for general academic survival advice or what you stand for strongly, one of the things you might want people to know is {{ advice }}.
               </p>
           </div>

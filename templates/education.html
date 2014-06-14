@@ -26,13 +26,13 @@
       stringOfModules = stringOfModules.replace(/&amp;/g, "&");
       var arrayOfModules = stringOfModules.split(',');
 
-      $("#myTags").tagit({
+      $("#modules_tags").tagit({
         // Options
         fieldName: "modules",
         availableTags: arrayOfModules,
         autocomplete: {
           delay: 0,
-          minLength: 2
+          minLength: 1
         },
         showAutocompleteOnFocus: true,
         removeConfirmation: true,
@@ -45,7 +45,7 @@
         singleFieldDelimiter: ',',
         singleFieldNode: null,
         tabIndex: null,
-        placeholderText: 'list your best modules',
+        placeholderText: '',
 
         // Events
         beforeTagAdded: function(event, ui) {
@@ -70,16 +70,7 @@
       });
     });
   </script>
-  <title>NUS Bridge</title>   
-
-  <!-- Just for debugging purposes. Don't actually copy this line! -->
-  <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-      <![endif]-->
+  <title>Your Education | NUS Bridge</title>
   </head>
 
   <body>
@@ -121,8 +112,7 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">{{ student_email }}</li>
                 <li class="divider"></li>
-                <li><a href="/profile">Profile</a></li>
-                <li><a href="/account">Account Settings</a></li>
+                <li><a href="/profile">Edit profile</a></li>
                 <li><a href="/">Log out</a></li>
               </ul>
             </li>
@@ -137,7 +127,7 @@
           <div class="col-md-12 text-center">
             <h1>What have you done well in?</h1>
             <br/>
-            <p>Which of the {{ number_of_modules_taken }} modules you have completed so far are your best in your opinion?</p>
+            <p class="lead">Which of the {{ number_of_modules_taken }} modules you have completed so far are your best in your opinion?</p>
           </div>
         </div>
       </div>
@@ -147,10 +137,13 @@
       <div class="row">
         <form method="get" action="/experience">
         <div class="col-md-10 text-center">
-            <ul id="myTags">
-              
+            <ul id="modules_tags">   
             </ul>
-            <!-- hidden here is an input textbox named 'aspirations' with values delimited with commas -->
+            <p>e.g. <span id="random_module"></span></p>
+            <script>
+              var random_module_id = Math.floor(Math.random() * (arrayOfModules.length - 1));
+              document.getElementById('random_module').innerHTML = arrayOfModules[random_module_id];
+            </script>
         </div>
         <div class="col-md-2 text-center">
           <button class="btn btn-success btn-lg btn-block" type="submit">Next <span class="glyphicon glyphicon-chevron-right"></button>

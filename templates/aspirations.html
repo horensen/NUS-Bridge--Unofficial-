@@ -51,7 +51,7 @@
         singleFieldDelimiter: ',',
         singleFieldNode: null,
         tabIndex: null,
-        placeholderText: 'your burning desire',
+        placeholderText: '',
 
         // Events
         beforeTagAdded: function(event, ui) {
@@ -75,16 +75,8 @@
       });
     });
   </script>
-  <title>NUS Bridge</title>   
+  <title>Your Aspirations | NUS Bridge</title>   
 
-  <!-- Just for debugging purposes. Don't actually copy this line! -->
-  <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-      <![endif]-->
   </head>
 
   <body>
@@ -126,8 +118,7 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">{{ student_email }}</li>
                 <li class="divider"></li>
-                <li><a href="/profile">Profile</a></li>
-                <li><a href="/account">Account Settings</a></li>
+                <li><a href="/profile">Edit profile</a></li>
                 <li><a href="/">Log out</a></li>
               </ul>
             </li>
@@ -142,7 +133,7 @@
           <div class="col-md-12 text-center">
             <h1>What is your dream?</h1>
             <br/>
-            <p>Where do you see yourself after your graduation? Or what do you hope to become or achieve?</p>
+            <p class="lead">Where do you see yourself after your graduation? Or what do you hope to become or achieve?</p>
           </div>
         </div>
       </div>
@@ -153,9 +144,8 @@
         <form method="get" action="/education">
         <div class="col-md-10 text-center">
             <ul id="myTags">
-              
             </ul>
-            <!-- hidden here is an input textbox named 'aspirations' with values delimited with commas -->
+            <p>enter your dream profession as a common noun</p>
         </div>
         <div class="col-md-2 text-center">
           <button class="btn btn-success btn-lg btn-block" type="submit">Next <span class="glyphicon glyphicon-chevron-right"></button>
