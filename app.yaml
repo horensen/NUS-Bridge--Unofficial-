@@ -19,6 +19,7 @@ handlers:
 
 - url: /.*
   script: nusbridge.app
+  secure: always
 
 libraries:
 - name: jinja2

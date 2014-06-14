@@ -9,6 +9,12 @@
  * @license MIT
  */
 
+ /* modified */
+
+$(function () {
+    $('#slickQuiz').slickQuiz();
+});
+
 (function($){
     $.slickQuiz = function(element, options) {
         var plugin   = this,
@@ -16,9 +22,8 @@
             _element = '#' + $element.attr('id'),
 
             defaults = {
-                checkAnswerText:  'Check My Answer!',
+                checkAnswerText:  'Check',
                 nextQuestionText: 'Next &raquo;',
-                backButtonText: '',
                 tryAgainText: '',
                 skipStartButton: false,
                 numberOfQuestions: null,
@@ -122,8 +127,8 @@
         plugin.method = {
             // Sets up the questions and answers based on above array
             setupQuiz: function() {
-                $quizName.hide().html(quizValues.info.name).fadeIn(1000);
-                $quizHeader.hide().prepend(quizValues.info.main).fadeIn(1000);
+                $quizName.hide().html(quizValues.info.name).fadeIn(500);
+                $quizHeader.hide().prepend(quizValues.info.main).fadeIn(500);
                 $quizResultsCopy.append(quizValues.info.results);
 
                 // add retry button to results view, if enabled
@@ -141,17 +146,14 @@
                         var question = questions[i];
 
                         var questionHTML = $('<li class="' + questionClass +'" id="question' + (count - 1) + '"></li>');
-                        questionHTML.append('<div class="' + questionCountClass + '">Question <span class="current">' + count + '</span> of <span class="total">' + questionCount + '</span></div>');
-                        questionHTML.append('<h3>' + count + '. ' + question.q + '</h3>');
+                        questionHTML.append('<div class="' + questionCountClass + '"><span class="current">' + count + '</span> of <span class="total">' + questionCount + '</span></div>');
+                        questionHTML.append('<h3>' + question.q + '</h3>');
 
-                        // Count the number of true values
+                        
                         var truths = 0;
                         for (i in question.a) {
                             if (question.a.hasOwnProperty(i)) {
                                 answer = question.a[i];
-                                if (answer.correct) {
-                                    truths++;
-                                }
                             }
                         }
 
@@ -251,33 +253,6 @@
                 }
             },
 
-            // Resets (restarts) the quiz (hides results, resets inputs, and displays first question)
-            resetQuiz: function(startButton) {
-                $quizResults.fadeOut(300, function() {
-                    $(_element + ' input').prop('checked', false).prop('disabled', false);
-
-                    $quizLevel.attr('class', 'quizLevel');
-                    $(_element + ' ' + _correct).removeClass(correctClass);
-
-                    $(_element + ' ' + _question          + ',' +
-                      _element + ' ' + _responses         + ',' +
-                      _element + ' ' + _correctResponse   + ',' +
-                      _element + ' ' + _incorrectResponse + ',' +
-                      _element + ' ' + _nextQuestionBtn   + ',' +
-                      _element + ' ' + _prevQuestionBtn
-                    ).hide();
-
-                    $(_element + ' ' + _questionCount + ',' +
-                      _element + ' ' + _answers + ',' +
-                      _element + ' ' + _checkAnswerBtn
-                    ).show();
-
-                    $quizArea.append($(_element + ' ' + _questions)).show();
-
-                    plugin.method.startQuiz($quizResults);
-                });
-            },
-
             // Validates the response selection(s), displays explanations & next question button
             checkAnswer: function(checkButton) {
                 var questionLI    = $($(checkButton).parents(_question)[0]),
@@ -291,7 +266,6 @@
                 for (i in answers) {
                     if (answers.hasOwnProperty(i)) {
                         var answer = answers[i];
-
                         if (answer.correct) {
                             trueAnswers.push($('<div />').html(answer.option).text());
                         }
@@ -307,6 +281,13 @@
                     var inputValue = $(this).next('label').text();
                     selectedAnswers.push(inputValue);
                 });
+
+                var selectedWordsTextbox = document.getElementById("selected_words");
+                if (selectedWordsTextbox.value != "") {
+                    selectedWordsTextbox.value += "," + selectedAnswers[0];
+                } else {
+                    selectedWordsTextbox.value += selectedAnswers[0];
+                }
 
                 if (plugin.config.preventUnanswered && selectedAnswers.length === 0) {
                     alert('You must select at least one answer.');
@@ -355,55 +336,6 @@
                     });
                 } else {
                     plugin.method.completeQuiz();
-                }
-            },
-
-            // Go back to the last question
-            backToQuestion: function(backButton) {
-                var questionLI = $($(backButton).parents(_question)[0]),
-                    answers    = questionLI.find(_answers);
-
-                // Back to previous question
-                if (answers.css('display') === 'block' ) {
-                    var prevQuestion = questionLI.prev(_question);
-
-                    questionLI.fadeOut(300, function() {
-                        prevQuestion.removeClass(correctClass);
-                        prevQuestion.find(_responses + ', ' + _responses + ' li').hide();
-                        prevQuestion.find(_answers).show();
-                        prevQuestion.find(_checkAnswerBtn).show();
-
-                        // If response messaging hasn't been disabled or moved to completion, hide the next question button
-                        // If it has been, we need nextQuestion visible so the user can move forward (there is no separate checkAnswer button)
-                        if (!plugin.config.disableResponseMessaging && !plugin.config.completionResponseMessaging) {
-                            prevQuestion.find(_nextQuestionBtn).hide();
-                        }
-
-                        if (prevQuestion.attr('id') != 'question0') {
-                            prevQuestion.find(_prevQuestionBtn).show();
-                        } else {
-                            prevQuestion.find(_prevQuestionBtn).hide();
-                        }
-
-                        prevQuestion.fadeIn(500);
-                    });
-
-                // Back to question from responses
-                } else {
-                    questionLI.find(_responses).fadeOut(300, function(){
-                        questionLI.removeClass(correctClass);
-                        questionLI.find(_responses + ' li').hide();
-                        answers.fadeIn(500);
-                        questionLI.find(_checkAnswerBtn).fadeIn(500);
-                        questionLI.find(_nextQuestionBtn).hide();
-
-                        // if question is first, don't show back button on question
-                        if (questionLI.attr('id') != 'question0') {
-                            questionLI.find(_prevQuestionBtn).show();
-                        } else {
-                            questionLI.find(_prevQuestionBtn).hide();
-                        }
-                    });
                 }
             },
 
@@ -493,12 +425,6 @@
             $(_element + ' ' + _checkAnswerBtn).on('click', function(e) {
                 e.preventDefault();
                 plugin.method.checkAnswer(this);
-            });
-
-            // Bind "back" buttons
-            $(_element + ' ' + _prevQuestionBtn).on('click', function(e) {
-                e.preventDefault();
-                plugin.method.backToQuestion(this);
             });
 
             // Bind "next" buttons

@@ -5,7 +5,6 @@ from google.appengine.ext.webapp import blobstore_handlers
 
 
 class ProfileInfo(ndb.Model):
-	ivle_token=ndb.StringProperty()
 	student_id=ndb.StringProperty()
 	name=ndb.StringProperty()
 	#picture=ndb.BlobKeyProperty()
@@ -14,12 +13,11 @@ class ProfileInfo(ndb.Model):
 	first_major=ndb.StringProperty()
 	second_major=ndb.StringProperty()
 	faculty=ndb.StringProperty()
-	nationality=ndb.StringProperty()
+	country=ndb.StringProperty()
 	gender=ndb.StringProperty()
 	#dob=ndb.DateProperty()
 	social_network=ndb.StringProperty(repeated=True)
 	assoc_list=ndb.StringProperty(repeated=True)
-	isLogin=ndb.StringProperty()
 
 class Aspirations(ndb.Model):
     student_id=ndb.StringProperty()
@@ -50,10 +48,10 @@ def userExist(std_id):
 		return False
 	else:
 		return True
-def createUser(student_obj,isValid,token):
+def createUser(student_obj):
+	# Also include timestamp
 	user_key=ndb.Key("NUSBridge", "ProfileInfo")
 	nus_user= ProfileInfo(parent=user_key)
-	nus_user.ivle_token=token
 	nus_user.student_id=student_obj['UserID']
 	nus_user.name=student_obj['Name']
 	nus_user.email=student_obj['Email']
@@ -61,10 +59,9 @@ def createUser(student_obj,isValid,token):
 	nus_user.first_major=student_obj['FirstMajor']
 	nus_user.second_major=student_obj['SecondMajor']
 	nus_user.faculty=student_obj['Faculty']
-	nus_user.nationality=''
+	nus_user.country=''
 	nus_user.gender=''
 	#nus_user.dob=''
 	nus_user.social_network=[]
 	nus_user.assoc_list=[]
-	nus_user.isLogin=isValid
 	nus_user.put()

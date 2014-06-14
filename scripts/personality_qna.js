@@ -4,69 +4,80 @@
 
 var quizJSON = {
     "info": {
-        "name":    "",
-        "main":    "",
-        "results": "<h5>Learn More</h5><p>Etiam scelerisque, nunc ac egestas consequat, odio nibh euismod nulla, eget auctor orci nibh vel nisi. Aliquam erat volutpat. Mauris vel neque sit amet nunc gravida congue sed sit amet purus.</p>",
-        "level1":  "Jeopardy Ready",
-        "level2":  "Jeopardy Contender",
-        "level3":  "Jeopardy Amateur",
-        "level4":  "Jeopardy Newb",
-        "level5":  "Stay in school, kid..." // no comma here
+        "results": "<button class=\"btn btn-success btn-lg btn-block\" type=\"submit\">Save</button>"
     },
     "questions": [
-        { // Question 1 - Multiple Choice, Single True Answer
-            "q": "What number is the letter A in the English alphabet?",
+        {
+            "q": "",
             "a": [
-                {"option": "8",      "correct": false},
-                {"option": "14",     "correct": false},
-                {"option": "1",      "correct": true},
-                {"option": "23",     "correct": false} // no comma here
-            ],
-            "correct": "<p><span>That's right!</span> The letter A is the first letter in the alphabet!</p>",
-            "incorrect": "<p><span>Uhh no.</span> It's the first letter of the alphabet. Did you actually <em>go</em> to kindergarden?</p>" // no comma here
+                {"option": "Animated", "trait": "Sanguine", "sign": "Strength", "definition": ""},
+                {"option": "Adventurous", "trait": "Choleric", "sign:": "Strength", "definition": ""},
+                {"option": "Analytical", "trait": "Melancholy", "sign:": "Strength", "definition": ""},
+                {"option": "Adaptable", "trait": "Phlegmatic", "sign:": "Strength", "definition": ""}
+            ]
         },
-        { // Question 2 - Multiple Choice, Multiple True Answers, Select Any
-            "q": "Which of the following best represents your preferred breakfast?",
+        {
+            "q": "",
             "a": [
-                {"option": "Bacon and eggs",               "correct": false},
-                {"option": "Fruit, oatmeal, and yogurt",   "correct": true},
-                {"option": "Leftover pizza",               "correct": false},
-                {"option": "Eggs, fruit, toast, and milk", "correct": true} // no comma here
-            ],
-            "select_any": true,
-            "correct": "<p><span>Nice!</span> Your cholestoral level is probably doing alright.</p>",
-            "incorrect": "<p><span>Hmmm.</span> You might want to reconsider your options.</p>" // no comma here
+                {"option": "Playful", "trait": "Sanguine", "sign": "Strength", "definition": ""},
+                {"option": "Persuasive", "trait": "Choleric", "sign:": "Strength", "definition": ""},
+                {"option": "Persistent", "trait": "Melancholy", "sign:": "Strength", "definition": ""},
+                {"option": "Peaceful", "trait": "Phlegmatic", "sign:": "Strength", "definition": ""}
+            ]
         },
-        { // Question 3 - Multiple Choice, Multiple True Answers, Select All
-            "q": "Where are you right now? Select ALL that apply.",
+        {
+            "q": "",
             "a": [
-                {"option": "Planet Earth",           "correct": true},
-                {"option": "Pluto",                  "correct": false},
-                {"option": "At a computing device",  "correct": true},
-                {"option": "The Milky Way",          "correct": true} // no comma here
-            ],
-            "correct": "<p><span>Brilliant!</span> You're seriously a genius, (wo)man.</p>",
-            "incorrect": "<p><span>Not Quite.</span> You're actually on Planet Earth, in The Milky Way, At a computer. But nice try.</p>" // no comma here
+                {"option": "Sociable", "trait": "Sanguine", "sign": "Strength", "definition": ""},
+                {"option": "Strong willed", "trait": "Choleric", "sign:": "Strength", "definition": ""},
+                {"option": "Self-sacrificing", "trait": "Melancholy", "sign:": "Strength", "definition": ""},
+                {"option": "Submissive", "trait": "Phlegmatic", "sign:": "Strength", "definition": ""}
+            ]
         },
-        { // Question 4
-            "q": "How many inches of rain does Michigan get on average per year?",
+        {
+            "q": "",
             "a": [
-                {"option": "149",    "correct": false},
-                {"option": "32",     "correct": true},
-                {"option": "3",      "correct": false},
-                {"option": "1291",   "correct": false} // no comma here
-            ],
-            "correct": "<p><span>Holy bananas!</span> I didn't actually expect you to know that! Correct!</p>",
-            "incorrect": "<p><span>Fail.</span> Sorry. You lose. It actually rains approximately 32 inches a year in Michigan.</p>" // no comma here
+                {"option": "Convincing", "trait": "Sanguine", "sign": "Strength", "definition": ""},
+                {"option": "Competitive", "trait": "Choleric", "sign:": "Strength", "definition": ""},
+                {"option": "Considerate", "trait": "Melancholy", "sign:": "Strength", "definition": ""},
+                {"option": "Controlled", "trait": "Phlegmatic", "sign:": "Strength", "definition": ""}
+            ]
+        }/*,
+        {
+            "q": "",
+            "a": [
+                {"option": "Refreshing", "trait": "Sanguine", "sign": "Strength", "definition": ""},
+                {"option": "Resourceful", "trait": "Choleric", "sign:": "Strength", "definition": ""},
+                {"option": "Respected", "trait": "Melancholy", "sign:": "Strength", "definition": ""},
+                {"option": "Reserved", "trait": "Phlegmatic", "sign:": "Strength", "definition": ""}
+            ]
         },
-        { // Question 5
-            "q": "Is Earth bigger than a basketball?",
+        {
+            "q": "",
             "a": [
-                {"option": "Yes",    "correct": true},
-                {"option": "No",     "correct": false} // no comma here
-            ],
-            "correct": "<p><span>Good Job!</span> You must be very observant!</p>",
-            "incorrect": "<p><span>ERRRR!</span> What planet Earth are <em>you</em> living on?!?</p>" // no comma here
-        } // no comma here
+                {"option": "Spirited", "trait": "Sanguine", "sign": "Strength", "definition": ""},
+                {"option": "Self-reliant", "trait": "Choleric", "sign:": "Strength", "definition": ""},
+                {"option": "Sensitive", "trait": "Melancholy", "sign:": "Strength", "definition": ""},
+                {"option": "Satisfied", "trait": "Phlegmatic", "sign:": "Strength", "definition": ""}
+            ]
+        },
+        {
+            "q": "",
+            "a": [
+                {"option": "Promoter", "trait": "Sanguine", "sign": "Strength", "definition": ""},
+                {"option": "Positive", "trait": "Choleric", "sign:": "Strength", "definition": ""},
+                {"option": "Planner", "trait": "Melancholy", "sign:": "Strength", "definition": ""},
+                {"option": "Patient", "trait": "Phlegmatic", "sign:": "Strength", "definition": ""}
+            ]
+        },
+        {
+            "q": "",
+            "a": [
+                {"option": "Optimistic", "trait": "Sanguine", "sign": "Strength", "definition": ""},
+                {"option": "Outspoken", "trait": "Choleric", "sign:": "Strength", "definition": ""},
+                {"option": "Orderly", "trait": "Melancholy", "sign:": "Strength", "definition": ""},
+                {"option": "Obliging", "trait": "Phlegmatic", "sign:": "Strength", "definition": ""}
+            ]
+        },*/
     ]
 };

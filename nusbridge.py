@@ -1,4 +1,4 @@
-# Libraries
+# LIBRARIES
 import urllib2
 import NusDatastore
 import json
@@ -7,80 +7,101 @@ import jinja2
 import os
 import datetime
 import HTMLParser
-#import nus_datastore
+import NusDatastore
 from google.appengine.ext import ndb
+#from appengine_utilities import sessions
+from webapp2_extras import sessions
 from urlparse import urlparse
 from random import randint
 
-# Global variables
+
+# GLOBAL VARIABLES
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + "/templates"), autoescape=True)
 app_domain = 'http://nusbridge.appspot.com/'
 ivle_api_key = 'O3nIU9c7l8jqYXfBMJlJN'
 
 
+# BASE REQUEST HANDLER (SESSION MANAGEMENT)
+class BaseHandler(webapp2.RequestHandler):
+    def dispatch(self):
+        # Get a session store for this request
+        self.session_store = sessions.get_store(request=self.request)
+ 
+        try:
+            # Dispatch the request
+            webapp2.RequestHandler.dispatch(self)
+        finally:
+            # Save all sessions
+            self.session_store.save_sessions(self.response)
+ 
+    @webapp2.cached_property
+    def session(self):
+        # Returns a session using the default cookie key
+        return self.session_store.get_session()
 
-class MainPage(webapp2.RequestHandler):
+config = {}
+
+config['webapp2_extras.sessions'] = {
+    'secret_key': ivle_api_key,
+}
+
+
+# INHERITED REQUEST HANDLERS
+class MainPage(BaseHandler):
     def get(self):
+        self.session['ivle_token'] = ""
+        self.session['is_valid'] = False
         template_values = {
             'login_url': 'https://ivle.nus.edu.sg/api/login/?apikey=' + ivle_api_key + '&url=' + app_domain + 'snapshot'
         }
         template = jinja_environment.get_template('index.html')
         self.response.out.write(template.render(template_values))
 
-class Profile(webapp2.RequestHandler):
+class Snapshot(BaseHandler):
     def get(self):
-        global student_name
-        global student_email
-
-        if user_is_validated:
-            template_values = {
-                'student_name': student_name,
-                'student_email': student_email
-            }
-            template = jinja_environment.get_template('profile.html')
-            self.response.out.write(template.render(template_values))
-        else:
-            self.redirect(app_domain)
-
-class Snapshot(webapp2.RequestHandler):
-    user_is_validated=False
-    ivle_token = ''
-    student_id = ''
-    student_name = ''
-    student_email = ''
-    matriculation_year = ''
-    first_major = ''
-    second_major = ''
-    faculty = ''
-
-    def get(self):
-        if self.user_is_validated==False:
-            self.ivle_token = self.request.get('token')
-            self.user_is_validated = json.load(urllib2.urlopen('https://ivle.nus.edu.sg/api/Lapi.svc/Validate?APIKey=' + ivle_api_key + '&Token=' + self.ivle_token))['Success']
+        if self.session.get('is_valid') != True:
+            self.session['ivle_token'] = self.request.get('token')
+            self.session['is_valid'] = json.load(urllib2.urlopen('https://ivle.nus.edu.sg/api/Lapi.svc/Validate?APIKey=' + ivle_api_key + '&Token=' + self.session.get('ivle_token')))['Success']
         
-        if self.user_is_validated:
-            self.student_profile = json.load(urllib2.urlopen('https://ivle.nus.edu.sg/api/Lapi.svc/Profile_View?APIKey=' + ivle_api_key + '&AuthToken=' + self.ivle_token))['Results'][0]
-            
-            self.student_id = self.student_profile['UserID']
-            self.student_name = self.student_profile['Name']
-            self.student_email = self.student_profile['Email']
-            self.matriculation_year = self.student_profile['MatriculationYear']
-            self.first_major = self.student_profile['FirstMajor']
-            self.second_major = self.student_profile['SecondMajor']
-            self.faculty = self.student_profile['Faculty']
+        if self.session.get('is_valid') == True:
+            student_profile_object = json.load(urllib2.urlopen('https://ivle.nus.edu.sg/api/Lapi.svc/Profile_View?APIKey=' + ivle_api_key + '&AuthToken=' + self.session.get('ivle_token')))['Results'][0]
+            self.session['student_id'] = student_profile_object['UserID']
+            self.session['student_name'] = student_profile_object['Name']
+            self.session['student_email'] = student_profile_object['Email']
+            self.session['student_matriculation_year'] = student_profile_object['MatriculationYear']
+            self.session['student_first_major'] = student_profile_object['FirstMajor']
+            self.session['student_second_major'] = student_profile_object['SecondMajor']
+            self.session['student_faculty'] = student_profile_object['Faculty']
 
-            if NusDatastore.userExist(self.student_id):
-                pass
-            else:
-                NusDatastore.createUser(self.student_profile, str(self.user_is_validated), self.ivle_token)
+            if NusDatastore.userExist(self.session['student_id']) == False:
+                NusDatastore.createUser(student_profile_object)
 			
             template_values = {
-                'student_name': self.student_name,
-                'student_email': self.student_email,
-                'matriculation_year': self.matriculation_year,
-                'first_major': self.first_major,
-                'second_major': self.second_major,
-                'faculty': self.faculty
+                'student_name': self.session.get('student_name'),
+                'student_email': self.session.get('student_email'),
+                'matriculation_year': self.session.get('student_matriculation_year'),
+                'first_major': self.session.get('student_first_major'),
+                'second_major': self.session.get('student_second_major'),
+                'faculty': self.session.get('student_faculty'),
+                'three_or_less_modules': '__________',
+                'remaining_module_count': '__________',
+                'number_of_interests': '__________',
+                'number_of_skills': '__________',
+                'interests': '__________',
+                'skills': '__________',
+                'aspirations': '__________',
+                'two_strengths_from_two_traits_at_work': '__________',
+                'activities': '__________',
+                'two_stengths_from_two_traits_as_a_friend': '__________',
+                'two_best_from_two_traits': '__________',
+                'advice': '__________',
+                'gender': '__________',
+                'country': '__________',
+                'age': '__________',
+                'date_of_birth': '__________',
+                'social_networks': '__________',
+                'website': '__________',
+                'associations': '__________'
             }
 
             template = jinja_environment.get_template('snapshot.html')
@@ -88,28 +109,23 @@ class Snapshot(webapp2.RequestHandler):
         else:
             self.redirect(app_domain)
 
-class Aspirations(webapp2.RequestHandler):
+class Aspirations(BaseHandler):
     def get(self):
-        self.student_name = NusDatastore.retrieveUserName()
-        self.student_email= Snapshot.student_email
-        if user_is_validated:
+        if self.session.get('is_valid') == True:
             template_values = {
-                'student_name': self.student_name,
-                'student_email': self.student_email
+                'student_name': self.session.get('student_name'),
+                'student_email': self.session.get('student_email'),
+                'existing_aspirations': ''
             }
             template = jinja_environment.get_template('aspirations.html')
             self.response.out.write(template.render(template_values))
-        else:
-            pass		
+        else:	
             self.redirect(app_domain)
 
-class Education(webapp2.RequestHandler):
+class Education(BaseHandler):
     def get(self):
-        global student_name
-        global student_email
-
-        if user_is_validated:
-            modules_taken_obj = json.load(urllib2.urlopen('https://ivle.nus.edu.sg/api/Lapi.svc/Modules_Taken?APIKey=' + ivle_api_key + '&AuthToken=' + ivle_token + '&StudentID=' + student_id))['Results']
+        if self.session.get('is_valid') == True:
+            modules_taken_obj = json.load(urllib2.urlopen('https://ivle.nus.edu.sg/api/Lapi.svc/Modules_Taken?APIKey=' + ivle_api_key + '&AuthToken=' + self.session.get('ivle_token') + '&StudentID=' + self.session['student_id']))['Results']
             list_of_modules_taken = ''
             number_of_modules_taken = 0
             
@@ -121,8 +137,8 @@ class Education(webapp2.RequestHandler):
                 number_of_modules_taken += 1
 
             template_values = {
-                'student_name': student_name,
-                'student_email': student_email,
+                'student_name': self.session.get('student_name'),
+                'student_email': self.session.get('student_email'),
                 'list_of_modules_taken': list_of_modules_taken,
                 'number_of_modules_taken': number_of_modules_taken
             }
@@ -131,84 +147,80 @@ class Education(webapp2.RequestHandler):
         else:
             self.redirect(app_domain)
 
-class Experience(webapp2.RequestHandler):
+class Experience(BaseHandler):
     def get(self):
-        global student_name
-        global student_email
-
-        if user_is_validated:
+        if self.session.get('is_valid') == True:
             template_values = {
-                'student_name': student_name,
-                'student_email': student_email
+                'student_name': self.session.get('student_name'),
+                'student_email': self.session.get('student_email')
             }
             template = jinja_environment.get_template('experience.html')
             self.response.out.write(template.render(template_values))
         else:
             self.redirect(app_domain)
 
-class Personality(webapp2.RequestHandler):
+class Personality(BaseHandler):
     def get(self):
-        global student_name
-        global student_email
-
-        if user_is_validated:
+        if self.session.get('is_valid') == True:
             template_values = {
-                'student_name': student_name,
-                'student_email': student_email
+                'student_name': self.session.get('student_name'),
+                'student_email': self.session.get('student_email')
             }
             template = jinja_environment.get_template('personality.html')
             self.response.out.write(template.render(template_values))
         else:
             self.redirect(app_domain)
 
-class SymmetricalConnections(webapp2.RequestHandler):
+class SymmetricalConnections(BaseHandler):
     def get(self):
-        global student_name
-        global student_email
-
-        if user_is_validated:
+        if self.session.get('is_valid') == True:
             template_values = {
-                'student_name': student_name,
-                'student_email': student_email
+                'student_name': self.session.get('student_name'),
+                'student_email': self.session.get('student_email')
             }
             template = jinja_environment.get_template('symmetrical.html')
             self.response.out.write(template.render(template_values))
         else:
             self.redirect(app_domain)
 
-class ComplementaryConnections(webapp2.RequestHandler):
+class ComplementaryConnections(BaseHandler):
     def get(self):
-        global student_name
-        global student_email
-
-        if user_is_validated:
+        if self.session.get('is_valid') == True:
             template_values = {
-                'student_name': student_name,
-                'student_email': student_email
+                'student_name': self.session.get('student_name'),
+                'student_email': self.session.get('student_email')
             }
             template = jinja_environment.get_template('complementary.html')
             self.response.out.write(template.render(template_values))
         else:
             self.redirect(app_domain)
 
-class ImprovementAdvisory(webapp2.RequestHandler):
+class ImprovementAdvisory(BaseHandler):
     def get(self):
-        global student_name
-        global student_email
-
-        if user_is_validated:
+        if self.session.get('is_valid') == True:
             template_values = {
-                'student_name': student_name,
-                'student_email': student_email
+                'student_name': self.session.get('student_name'),
+                'student_email': self.session.get('student_email')
             }
             template = jinja_environment.get_template('improvement.html')
             self.response.out.write(template.render(template_values))
         else:
             self.redirect(app_domain)
-	
-class UserName(ndb.Model):
-	name=ndb.StringProperty()
-	
+
+class Profile(BaseHandler):
+    def get(self):
+        if self.session.get('is_valid') == True:
+            template_values = {
+                'student_name': self.session.get('student_name'),
+                'student_email': self.session.get('student_email')
+            }
+            template = jinja_environment.get_template('profile.html')
+            self.response.out.write(template.render(template_values))
+        else:
+            self.redirect(app_domain)
+
+
+# FOR TESTING
 class UserDisplay(webapp2.RequestHandler):
 	#user1=UserName(parent=ndb.Key("NUSBridge",user_name), major="sci")
 	#user1.put()
@@ -230,16 +242,11 @@ class UserDisplay(webapp2.RequestHandler):
 				self.response.out.write('<blockquote>%s is a not a registered user</blockquote>'%(user_name))
 		self.response.out.write(template.render())
 
-# Add more links like this ,('/wishlist', WishList) in the square brackets []
-app = webapp2.WSGIApplication([('/', MainPage),
-                               ('/profile', Profile),
-                               ('/snapshot', Snapshot),
-                               ('/aspirations', Aspirations),
-                               ('/education', Education),
-                               ('/experience', Experience),
-                               ('/personality', Personality),
-                               ('/symmetrical-connections', SymmetricalConnections),
-                               ('/complementary-connections', ComplementaryConnections),
-                               ('/improvement-advisory', ImprovementAdvisory),
-							   ('/testingNdb', UserDisplay)],
-                              debug=True)
+
+# NDB MODELS
+class UserName(ndb.Model):
+    name=ndb.StringProperty()
+
+
+# APP WSGI APPLICATION
+app = webapp2.WSGIApplication([('/', MainPage), ('/profile', Profile), ('/snapshot', Snapshot), ('/aspirations', Aspirations), ('/education', Education), ('/experience', Experience), ('/personality', Personality), ('/symmetrical-connections', SymmetricalConnections), ('/complementary-connections', ComplementaryConnections), ('/improvement-advisory', ImprovementAdvisory), ('/testingNdb', UserDisplay)], config=config, debug=True)
