@@ -10,10 +10,18 @@
     <link href="../stylesheets/bootstrap.css" rel="stylesheet">
     <link href="../stylesheets/jquery-ui.css" rel="stylesheet">
     <link href="../stylesheets/jquery.tagit.css" rel="stylesheet">
+    <link href="../stylesheets/slickQuiz.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="../stylesheets/master.css" media="screen" rel="stylesheet" type="text/css">
     <script src="../scripts/jquery.js"></script>
     <script src="../scripts/jquery-ui.js"></script>
     <script src="../scripts/bootstrap.js"></script>
-    <script src="../scripts/tag-it.js"></script>
+    <script src="../scripts/personality_qna.js"></script>
+    <script src="../scripts/slickQuiz.js"></script>
+    <script>
+    $(function () {
+      $('#slickQuiz').slickQuiz();
+    });
+    </script>
   	<title>Your Personality | NUS Bridge</title>   
   </head>
 
@@ -71,11 +79,32 @@
   				<div class="col-md-12 text-center">
             <h1>What is your inner self like?</h1>
             <br/>
-            <p class="lead">Based on the Four Temperaments assessment, examine your strengths and weaknesses. Be honest.</p>
+            <p class="lead">Based on the Four Temperaments assessment, choose a word that best describes your strength or weakness from each question. Be honest.</p>
   				</div>
   			</div>
   		</div>
   	</div>
+
+    <div class="container">
+      <div class="row">
+        <div id="slickQuiz" class="col-md-12">
+          <div class="quizArea">
+              <div class="quizHeader">
+                  <!-- where the quiz main copy goes -->
+                  <a href="#" class="btn btn-primary btn-lg btn-block startQuiz">Begin</a>
+              </div>
+              <!-- where the quiz gets built -->
+          </div>
+          <div class="quizResults">
+              <h3 class="quizScore">You Scored: <span><!-- where the quiz score goes --></span></h3>
+              <h3 class="quizLevel"><strong>Ranking:</strong> <span><!-- where the quiz ranking level goes --></span></h3>
+              <div class="quizResultsCopy">
+                  <!-- where the quiz result copy goes -->
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
     
     <hr class="featurette-divider">
 
