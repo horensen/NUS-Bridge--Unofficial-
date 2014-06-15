@@ -6,7 +6,7 @@ var quizJSON = {
     "name":    "",
     "main":    "<p>40 questions with 4 choices randomly sorted.</p>",
     "info": {
-        "results": "<form method=\"get\" action=\"/snapshot\"><input name=\"personality_words\" id=\"selected_words\" type=\"hidden\" class=\"form-control\"><button class=\"btn btn-success btn-lg btn-block\" type=\"submit\">Save</button></form>"
+        "results": "<form method=\"get\" action=\"/snapshot\"><input name=\"personality_words\" id=\"selected_words\" type=\"hidden\" class=\"form-control\"><button class=\"btn btn-success btn-lg btn-block\" type=\"submit\">Save and Finish</button></form>"
     },
     "questions": [
         {
