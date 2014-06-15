@@ -23,7 +23,7 @@ $(function () {
 
             defaults = {
                 checkAnswerText:  'Check',
-                nextQuestionText: 'Next &raquo;',
+                nextQuestionText: 'Next',
                 tryAgainText: '',
                 skipStartButton: false,
                 numberOfQuestions: null,
@@ -146,7 +146,7 @@ $(function () {
                         var question = questions[i];
 
                         var questionHTML = $('<li class="' + questionClass +'" id="question' + (count - 1) + '"></li>');
-                        questionHTML.append('<div class="' + questionCountClass + '"><span class="current">' + count + '</span> of <span class="total">' + questionCount + '</span></div>');
+                        questionHTML.append('<div class="text-center ' + questionCountClass + '"><span class="current">' + count + '</span> of <span class="total">' + questionCount + '</span></div>');
                         questionHTML.append('<h3>' + question.q + '</h3>');
 
                         
@@ -158,7 +158,7 @@ $(function () {
                         }
 
                         // Now let's append the answers with checkboxes or radios depending on truth count
-                        var answerHTML = $('<ul class="' + answersClass + '"></ul>');
+                        var answerHTML = $('<ul class="list-group"></ul>');
 
                         // Get the answers
                         var answers = plugin.config.randomSort || plugin.config.randomSortAnswers ?
@@ -179,9 +179,9 @@ $(function () {
                                 var input = '<input id="' + optionId + '" name="' + inputName +
                                             '" type="' + inputType + '" />';
 
-                                var optionLabel = '<label for="' + optionId + '">' + answer.option + '</label>';
+                                var optionLabel = ' <label for="' + optionId + '">' + answer.option + '</label>';
 
-                                var answerContent = $('<li></li>')
+                                var answerContent = $('<li class=\"list-group-item\"></li>')
                                     .append(input)
                                     .append(optionLabel);
                                 answerHTML.append(answerContent);
@@ -210,10 +210,10 @@ $(function () {
                         // If response messaging is disabled or hidden until the quiz is completed,
                         // make the nextQuestion button the checkAnswer button, as well
                         if (plugin.config.disableResponseMessaging || plugin.config.completionResponseMessaging) {
-                            questionHTML.append('<a href="#" class="button ' + nextQuestionClass + ' ' + checkAnswerClass + '">' + plugin.config.nextQuestionText + '</a>');
+                            questionHTML.append('<button class="btn btn-primary btn-lg btn-block ' + nextQuestionClass + ' ' + checkAnswerClass + '">' + plugin.config.nextQuestionText + '</button>');
                         } else {
-                            questionHTML.append('<a href="#" class="button ' + nextQuestionClass + '">' + plugin.config.nextQuestionText + '</a>');
-                            questionHTML.append('<a href="#" class="button ' + checkAnswerClass + '">' + plugin.config.checkAnswerText + '</a>');
+                            questionHTML.append('<button class="btn btn-primary btn-lg btn-block ' + nextQuestionClass + '">' + plugin.config.nextQuestionText + '</button>');
+                            questionHTML.append('<button class="btn btn-primary btn-lg btn-block ' + checkAnswerClass + '">' + plugin.config.checkAnswerText + '</button>');
                         }
 
                         // Append question & answers to quiz
@@ -290,7 +290,7 @@ $(function () {
                 }
 
                 if (plugin.config.preventUnanswered && selectedAnswers.length === 0) {
-                    alert('You must select at least one answer.');
+                    alert('You must select an answer.');
                     return false;
                 }
 

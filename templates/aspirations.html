@@ -20,19 +20,9 @@
       // - https://github.com/aehlke/tag-it
       // - http://jqueryui.com/autocomplete/#remote
 
-      var listOfAspirations = [
-          "entrepreneur",
-          "interaction designer",
-          "business developer",
-          "electrical engineer",
-          "architect",
-          "doctor",
-          "lawyer",
-          "banker",
-          "accountant"
-      ];
+      var listOfAspirations = [];
 
-      $("#myTags").tagit({
+      $("#aspirations_tags").tagit({
         // Options
         fieldName: "aspirations",
         availableTags: listOfAspirations,
@@ -143,12 +133,12 @@
       <div class="row">
         <form method="get" action="/education">
         <div class="col-md-10 text-center">
-            <ul id="myTags">
+            <ul id="aspirations_tags">
             </ul>
             <p>enter your dream profession as a common noun</p>
         </div>
         <div class="col-md-2 text-center">
-          <button class="btn btn-success btn-lg btn-block" type="submit">Next <span class="glyphicon glyphicon-chevron-right"></button>
+          <button class="btn btn-success btn-lg btn-block" type="submit">Next</button>
         </div>
         </form>
       </div>

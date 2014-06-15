@@ -9,11 +9,12 @@ import datetime
 import HTMLParser
 import NusDatastore
 from google.appengine.ext import ndb
-#from appengine_utilities import sessions
 from webapp2_extras import sessions
 from urlparse import urlparse
 from random import randint
-
+#from nltk.corporus import wordnet
+#from itertools import product
+from difflib import SequenceMatcher
 
 # GLOBAL VARIABLES
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + "/templates"), autoescape=True)
@@ -242,11 +243,51 @@ class UserDisplay(webapp2.RequestHandler):
 				self.response.out.write('<blockquote>%s is a not a registered user</blockquote>'%(user_name))
 		self.response.out.write(template.render())
 
+class SemanticTest(webapp2.RequestHandler):
+    def get(self):
+        sm = SequenceMatcher(None)
+        word1 = 'December'
+        word2 = 'September'
+        sm.set_seq1(word1)
+        sm.set_seq2(word2)
+        similarity_ratio = '{0:.0%}'.format(sm.ratio())
+        result = word1 + " and " + word2 + " are " + similarity_ratio + " similar in spelling."
+
+        #set1 = wordnet.synset('cat.n.01')
+        #set2 = wordnet.synset('dog.n.01')
+        #wordx, wordy = "cat","dog"
+        #sem1, sem2 = wn.synsets(wordx), wn.synsets(wordy)
+
+        #maxscore = 0
+        #for i,j in list(product(*[sem1,sem2])):
+        #    score = i.wup_similarity(j) # Wu-Palmer Similarity
+        #    maxscore = score if maxscore < score else maxscore
+
+        template_values = {
+            'score': result
+        }
+        template = jinja_environment.get_template('semantictest.html')
+        self.response.out.write(template.render(template_values))
+
 
 # NDB MODELS
 class UserName(ndb.Model):
     name=ndb.StringProperty()
 
 
-# APP WSGI APPLICATION
-app = webapp2.WSGIApplication([('/', MainPage), ('/profile', Profile), ('/snapshot', Snapshot), ('/aspirations', Aspirations), ('/education', Education), ('/experience', Experience), ('/personality', Personality), ('/symmetrical-connections', SymmetricalConnections), ('/complementary-connections', ComplementaryConnections), ('/improvement-advisory', ImprovementAdvisory), ('/testingNdb', UserDisplay)], config=config, debug=True)
+# WEB SERVER GATE INTERFACE
+app = webapp2.WSGIApplication([
+    ('/', MainPage),
+    ('/profile', Profile),
+    ('/snapshot', Snapshot),
+    ('/aspirations', Aspirations),
+    ('/education', Education),
+    ('/experience', Experience),
+    ('/personality', Personality),
+    ('/symmetrical-connections', SymmetricalConnections),
+    ('/complementary-connections', ComplementaryConnections),
+    ('/improvement-advisory', ImprovementAdvisory),
+    ('/testingNdb', UserDisplay),
+    ('/semantictest', SemanticTest)],
+    config=config,
+    debug=True)
