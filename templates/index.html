@@ -8,7 +8,7 @@
   	<meta name="author" content="">
   	<link rel="shortcut icon" href="favicon.ico">
   	<link href="../stylesheets/bootstrap.css" rel="stylesheet">
-    <link href="../stylesheets/stylish-portfolio.css" rel="stylesheet">
+    <link href="../stylesheets/home-page.css" rel="stylesheet">
     <script src="../scripts/jquery.js"></script>
     <script src="../scripts/bootstrap.js"></script>
   	<title>NUS Bridge</title>   
@@ -34,8 +34,8 @@
     <!-- Full Page Image Header Area -->
     <div id="top" class="header">
         <div class="vert-text" style="padding: 50px 20px 150px 20px">
-            <h1>What goes into achieving your dream?</h1>
-            <h3>See and learn from interesting connections in NUS and their experiences relevant to your aspiration.</h3>
+            <!--<h1>What goes into achieving your dream?</h1>-->
+            <h3>See and learn from interesting connections and experiences in NUS relevant to your aspiration.</h3>
             <br/><br/><br/>
             <a href="{{ login_url }}" class="btn btn-primary btn-lg">Sign in with your NUS account</a>
         </div>
@@ -48,9 +48,19 @@
             <div class="row">
                 <div class="col-md-6 col-md-offset-3 text-center" style="color: #e6e6e6;">
                     <h2>What is NUS Bridge?</h2>
-                    <p class="lead">Your connections are the most important assets for your personal well-being and professional success. It can be challenging to understand the value of your connections in an academic setting. Your social capital is present but it is either overlooked or not obvious.</p>
-                    <p class="lead">Our mission is to make finding relevant people and experiences as easy as possible for your goals.</p>
-                    <p class="lead">Indeed, this is just a beginning as we attempt to answer uncertainty for your aspiration. When was the last time you were asked about your game plan to achieve your dream?</p>
+                    <p class="lead">Have you ever had uncertainity in the quest for your hopes while you're still in university?</p>
+                    <p class="lead">While keeping up with technical knowledge is important, we believe that who you know are the most important assets for your personal well-being and professional success. We also believe that knowing your flaws is also a strength.</p>
+                    <p class="lead">This is all about you and your goals. In an academic environment, there may be people, other than your friends, who think like you or even better than you too.</p>
+                    <p class="lead">So, we thought about an experiment. We created NUS Bridge to find people and wisdom from the crowd relevant to your aspiration.</p>
+                    <p class="lead">Indeed, this is just a beginning and your contribution to the crowd helps.</p>
+                    <!--
+                    Previous text:
+                    Your connections are the most important assets for your personal well-being and professional success. It can be challenging to understand the value of your connections in an academic setting. Your social capital is present but it is either overlooked or not obvious.
+
+                    Our mission is to make finding relevant people and experiences as easy as possible for your goals.
+
+                    Indeed, this is just a beginning as we attempt to answer uncertainty in the quest for your hopes. Has anyone asked you what you are going to do for your dream?
+                    -->
                 </div>
             </div>
         </div>
@@ -64,6 +74,7 @@
                 <div class="col-md-4 col-md-offset-4 text-center">
                     <h2>Let us begin by understanding you</h2>
                     <hr>
+                    <br/>
                 </div>
             </div>
             <div class="row">
@@ -71,14 +82,14 @@
                     <div class="service-item">
                         <i class="service-icon fa fa-rocket"></i>
                         <h4>Your Aspiration</h4>
-                        <p>What do you want or want to be after your graduation?</p>
+                        <p>What do you want to be or achieve after your graduation?</p>
                     </div>
                 </div>
                 <div class="col-md-2 text-center">
                     <div class="service-item">
                         <i class="service-icon fa fa-magnet"></i>
                         <h4>Your Education</h4>
-                        <p>What are your best peforming modules?</p>
+                        <p>What modules have you done well in?</p>
                     </div>
                 </div>
                 <div class="col-md-2 text-center">
@@ -92,7 +103,7 @@
                     <div class="service-item">
                         <i class="service-icon fa fa-pencil"></i>
                         <h4>Your Personality</h4>
-                        <p>What words will describe you?</p>
+                        <p>What words describe you?</p>
                     </div>
                 </div>
             </div>
@@ -114,7 +125,7 @@
             <div class="row">
                 <div class="col-md-4 col-md-offset-4 text-center">
                     <br/>
-                    <p class="lead">We use the data your provided to evaluate who are similar to you and who are complementary to you. Based on your results, we would also suggest to you how you can understand others by understanding yourself.</p>
+                    <p class="lead">We use the data you provided to analyse the entire social capital, which is either overlooked or not obvious. Then, we evaluate who are similar to you, who are complementary to you and what you may learn from them. Based on your results, we would also suggest to you how you can understand others by understanding yourself.</p>
                     <br/><hr>
                 </div>
             </div>
@@ -122,16 +133,19 @@
             <div class="row">
                 <div class="col-md-4 text-center">
                     <div class="portfolio-item">
+                        <p>(picture)</p>
                         <h4>Symmetrical Connections</h4>
                     </div>
                 </div>
                 <div class="col-md-4 text-center">
                     <div class="portfolio-item">
+                        <p>(picture)</p>
                         <h4>Complementary Connections</h4>
                     </div>
                 </div>
                 <div class="col-md-4 text-center">
                     <div class="portfolio-item">
+                        <p>(picture)</p>
                         <h4>Improvement Advisory</h4>
                     </div>
                 </div>
@@ -144,8 +158,8 @@
     <div class="call-to-action">
         <div class="container">
             <div class="row">
-                <div class="col-md-6 col-md-offset-3 text-center">
-                    <h3>Because relationship and collective wisdom matters. Over # people have started.</h3>
+                <div class="col-md-12 text-center">
+                    <h3>Because relationships and collective wisdom matter. {{ number_of_users }} people have started.</h3>
                     <a href="{{ login_url }}" class="btn btn-lg btn-primary">Sign in with your NUS account</a>
                 </div>
             </div>

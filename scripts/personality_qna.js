@@ -1,7 +1,5 @@
 // Setup your quiz text and questions here
 
-// NOTE: pay attention to commas, IE struggles with those bad boys
-
 var quizJSON = {
     "name":    "",
     "main":    "<p>40 questions with 4 choices randomly sorted.</p>",

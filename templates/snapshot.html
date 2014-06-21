@@ -89,18 +89,26 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12 text-center">
-            <h4>Complete all questionnaires to see a dynamically generated summary about you so that we can analyse it for interesting connections for your goals.</h4>
+            <h4>Complete all questionnaires to see a dynamically generated summary about you. We will analyse the data to find connections and experiences which you can learn from.</h4>
           <br/>
           </div>
         </div>
 
         <div class="row">
           <div class="col-md-3">
+            {% if aspirations == '' %}
             <a href="/aspirations" class="btn btn-primary btn-lg btn-block">Your Aspirations</a>
+            {% else %}
+            <a href="/aspirations" class="btn btn-success btn-lg btn-block">Your Aspirations</a>
+            {% endif %}
             <br/>
           </div>
           <div class="col-md-3">
+            {% if best_modules == '' %}
             <a href="/education" class="btn btn-primary btn-lg btn-block">Your Education</a>
+            {% else %}
+            <a href="/education" class="btn btn-success btn-lg btn-block">Your Education</a>
+            {% endif %}
             <br/>
           </div>
           <div class="col-md-3">
@@ -121,7 +129,7 @@
             <div class="panel panel-default">
               <div class="panel-heading">Summary</div>
                 <div class="panel-body">
-                  <p class="lead">You feel that you have done well in {{ three_or_less_modules }} and {{ remaining_module_count }} other modules. This is probably related to any of your {{ number_of_interests }} interests and {{ number_of_skills }} skills.</p>
+                  <p class="lead">You feel that you have done well in {{ best_modules }}. This is probably related to any of your {{ number_of_interests }} interests and {{ number_of_skills }} skills.</p>
                   <p class="lead">As you appreciate learning about {{ interests }} and you are good at {{ skills }}, you aspire to be {{ aspirations }} after your graduation. At work, you {{ two_strengths_from_two_traits_at_work }}. You would probably use what you have learned from {{ activities }}.</p>
                   <p class="lead">It seems that you {{ two_stengths_from_two_traits_as_a_friend }}. You are best in {{ two_best_from_two_traits }}. If someone looks up to you for what you strongly believe in success, general academic survival advice or anything else beneficial, one of the things you might want people to know is {{ advice }}.</p>
                 </div>
@@ -159,5 +167,7 @@
           </div>
       </div>     
     </div>
+
+
   </body>
   </html>

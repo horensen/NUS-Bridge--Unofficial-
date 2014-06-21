@@ -14,18 +14,21 @@
   <script src="../scripts/jquery-ui.js"></script>
   <script src="../scripts/bootstrap.js"></script>
   <script src="../scripts/tag-it.js"></script>
-  <script>
+    <script>
     $(document).ready(function(){
       // References:
       // - https://github.com/aehlke/tag-it
       // - http://jqueryui.com/autocomplete/#remote
 
-      var listOfAspirations = [];
+      var temp = "{{ existing_aspirations }}";
+      temp = temp.replace(/&lt;/g, "<");
+      temp = temp.replace(/&gt;/g, ">");
+      document.getElementById('aspirations_tags').innerHTML = temp;
 
       $("#aspirations_tags").tagit({
         // Options
         fieldName: "aspirations",
-        availableTags: listOfAspirations,
+        availableTags: [],
         autocomplete: {
           delay: 0,
           minLength: 2
@@ -123,7 +126,7 @@
           <div class="col-md-12 text-center">
             <h1>What is your dream?</h1>
             <br/>
-            <p class="lead">Where do you see yourself after your graduation? Or what do you hope to become or achieve?</p>
+            <p class="lead">What do you hope to become after your graduation?</p>
           </div>
         </div>
       </div>
@@ -131,7 +134,7 @@
 
     <div class="container">
       <div class="row">
-        <form method="get" action="/education">
+        <form method="post" action="/education">
         <div class="col-md-9 text-center">
             <ul id="aspirations_tags">
             </ul>
@@ -143,7 +146,6 @@
         </form>
       </div>
     </div>
-    
     
   </body>
   </html>

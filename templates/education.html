@@ -19,6 +19,11 @@
       // References:
       // - https://github.com/aehlke/tag-it
       // - http://jqueryui.com/autocomplete/#remote
+
+      var temp = "{{ existing_best_modules }}";
+      temp = temp.replace(/&lt;/g, "<");
+      temp = temp.replace(/&gt;/g, ">");
+      document.getElementById('modules_tags').innerHTML = temp;
       
       var stringOfModules = "{{ list_of_modules_taken }}";
       stringOfModules = stringOfModules.replace(/&#34;/g, "\"");
@@ -42,7 +47,7 @@
         readOnly: false,
         tagLimit: null,
         singleField: true,
-        singleFieldDelimiter: ',',
+        singleFieldDelimiter: ',,',
         singleFieldNode: null,
         tabIndex: null,
         placeholderText: '',
@@ -135,7 +140,7 @@
 
     <div class="container">
       <div class="row">
-        <form method="get" action="/experience">
+        <form method="post" action="/experience">
         <div class="col-md-9 text-center">
             <ul id="modules_tags">   
             </ul>
