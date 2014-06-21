@@ -89,7 +89,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12 text-center">
-            <h4>Complete all questionnaires to see a dynamically generated summary about you. We will analyse the data to find connections and experiences which you can learn from.</h4>
+            <h4>Complete all questionnaires to see a dynamically generated summary about you. The data will be analysed to find interesting connections and experiences which you can learn from.</h4>
           <br/>
           </div>
         </div>
@@ -112,11 +112,19 @@
             <br/>
           </div>
           <div class="col-md-3">
+            {% if interests == '' and skills == '' and involvements == '' and advice == '' %}
             <a href="/experience" class="btn btn-primary btn-lg btn-block">Your Experience</a>
+            {% else %}
+            <a href="/experience" class="btn btn-success btn-lg btn-block">Your Experience</a>
+            {% endif %}
             <br/>
           </div>
           <div class="col-md-3">
+            {% if two_strengths_from_two_traits_at_work == '' and two_stengths_from_two_traits_as_a_friend == '' and two_best_from_two_traits == '' %}
             <a href="/personality" class="btn btn-primary btn-lg btn-block">Your Personality</a>
+            {% else %}
+            <a href="/personality" class="btn btn-success btn-lg btn-block">Your Personality</a>
+            {% endif %}
             <br/>
           </div>
         </div>
@@ -129,8 +137,8 @@
             <div class="panel panel-default">
               <div class="panel-heading">Summary</div>
                 <div class="panel-body">
-                  <p class="lead">You feel that you have done well in {{ best_modules }}. This is probably related to any of your {{ number_of_interests }} interests and {{ number_of_skills }} skills.</p>
-                  <p class="lead">As you appreciate learning about {{ interests }} and you are good at {{ skills }}, you aspire to be {{ aspirations }} after your graduation. At work, you {{ two_strengths_from_two_traits_at_work }}. You would probably use what you have learned from {{ activities }}.</p>
+                  <p class="lead">You feel that you have done well in {{ best_modules }}. {{ number_of_skills_and_interests }}</p>
+                  <p class="lead">As you appreciate learning about {{ interests }} and you are good at {{ skills }}, you aspire to be {{ aspirations }} after your graduation. At work, you {{ two_strengths_from_two_traits_at_work }}. You would probably use what you have learned from {{ involvements }}.</p>
                   <p class="lead">It seems that you {{ two_stengths_from_two_traits_as_a_friend }}. You are best in {{ two_best_from_two_traits }}. If someone looks up to you for what you strongly believe in success, general academic survival advice or anything else beneficial, one of the things you might want people to know is {{ advice }}.</p>
                 </div>
               </div>
@@ -139,29 +147,17 @@
             <div class="panel panel-default">
               <div class="panel-heading">Personal Information</div>
               <div class="panel-body">
-                <p>Gender</p>
-                <p>{{ gender }}</p>
-                <p>Country</p>
-                <p>{{ country }}</p>
-                <p>Age</p>
-                <p>{{ age }} (born in {{ date_of_birth }})</p>
+                <p>Gender: <b>{{ gender }}</b></p>
+                <p>Country: <b>{{ country }}</b></p>
+                <p>Date of Birth: <b>{{ date_of_birth }}</b></p>
               </div>
             </div>
             <div class="panel panel-default">
               <div class="panel-heading">Presence</div>
               <div class="panel-body">
-                <p>Social Networks</p>
-                <ul>
-                  {{ social_networks }}
-                </ul>
-                <p>Website</p>
-                <ul>
-                  {{ website }}
-                </ul>
-                <p>Associations</p>
-                <ul>
-                  {{ associations }}
-                </ul>                                
+                <p>Website: <b>{{ website }}</b></p>
+                <p>Social Networks:</p><b><ul>{{ social_networks }}</ul></b>
+                <p>Associations:</p><b><ul>{{ associations }}</ul></b>                              
               </div>
             </div>
           </div>

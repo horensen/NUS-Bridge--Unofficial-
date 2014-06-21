@@ -20,6 +20,26 @@
       // - https://github.com/aehlke/tag-it
       // - http://jqueryui.com/autocomplete/#remote
 
+      var temp = "{{ existing_skills }}";
+      temp = temp.replace(/&lt;/g, "<");
+      temp = temp.replace(/&gt;/g, ">");
+      document.getElementById('skills_tags').innerHTML = temp;
+
+      temp = "{{ existing_interests }}";
+      temp = temp.replace(/&lt;/g, "<");
+      temp = temp.replace(/&gt;/g, ">");
+      document.getElementById('interests_tags').innerHTML = temp;
+
+      temp = "{{ existing_involvements }}";
+      temp = temp.replace(/&lt;/g, "<");
+      temp = temp.replace(/&gt;/g, ">");
+      document.getElementById('involvements_tags').innerHTML = temp;
+
+      temp = "{{ existing_advices }}";
+      temp = temp.replace(/&lt;/g, "<");
+      temp = temp.replace(/&gt;/g, ">");
+      document.getElementById('advices_tags').innerHTML = temp;
+
       $("#skills_tags").tagit({
         // Options
         fieldName: "skills",
@@ -36,7 +56,7 @@
         readOnly: false,
         tagLimit: null,
         singleField: true,
-        singleFieldDelimiter: ',',
+        singleFieldDelimiter: ',,',
         singleFieldNode: null,
         tabIndex: null,
         placeholderText: ''
@@ -58,7 +78,7 @@
         readOnly: false,
         tagLimit: null,
         singleField: true,
-        singleFieldDelimiter: ',',
+        singleFieldDelimiter: ',,',
         singleFieldNode: null,
         tabIndex: null,
         placeholderText: ''
@@ -66,7 +86,7 @@
 
       $("#involvements_tags").tagit({
         // Options
-        fieldName: "activities",
+        fieldName: "involvements",
         availableTags: null,
         autocomplete: {
           delay: 0,
@@ -80,7 +100,7 @@
         readOnly: false,
         tagLimit: null,
         singleField: true,
-        singleFieldDelimiter: ',',
+        singleFieldDelimiter: ',,',
         singleFieldNode: null,
         tabIndex: null,
         placeholderText: ''
@@ -98,7 +118,7 @@
         readOnly: false,
         tagLimit: null,
         singleField: true,
-        singleFieldDelimiter: ',',
+        singleFieldDelimiter: ',,',
         singleFieldNode: null,
         tabIndex: null,
         placeholderText: ''
@@ -169,7 +189,7 @@
     </div>
 
     <div class="container">
-      <form method="get" action="/personality">
+      <form method="post" action="/personality">
         <div class="row">
           <div class="col-md-3">
             <h4>Your best skills or areas of knowledge</h4>

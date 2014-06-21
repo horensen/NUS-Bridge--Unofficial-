@@ -1,6 +1,7 @@
 # LIBRARIES
 from google.appengine.ext import ndb
 import datetime
+import four_temperaments
 
 
 
@@ -48,10 +49,10 @@ def insert_user(student_profile_object):
 	nus_user.associations = []
 	nus_user.put()
 
-def update_user(student_id, user_picture, date_of_birth, gender, country, website, social_networks, associations):
+def update_user(student_id, user_picture, date_of_birth, gender, country, website, social_networks, associations): # implement this function
 	pass
 
-def user_exists(student_id):
+def user_exists(student_id): # this function is modified
 	#user_key = ndb.Key("NUSBridge", entity)
 	#temp = ProfileInfo.query(ancestor=user_key)
 	#temp.filter(ProfileInfo.student_id==student_id).fetch(0)
@@ -134,6 +135,12 @@ def insert_or_update_experience(student_id, skills_and_knowledge, interests, inv
 	user_experience.advices = advices
 	user_experience.put()
 
+def get_number_of_skills(student_id): # implement this function
+	return 0
+
+def get_number_of_interests(student_id): # implement this function
+	return 0
+
 
 
 
@@ -144,22 +151,90 @@ class Personality(ndb.Model):
     student_id = ndb.StringProperty()
     words = ndb.StringProperty(repeated=True)
     word_ids = ndb.IntegerProperty(repeated=True)
-    dominant_temperaments = ndb.StringProperty(repeated=True)
+    sanguine_strength_count = ndb.IntegerProperty()
+    sanguine_weakness_count = ndb.IntegerProperty()
+    choleric_strength_count = ndb.IntegerProperty()
+    choleric_weakness_count = ndb.IntegerProperty()
+    melancholy_strength_count = ndb.IntegerProperty()
+    melancholy_weakness_count = ndb.IntegerProperty()
+    phlegmatic_strength_count = ndb.IntegerProperty()
+    phlegmatic_weakness_count = ndb.IntegerProperty()
+    two_dominant_temperaments_strength = ndb.StringProperty(repeated=True)
+    two_dominant_temperaments_weakness = ndb.StringProperty(repeated=True)
+    two_dominant_temperaments_both = ndb.StringProperty(repeated=True)
 
-def get_personality(std_id):
-	qry = Personality.query(ancestor=ndb.Key("NUSBridge", "Personality"))
-	result = qry.filter(Personality.student_id==student_id).fetch()
-	return result[0]
-
-def insert_or_update_personality(student_id, words, word_ids, dominant_temperaments): # modify this function such that it will insert a new entity if it's new or update the existing entity if present
+def insert_or_update_personality(student_id, words): # modify this function such that it will insert a new entity if it's new or update the existing entity if present
 	user_key = ndb.Key("NUSBridge", "Personality")
 	user_personality = Personality(parent=user_key)
 	user_personality.student_id = student_id
 	user_personality.words = words
+	word_ids = []
+	sanguine_strength_count = 0
+	sanguine_weakness_count = 0
+	choleric_strength_count = 0
+	choleric_weakness_count = 0
+	melancholy_strength_count = 0
+	melancholy_weakness_count = 0
+	phlegmatic_strength_count = 0
+	phlegmatic_weakness_count = 0
+	for word in words:
+		word_id = four_temperaments.get_word_id(word)
+		temperament = four_temperaments.get_temperament(word)
+		sw = four_temperaments.get_strength_or_weakness(word)
+		word_ids.append(word_id)
+		if temperament == "Sanguine" and sw == "strength":
+			sanguine_strength_count += 1
+		elif temperament == "Sanguine" and sw == "weakness":
+			sanguine_weakness_count += 1
+		elif temperament == "Choleric" and sw == "strength":
+			choleric_strength_count += 1
+		elif temperament == "Choleric" and sw == "weakness":
+			choleric_weakness_count += 1
+		elif temperament == "Melancholy" and sw == "strength":
+			melancholy_strength_count += 1
+		elif temperament == "Melancholy" and sw == "weakness":
+			melancholy_weakness_count += 1
+		elif temperament == "Phlegmatic" and sw == "strength":
+			phlegmatic_strength_count += 1
+		elif temperament == "Phlegmatic" and sw == "weakness":
+			phlegmatic_weakness_count += 1
 	user_personality.word_ids = word_ids
-	user_personality.dominant_temperaments = dominant_temperaments
+	user_personality.sanguine_strength_count = sanguine_strength_count
+	user_personality.sanguine_weakness_count = sanguine_weakness_count
+	user_personality.choleric_strength_count = choleric_strength_count
+	user_personality.choleric_weakness_count = choleric_weakness_count
+	user_personality.melancholy_strength_count = melancholy_strength_count
+	user_personality.melancholy_weakness_count = melancholy_weakness_count
+	user_personality.phlegmatic_strength_count = phlegmatic_strength_count
+	user_personality.phlegmatic_weakness_count = phlegmatic_weakness_count
+	# implement here to store the
+	# - two dominant temperaments (strength)
+	# - two dominant temperaments (weakness)
+	# - two dominant temperaments (both strength and weakness)
 	user_personality.put()
 
-
-
-
+def get_percentage(temperament, swb): # implement this function
+	if temperament == "Sanguine" and swb == "strength":
+		return 0 / 20
+	elif temperament == "Sanguine" and swb == "weakness":
+		return 0 / 20
+	elif temperament == "Choleric" and swb == "strength":
+		return 0 / 20
+	elif temperament == "Choleric" and swb == "weakness":
+		return 0 / 20
+	elif temperament == "Melancholy" and swb == "strength":
+		return 0 / 20
+	elif temperament == "Melancholy" and swb == "weakness":
+		return 0 / 20
+	elif temperament == "Phlegmatic" and swb == "strength":
+		return 0 / 20
+	elif temperament == "Phlegmatic" and swb == "weakness":
+		return 0 / 20
+	elif temperament == "Sanguine" and swb == "both":
+		return 0 / 40
+	elif temperament == "Choleric" and swb == "both":
+		return 0 / 40
+	elif temperament == "Melancholy" and swb == "both":
+		return 0 / 40
+	elif temperament == "Phlegmatic" and swb == "both":
+		return 0 / 40

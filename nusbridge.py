@@ -17,18 +17,10 @@ import urllib
 import urllib2
 import webapp2
 
-
-
-
-
 # GLOBAL VARIABLES
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + "/templates"), autoescape=True)
 app_domain = 'http://nusbridge.appspot.com/'
 ivle_api_key = 'O3nIU9c7l8jqYXfBMJlJN'
-
-
-
-
 
 # BASE REQUEST HANDLER (SESSION MANAGEMENT)
 class BaseHandler(webapp2.RequestHandler):
@@ -72,6 +64,15 @@ class MainPage(BaseHandler):
         self.response.out.write(template.render(template_values))
 
 class Snapshot(BaseHandler):
+    def post(self):
+        # Insert or update personality
+        words = self.request.get("personality_words").split(",")
+        if app_datastore.user_exists(self.session['student_id']):
+            app_datastore.insert_or_update_personality(self.session['student_id'], words)
+
+        # Redirect to Snapshot
+        self.redirect(app_domain + "snapshot")
+
     def get(self):
         # Retrieve token
         if self.session.get('is_valid') != True:
@@ -90,8 +91,20 @@ class Snapshot(BaseHandler):
             self.session['student_first_major'] = student_profile_object['FirstMajor']
             self.session['student_second_major'] = student_profile_object['SecondMajor']
             self.session['student_faculty'] = student_profile_object['Faculty']
-            best_modules_html = ''
+
+            # Initialise strings to be populated from datastore
             aspirations_html = ''
+            best_modules_html = ''
+            skills_and_interests_html = ''
+            interests_html = ''
+            skills_html = ''
+            strengths_at_work_html = ''
+            involvements_html = ''
+            strengths_as_a_friend_html = ''
+            personality_best_html = ''
+            advice_html = ''
+            social_networks_html = ''
+            associations_html = ''
 
             # If the user exists
             if app_datastore.user_exists(self.session['student_id']):
@@ -139,6 +152,47 @@ class Snapshot(BaseHandler):
                 except IndexError:
                     pass
 
+                # Describe existing number of skills and interests
+                number_of_skills = app_datastore.get_number_of_skills(self.session['student_id'])
+                number_of_interests = app_datastore.get_number_of_interests(self.session['student_id'])
+                
+                if number_of_skills > 0 and number_of_interests > 0:
+                    skills_and_interests_html = "This is probably related to any of your " + str(number_of_skills) + " skill"
+                    if number_of_skills > 1:
+                        skills_and_interests_html += "s"
+                    skills_and_interests_html += " and " + str(number_of_interests) + " interest"
+                    if number_of_interests > 1:
+                        skills_and_interests_html += "s"
+                    skills_and_interests_html += "."
+
+
+                # Describe existing interests
+                interests_html = ''
+
+                # Describe existing skills
+                skills_html = ''
+
+                # Describe and two strengths at work
+                strengths_at_work_html = ''
+
+                # Describe existing involvements
+                involvements_html = ''
+
+                # Describe any two strengths as a friend
+                strengths_as_a_friend_html = ''
+
+                # Describe any best from each dominant trait in terms of personality. There are only two dominant traits out of four.
+                personality_best_html = ''
+
+                # Describe any one existing advice
+                advice_html = ''
+
+                # List social networks in bullet points
+                social_networks_html = ''
+
+                # List associations in bullet points
+                associations_html = ''
+
             # else if the user is new
             else:
                 # Register into the datastore
@@ -153,23 +207,21 @@ class Snapshot(BaseHandler):
                 'second_major': self.session.get('student_second_major'),
                 'faculty': self.session.get('student_faculty'),
                 'best_modules': best_modules_html,
-                'number_of_interests': '__________',
-                'number_of_skills': '__________',
-                'interests': '__________',
-                'skills': '__________',
+                'number_of_skills_and_interests': skills_and_interests_html,
+                'interests': interests_html,
+                'skills': skills_html,
                 'aspirations': aspirations_html,
-                'two_strengths_from_two_traits_at_work': '__________',
-                'activities': '__________',
-                'two_stengths_from_two_traits_as_a_friend': '__________',
-                'two_best_from_two_traits': '__________',
-                'advice': '__________',
-                'gender': '__________',
-                'country': '__________',
-                'age': '__________',
-                'date_of_birth': '__________',
-                'social_networks': '__________',
-                'website': '__________',
-                'associations': '__________'
+                'two_strengths_from_two_traits_at_work': strengths_at_work_html,
+                'involvements': involvements_html,
+                'two_stengths_from_two_traits_as_a_friend': strengths_as_a_friend_html,
+                'two_best_from_two_traits': personality_best_html,
+                'advice': advice_html,
+                'gender': app_datastore.get_user(self.session['student_id']).gender,
+                'country': app_datastore.get_user(self.session['student_id']).country,
+                'date_of_birth': app_datastore.get_user(self.session['student_id']).date_of_birth,
+                'website': app_datastore.get_user(self.session['student_id']).website,
+                'social_networks': social_networks_html,
+                'associations': associations_html
             }
 
             template = jinja_environment.get_template('snapshot.html')
@@ -262,16 +314,71 @@ class Experience(BaseHandler):
 
     def get(self):
         if self.session.get('is_valid') == True:
+            # Retrieve existing user's skills
+            skills_html = ''
+            try:
+                mylist = app_datastore.get_experience(self.session['student_id']).skills_and_knowledge
+                for item in mylist:
+                    skills_html += "<li>" + item + "</li>"
+            except IndexError:
+                pass
+
+            # Retrieve existing user's interests
+            interests_html = ''
+            try:
+                mylist = app_datastore.get_experience(self.session['student_id']).interests
+                for item in mylist:
+                    interests_html += "<li>" + item + "</li>"
+            except IndexError:
+                pass
+
+            # Retrieve existing user's involvements
+            involvements_html = ''
+            try:
+                mylist = app_datastore.get_experience(self.session['student_id']).involvements
+                for item in mylist:
+                    involvements_html += "<li>" + item + "</li>"
+            except IndexError:
+                pass
+
+            # Retrieve existing user's advices
+            advices_html = ''
+            try:
+                mylist = app_datastore.get_experience(self.session['student_id']).advices
+                for item in mylist:
+                    advices_html += "<li>" + item + "</li>"
+            except IndexError:
+                pass
+
+            # Prepare template values and template
             template_values = {
                 'student_name': self.session.get('student_name'),
-                'student_email': self.session.get('student_email')
+                'student_email': self.session.get('student_email'),
+                'existing_skills': skills_html,
+                'existing_interests': interests_html,
+                'existing_involvements': involvements_html,
+                'existing_advices': advices_html
             }
             template = jinja_environment.get_template('experience.html')
+
+            # Write page
             self.response.out.write(template.render(template_values))
         else:
             self.redirect(app_domain)
 
 class Personality(BaseHandler):
+    def post(self):
+        # Insert or update experience
+        skills = self.request.get("skills").split(",,")
+        interests = self.request.get("interests").split(",,")
+        involvements = self.request.get("involvements").split(",,")
+        advices = self.request.get("advices").split(",,")
+        if app_datastore.user_exists(self.session['student_id']):
+            app_datastore.insert_or_update_experience(self.session['student_id'], skills, interests, involvements, advices)
+
+        # Redirect to Personality questionnaire
+        self.redirect(app_domain + "personality")
+
     def get(self):
         if self.session.get('is_valid') == True:
             template_values = {

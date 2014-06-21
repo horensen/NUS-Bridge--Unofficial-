@@ -4,7 +4,7 @@ var quizJSON = {
     "name":    "",
     "main":    "<p>40 questions with 4 choices randomly sorted.</p>",
     "info": {
-        "results": "<form method=\"get\" action=\"/snapshot\"><input name=\"personality_words\" id=\"selected_words\" type=\"hidden\" class=\"form-control\"><button class=\"btn btn-success btn-lg btn-block\" type=\"submit\">Save and Finish</button></form>"
+        "results": "<form method=\"post\" action=\"/snapshot\"><input name=\"personality_words\" id=\"selected_words\" type=\"hidden\" class=\"form-control\"><button class=\"btn btn-success btn-lg btn-block\" type=\"submit\">Save and Finish</button><br/></form>"
     },
     "questions": [
         {
@@ -48,7 +48,7 @@ var quizJSON = {
             "a": [
                 {"option": "Refreshing", "trait": "Sanguine", "sign": "Strength", "definition": ""},
                 {"option": "Resourceful", "trait": "Choleric", "sign:": "Strength", "definition": ""},
-                {"option": "Respected", "trait": "Melancholy", "sign:": "Strength", "definition": ""},
+                {"option": "Respectful", "trait": "Melancholy", "sign:": "Strength", "definition": ""},
                 {"option": "Reserved", "trait": "Phlegmatic", "sign:": "Strength", "definition": ""}
             ]
         },
@@ -175,7 +175,7 @@ var quizJSON = {
                 {"option": "Popular", "trait": "Sanguine", "sign": "Strength", "definition": ""},
                 {"option": "Productive", "trait": "Choleric", "sign:": "Strength", "definition": ""},
                 {"option": "Perfectionist", "trait": "Melancholy", "sign:": "Strength", "definition": ""},
-                {"option": "Permissive", "trait": "Phlegmatic", "sign:": "Strength", "definition": ""}
+                {"option": "Pleaser", "trait": "Phlegmatic", "sign:": "Strength", "definition": ""}
             ]
         },
         {
