@@ -66,6 +66,10 @@ def user_exists(student_id): # this function is modified
 def get_number_of_users():
 	return ProfileInfo.query().count()
 
+#my sugguestion of implementing the update by having individual method for each field
+def updateUserRecord():
+	
+
 
 
 

@@ -1,3 +1,5 @@
+from random import randint
+
 words = {
     'Animated': [1, 1, 'Sanguine', 'strength'],
     'Adventurous': [2, 1, 'Choleric', 'strength'],
@@ -165,260 +167,371 @@ temperaments = {
     'Sanguine': [
         {
             'emotions': [
-                '',
-                '',
-                ''
+                'appealing personality',
+                'storyteller',
+                'life of the party',
+                'good sense of humour',
+                'memory for colour',
+                'physically holds on to listener',
+                'emotional and demonstrative',
+                'enthusiastic and expressive',
+                'cheerful and bubbly',
+                'curious',
+                'good on stage',
+                'wide-eyed and innocent',
+                'lives in the present',
+                'changeable disposition',
+                'sincere at heart',
+                'always a child'
             ]
         },
         {
             'at work': [
-                '',
-                '',
-                ''
+                'volunteer for jobs',
+                'can think up new activities',
+                'look great on the surface',
+                'are creative and colourful',
+                'have energy and enthusiasm',
+                'can start in a flashy way',
+                'can inspire others to join',
+                'can charm others to work'
             ]
         },
         {
             'as a friend': [
-                '',
-                '',
-                ''
+                'make friends easily',
+                'love people',
+                'thrive on compliments',
+                'are exciting',
+                'envied by others',
+                'don\'t hold grudges',
+                'apologise quickly',
+                'prevent dull moments',
+                'like spontaneous activities'
             ]
         },
         {
             'best in': [
-                '',
-                '',
-                ''
+                'dealing with people enthusiastically',
+                'expressing thoughts with excitement',
+                'up-front positions of attention'
             ]
         },
         {
             'needs to be': [
-                '',
-                '',
-                ''
+                'organised'
             ]
         },
         {
             'flaws': [
-                '',
-                '',
-                ''
+                'talk too much',
+                'self-centered',
+                'uncultivated memories',
+                'disorganised'
             ]
         },
         {
             'positives carried to extremes': [
-                '',
-                '',
-                ''
+                'constantly talking',
+                'monopolising',
+                'interrupting and straying too far from the truth'
             ]
         },
         {
             'improvements': [
-                '',
-                '',
-                ''
+                'talk half as much as before',
+                'watch for signs of boredom',
+                'condense your comments',
+                'stop exaggerating',
+                'be sensitive to other people\'s interest',
+                'learn to listen',
+                'put others\' need first',
+                'pay attention to names',
+                'write things down'
             ]
         },
         {
             'to get along with this': [
-                '',
-                '',
-                ''
+                'recognise their difficulty in accomplishing tasks',
+                'realise they may talk without thinking first',
+                'realise they like variety and flexibility',
+                'help them to keep from accepting more than they can do',
+                'priase them for everything they accomplish',
+                'remember they are circumstantial people',
+                'realise that they mean well'
             ]
         }
     ],
     'Melancholy': [
         {
             'emotions': [
-                '',
-                '',
-                ''
+                'deep and thoughtful',
+                'analytical',
+                'serious and purposeful',
+                'genius prone',
+                'talented and creative',
+                'artistic or musical',
+                'philosophical and poetic',
+                'appreciative of beauty',
+                'sensitive of others',
+                'self-sacrificing',
+                'conscientious',
+                'idealistic'
             ]
         },
         {
             'at work': [
-                '',
-                '',
-                ''
+                'are schedule oriented',
+                'are perfectionist; high standards',
+                'are detail conscious',
+                'are persistent and thorough',
+                'are orderly and organised',
+                'are neat and tidy',
+                'are economical',
+                'can see the problems',
+                'can find creative solutions',
+                'finish what is started',
+                'like charts, graphics, figures and lists'
             ]
         },
         {
             'as a friend': [
-                '',
-                '',
-                ''
+                'make friends cautiously',
+                'are content to stay in background',
+                'avoid causing attention',
+                'are faithful and devoted',
+                'will listen to complains',
+                'can solve others\' problems',
+                'have deep concern for other people',
+                'can be moved to tears with compassion',
+                'usually seek an ideal mate'
             ]
         },
         {
             'best in': [
-                '',
-                '',
-                ''
+                'attending to details and deep thinking',
+                'keeping records, charts and graphs',
+                'analysing problems too difficult for others'
             ]
         },
         {
             'needs to be': [
-                '',
-                '',
-                ''
+                'cheered up'
             ]
         },
         {
             'flaws': [
-                '',
-                '',
-                ''
+                'easily depressed',
+                'procastinate',
+                'put unrealistic demands on others'
             ]
         },
         {
             'positives carried to extremes': [
-                '',
-                '',
-                ''
+                'brooding',
+                'depressed'
             ]
         },
         {
             'improvements': [
-                '',
-                '',
-                ''
+                'realise no one likes gloomy people',
+                'don\'t be hurt easily',
+                'look for the positives',
+                'blow away the black clouds',
+                'don\'t spend too much time planning',
+                'relax your standards'
             ]
         },
         {
             'to get along with this': [
-                '',
-                '',
-                ''
+                'know thay they are very sensitive and get hurt easily',
+                'realise they are programmed with pessimistic attitude',
+                'learn to deal with depression',
+                'compliment them sincerely',
+                'accept that they like it quiet sometimes',
+                'try to keep a reasonable schedule',
+                'realise that neatness is a necessity',
+                'help them not to become slaves to the family'
             ]
         }
     ],
     'Choleric': [
         {
             'emotions': [
-                '',
-                '',
-                ''
+                'born leader',
+                'dynamic and active',
+                'compulsive need for change',
+                'must correct wrongs',
+                'strong willed and decisive',
+                'unemotional',
+                'not easily discouraged',
+                'independent and self-sufficient',
+                'exudes confidence',
+                'can run anything'
             ]
         },
         {
             'at work': [
-                '',
-                '',
-                ''
+                'are goal oriented',
+                'can see the whole picture',
+                'organise well',
+                'seek practical solutions',
+                'move quickly to action',
+                'can delegate work',
+                'insist on production',
+                'make the goal',
+                'stimulate activity',
+                'thrive on opposition'
             ]
         },
         {
             'as a friend': [
-                '',
-                '',
-                ''
+                'have little need for friends',
+                'will work for group activitiy',
+                'will lead and organise',
+                'are usually right',
+                'excel in emergencies'
             ]
         },
         {
             'best in': [
-                '',
-                '',
-                ''
+                'jobs that require quick decisions',
+                'spots that need instant action and accomplishment',
+                'areas that demand strong control and authority'
             ]
         },
         {
             'needs to be': [
-                '',
-                '',
-                ''
+                'toned down'
             ]
         },
         {
             'flaws': [
-                '',
-                '',
-                ''
+                'compulsive worker',
+                'must be in control',
+                'don\'t know how to handle people',
+                'right but unpopular'
             ]
         },
         {
             'positives carried to extremes': [
-                '',
-                '',
-                ''
+                'bossy',
+                'controlling',
+                'manipulative'
             ]
         },
         {
             'improvements': [
-                '',
-                '',
-                ''
+                'learn to relax',
+                'take pressure off others',
+                'plan leisure activities',
+                'respond to other leadership',
+                'don\'t look down on \'the dummies\'',
+                'stop manipulating',
+                'practice patience',
+                'keep advice until asked',
+                'tone down your approach',
+                'stop arguing and causing trouble',
+                'let someone else be right',
+                'learn to apologise',
+                'admit you have some faults'
             ]
         },
         {
             'to get along with this': [
-                '',
-                '',
-                ''
+                'recognise they are born leaders',
+                'insist on two-way communication',
+                'know they don\'t mean to hurt',
+                'try to divide areas of responsibility',
+                'realise they are not compassionate'
             ]
         }
     ],
     'Phlegmatic': [
         {
             'emotions': [
-                '',
-                '',
-                ''
+                'low-key personality',
+                'easygoing and relaxed',
+                'calm and cool',
+                'patient',
+                'consistent life',
+                'quiet but witty',
+                'sympathetic and kind',
+                'keeps emotions hidden',
+                'happily reconciled to life',
+                'all-purpose person'
             ]
         },
         {
             'at work': [
-                '',
-                '',
-                ''
+                'are competent and steady',
+                'are peaceful and agreeable',
+                'have administrative ability',
+                'can mediate problems',
+                'avoid conflicts',
+                'good under pressure',
+                'find the easy way'
             ]
         },
         {
             'as a friend': [
-                '',
-                '',
-                ''
+                'are easy to get along with',
+                'are pleasant and enjoyable',
+                'are inoffensive',
+                'are a good listener',
+                'have dry sense of humour',
+                'enjoy watching people',
+                'have many friends',
+                'have compassion and concern'
             ]
         },
         {
             'best in': [
-                '',
-                '',
-                ''
+                'position of mediation and unity',
+                'storms that need a calming hand',
+                'routines that might seem dull to others'
             ]
         },
         {
             'needs to be': [
-                '',
-                '',
-                ''
+                'motivated'
             ]
         },
         {
             'flaws': [
-                '',
-                '',
-                ''
+                'are not exciting',
+                'resist change',
+                'seem lazy',
+                'appear wishy-washy'
             ]
         },
         {
             'positives carried to extremes': [
-                '',
-                '',
-                ''
+                'doesn\'t care about doing anything',
+                'indifferent',
+                'indecisive'
             ]
         },
         {
             'improvements': [
-                '',
-                '',
-                ''
+                'try to get enthused',
+                'learn to communicate your feelings',
+                'try something new',
+                'learn to accept responsibility for your life',
+                'don\'t put off until tomorrow what you can do today',
+                'motivate yourself',
+                'practice making decision'
             ]
         },
         {
             'how to get along with': [
-                '',
-                '',
-                ''
+                'realise they need direct motivation',
+                'help them set goals and make rewards',
+                'don\'t expect enthusiasm',
+                'realise that putting things off is their form of quiet control',
+                'force them to make decisions',
+                'don\'t heap all the blame on them',
+                'encourage them to accept responsibilities'
             ]
         }
     ]
@@ -437,28 +550,46 @@ def get_strength_or_weakness(word):
     return words[word][3]
 
 def get_random_emotion(temperament):
-    pass
+    descriptions = temperaments[temperament][0]['emotions']
+    description_id = randint(0, len(descriptions)-1)
+    return descriptions[description_id]
 
 def get_random_at_work(temperament):
-    pass
+    descriptions = temperaments[temperament][1]['at work']
+    description_id = randint(0, len(descriptions)-1)
+    return descriptions[description_id]
 
 def get_random_as_a_friend(temperament):
-    pass
+    descriptions = temperaments[temperament][2]['as a friend']
+    description_id = randint(0, len(descriptions)-1)
+    return descriptions[description_id]
 
 def get_random_best_in(temperament):
-    pass
+    descriptions = temperaments[temperament][3]['best in']
+    description_id = randint(0, len(descriptions)-1)
+    return descriptions[description_id]
 
 def get_random_needs_to_be(temperament):
-    pass
+    descriptions = temperaments[temperament][4]['needs to be']
+    description_id = randint(0, len(descriptions)-1)
+    return descriptions[description_id]
 
 def get_random_flaw(temperament):
-    pass
+    descriptions = temperaments[temperament][5]['flaws']
+    description_id = randint(0, len(descriptions)-1)
+    return descriptions[description_id]
 
 def get_random_extreme(temperament):
-    pass
+    descriptions = temperaments[temperament][6]['positives carried to extremes']
+    description_id = randint(0, len(descriptions)-1)
+    return descriptions[description_id]
 
 def get_random_improvement(temperament):
-    pass
+    descriptions = temperaments[temperament][7]['improvements']
+    description_id = randint(0, len(descriptions)-1)
+    return descriptions[description_id]
 
 def get_random_how_to_get_along_with(temperament):
-    pass
+    descriptions = temperaments[temperament][8]['how to get along with']
+    description_id = randint(0, len(descriptions)-1)
+    return descriptions[description_id]
