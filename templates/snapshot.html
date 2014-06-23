@@ -85,6 +85,7 @@
   		</div>
   	</div>
 
+    {% if aspirations == '' or best_modules == '' or interests == '' or skills == '' or involvements == '' or advice == '' or two_strengths_from_two_traits_at_work == '' or two_stengths_from_two_traits_as_a_friend == '' or two_best_from_two_traits == ''%}
     <div class="well" style="border-radius: 0px;">
       <div class="container">
         <div class="row">
@@ -93,7 +94,6 @@
           <br/>
           </div>
         </div>
-
         <div class="row">
           <div class="col-md-3">
             {% if aspirations == '' %}
@@ -112,7 +112,7 @@
             <br/>
           </div>
           <div class="col-md-3">
-            {% if interests == '' and skills == '' and involvements == '' and advice == '' %}
+            {% if interests == '' or skills == '' or involvements == '' or advice == '' %}
             <a href="/experience" class="btn btn-primary btn-lg btn-block">Your Experience</a>
             {% else %}
             <a href="/experience" class="btn btn-success btn-lg btn-block">Your Experience</a>
@@ -120,7 +120,7 @@
             <br/>
           </div>
           <div class="col-md-3">
-            {% if two_strengths_from_two_traits_at_work == '' and two_stengths_from_two_traits_as_a_friend == '' and two_best_from_two_traits == '' %}
+            {% if two_strengths_from_two_traits_at_work == '' or two_stengths_from_two_traits_as_a_friend == '' or two_best_from_two_traits == '' %}
             <a href="/personality" class="btn btn-primary btn-lg btn-block">Your Personality</a>
             {% else %}
             <a href="/personality" class="btn btn-success btn-lg btn-block">Your Personality</a>
@@ -130,7 +130,7 @@
         </div>
       </div>
     </div>
-
+    {% else %}
   	<div class="container">
       <div class="row">
          <div class="col-md-8">
@@ -138,8 +138,8 @@
               <div class="panel-heading">Summary</div>
                 <div class="panel-body">
                   <p class="lead">You feel that you have done well in {{ best_modules }}. {{ number_of_skills_and_interests }}</p>
-                  <p class="lead">As you appreciate learning about {{ interests }} and you are good at {{ skills }}, you aspire to be {{ aspirations }} after your graduation. At work, you {{ two_strengths_from_two_traits_at_work }}. You would probably use what you have learned from {{ involvements }}.</p>
-                  <p class="lead">It seems that you {{ two_stengths_from_two_traits_as_a_friend }}. You are best in {{ two_best_from_two_traits }}. If someone looks up to you for what you strongly believe in success, general academic survival advice or anything else beneficial, one of the things you might want people to know is {{ advice }}.</p>
+                  <p class="lead">As you appreciate learning about {{ interests }}, and you are good at {{ skills }}, you aspire to be {{ aspirations }} after your graduation. At work, you {{ two_strengths_from_two_traits_at_work }}. You would probably use what you have learned from {{ involvements }}.</p>
+                  <p class="lead">It seems that you {{ two_stengths_from_two_traits_as_a_friend }} as a friend. You are best in {{ two_best_from_two_traits }}. If someone looks up to you for what you strongly believe in, one of the things you like to share is "{{ advice }}".</p>
                 </div>
               </div>
             </div>
@@ -163,7 +163,7 @@
           </div>
       </div>     
     </div>
-
+    {% endif %}
 
   </body>
   </html>

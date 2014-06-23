@@ -9,6 +9,7 @@ from webapp2_extras import sessions
 import cgi
 import datetime
 import HTMLParser
+import four_temperaments
 import jinja2
 import json
 import app_datastore
@@ -97,7 +98,7 @@ class Snapshot(BaseHandler):
             best_modules_html = ''
             skills_and_interests_html = ''
             interests_html = ''
-            skills_html = ''
+            skills_and_knowledge_html = ''
             strengths_at_work_html = ''
             involvements_html = ''
             strengths_as_a_friend_html = ''
@@ -131,12 +132,15 @@ class Snapshot(BaseHandler):
                 try:
                     best_modules = app_datastore.get_education(self.session['student_id']).best_modules
                     number_of_best_modules = len(best_modules)
-                    max_number_of_modules_to_list = 3
-                    if number_of_best_modules > max_number_of_modules_to_list:
-                        remaining_best_module_count = number_of_best_modules - max_number_of_modules_to_list
+                    if number_of_best_modules > 3:
+                        remaining_best_module_count = number_of_best_modules - 3
                         best_module_id_1 = randint(0, number_of_best_modules-1)
-                        best_module_id_2 = randint(0, number_of_best_modules-1)
-                        best_module_id_3 = randint(0, number_of_best_modules-1)
+                        best_module_id_2 = best_module_id_1
+                        while (best_module_id_2 == best_module_id_1):
+                            best_module_id_2 = randint(0, number_of_best_modules-1)
+                        best_module_id_3 = best_module_id_1
+                        while (best_module_id_3 == best_module_id_1 or best_module_id_3 == best_module_id_2):
+                            best_module_id_3 = randint(0, number_of_best_modules-1)
                         best_modules_html = best_modules[best_module_id_1] + ", " + best_modules[best_module_id_2] + ", " + best_modules[best_module_id_3] + " and " + str(remaining_best_module_count) + " other module"
                         if remaining_best_module_count > 1:
                             best_modules_html += "s"
@@ -152,7 +156,7 @@ class Snapshot(BaseHandler):
                 except IndexError:
                     pass
 
-                # Describe existing number of skills and interests
+                # Describe number of skills and interests
                 number_of_skills = app_datastore.get_number_of_skills(self.session['student_id'])
                 number_of_interests = app_datastore.get_number_of_interests(self.session['student_id'])
                 
@@ -167,25 +171,122 @@ class Snapshot(BaseHandler):
 
 
                 # Describe existing interests
-                interests_html = ''
+                try:
+                    interests = app_datastore.get_experience(self.session['student_id']).interests
+                    if len(interests) > 3:
+                        remaining_interest_count = len(interests) - 3
+                        interest_id_1 = randint(0, len(interests)-1)
+                        interest_id_2 = interest_id_1
+                        while (interest_id_2 == interest_id_1):
+                            interest_id_2 = randint(0, len(interests)-1)
+                        interest_id_3 = interest_id_1
+                        while (interest_id_3 == interest_id_1 or interest_id_3 == interest_id_2):
+                            interest_id_3 = randint(0, len(interests)-1)
+                        interests_html = interests[interest_id_1] + ", " + interests[interest_id_2] + ", " + interests[interest_id_3] + " and " + str(remaining_interest_count) + " other interest"
+                        if remaining_interest_count > 1:
+                            interests_html += "s"
+                    else:
+                        i = 1
+                        for interest in interests:
+                            interests_html += interest
+                            if i + 1 < len(interests):
+                                interests_html += ", "
+                            elif i + 1 == len(interests):
+                                interests_html += " and "
+                            i += 1
+                except IndexError:
+                    pass
+
 
                 # Describe existing skills
-                skills_html = ''
+                try:
+                    sk = app_datastore.get_experience(self.session['student_id']).skills_and_knowledge
+                    if len(sk) > 3:
+                        remaining_sk_count = len(sk) - 3
+                        sk_id_1 = randint(0, len(sk)-1)
+                        sk_id_2 = sk_id_1
+                        while (sk_id_2 == sk_id_1):
+                            sk_id_2 = randint(0, len(sk)-1)
+                        sk_id_3 = sk_id_1
+                        while (sk_id_3 == sk_id_1 or sk_id_3 == sk_id_2):
+                            sk_id_3 = randint(0, len(sk)-1)
+                        skills_and_knowledge_html = sk[sk_id_1] + ", " + sk[sk_id_2] + ", " + sk[sk_id_3] + " and " + str(remaining_sk_count) + " other skill"
+                        if remaining_sk_count > 1:
+                            skills_and_knowledge_html += "s"
+                    else:
+                        i = 1
+                        for skill_or_knowledge in sk:
+                            skills_and_knowledge_html += skill_or_knowledge
+                            if i + 1 < len(sk):
+                                skills_and_knowledge_html += ", "
+                            elif i + 1 == len(sk):
+                                skills_and_knowledge_html += " and "
+                            i += 1
+                except IndexError:
+                    pass
 
                 # Describe and two strengths at work
-                strengths_at_work_html = ''
+                try:
+                    trait1 = app_datastore.get_personality(self.session['student_id']).two_dominant_temperaments_both[0]
+                    trait2 = app_datastore.get_personality(self.session['student_id']).two_dominant_temperaments_both[1]
+                    phrase1 = four_temperaments.get_random_at_work(trait1)
+                    phrase2 = four_temperaments.get_random_at_work(trait2)
+                    strengths_at_work_html = phrase1 + " and " + phrase2
+                except IndexError:
+                    pass
 
                 # Describe existing involvements
-                involvements_html = ''
+                try:
+                    involvements = app_datastore.get_experience(self.session['student_id']).involvements
+                    if len(involvements) > 3:
+                        remaining_involvement_count = len(involvements) - 3
+                        involvement_id_1 = randint(0, len(involvements)-1)
+                        involvement_id_2 = involvement_id_1
+                        while (involvement_id_2 == involvement_id_1):
+                            involvement_id_2 = randint(0, len(involvements)-1)
+                        involvement_id_3 = involvement_id_1
+                        while (involvement_id_3 == involvement_id_1 or involvement_id_3 == involvement_id_2):
+                            involvement_id_3 = randint(0, len(involvements)-1)
+                        involvements_html = involvements[involvement_id_1] + ", " + involvements[involvement_id_2] + ", " + involvements[involvement_id_3] + " and " + str(remaining_involvement_count) + " other involvement"
+                        if remaining_involvement_count > 1:
+                            involvements_html += "s"
+                    else:
+                        i = 1
+                        for involvement in involvements:
+                            involvements_html += involvement
+                            if i + 1 < len(involvements):
+                                involvements_html += ", "
+                            elif i + 1 == len(involvements):
+                                involvements_html += " and "
+                            i += 1
+                except IndexError:
+                    pass
 
                 # Describe any two strengths as a friend
-                strengths_as_a_friend_html = ''
+                try:
+                    trait1 = app_datastore.get_personality(self.session['student_id']).two_dominant_temperaments_both[0]
+                    trait2 = app_datastore.get_personality(self.session['student_id']).two_dominant_temperaments_both[1]
+                    phrase1 = four_temperaments.get_random_as_a_friend(trait1)
+                    phrase2 = four_temperaments.get_random_as_a_friend(trait2)
+                    strengths_as_a_friend_html = phrase1 + " and " + phrase2
+                except IndexError:
+                    pass
 
                 # Describe any best from each dominant trait in terms of personality. There are only two dominant traits out of four.
-                personality_best_html = ''
+                try:
+                    trait1 = app_datastore.get_personality(self.session['student_id']).two_dominant_temperaments_both[0]
+                    trait2 = app_datastore.get_personality(self.session['student_id']).two_dominant_temperaments_both[1]
+                    phrase1 = four_temperaments.get_random_best_in(trait1)
+                    phrase2 = four_temperaments.get_random_best_in(trait2)
+                    personality_best_html = phrase1 + " and " + phrase2
+                except IndexError:
+                    pass
 
                 # Describe any one existing advice
-                advice_html = ''
+                try:
+                    advice_html = app_datastore.get_random_advice(self.session['student_id'])
+                except IndexError:
+                    pass
 
                 # List social networks in bullet points
                 social_networks_html = ''
@@ -209,7 +310,7 @@ class Snapshot(BaseHandler):
                 'best_modules': best_modules_html,
                 'number_of_skills_and_interests': skills_and_interests_html,
                 'interests': interests_html,
-                'skills': skills_html,
+                'skills': skills_and_knowledge_html,
                 'aspirations': aspirations_html,
                 'two_strengths_from_two_traits_at_work': strengths_at_work_html,
                 'involvements': involvements_html,
