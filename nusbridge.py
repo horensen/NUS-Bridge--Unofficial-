@@ -257,7 +257,7 @@ class Snapshot(BaseHandler):
                             if i + 1 < len(involvements):
                                 involvements_html += ", "
                             elif i + 1 == len(involvements):
-                                involvements_html += " and "
+                                involvements_html += " or "
                             i += 1
                 except IndexError:
                     pass

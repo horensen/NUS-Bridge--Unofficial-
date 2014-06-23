@@ -201,7 +201,7 @@ temperaments = {
             'as a friend': [
                 'make friends easily',
                 'love people',
-                'thrive on compliments',
+                'can thrive on compliments',
                 'are exciting',
                 'envied by others',
                 'don\'t hold grudges',
@@ -374,12 +374,12 @@ temperaments = {
             'at work': [
                 'are goal oriented',
                 'can see the whole picture',
-                'organise well',
+                'can organise well',
                 'seek practical solutions',
-                'move quickly to action',
+                'can move quickly to action',
                 'can delegate work',
                 'insist on production',
-                'make the goal',
+                'can make the goal',
                 'stimulate activity',
                 'thrive on opposition'
             ]
@@ -469,7 +469,7 @@ temperaments = {
                 'have administrative ability',
                 'can mediate problems',
                 'avoid conflicts',
-                'good under pressure',
+                'are good under pressure',
                 'find the easy way'
             ]
         },
@@ -479,7 +479,7 @@ temperaments = {
                 'are pleasant and enjoyable',
                 'are inoffensive',
                 'are a good listener',
-                'have dry sense of humour',
+                'have a dry sense of humour',
                 'enjoy watching people',
                 'have many friends',
                 'have compassion and concern'
