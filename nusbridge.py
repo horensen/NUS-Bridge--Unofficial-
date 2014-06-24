@@ -53,6 +53,15 @@ config['webapp2_extras.sessions'] = {
 
 # INHERITED REQUEST HANDLERS
 class MainPage(BaseHandler):
+    #def post(self):
+        # Redirect to OpenID provider
+        # Declare openId = self.request.get('openId').rstrip()
+        # or openId = 'https://openid.nus.edu.sg/'
+        # Then redirect user to log in using a federated identity
+        # self.redirect(users.create_login_url('/', None, federated_identity=openId)
+        # Or in Google API
+        # self.redirect(self.request.host_url)
+
     def get(self):
         self.session['ivle_token'] = ""
         self.session['is_valid'] = False
@@ -75,6 +84,8 @@ class Snapshot(BaseHandler):
         self.redirect(app_domain + "snapshot")
 
     def get(self):
+        urlfetch.set_default_fetch_deadline(60)
+
         # Retrieve token
         if self.session.get('is_valid') != True:
             self.session['ivle_token'] = self.request.get('token')
@@ -93,14 +104,19 @@ class Snapshot(BaseHandler):
             self.session['student_second_major'] = student_profile_object['SecondMajor']
             self.session['student_faculty'] = student_profile_object['Faculty']
 
-            # Initialise strings to be populated from datastore
+            # Initialise values to be populated from datastore
+            aspirations_completed = False
+            education_completed = False
+            experience_completed = False
+            personality_completed = False
             aspirations_html = ''
             best_modules_html = ''
-            skills_and_interests_html = ''
+            #skills_and_interests_html = ''
             interests_html = ''
             skills_and_knowledge_html = ''
             strengths_at_work_html = ''
             involvements_html = ''
+            emotions_html = ''
             strengths_as_a_friend_html = ''
             personality_best_html = ''
             advice_html = ''
@@ -112,6 +128,7 @@ class Snapshot(BaseHandler):
                 # Describe existing aspirations
                 try:
                     aspirations = app_datastore.get_aspirations(self.session['student_id']).aspirations
+                    aspirations_completed = app_datastore.get_aspirations(self.session['student_id']).completed
                     number_of_aspirations = len(aspirations)
                     aspiration_id = 1
                     for aspiration in aspirations:
@@ -131,6 +148,7 @@ class Snapshot(BaseHandler):
                 # Describe existing best modules
                 try:
                     best_modules = app_datastore.get_education(self.session['student_id']).best_modules
+                    education_completed = app_datastore.get_education(self.session['student_id']).completed
                     number_of_best_modules = len(best_modules)
                     if number_of_best_modules > 3:
                         remaining_best_module_count = number_of_best_modules - 3
@@ -156,23 +174,10 @@ class Snapshot(BaseHandler):
                 except IndexError:
                     pass
 
-                # Describe number of skills and interests
-                number_of_skills = app_datastore.get_number_of_skills(self.session['student_id'])
-                number_of_interests = app_datastore.get_number_of_interests(self.session['student_id'])
-                
-                if number_of_skills > 0 and number_of_interests > 0:
-                    skills_and_interests_html = "This is probably related to any of your " + str(number_of_skills) + " skill"
-                    if number_of_skills > 1:
-                        skills_and_interests_html += "s"
-                    skills_and_interests_html += " and " + str(number_of_interests) + " interest"
-                    if number_of_interests > 1:
-                        skills_and_interests_html += "s"
-                    skills_and_interests_html += "."
-
-
                 # Describe existing interests
                 try:
                     interests = app_datastore.get_experience(self.session['student_id']).interests
+                    experience_completed = app_datastore.get_experience(self.session['student_id']).completed
                     if len(interests) > 3:
                         remaining_interest_count = len(interests) - 3
                         interest_id_1 = randint(0, len(interests)-1)
@@ -201,6 +206,7 @@ class Snapshot(BaseHandler):
                 # Describe existing skills
                 try:
                     sk = app_datastore.get_experience(self.session['student_id']).skills_and_knowledge
+                    experience_completed = app_datastore.get_experience(self.session['student_id']).completed
                     if len(sk) > 3:
                         remaining_sk_count = len(sk) - 3
                         sk_id_1 = randint(0, len(sk)-1)
@@ -227,6 +233,7 @@ class Snapshot(BaseHandler):
 
                 # Describe and two strengths at work
                 try:
+                    personality_completed = app_datastore.get_personality(self.session['student_id']).completed
                     trait1 = app_datastore.get_personality(self.session['student_id']).two_dominant_temperaments_both[0]
                     trait2 = app_datastore.get_personality(self.session['student_id']).two_dominant_temperaments_both[1]
                     phrase1 = four_temperaments.get_random_at_work(trait1)
@@ -238,6 +245,7 @@ class Snapshot(BaseHandler):
                 # Describe existing involvements
                 try:
                     involvements = app_datastore.get_experience(self.session['student_id']).involvements
+                    experience_completed = app_datastore.get_experience(self.session['student_id']).completed
                     if len(involvements) > 3:
                         remaining_involvement_count = len(involvements) - 3
                         involvement_id_1 = randint(0, len(involvements)-1)
@@ -262,8 +270,20 @@ class Snapshot(BaseHandler):
                 except IndexError:
                     pass
 
+                # Describe any two emotions
+                try:
+                    personality_completed = app_datastore.get_personality(self.session['student_id']).completed
+                    trait1 = app_datastore.get_personality(self.session['student_id']).two_dominant_temperaments_both[0]
+                    trait2 = app_datastore.get_personality(self.session['student_id']).two_dominant_temperaments_both[1]
+                    phrase1 = four_temperaments.get_random_emotion(trait1)
+                    phrase2 = four_temperaments.get_random_emotion(trait2)
+                    emotions_html = phrase1 + " and " + phrase2
+                except IndexError:
+                    pass
+
                 # Describe any two strengths as a friend
                 try:
+                    personality_completed = app_datastore.get_personality(self.session['student_id']).completed
                     trait1 = app_datastore.get_personality(self.session['student_id']).two_dominant_temperaments_both[0]
                     trait2 = app_datastore.get_personality(self.session['student_id']).two_dominant_temperaments_both[1]
                     phrase1 = four_temperaments.get_random_as_a_friend(trait1)
@@ -274,6 +294,7 @@ class Snapshot(BaseHandler):
 
                 # Describe any best from each dominant trait in terms of personality. There are only two dominant traits out of four.
                 try:
+                    personality_completed = app_datastore.get_personality(self.session['student_id']).completed
                     trait1 = app_datastore.get_personality(self.session['student_id']).two_dominant_temperaments_both[0]
                     trait2 = app_datastore.get_personality(self.session['student_id']).two_dominant_temperaments_both[1]
                     phrase1 = four_temperaments.get_random_best_in(trait1)
@@ -285,6 +306,7 @@ class Snapshot(BaseHandler):
                 # Describe any one existing advice
                 try:
                     advice_html = app_datastore.get_random_advice(self.session['student_id'])
+                    experience_completed = app_datastore.get_experience(self.session['student_id']).completed
                 except IndexError:
                     pass
 
@@ -301,22 +323,29 @@ class Snapshot(BaseHandler):
                 
 			
             template_values = {
+                # Jumbotron
                 'student_name': self.session.get('student_name'),
                 'student_email': self.session.get('student_email'),
                 'matriculation_year': self.session.get('student_matriculation_year'),
                 'first_major': self.session.get('student_first_major'),
                 'second_major': self.session.get('student_second_major'),
                 'faculty': self.session.get('student_faculty'),
+                # Summary
+                'aspirations_completed': aspirations_completed,
+                'education_completed': education_completed,
+                'experience_completed': experience_completed,
+                'personality_completed': personality_completed,
                 'best_modules': best_modules_html,
-                'number_of_skills_and_interests': skills_and_interests_html,
+                'aspirations': aspirations_html,
                 'interests': interests_html,
                 'skills': skills_and_knowledge_html,
-                'aspirations': aspirations_html,
+                'two_emotions_from_two_traits': emotions_html,
                 'two_strengths_from_two_traits_at_work': strengths_at_work_html,
                 'involvements': involvements_html,
                 'two_stengths_from_two_traits_as_a_friend': strengths_as_a_friend_html,
                 'two_best_from_two_traits': personality_best_html,
                 'advice': advice_html,
+                # Sidebar
                 'gender': app_datastore.get_user(self.session['student_id']).gender,
                 'country': app_datastore.get_user(self.session['student_id']).country,
                 'date_of_birth': app_datastore.get_user(self.session['student_id']).date_of_birth,
@@ -377,7 +406,7 @@ class Education(BaseHandler):
                 pass
 
             # Retrieve all modules completed by the user from IVLE
-            urlfetch.set_default_fetch_deadline(10)
+            urlfetch.set_default_fetch_deadline(60)
             modules_taken_obj = json.load(urllib2.urlopen('https://ivle.nus.edu.sg/api/Lapi.svc/Modules_Taken?APIKey=' + ivle_api_key + '&AuthToken=' + self.session.get('ivle_token') + '&StudentID=' + self.session['student_id']))['Results']
             list_of_modules_taken = ''
             number_of_modules_taken = 0

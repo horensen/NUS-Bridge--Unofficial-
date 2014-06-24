@@ -84,6 +84,7 @@ def get_number_of_users():
 class Aspirations(ndb.Model):
     student_id = ndb.StringProperty()
     aspirations = ndb.StringProperty(repeated=True)
+    completed = ndb.BooleanProperty()
 
 def get_aspirations(student_id):
 	qry = Aspirations.query(ancestor=ndb.Key("NUSBridge", "Aspirations"))
@@ -96,12 +97,14 @@ def insert_or_update_aspirations(student_id, aspirations):
 	if result:
 		user_aspirations = result[0]
 		user_aspirations.aspirations = aspirations
+		user_aspirations.completed = True
 		user_aspirations.put()
 	else:
 		user_key = ndb.Key("NUSBridge", "Aspirations")
 		user_aspirations = Aspirations(parent=user_key)
 		user_aspirations.student_id = student_id
 		user_aspirations.aspirations = aspirations
+		user_aspirations.completed = True
 		user_aspirations.put()
 
 
@@ -112,6 +115,7 @@ def insert_or_update_aspirations(student_id, aspirations):
 class Education(ndb.Model):
     student_id = ndb.StringProperty()
     best_modules = ndb.StringProperty(repeated=True)
+    completed = ndb.BooleanProperty()
 
 def get_education(student_id):
 	qry = Education.query(ancestor=ndb.Key("NUSBridge", "Education"))
@@ -124,12 +128,14 @@ def insert_or_update_education(student_id, best_modules):
 	if result:
 		user_education = result[0]
 		user_education.best_modules = best_modules
+		user_education.completed = True
 		user_education.put()
 	else:
 		user_key = ndb.Key("NUSBridge", "Education")
 		user_education = Education(parent=user_key)
 		user_education.student_id = student_id
 		user_education.best_modules = best_modules
+		user_education.completed = True
 		user_education.put()
 
 
@@ -143,6 +149,7 @@ class Experience(ndb.Model):
     interests = ndb.StringProperty(repeated=True)
     involvements = ndb.StringProperty(repeated=True)
     advices = ndb.StringProperty(repeated=True)
+    completed = ndb.BooleanProperty()
 
 def get_experience(student_id):
 	qry = Experience.query(ancestor=ndb.Key("NUSBridge", "Experience"))
@@ -158,6 +165,7 @@ def insert_or_update_experience(student_id, skills_and_knowledge, interests, inv
 		user_experience.interests = interests
 		user_experience.involvements = involvements
 		user_experience.advices = advices
+		user_experience.completed = True
 		user_experience.put()
 	else:
 		user_key = ndb.Key("NUSBridge", "Experience")
@@ -167,6 +175,7 @@ def insert_or_update_experience(student_id, skills_and_knowledge, interests, inv
 		user_experience.interests = interests
 		user_experience.involvements = involvements
 		user_experience.advices = advices
+		user_experience.completed = True
 		user_experience.put()
 
 def get_number_of_skills(student_id):
@@ -202,6 +211,7 @@ class Personality(ndb.Model):
     two_dominant_temperaments_strength = ndb.StringProperty(repeated=True)
     two_dominant_temperaments_weakness = ndb.StringProperty(repeated=True)
     two_dominant_temperaments_both = ndb.StringProperty(repeated=True)
+    completed = ndb.BooleanProperty()
 
 def get_personality(student_id):
 	qry = Personality.query(ancestor=ndb.Key("NUSBridge", "Personality"))
@@ -266,6 +276,8 @@ def insert_or_update_personality(student_id, words):
 		user_personality.two_dominant_temperaments_strength = get_top_two_traits(student_id, "strength")
 		user_personality.two_dominant_temperaments_weakness = get_top_two_traits(student_id, "weakness")
 		user_personality.two_dominant_temperaments_both = get_top_two_traits(student_id, "both")
+
+		user_personality.completed = True
 		user_personality.put()
 	else:
 		user_key = ndb.Key("NUSBridge", "Personality")
@@ -324,12 +336,13 @@ def insert_or_update_personality(student_id, words):
 		user_personality.two_dominant_temperaments_strength = get_top_two_traits(student_id, "strength")
 		user_personality.two_dominant_temperaments_weakness = get_top_two_traits(student_id, "weakness")
 		user_personality.two_dominant_temperaments_both = get_top_two_traits(student_id, "both")
+
+		user_personality.completed = True
 		user_personality.put()
 		
 
 def get_top_two_traits(student_id, swb):
 	traits = ["Sanguine", "Choleric", "Melancholy", "Phlegmatic"]
-	#shuffle(traits) just in case there is a need to pick two from more than two equal traits
 	trait_count = [0, 0, 0, 0]
 	trait_count = [get_temperament_count(student_id, traits[0], swb), get_temperament_count(student_id, traits[1], swb), get_temperament_count(student_id, traits[2], swb), get_temperament_count(student_id, traits[3], swb)]
 	sorted_counts = copy.copy(trait_count)
@@ -338,10 +351,14 @@ def get_top_two_traits(student_id, swb):
 	second_highest_count = sorted_counts[2]
 	index_of_first_highest_count_in_trait_count = trait_count.index(first_highest_count)
 	index_of_second_highest_count_in_trait_count = trait_count.index(second_highest_count)
+
+	if index_of_second_highest_count_in_trait_count == index_of_first_highest_count_in_trait_count:
+		index_of_second_highest_count_in_trait_count += 1
+		while (trait_count[index_of_second_highest_count_in_trait_count] != second_highest_count):
+			index_of_second_highest_count_in_trait_count += 1
+
 	first_highest_trait = traits[index_of_first_highest_count_in_trait_count]
 	second_highest_trait = traits[index_of_second_highest_count_in_trait_count]
-	print "First highest trait: " + first_highest_trait
-	print "Second highest trait: " + second_highest_trait
 	return [first_highest_trait, second_highest_trait]
 
 def get_temperament_count(student_id, temperament, swb):

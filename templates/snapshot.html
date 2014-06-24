@@ -85,7 +85,7 @@
   		</div>
   	</div>
 
-    {% if aspirations == '' or best_modules == '' or interests == '' or skills == '' or involvements == '' or advice == '' or two_strengths_from_two_traits_at_work == '' or two_stengths_from_two_traits_as_a_friend == '' or two_best_from_two_traits == ''%}
+    {% if aspirations_completed != True or education_completed != True or experience_completed != True or personality_completed != True %}
     <div class="well" style="border-radius: 0px;">
       <div class="container">
         <div class="row">
@@ -96,7 +96,7 @@
         </div>
         <div class="row">
           <div class="col-md-3">
-            {% if aspirations == '' %}
+            {% if aspirations_completed == False %}
             <a href="/aspirations" class="btn btn-primary btn-lg btn-block">Your Aspirations</a>
             {% else %}
             <a href="/aspirations" class="btn btn-success btn-lg btn-block">Your Aspirations</a>
@@ -104,7 +104,7 @@
             <br/>
           </div>
           <div class="col-md-3">
-            {% if best_modules == '' %}
+            {% if education_completed == False %}
             <a href="/education" class="btn btn-primary btn-lg btn-block">Your Education</a>
             {% else %}
             <a href="/education" class="btn btn-success btn-lg btn-block">Your Education</a>
@@ -112,7 +112,7 @@
             <br/>
           </div>
           <div class="col-md-3">
-            {% if interests == '' or skills == '' or involvements == '' or advice == '' %}
+            {% if experience_completed == False %}
             <a href="/experience" class="btn btn-primary btn-lg btn-block">Your Experience</a>
             {% else %}
             <a href="/experience" class="btn btn-success btn-lg btn-block">Your Experience</a>
@@ -120,7 +120,7 @@
             <br/>
           </div>
           <div class="col-md-3">
-            {% if two_strengths_from_two_traits_at_work == '' or two_stengths_from_two_traits_as_a_friend == '' or two_best_from_two_traits == '' %}
+            {% if personality_completed == False %}
             <a href="/personality" class="btn btn-primary btn-lg btn-block">Your Personality</a>
             {% else %}
             <a href="/personality" class="btn btn-success btn-lg btn-block">Your Personality</a>
@@ -137,9 +137,40 @@
             <div class="panel panel-default">
               <div class="panel-heading">Summary</div>
                 <div class="panel-body">
-                  <p class="lead">You feel that you have done well in {{ best_modules }}. {{ number_of_skills_and_interests }}</p>
-                  <p class="lead">As you appreciate learning about {{ interests }}, and you are good at {{ skills }}, you aspire to be {{ aspirations }} after your graduation. At work, you {{ two_strengths_from_two_traits_at_work }}. You would probably use what you have learned from {{ involvements }}.</p>
-                  <p class="lead">It seems that you {{ two_stengths_from_two_traits_as_a_friend }} as a friend. You are best in {{ two_best_from_two_traits }}. If someone looks up to you for what you strongly believe in, one of the things you like to share is "{{ advice }}".</p>
+                  {% if best_modules != '' %}
+                    <p class="lead">
+                      Keep up the good work and the knowledge you acquired from {{ best_modules }}.
+                    </p>
+                  {% endif %}
+
+                  <p class="lead">
+                    {% if aspirations == '' %}
+                      This is a good time to think about your future. 
+                        {% if interests != '' %}
+                          Consider your interests in {{ interests }}. 
+                        {% endif %}
+                        {% if skills != '' %}
+                          Focus on your abilities in {{ skills }}. 
+                        {% endif %}
+                        Your opinions about your dream matter more than anyone else's. Put them to use and truly excel in life.
+                    {% else %}
+                      As you appreciate learning about {{ interests }}, and you are good at {{ skills }}, you aspire to be {{ aspirations }} after your graduation.
+                    {% endif %}
+                  </p>
+
+                  <p class="lead">
+                    Generally you {{ two_emotions_from_two_traits }}. At work, you {{ two_strengths_from_two_traits_at_work }}.
+                    {% if involvements != '' %}
+                      You would probably use what you have learned from {{ involvements }}.
+                    {% endif %}
+                  </p>
+
+                  <p class="lead">
+                    It seems that you {{ two_stengths_from_two_traits_as_a_friend }} as a friend. You are best in {{ two_best_from_two_traits }}.
+                    {% if advice != '' %}
+                      If someone looks up to you for what you strongly believe in, one of the things you like to share is "{{ advice }}".
+                    {% endif %}
+                  </p>
                 </div>
               </div>
             </div>

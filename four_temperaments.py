@@ -1,188 +1,188 @@
 from random import randint
 
 words = {
-    'Animated': [1, 1, 'Sanguine', 'strength'],
-    'Adventurous': [2, 1, 'Choleric', 'strength'],
-    'Analytical': [3, 1, 'Melancholy', 'strength'],
-    'Adaptable': [4, 1, 'Phlegmatic', 'strength'],
-    'Playful': [5, 2, 'Sanguine', 'strength'],
-    'Persuasive': [6, 2, 'Choleric', 'strength'],
-    'Persistent': [7, 2, 'Melancholy', 'strength'],
-    'Peaceful': [8, 2, 'Phlegmatic', 'strength'],
-    'Sociable': [9, 3, 'Sanguine', 'strength'],
-    'Strong-willed': [10, 3, 'Choleric', 'strength'],
-    'Self-sacrificing': [11, 3, 'Melancholy', 'strength'],
-    'Submissive': [12, 3, 'Phlegmatic', 'strength'],
-    'Convincing': [13, 4, 'Sanguine', 'strength'],
-    'Competitive': [14, 4, 'Choleric', 'strength'],
-    'Considerate': [15, 4, 'Melancholy', 'strength'],
-    'Controlled': [16, 4, 'Phlegmatic', 'strength'],
-    'Refreshing': [17, 5, 'Sanguine', 'strength'],
-    'Resourceful': [18, 5, 'Choleric', 'strength'],
-    'Respectful': [19, 5, 'Melancholy', 'strength'],
-    'Reserved': [20, 5, 'Phlegmatic', 'strength'],
-    'Spirited': [21, 6, 'Sanguine', 'strength'],
-    'Self-reliant': [22, 6, 'Choleric', 'strength'],
-    'Sensitive': [23, 6, 'Melancholy', 'strength'],
-    'Satisfied': [24, 6, 'Phlegmatic', 'strength'],
-    'Promoter': [25, 7, 'Sanguine', 'strength'],
-    'Positive': [26, 7, 'Choleric', 'strength'],
-    'Planner': [27, 7, 'Melancholy', 'strength'],
-    'Patient': [28, 7, 'Phlegmatic', 'strength'],
-    'Optimistic': [29, 8, 'Sanguine', 'strength'],
-    'Outspoken': [30, 8, 'Choleric', 'strength'],
-    'Orderly': [31, 8, 'Melancholy', 'strength'],
-    'Obliging': [32, 8, 'Phlegmatic', 'strength'],
-    'Spontaneous': [33, 9, 'Sanguine', 'strength'],
-    'Sure': [34, 9, 'Choleric', 'strength'],
-    'Scheduled': [35, 9, 'Melancholy', 'strength'],
-    'Shy': [36, 9, 'Phlegmatic', 'strength'],
-    'Funny': [37, 10, 'Sanguine', 'strength'],
-    'Forceful': [38, 10, 'Choleric', 'strength'],
-    'Faithful': [39, 10, 'Melancholy', 'strength'],
-    'Friendly': [40, 10, 'Phlegmatic', 'strength'],
-    'Delightful': [41, 11, 'Sanguine', 'strength'],
-    'Daring': [42, 11, 'Choleric', 'strength'],
-    'Detailed': [43, 11, 'Melancholy', 'strength'],
-    'Diplomatic': [44, 11, 'Phlegmatic', 'strength'],
-    'Cheerful': [45, 12, 'Sanguine', 'strength'],
-    'Confident': [46, 12, 'Choleric', 'strength'],
-    'Cultured': [47, 12, 'Melancholy', 'strength'],
-    'Consistent': [48, 12, 'Phlegmatic', 'strength'],
-    'Inspiring': [49, 13, 'Sanguine', 'strength'],
-    'Independent': [50, 13, 'Choleric', 'strength'],
-    'Idealist': [51, 13, 'Melancholy', 'strength'],
-    'Inoffensive': [52, 13, 'Phlegmatic', 'strength'],
-    'Demonstrative': [53, 14, 'Sanguine', 'strength'],
-    'Decisive': [54, 14, 'Choleric', 'strength'],
-    'Deep': [55, 14, 'Melancholy', 'strength'],
-    'Dry humour': [56, 14, 'Phlegmatic', 'strength'],
-    'Mixes easily': [57, 15, 'Sanguine', 'strength'],
-    'Mover': [58, 15, 'Choleric', 'strength'],
-    'Musical': [59, 15, 'Melancholy', 'strength'],
-    'Mediator': [60, 15, 'Phlegmatic', 'strength'],
-    'Talker': [61, 16, 'Sanguine', 'strength'],
-    'Tenacious': [62, 16, 'Choleric', 'strength'],
-    'Thoughtful': [63, 16, 'Melancholy', 'strength'],
-    'Tolerant': [64, 16, 'Phlegmatic', 'strength'],
-    'Lively': [65, 17, 'Sanguine', 'strength'],
-    'Leader': [66, 17, 'Choleric', 'strength'],
-    'Loyal': [67, 17, 'Melancholy', 'strength'],
-    'Listener': [68, 17, 'Phlegmatic', 'strength'],
-    'Cute': [69, 18, 'Sanguine', 'strength'],
-    'Chief': [70, 18, 'Choleric', 'strength'],
-    'Chart-maker': [71, 18, 'Melancholy', 'strength'],
-    'Contented': [72, 18, 'Phlegmatic', 'strength'],
-    'Popular': [73, 19, 'Sanguine', 'strength'],
-    'Productive': [74, 19, 'Choleric', 'strength'],
-    'Perfectionist': [75, 19, 'Melancholy', 'strength'],
-    'Pleaser': [76, 19, 'Phlegmatic', 'strength'],
-    'Bouncy': [77, 20, 'Sanguine', 'strength'],
-    'Bold': [78, 20, 'Choleric', 'strength'],
-    'Behaved': [79, 20, 'Melancholy', 'strength'],
-    'Balanced': [80, 20, 'Phlegmatic', 'strength'],
-    'Brassy': [81, 21, 'Sanguine', 'weakness'],
-    'Bossy': [82, 21, 'Choleric', 'weakness'],
-    'Bashful': [83, 21, 'Melancholy', 'weakness'],
-    'Blank': [84, 21, 'Phlegmatic', 'weakness'],
-    'Undisciplined': [85, 22, 'Sanguine', 'weakness'],
-    'Unsympathetic': [86, 22, 'Choleric', 'weakness'],
-    'Unforgiving': [87, 22, 'Melancholy', 'weakness'],
-    'Unenthusiastic': [88, 22, 'Phlegmatic', 'weakness'],
-    'Repetitious': [89, 23, 'Sanguine', 'weakness'],
-    'Resistant': [90, 23, 'Choleric', 'weakness'],
-    'Resentful': [91, 23, 'Melancholy', 'weakness'],
-    'Reticent': [92, 23, 'Phlegmatic', 'weakness'],
-    'Forgetful': [93, 24, 'Sanguine', 'weakness'],
-    'Frank': [94, 24, 'Choleric', 'weakness'],
-    'Fussy': [95, 24, 'Melancholy', 'weakness'],
-    'Fearful': [96, 24, 'Phlegmatic', 'weakness'],
-    'Interrupts': [97, 25, 'Sanguine', 'weakness'],
-    'Impatient': [98, 25, 'Choleric', 'weakness'],
-    'Insecure': [99, 25, 'Melancholy', 'weakness'],
-    'Indecisive': [100, 25, 'Phlegmatic', 'weakness'],
-    'Unpredictable': [101, 26, 'Sanguine', 'weakness'],
-    'Unaffectionate': [102, 26, 'Choleric', 'weakness'],
-    'Unpopular': [103, 26, 'Melancholy', 'weakness'],
-    'Uninvolved': [104, 26, 'Phlegmatic', 'weakness'],
-    'Haphazard': [105, 27, 'Sanguine', 'weakness'],
-    'Headstrong': [106, 27, 'Choleric', 'weakness'],
-    'Hard to please': [107, 27, 'Melancholy', 'weakness'],
-    'Hesitant': [108, 27, 'Phlegmatic', 'weakness'],
-    'Permissive': [109, 28, 'Sanguine', 'weakness'],
-    'Proud': [110, 28, 'Choleric', 'weakness'],
-    'Pessimistic': [111, 28, 'Melancholy', 'weakness'],
-    'Plain': [112, 28, 'Phlegmatic', 'weakness'],
-    'Angered easily': [113, 29, 'Sanguine', 'weakness'],
-    'Argumentative': [114, 29, 'Choleric', 'weakness'],
-    'Alienated': [115, 29, 'Melancholy', 'weakness'],
-    'Aimless': [116, 29, 'Phlegmatic', 'weakness'],
-    'Naive': [117, 30, 'Sanguine', 'weakness'],
-    'Nervy': [118, 30, 'Choleric', 'weakness'],
-    'Negative attitude': [119, 30, 'Melancholy', 'weakness'],
-    'Nonchalant': [120, 30, 'Phlegmatic', 'weakness'],
-    'Wants credit': [121, 31, 'Sanguine', 'weakness'],
-    'Workaholic': [122, 31, 'Choleric', 'weakness'],
-    'Withdrawn': [123, 31, 'Melancholy', 'weakness'],
-    'Worrier': [124, 31, 'Phlegmatic', 'weakness'],
-    'Talkative': [125, 32, 'Sanguine', 'weakness'],
-    'Tactless': [126, 32, 'Choleric', 'weakness'],
-    'Too sensitive': [127, 32, 'Melancholy', 'weakness'],
-    'Timid': [128, 32, 'Phlegmatic', 'weakness'],
-    'Disorganised': [129, 33, 'Sanguine', 'weakness'],
-    'Domineering': [130, 33, 'Choleric', 'weakness'],
-    'Depressed': [131, 33, 'Melancholy', 'weakness'],
-    'Doubtful': [132, 33, 'Phlegmatic', 'weakness'],
-    'Inconsistent': [133, 34, 'Sanguine', 'weakness'],
-    'Intolerant': [134, 34, 'Choleric', 'weakness'],
-    'Introvert': [135, 34, 'Melancholy', 'weakness'],
-    'Indifferent': [136, 34, 'Phlegmatic', 'weakness'],
-    'Messy': [137, 35, 'Sanguine', 'weakness'],
-    'Manipulative': [138, 35, 'Choleric', 'weakness'],
-    'Moody': [139, 35, 'Melancholy', 'weakness'],
-    'Mumbles': [140, 35, 'Phlegmatic', 'weakness'],
-    'Show-off': [141, 36, 'Sanguine', 'weakness'],
-    'Stubborn': [142, 36, 'Choleric', 'weakness'],
-    'Skeptical': [143, 36, 'Melancholy', 'weakness'],
-    'Slow': [144, 36, 'Phlegmatic', 'weakness'],
-    'Loud': [145, 37, 'Sanguine', 'weakness'],
-    'Lord over others': [146, 37, 'Choleric', 'weakness'],
-    'Loner': [147, 37, 'Melancholy', 'weakness'],
-    'Lazy': [148, 37, 'Phlegmatic', 'weakness'],
-    'Scatterbrained': [149, 38, 'Sanguine', 'weakness'],
-    'Short-tempered': [150, 38, 'Choleric', 'weakness'],
-    'Suspicious': [151, 38, 'Melancholy', 'weakness'],
-    'Sluggish': [152, 38, 'Phlegmatic', 'weakness'],
-    'Restless': [153, 39, 'Sanguine', 'weakness'],
-    'Rash': [154, 39, 'Choleric', 'weakness'],
-    'Revengeful': [155, 39, 'Melancholy', 'weakness'],
-    'Reluctant': [156, 39, 'Phlegmatic', 'weakness'],
-    'Changeable': [157, 40, 'Sanguine', 'weakness'],
-    'Crafty': [158, 40, 'Choleric', 'weakness'],
-    'Critical': [159, 40, 'Melancholy', 'weakness'],
-    'Compromising': [160, 40, 'Phlegmatic', 'weakness']
+    'Animated': [1, 1, 'Sanguine', 'strength'], #OK
+    'Adventurous': [2, 1, 'Choleric', 'strength'], #OK
+    'Analytical': [3, 1, 'Melancholy', 'strength'], #OK
+    'Adaptable': [4, 1, 'Phlegmatic', 'strength'], #OK
+    'Playful': [5, 2, 'Sanguine', 'strength'], #OK
+    'Persuasive': [6, 2, 'Choleric', 'strength'], #OK
+    'Persistent': [7, 2, 'Melancholy', 'strength'], #OK
+    'Peaceful': [8, 2, 'Phlegmatic', 'strength'], #OK
+    'Sociable': [9, 3, 'Sanguine', 'strength'], #OK
+    'Strong-willed': [10, 3, 'Choleric', 'strength'], #OK
+    'Self-sacrificing': [11, 3, 'Melancholy', 'strength'], #OK
+    'Submissive': [12, 3, 'Phlegmatic', 'strength'], #OK
+    'Convincing': [13, 4, 'Sanguine', 'strength'], #OK
+    'Competitive': [14, 4, 'Choleric', 'strength'], #OK
+    'Considerate': [15, 4, 'Melancholy', 'strength'], #OK
+    'Controlled': [16, 4, 'Phlegmatic', 'strength'], #OK
+    'Refreshing': [17, 5, 'Sanguine', 'strength'], #OK
+    'Resourceful': [18, 5, 'Choleric', 'strength'], #OK
+    'Respectful': [19, 5, 'Melancholy', 'strength'], #OK
+    'Reserved': [20, 5, 'Phlegmatic', 'strength'], #OK
+    'Spirited': [21, 6, 'Sanguine', 'strength'], # OK
+    'Self-reliant': [22, 6, 'Choleric', 'strength'], #OK
+    'Sensitive': [23, 6, 'Melancholy', 'strength'], #OK
+    'Satisfied': [24, 6, 'Phlegmatic', 'strength'], #OK
+    'Promoter': [25, 7, 'Sanguine', 'strength'], #OK
+    'Positive': [26, 7, 'Choleric', 'strength'], #OK
+    'Planner': [27, 7, 'Melancholy', 'strength'], #OK
+    'Patient': [28, 7, 'Phlegmatic', 'strength'], #OK
+    'Optimistic': [29, 8, 'Sanguine', 'strength'], #OK
+    'Outspoken': [30, 8, 'Choleric', 'strength'], #OK
+    'Orderly': [31, 8, 'Melancholy', 'strength'], #OK
+    'Obliging': [32, 8, 'Phlegmatic', 'strength'], #OK
+    'Spontaneous': [33, 9, 'Sanguine', 'strength'], #OK
+    'Sure': [34, 9, 'Choleric', 'strength'], #OK
+    'Scheduled': [35, 9, 'Melancholy', 'strength'], #OK
+    'Shy': [36, 9, 'Phlegmatic', 'strength'], #OK
+    'Funny': [37, 10, 'Sanguine', 'strength'], #OK
+    'Forceful': [38, 10, 'Choleric', 'strength'], #OK
+    'Faithful': [39, 10, 'Melancholy', 'strength'], #OK
+    'Friendly': [40, 10, 'Phlegmatic', 'strength'], #OK
+    'Delightful': [41, 11, 'Sanguine', 'strength'], #OK
+    'Daring': [42, 11, 'Choleric', 'strength'], #OK
+    'Detailed': [43, 11, 'Melancholy', 'strength'], #OK
+    'Diplomatic': [44, 11, 'Phlegmatic', 'strength'], #OK
+    'Cheerful': [45, 12, 'Sanguine', 'strength'], #OK
+    'Confident': [46, 12, 'Choleric', 'strength'], #OK
+    'Cultured': [47, 12, 'Melancholy', 'strength'], #OK
+    'Consistent': [48, 12, 'Phlegmatic', 'strength'], #OK
+    'Inspiring': [49, 13, 'Sanguine', 'strength'], #OK
+    'Independent': [50, 13, 'Choleric', 'strength'], #OK
+    'Idealist': [51, 13, 'Melancholy', 'strength'], #OK
+    'Inoffensive': [52, 13, 'Phlegmatic', 'strength'], #OK
+    'Demonstrative': [53, 14, 'Sanguine', 'strength'], #OK
+    'Decisive': [54, 14, 'Choleric', 'strength'], #OK
+    'Deep': [55, 14, 'Melancholy', 'strength'], #OK
+    'Dry humour': [56, 14, 'Phlegmatic', 'strength'], #OK
+    'Mixes easily': [57, 15, 'Sanguine', 'strength'], #OK
+    'Mover': [58, 15, 'Choleric', 'strength'], #OK
+    'Musical': [59, 15, 'Melancholy', 'strength'], #OK
+    'Mediator': [60, 15, 'Phlegmatic', 'strength'], #OK
+    'Talker': [61, 16, 'Sanguine', 'strength'], #OK
+    'Tenacious': [62, 16, 'Choleric', 'strength'], #OK
+    'Thoughtful': [63, 16, 'Melancholy', 'strength'], #OK
+    'Tolerant': [64, 16, 'Phlegmatic', 'strength'], #OK
+    'Lively': [65, 17, 'Sanguine', 'strength'], #OK
+    'Leader': [66, 17, 'Choleric', 'strength'], #OK
+    'Loyal': [67, 17, 'Melancholy', 'strength'], #OK
+    'Listener': [68, 17, 'Phlegmatic', 'strength'], #OK
+    'Cute': [69, 18, 'Sanguine', 'strength'], #OK
+    'Chief': [70, 18, 'Choleric', 'strength'], #OK
+    'Chart-maker': [71, 18, 'Melancholy', 'strength'], #OK
+    'Contented': [72, 18, 'Phlegmatic', 'strength'], #OK
+    'Popular': [73, 19, 'Sanguine', 'strength'], #OK
+    'Productive': [74, 19, 'Choleric', 'strength'], #OK
+    'Perfectionist': [75, 19, 'Melancholy', 'strength'], #OK
+    'Pleaser': [76, 19, 'Phlegmatic', 'strength'], #OK
+    'Bouncy': [77, 20, 'Sanguine', 'strength'], #OK
+    'Bold': [78, 20, 'Choleric', 'strength'], #OK
+    'Behaved': [79, 20, 'Melancholy', 'strength'], #OK
+    'Balanced': [80, 20, 'Phlegmatic', 'strength'], #OK
+    'Brassy': [81, 21, 'Sanguine', 'weakness'], #OK
+    'Bossy': [82, 21, 'Choleric', 'weakness'], #OK
+    'Bashful': [83, 21, 'Melancholy', 'weakness'], #OK
+    'Blank': [84, 21, 'Phlegmatic', 'weakness'], #OK
+    'Undisciplined': [85, 22, 'Sanguine', 'weakness'], #OK
+    'Unsympathetic': [86, 22, 'Choleric', 'weakness'], #OK
+    'Unforgiving': [87, 22, 'Melancholy', 'weakness'], #OK
+    'Unenthusiastic': [88, 22, 'Phlegmatic', 'weakness'], #OK
+    'Repetitious': [89, 23, 'Sanguine', 'weakness'], #OK
+    'Resistant': [90, 23, 'Choleric', 'weakness'], #OK
+    'Resentful': [91, 23, 'Melancholy', 'weakness'], #OK
+    'Reticent': [92, 23, 'Phlegmatic', 'weakness'], #OK
+    'Forgetful': [93, 24, 'Sanguine', 'weakness'], #OK
+    'Frank': [94, 24, 'Choleric', 'weakness'], #OK
+    'Fussy': [95, 24, 'Melancholy', 'weakness'], #OK
+    'Fearful': [96, 24, 'Phlegmatic', 'weakness'], #OK
+    'Interrupts': [97, 25, 'Sanguine', 'weakness'], #OK
+    'Impatient': [98, 25, 'Choleric', 'weakness'], #OK
+    'Insecure': [99, 25, 'Melancholy', 'weakness'], #OK
+    'Indecisive': [100, 25, 'Phlegmatic', 'weakness'], #OK
+    'Unpredictable': [101, 26, 'Sanguine', 'weakness'], #OK
+    'Unaffectionate': [102, 26, 'Choleric', 'weakness'], #OK
+    'Unpopular': [103, 26, 'Melancholy', 'weakness'], #OK
+    'Uninvolved': [104, 26, 'Phlegmatic', 'weakness'], #OK
+    'Haphazard': [105, 27, 'Sanguine', 'weakness'], #OK
+    'Headstrong': [106, 27, 'Choleric', 'weakness'], #OK
+    'Hard to please': [107, 27, 'Melancholy', 'weakness'], #OK
+    'Hesitant': [108, 27, 'Phlegmatic', 'weakness'], #OK
+    'Permissive': [109, 28, 'Sanguine', 'weakness'], #OK
+    'Proud': [110, 28, 'Choleric', 'weakness'], #OK
+    'Pessimistic': [111, 28, 'Melancholy', 'weakness'], #OK
+    'Plain': [112, 28, 'Phlegmatic', 'weakness'], #OK
+    'Angered easily': [113, 29, 'Sanguine', 'weakness'], #OK
+    'Argumentative': [114, 29, 'Choleric', 'weakness'], #OK
+    'Alienated': [115, 29, 'Melancholy', 'weakness'], #OK
+    'Aimless': [116, 29, 'Phlegmatic', 'weakness'], #OK
+    'Naive': [117, 30, 'Sanguine', 'weakness'], #OK
+    'Nervy': [118, 30, 'Choleric', 'weakness'], #OK
+    'Negative attitude': [119, 30, 'Melancholy', 'weakness'], #OK
+    'Nonchalant': [120, 30, 'Phlegmatic', 'weakness'], #OK
+    'Wants credit': [121, 31, 'Sanguine', 'weakness'], #OK
+    'Workaholic': [122, 31, 'Choleric', 'weakness'], #OK
+    'Withdrawn': [123, 31, 'Melancholy', 'weakness'], #OK
+    'Worrier': [124, 31, 'Phlegmatic', 'weakness'], #OK
+    'Talkative': [125, 32, 'Sanguine', 'weakness'], #OK
+    'Tactless': [126, 32, 'Choleric', 'weakness'], #OK
+    'Too sensitive': [127, 32, 'Melancholy', 'weakness'], #OK
+    'Timid': [128, 32, 'Phlegmatic', 'weakness'], #OK
+    'Disorganised': [129, 33, 'Sanguine', 'weakness'], #OK
+    'Domineering': [130, 33, 'Choleric', 'weakness'], #OK
+    'Depressed': [131, 33, 'Melancholy', 'weakness'], #OK
+    'Doubtful': [132, 33, 'Phlegmatic', 'weakness'], #OK
+    'Inconsistent': [133, 34, 'Sanguine', 'weakness'], #OK
+    'Intolerant': [134, 34, 'Choleric', 'weakness'], #OK
+    'Introvert': [135, 34, 'Melancholy', 'weakness'], #OK
+    'Indifferent': [136, 34, 'Phlegmatic', 'weakness'], #OK
+    'Messy': [137, 35, 'Sanguine', 'weakness'], #OK
+    'Manipulative': [138, 35, 'Choleric', 'weakness'], #OK
+    'Moody': [139, 35, 'Melancholy', 'weakness'], #OK
+    'Mumbles': [140, 35, 'Phlegmatic', 'weakness'], #OK
+    'Show-off': [141, 36, 'Sanguine', 'weakness'], #OK
+    'Stubborn': [142, 36, 'Choleric', 'weakness'], #OK
+    'Skeptical': [143, 36, 'Melancholy', 'weakness'], #OK
+    'Slow': [144, 36, 'Phlegmatic', 'weakness'], #OK
+    'Loud': [145, 37, 'Sanguine', 'weakness'], #OK
+    'Lord over others': [146, 37, 'Choleric', 'weakness'], #OK
+    'Loner': [147, 37, 'Melancholy', 'weakness'], #OK
+    'Lazy': [148, 37, 'Phlegmatic', 'weakness'], #OK
+    'Scatterbrained': [149, 38, 'Sanguine', 'weakness'], #OK
+    'Short-tempered': [150, 38, 'Choleric', 'weakness'], #OK
+    'Suspicious': [151, 38, 'Melancholy', 'weakness'], #OK
+    'Sluggish': [152, 38, 'Phlegmatic', 'weakness'], #OK
+    'Restless': [153, 39, 'Sanguine', 'weakness'], #OK
+    'Rash': [154, 39, 'Choleric', 'weakness'], #OK
+    'Revengeful': [155, 39, 'Melancholy', 'weakness'], #OK
+    'Reluctant': [156, 39, 'Phlegmatic', 'weakness'], #OK
+    'Changeable': [157, 40, 'Sanguine', 'weakness'], #OK
+    'Crafty': [158, 40, 'Choleric', 'weakness'], #OK
+    'Critical': [159, 40, 'Melancholy', 'weakness'], #OK
+    'Compromising': [160, 40, 'Phlegmatic', 'weakness'] #OK
 }
 
 temperaments = {
     'Sanguine': [
         {
             'emotions': [
-                'appealing personality',
-                'storyteller',
-                'life of the party',
-                'good sense of humour',
-                'memory for colour',
-                'physically holds on to listener',
-                'emotional and demonstrative',
-                'enthusiastic and expressive',
-                'cheerful and bubbly',
-                'curious',
-                'good on stage',
-                'wide-eyed and innocent',
-                'lives in the present',
-                'changeable disposition',
-                'sincere at heart',
-                'always a child'
+                'have an appealing personality',
+                'are a storyteller',
+                'are the life of the party',
+                'have a good sense of humour',
+                'have memory for colour',
+                'physically hold on to listener',
+                'are emotional and demonstrative',
+                'are enthusiastic and expressive',
+                'are cheerful and bubbly',
+                'are curious',
+                'are good on stage',
+                'are wide-eyed and innocent',
+                'live in the present',
+                'have a changeable disposition',
+                'are sincere at heart',
+                'are always a child'
             ]
         },
         {
@@ -265,18 +265,18 @@ temperaments = {
     'Melancholy': [
         {
             'emotions': [
-                'deep and thoughtful',
-                'analytical',
-                'serious and purposeful',
-                'genius prone',
-                'talented and creative',
-                'artistic or musical',
-                'philosophical and poetic',
-                'appreciative of beauty',
-                'sensitive of others',
-                'self-sacrificing',
-                'conscientious',
-                'idealistic'
+                'are deep and thoughtful',
+                'are analytical',
+                'are serious and purposeful',
+                'are genius prone',
+                'are talented and creative',
+                'are artistic or musical',
+                'are philosophical and poetic',
+                'are appreciative of beauty',
+                'are sensitive of others',
+                'are self-sacrificing',
+                'are conscientious',
+                'are idealistic'
             ]
         },
         {
@@ -358,15 +358,15 @@ temperaments = {
     'Choleric': [
         {
             'emotions': [
-                'born leader',
-                'dynamic and active',
-                'compulsive need for change',
+                'are a born leader',
+                'are dynamic and active',
+                'have compulsive need for change',
                 'must correct wrongs',
-                'strong willed and decisive',
-                'unemotional',
-                'not easily discouraged',
-                'independent and self-sufficient',
-                'exudes confidence',
+                'are strong-willed and decisive',
+                'are unemotional',
+                'are not easily discouraged',
+                'areindependent and self-sufficient',
+                'exude confidence',
                 'can run anything'
             ]
         },
@@ -450,16 +450,16 @@ temperaments = {
     'Phlegmatic': [
         {
             'emotions': [
-                'low-key personality',
-                'easygoing and relaxed',
-                'calm and cool',
-                'patient',
-                'consistent life',
-                'quiet but witty',
-                'sympathetic and kind',
-                'keeps emotions hidden',
-                'happily reconciled to life',
-                'all-purpose person'
+                'have a low-key personality',
+                'are easygoing and relaxed',
+                'are calm and cool',
+                'are patient',
+                'have a consistent life',
+                'are quiet but witty',
+                'are sympathetic and kind',
+                'keep emotions hidden',
+                'are happily reconciled to life',
+                'are an all-purpose person'
             ]
         },
         {
@@ -538,6 +538,7 @@ temperaments = {
 }
 
 def get_word_id(word):
+    print word
     return words[word][0]
 
 def get_question_set_id(word):
