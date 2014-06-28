@@ -95,14 +95,15 @@ class Snapshot(BaseHandler):
         if self.session.get('is_valid') == True and self.session.get('ivle_token') != '':
 
             # Retrieve profile information from IVLE and remember for the current browser session
-            student_profile_object = json.load(urllib2.urlopen('https://ivle.nus.edu.sg/api/Lapi.svc/Profile_View?APIKey=' + ivle_api_key + '&AuthToken=' + self.session.get('ivle_token')))['Results'][0]
-            self.session['student_id'] = student_profile_object['UserID']
-            self.session['student_name'] = student_profile_object['Name']
-            self.session['student_email'] = student_profile_object['Email']
-            self.session['student_matriculation_year'] = student_profile_object['MatriculationYear']
-            self.session['student_first_major'] = student_profile_object['FirstMajor']
-            self.session['student_second_major'] = student_profile_object['SecondMajor']
-            self.session['student_faculty'] = student_profile_object['Faculty']
+            if app_datastore.user_exists(self.session.get('student_id')) == False:
+                student_profile_object = json.load(urllib2.urlopen('https://ivle.nus.edu.sg/api/Lapi.svc/Profile_View?APIKey=' + ivle_api_key + '&AuthToken=' + self.session.get('ivle_token')))['Results'][0]
+                self.session['student_id'] = student_profile_object['UserID']
+                self.session['student_name'] = student_profile_object['Name']
+                self.session['student_email'] = student_profile_object['Email']
+                self.session['student_matriculation_year'] = student_profile_object['MatriculationYear']
+                self.session['student_first_major'] = student_profile_object['FirstMajor']
+                self.session['student_second_major'] = student_profile_object['SecondMajor']
+                self.session['student_faculty'] = student_profile_object['Faculty']
 
             # Initialise values to be populated from datastore
             aspirations_completed = False
@@ -120,8 +121,7 @@ class Snapshot(BaseHandler):
             strengths_as_a_friend_html = ''
             personality_best_html = ''
             advice_html = ''
-            social_networks_html = ''
-            associations_html = ''
+            social_networks_html=''
 
             # If the user exists
             if app_datastore.user_exists(self.session['student_id']):
@@ -142,7 +142,7 @@ class Snapshot(BaseHandler):
                         elif aspiration_id + 1 == number_of_aspirations:
                             aspirations_html += " or "
                         aspiration_id += 1
-                except IndexError:
+                except Exception:
                     pass
 
                 # Describe existing best modules
@@ -171,7 +171,7 @@ class Snapshot(BaseHandler):
                             elif i + 1 == number_of_best_modules:
                                 best_modules_html += " and "
                             i += 1
-                except IndexError:
+                except Exception:
                     pass
 
                 # Describe existing interests
@@ -199,7 +199,7 @@ class Snapshot(BaseHandler):
                             elif i + 1 == len(interests):
                                 interests_html += " and "
                             i += 1
-                except IndexError:
+                except Exception:
                     pass
 
 
@@ -228,7 +228,7 @@ class Snapshot(BaseHandler):
                             elif i + 1 == len(sk):
                                 skills_and_knowledge_html += " and "
                             i += 1
-                except IndexError:
+                except Exception:
                     pass
 
                 # Describe and two strengths at work
@@ -239,7 +239,7 @@ class Snapshot(BaseHandler):
                     phrase1 = four_temperaments.get_random_at_work(trait1)
                     phrase2 = four_temperaments.get_random_at_work(trait2)
                     strengths_at_work_html = phrase1 + " and " + phrase2
-                except IndexError:
+                except Exception:
                     pass
 
                 # Describe existing involvements
@@ -267,7 +267,7 @@ class Snapshot(BaseHandler):
                             elif i + 1 == len(involvements):
                                 involvements_html += " or "
                             i += 1
-                except IndexError:
+                except Exception:
                     pass
 
                 # Describe any two emotions
@@ -278,7 +278,7 @@ class Snapshot(BaseHandler):
                     phrase1 = four_temperaments.get_random_emotion(trait1)
                     phrase2 = four_temperaments.get_random_emotion(trait2)
                     emotions_html = phrase1 + " and " + phrase2
-                except IndexError:
+                except Exception:
                     pass
 
                 # Describe any two strengths as a friend
@@ -289,7 +289,7 @@ class Snapshot(BaseHandler):
                     phrase1 = four_temperaments.get_random_as_a_friend(trait1)
                     phrase2 = four_temperaments.get_random_as_a_friend(trait2)
                     strengths_as_a_friend_html = phrase1 + " and " + phrase2
-                except IndexError:
+                except Exception:
                     pass
 
                 # Describe any best from each dominant trait in terms of personality. There are only two dominant traits out of four.
@@ -300,28 +300,30 @@ class Snapshot(BaseHandler):
                     phrase1 = four_temperaments.get_random_best_in(trait1)
                     phrase2 = four_temperaments.get_random_best_in(trait2)
                     personality_best_html = phrase1 + " and " + phrase2
-                except IndexError:
+                except Exception:
                     pass
 
                 # Describe any one existing advice
                 try:
                     advice_html = app_datastore.get_random_advice(self.session['student_id'])
                     experience_completed = app_datastore.get_experience(self.session['student_id']).completed
-                except IndexError:
+                except Exception:
                     pass
 
                 # List social networks in bullet points
-                social_networks_html = ''
-
-                # List associations in bullet points
-                associations_html = ''
+                try:
+                    social_networks_obj = app_datastore.get_user(self.session['student_id']).social_networks
+                    for link in social_networks_obj:
+                        social_networks_html+="<li>"+link+"</li>"
+                except Exception:
+                    pass
+               
 
             # else if the user is new
             else:
                 # Register into the datastore
                 app_datastore.insert_user(student_profile_object)
                 
-			
             template_values = {
                 # Jumbotron
                 'student_name': self.session.get('student_name'),
@@ -350,8 +352,7 @@ class Snapshot(BaseHandler):
                 'country': app_datastore.get_user(self.session['student_id']).country,
                 'date_of_birth': app_datastore.get_user(self.session['student_id']).date_of_birth,
                 'website': app_datastore.get_user(self.session['student_id']).website,
-                'social_networks': social_networks_html,
-                'associations': associations_html
+                'social_networks': social_networks_html
             }
 
             template = jinja_environment.get_template('snapshot.html')
@@ -368,7 +369,7 @@ class Aspirations(BaseHandler):
                 mylist = app_datastore.get_aspirations(self.session['student_id']).aspirations
                 for item in mylist:
                     aspirations_html += "<li>" + item + "</li>"
-            except IndexError:
+            except Exception:
                 pass
 
             # Prepare template values and template
@@ -402,7 +403,7 @@ class Education(BaseHandler):
                 mylist = app_datastore.get_education(self.session['student_id']).best_modules
                 for item in mylist:
                     best_modules_html += "<li>" + item + "</li>"
-            except IndexError:
+            except Exception:
                 pass
 
             # Retrieve all modules completed by the user from IVLE
@@ -450,7 +451,7 @@ class Experience(BaseHandler):
                 mylist = app_datastore.get_experience(self.session['student_id']).skills_and_knowledge
                 for item in mylist:
                     skills_html += "<li>" + item + "</li>"
-            except IndexError:
+            except Exception:
                 pass
 
             # Retrieve existing user's interests
@@ -459,7 +460,7 @@ class Experience(BaseHandler):
                 mylist = app_datastore.get_experience(self.session['student_id']).interests
                 for item in mylist:
                     interests_html += "<li>" + item + "</li>"
-            except IndexError:
+            except Exception:
                 pass
 
             # Retrieve existing user's involvements
@@ -468,7 +469,7 @@ class Experience(BaseHandler):
                 mylist = app_datastore.get_experience(self.session['student_id']).involvements
                 for item in mylist:
                     involvements_html += "<li>" + item + "</li>"
-            except IndexError:
+            except Exception:
                 pass
 
             # Retrieve existing user's advices
@@ -477,7 +478,7 @@ class Experience(BaseHandler):
                 mylist = app_datastore.get_experience(self.session['student_id']).advices
                 for item in mylist:
                     advices_html += "<li>" + item + "</li>"
-            except IndexError:
+            except Exception:
                 pass
 
             # Prepare template values and template
@@ -557,11 +558,41 @@ class ImprovementAdvisory(BaseHandler):
             self.redirect(app_domain)
 
 class Profile(BaseHandler):
+    def post(self):
+        student_country=self.request.get('user_country')
+        student_gender=self.request.get('user_gender')
+        student_website=self.request.get('user_website')
+        student_social_network=self.request.get('networks').split(",,")
+
+        if self.session.get('is_valid'):
+            app_datastore.update_user(self.session.get('student_id'),self.request.get("user_dob"),student_gender,student_country,student_website,student_social_network)
+
+        self.redirect("/profile")
+
     def get(self):
+        std_obj=app_datastore.get_user(self.session.get('student_id'))
+        student_dob=std_obj.date_of_birth
+        student_gender=std_obj.gender
+        student_country=std_obj.country
+        student_website=std_obj.website
+        student_social_network = std_obj.social_networks
+        networks_html = ''
+
+        try:
+            for link in student_social_network:
+                networks_html += "<li>" + link + "</li>"
+        except Exception:
+            pass
+
         if self.session.get('is_valid') == True:
             template_values = {
+                'user_gender': student_gender,
                 'student_name': self.session.get('student_name'),
-                'student_email': self.session.get('student_email')
+                'student_email': self.session.get('student_email'),
+                'user_dob': student_dob,
+                'user_country': student_country,
+                'user_website': student_website,
+                'existing_networks': networks_html
             }
             template = jinja_environment.get_template('profile.html')
             self.response.out.write(template.render(template_values))

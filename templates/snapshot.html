@@ -70,13 +70,11 @@
   		</div>
   	</div>
   	<br/><br/>
-  	<div class="jumbotron">
+  	<div class="jumbotron" style="color: #ffffff; background: #0a5175;">
   		<div class="container">
   			<div class="row">
-  				<div class="col-md-3 text-center">
-            <img src="../images/icon_961.png" class="img-circle" style="height:200px; width:200px; border:3px solid gray;">
-  				</div>
-  				<div class="col-md-9 text-center">
+  				<div class="col-md-12 text-center">
+            <!--<img src="../images/icon_961.png" class="img-circle" style="height:150px; width:150px; border:3px solid white;">-->
 		  			<h1>{{ student_name }}</h1>
 		  			<p>Matriculated in {{ matriculation_year }}</p>
 		  			<h2>{{ first_major }}{% if second_major != '' %}{{ " and " + second_major }}{% endif %}, {{ faculty }}</h2>
@@ -135,13 +133,13 @@
       <div class="row">
          <div class="col-md-8">
             <div class="panel panel-default">
-              <div class="panel-heading">Summary</div>
+              <div class="panel-heading">Briefly About You</div>
                 <div class="panel-body">
-                  {% if best_modules != '' %}
+                  <!--{% if best_modules != '' %}
                     <p class="lead">
                       Keep up the good work and the knowledge you acquired from {{ best_modules }}.
                     </p>
-                  {% endif %}
+                  {% endif %}-->
 
                   <p class="lead">
                     {% if aspirations == '' %}
@@ -154,7 +152,7 @@
                         {% endif %}
                         Your opinions about your dream matter more than anyone else's. Put them to use and truly excel in life.
                     {% else %}
-                      As you appreciate learning about {{ interests }}, and you are good at {{ skills }}, you aspire to be {{ aspirations }} after your graduation.
+                      You want to be {{ aspirations }} after your graduation. You appreciate learning about {{ interests }}, and you are good at {{ skills }}.
                     {% endif %}
                   </p>
 
@@ -166,7 +164,7 @@
                   </p>
 
                   <p class="lead">
-                    It seems that you {{ two_stengths_from_two_traits_as_a_friend }} as a friend. You are best in {{ two_best_from_two_traits }}.
+                    As a friend, it seems that you {{ two_stengths_from_two_traits_as_a_friend }}. You are best in {{ two_best_from_two_traits }}.
                     {% if advice != '' %}
                       If someone looks up to you for what you strongly believe in, one of the things you like to share is "{{ advice }}".
                     {% endif %}
@@ -187,9 +185,14 @@
               <div class="panel-heading">Presence</div>
               <div class="panel-body">
                 <p>Website: <b>{{ website }}</b></p>
-                <p>Social Networks:</p><b><ul>{{ social_networks }}</ul></b>
-                <p>Associations:</p><b><ul>{{ associations }}</ul></b>                              
+                <p>Social Networks:</p><b><ul id="social_networks_li"></ul></b>                     
               </div>
+              <script>
+                var social_networks = "{{ social_networks }}";
+                social_networks = social_networks.replace(/&lt;/g, "<");
+                social_networks = social_networks.replace(/&gt;/g, ">");
+                document.getElementById('social_networks_li').innerHTML = social_networks;
+              </script>
             </div>
           </div>
       </div>     

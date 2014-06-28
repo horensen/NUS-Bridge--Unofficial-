@@ -1,7 +1,8 @@
 from nltk.corpus import wordnet
+import difflib
 
 class SemanticTest(webapp2.RequestHandler):
-    def get(self):
+    def get(self,word1,word2):
         #word1 = 'animal'
         #word2 = 'organism'
         #sm = SequenceMatcher(None)
@@ -24,6 +25,12 @@ class SemanticTest(webapp2.RequestHandler):
         #for i,j in list(product(*[sem1,sem2])):
         #    score = i.wup_similarity(j) # Wu-Palmer Similarity
         #    maxscore = score if maxscore < score else maxscore
+		
+		#jie ping method see if applicable
+		compare= difflib.SequenceMatcher(None,word1,word2)
+		#return the percentage of similarity in percentage round off to 2 decimal points
+		result= compare.ratio()*100
+		wup_similarity_result=round(result,2)
 
         template_values = {
             #'sequence_matcher_result': sequence_matcher_result,

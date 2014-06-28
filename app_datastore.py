@@ -26,7 +26,7 @@ class ProfileInfo(ndb.Model):
 	country = ndb.StringProperty()
 	website = ndb.StringProperty()
 	social_networks = ndb.StringProperty(repeated=True)
-	associations = ndb.StringProperty(repeated=True)
+
 
 def get_user(student_id):
 	qry = ProfileInfo.query(ancestor=ndb.Key("NUSBridge", "ProfileInfo"))
@@ -50,10 +50,9 @@ def insert_user(student_profile_object):
 	nus_user.country = ''
 	nus_user.website = ''
 	nus_user.social_networks = []
-	nus_user.associations = []
 	nus_user.put()
 
-def update_user(student_id, date_of_birth, gender, country, website, social_networks, associations):
+def update_user(student_id, date_of_birth, gender, country, website, social_networks):
 	qry = ProfileInfo.query(ancestor=ndb.Key("NUSBridge", "ProfileInfo"))
 	result = qry.filter(ProfileInfo.student_id==student_id).fetch()
 	nus_user = result[0]
@@ -62,7 +61,6 @@ def update_user(student_id, date_of_birth, gender, country, website, social_netw
 	nus_user.country = country
 	nus_user.website = website
 	nus_user.social_networks = social_networks
-	nus_user.associations = associations
 	nus_user.put()
 
 def user_exists(student_id):
