@@ -3,163 +3,163 @@ from random import randint
 words = {
     'Animated': [1, 1, 'Sanguine', 'strength'], #OK
     'Adventurous': [2, 1, 'Choleric', 'strength'], #OK
-    'Analytical': [3, 1, 'Melancholy', 'strength'], #OK
+    'Analytical': [3, 1, 'Melancholic', 'strength'], #OK
     'Adaptable': [4, 1, 'Phlegmatic', 'strength'], #OK
     'Playful': [5, 2, 'Sanguine', 'strength'], #OK
     'Persuasive': [6, 2, 'Choleric', 'strength'], #OK
-    'Persistent': [7, 2, 'Melancholy', 'strength'], #OK
+    'Persistent': [7, 2, 'Melancholic', 'strength'], #OK
     'Peaceful': [8, 2, 'Phlegmatic', 'strength'], #OK
     'Sociable': [9, 3, 'Sanguine', 'strength'], #OK
     'Strong-willed': [10, 3, 'Choleric', 'strength'], #OK
-    'Self-sacrificing': [11, 3, 'Melancholy', 'strength'], #OK
+    'Self-sacrificing': [11, 3, 'Melancholic', 'strength'], #OK
     'Submissive': [12, 3, 'Phlegmatic', 'strength'], #OK
     'Convincing': [13, 4, 'Sanguine', 'strength'], #OK
     'Competitive': [14, 4, 'Choleric', 'strength'], #OK
-    'Considerate': [15, 4, 'Melancholy', 'strength'], #OK
+    'Considerate': [15, 4, 'Melancholic', 'strength'], #OK
     'Controlled': [16, 4, 'Phlegmatic', 'strength'], #OK
     'Refreshing': [17, 5, 'Sanguine', 'strength'], #OK
     'Resourceful': [18, 5, 'Choleric', 'strength'], #OK
-    'Respectful': [19, 5, 'Melancholy', 'strength'], #OK
+    'Respectful': [19, 5, 'Melancholic', 'strength'], #OK
     'Reserved': [20, 5, 'Phlegmatic', 'strength'], #OK
     'Spirited': [21, 6, 'Sanguine', 'strength'], # OK
     'Self-reliant': [22, 6, 'Choleric', 'strength'], #OK
-    'Sensitive': [23, 6, 'Melancholy', 'strength'], #OK
+    'Sensitive': [23, 6, 'Melancholic', 'strength'], #OK
     'Satisfied': [24, 6, 'Phlegmatic', 'strength'], #OK
     'Promoter': [25, 7, 'Sanguine', 'strength'], #OK
     'Positive': [26, 7, 'Choleric', 'strength'], #OK
-    'Planner': [27, 7, 'Melancholy', 'strength'], #OK
+    'Planner': [27, 7, 'Melancholic', 'strength'], #OK
     'Patient': [28, 7, 'Phlegmatic', 'strength'], #OK
     'Optimistic': [29, 8, 'Sanguine', 'strength'], #OK
     'Outspoken': [30, 8, 'Choleric', 'strength'], #OK
-    'Orderly': [31, 8, 'Melancholy', 'strength'], #OK
+    'Orderly': [31, 8, 'Melancholic', 'strength'], #OK
     'Obliging': [32, 8, 'Phlegmatic', 'strength'], #OK
     'Spontaneous': [33, 9, 'Sanguine', 'strength'], #OK
     'Sure': [34, 9, 'Choleric', 'strength'], #OK
-    'Scheduled': [35, 9, 'Melancholy', 'strength'], #OK
+    'Scheduled': [35, 9, 'Melancholic', 'strength'], #OK
     'Shy': [36, 9, 'Phlegmatic', 'strength'], #OK
     'Funny': [37, 10, 'Sanguine', 'strength'], #OK
     'Forceful': [38, 10, 'Choleric', 'strength'], #OK
-    'Faithful': [39, 10, 'Melancholy', 'strength'], #OK
+    'Faithful': [39, 10, 'Melancholic', 'strength'], #OK
     'Friendly': [40, 10, 'Phlegmatic', 'strength'], #OK
     'Delightful': [41, 11, 'Sanguine', 'strength'], #OK
     'Daring': [42, 11, 'Choleric', 'strength'], #OK
-    'Detailed': [43, 11, 'Melancholy', 'strength'], #OK
+    'Detailed': [43, 11, 'Melancholic', 'strength'], #OK
     'Diplomatic': [44, 11, 'Phlegmatic', 'strength'], #OK
     'Cheerful': [45, 12, 'Sanguine', 'strength'], #OK
     'Confident': [46, 12, 'Choleric', 'strength'], #OK
-    'Cultured': [47, 12, 'Melancholy', 'strength'], #OK
+    'Cultured': [47, 12, 'Melancholic', 'strength'], #OK
     'Consistent': [48, 12, 'Phlegmatic', 'strength'], #OK
     'Inspiring': [49, 13, 'Sanguine', 'strength'], #OK
     'Independent': [50, 13, 'Choleric', 'strength'], #OK
-    'Idealist': [51, 13, 'Melancholy', 'strength'], #OK
+    'Idealist': [51, 13, 'Melancholic', 'strength'], #OK
     'Inoffensive': [52, 13, 'Phlegmatic', 'strength'], #OK
     'Demonstrative': [53, 14, 'Sanguine', 'strength'], #OK
     'Decisive': [54, 14, 'Choleric', 'strength'], #OK
-    'Deep': [55, 14, 'Melancholy', 'strength'], #OK
+    'Deep': [55, 14, 'Melancholic', 'strength'], #OK
     'Dry humour': [56, 14, 'Phlegmatic', 'strength'], #OK
     'Mixes easily': [57, 15, 'Sanguine', 'strength'], #OK
     'Mover': [58, 15, 'Choleric', 'strength'], #OK
-    'Musical': [59, 15, 'Melancholy', 'strength'], #OK
+    'Musical': [59, 15, 'Melancholic', 'strength'], #OK
     'Mediator': [60, 15, 'Phlegmatic', 'strength'], #OK
     'Talker': [61, 16, 'Sanguine', 'strength'], #OK
     'Tenacious': [62, 16, 'Choleric', 'strength'], #OK
-    'Thoughtful': [63, 16, 'Melancholy', 'strength'], #OK
+    'Thoughtful': [63, 16, 'Melancholic', 'strength'], #OK
     'Tolerant': [64, 16, 'Phlegmatic', 'strength'], #OK
     'Lively': [65, 17, 'Sanguine', 'strength'], #OK
     'Leader': [66, 17, 'Choleric', 'strength'], #OK
-    'Loyal': [67, 17, 'Melancholy', 'strength'], #OK
+    'Loyal': [67, 17, 'Melancholic', 'strength'], #OK
     'Listener': [68, 17, 'Phlegmatic', 'strength'], #OK
     'Cute': [69, 18, 'Sanguine', 'strength'], #OK
     'Chief': [70, 18, 'Choleric', 'strength'], #OK
-    'Chart-maker': [71, 18, 'Melancholy', 'strength'], #OK
+    'Chart-maker': [71, 18, 'Melancholic', 'strength'], #OK
     'Contented': [72, 18, 'Phlegmatic', 'strength'], #OK
     'Popular': [73, 19, 'Sanguine', 'strength'], #OK
     'Productive': [74, 19, 'Choleric', 'strength'], #OK
-    'Perfectionist': [75, 19, 'Melancholy', 'strength'], #OK
+    'Perfectionist': [75, 19, 'Melancholic', 'strength'], #OK
     'Pleaser': [76, 19, 'Phlegmatic', 'strength'], #OK
     'Bouncy': [77, 20, 'Sanguine', 'strength'], #OK
     'Bold': [78, 20, 'Choleric', 'strength'], #OK
-    'Behaved': [79, 20, 'Melancholy', 'strength'], #OK
+    'Behaved': [79, 20, 'Melancholic', 'strength'], #OK
     'Balanced': [80, 20, 'Phlegmatic', 'strength'], #OK
     'Brassy': [81, 21, 'Sanguine', 'weakness'], #OK
     'Bossy': [82, 21, 'Choleric', 'weakness'], #OK
-    'Bashful': [83, 21, 'Melancholy', 'weakness'], #OK
+    'Bashful': [83, 21, 'Melancholic', 'weakness'], #OK
     'Blank': [84, 21, 'Phlegmatic', 'weakness'], #OK
     'Undisciplined': [85, 22, 'Sanguine', 'weakness'], #OK
     'Unsympathetic': [86, 22, 'Choleric', 'weakness'], #OK
-    'Unforgiving': [87, 22, 'Melancholy', 'weakness'], #OK
+    'Unforgiving': [87, 22, 'Melancholic', 'weakness'], #OK
     'Unenthusiastic': [88, 22, 'Phlegmatic', 'weakness'], #OK
     'Repetitious': [89, 23, 'Sanguine', 'weakness'], #OK
     'Resistant': [90, 23, 'Choleric', 'weakness'], #OK
-    'Resentful': [91, 23, 'Melancholy', 'weakness'], #OK
+    'Resentful': [91, 23, 'Melancholic', 'weakness'], #OK
     'Reticent': [92, 23, 'Phlegmatic', 'weakness'], #OK
     'Forgetful': [93, 24, 'Sanguine', 'weakness'], #OK
     'Frank': [94, 24, 'Choleric', 'weakness'], #OK
-    'Fussy': [95, 24, 'Melancholy', 'weakness'], #OK
+    'Fussy': [95, 24, 'Melancholic', 'weakness'], #OK
     'Fearful': [96, 24, 'Phlegmatic', 'weakness'], #OK
     'Interrupts': [97, 25, 'Sanguine', 'weakness'], #OK
     'Impatient': [98, 25, 'Choleric', 'weakness'], #OK
-    'Insecure': [99, 25, 'Melancholy', 'weakness'], #OK
+    'Insecure': [99, 25, 'Melancholic', 'weakness'], #OK
     'Indecisive': [100, 25, 'Phlegmatic', 'weakness'], #OK
     'Unpredictable': [101, 26, 'Sanguine', 'weakness'], #OK
     'Unaffectionate': [102, 26, 'Choleric', 'weakness'], #OK
-    'Unpopular': [103, 26, 'Melancholy', 'weakness'], #OK
+    'Unpopular': [103, 26, 'Melancholic', 'weakness'], #OK
     'Uninvolved': [104, 26, 'Phlegmatic', 'weakness'], #OK
     'Haphazard': [105, 27, 'Sanguine', 'weakness'], #OK
     'Headstrong': [106, 27, 'Choleric', 'weakness'], #OK
-    'Hard to please': [107, 27, 'Melancholy', 'weakness'], #OK
+    'Hard to please': [107, 27, 'Melancholic', 'weakness'], #OK
     'Hesitant': [108, 27, 'Phlegmatic', 'weakness'], #OK
     'Permissive': [109, 28, 'Sanguine', 'weakness'], #OK
     'Proud': [110, 28, 'Choleric', 'weakness'], #OK
-    'Pessimistic': [111, 28, 'Melancholy', 'weakness'], #OK
+    'Pessimistic': [111, 28, 'Melancholic', 'weakness'], #OK
     'Plain': [112, 28, 'Phlegmatic', 'weakness'], #OK
     'Angered easily': [113, 29, 'Sanguine', 'weakness'], #OK
     'Argumentative': [114, 29, 'Choleric', 'weakness'], #OK
-    'Alienated': [115, 29, 'Melancholy', 'weakness'], #OK
+    'Alienated': [115, 29, 'Melancholic', 'weakness'], #OK
     'Aimless': [116, 29, 'Phlegmatic', 'weakness'], #OK
     'Naive': [117, 30, 'Sanguine', 'weakness'], #OK
     'Nervy': [118, 30, 'Choleric', 'weakness'], #OK
-    'Negative attitude': [119, 30, 'Melancholy', 'weakness'], #OK
+    'Negative attitude': [119, 30, 'Melancholic', 'weakness'], #OK
     'Nonchalant': [120, 30, 'Phlegmatic', 'weakness'], #OK
     'Wants credit': [121, 31, 'Sanguine', 'weakness'], #OK
     'Workaholic': [122, 31, 'Choleric', 'weakness'], #OK
-    'Withdrawn': [123, 31, 'Melancholy', 'weakness'], #OK
+    'Withdrawn': [123, 31, 'Melancholic', 'weakness'], #OK
     'Worrier': [124, 31, 'Phlegmatic', 'weakness'], #OK
     'Talkative': [125, 32, 'Sanguine', 'weakness'], #OK
     'Tactless': [126, 32, 'Choleric', 'weakness'], #OK
-    'Too sensitive': [127, 32, 'Melancholy', 'weakness'], #OK
+    'Too sensitive': [127, 32, 'Melancholic', 'weakness'], #OK
     'Timid': [128, 32, 'Phlegmatic', 'weakness'], #OK
     'Disorganised': [129, 33, 'Sanguine', 'weakness'], #OK
     'Domineering': [130, 33, 'Choleric', 'weakness'], #OK
-    'Depressed': [131, 33, 'Melancholy', 'weakness'], #OK
+    'Depressed': [131, 33, 'Melancholic', 'weakness'], #OK
     'Doubtful': [132, 33, 'Phlegmatic', 'weakness'], #OK
     'Inconsistent': [133, 34, 'Sanguine', 'weakness'], #OK
     'Intolerant': [134, 34, 'Choleric', 'weakness'], #OK
-    'Introvert': [135, 34, 'Melancholy', 'weakness'], #OK
+    'Introvert': [135, 34, 'Melancholic', 'weakness'], #OK
     'Indifferent': [136, 34, 'Phlegmatic', 'weakness'], #OK
     'Messy': [137, 35, 'Sanguine', 'weakness'], #OK
     'Manipulative': [138, 35, 'Choleric', 'weakness'], #OK
-    'Moody': [139, 35, 'Melancholy', 'weakness'], #OK
+    'Moody': [139, 35, 'Melancholic', 'weakness'], #OK
     'Mumbles': [140, 35, 'Phlegmatic', 'weakness'], #OK
     'Show-off': [141, 36, 'Sanguine', 'weakness'], #OK
     'Stubborn': [142, 36, 'Choleric', 'weakness'], #OK
-    'Skeptical': [143, 36, 'Melancholy', 'weakness'], #OK
+    'Skeptical': [143, 36, 'Melancholic', 'weakness'], #OK
     'Slow': [144, 36, 'Phlegmatic', 'weakness'], #OK
     'Loud': [145, 37, 'Sanguine', 'weakness'], #OK
     'Lord over others': [146, 37, 'Choleric', 'weakness'], #OK
-    'Loner': [147, 37, 'Melancholy', 'weakness'], #OK
+    'Loner': [147, 37, 'Melancholic', 'weakness'], #OK
     'Lazy': [148, 37, 'Phlegmatic', 'weakness'], #OK
     'Scatterbrained': [149, 38, 'Sanguine', 'weakness'], #OK
     'Short-tempered': [150, 38, 'Choleric', 'weakness'], #OK
-    'Suspicious': [151, 38, 'Melancholy', 'weakness'], #OK
+    'Suspicious': [151, 38, 'Melancholic', 'weakness'], #OK
     'Sluggish': [152, 38, 'Phlegmatic', 'weakness'], #OK
     'Restless': [153, 39, 'Sanguine', 'weakness'], #OK
     'Rash': [154, 39, 'Choleric', 'weakness'], #OK
-    'Revengeful': [155, 39, 'Melancholy', 'weakness'], #OK
+    'Revengeful': [155, 39, 'Melancholic', 'weakness'], #OK
     'Reluctant': [156, 39, 'Phlegmatic', 'weakness'], #OK
     'Changeable': [157, 40, 'Sanguine', 'weakness'], #OK
     'Crafty': [158, 40, 'Choleric', 'weakness'], #OK
-    'Critical': [159, 40, 'Melancholy', 'weakness'], #OK
+    'Critical': [159, 40, 'Melancholic', 'weakness'], #OK
     'Compromising': [160, 40, 'Phlegmatic', 'weakness'] #OK
 }
 
@@ -224,10 +224,10 @@ temperaments = {
         },
         {
             'flaws': [
-                'talk too much',
-                'self-centered',
-                'uncultivated memories',
-                'disorganised'
+                'may talk too much',
+                'are self-centered',
+                'have uncultivated memories',
+                'are disorganised'
             ]
         },
         {
@@ -251,18 +251,18 @@ temperaments = {
             ]
         },
         {
-            'to get along with this': [
-                'recognise their difficulty in accomplishing tasks',
-                'realise they may talk without thinking first',
-                'realise they like variety and flexibility',
-                'help them to keep from accepting more than they can do',
-                'priase them for everything they accomplish',
-                'remember they are circumstantial people',
-                'realise that they mean well'
+            'how to get along with this': [
+                'recognise your difficulty in accomplishing tasks',
+                'realise that may have a tendancy to talk without thinking first',
+                'realise that you like variety and flexibility',
+                'need help to keep yourself from accepting more than what you can do',
+                'you would appreciate praises for everything you accomplish',
+                'know that you are a circumstantial person',
+                'realise that you mean well'
             ]
         }
     ],
-    'Melancholy': [
+    'Melancholic': [
         {
             'emotions': [
                 'are deep and thoughtful',
@@ -321,9 +321,9 @@ temperaments = {
         },
         {
             'flaws': [
-                'easily depressed',
-                'procastinate',
-                'put unrealistic demands on others'
+                'are easily depressed',
+                'may procastinate',
+                'may put unrealistic demands on others'
             ]
         },
         {
@@ -335,23 +335,21 @@ temperaments = {
         {
             'improvements': [
                 'realise no one likes gloomy people',
-                'don\'t be hurt easily',
+                'not to be hurt easily',
                 'look for the positives',
-                'blow away the black clouds',
-                'don\'t spend too much time planning',
+                'not to spend too much time planning',
                 'relax your standards'
             ]
         },
         {
-            'to get along with this': [
-                'know thay they are very sensitive and get hurt easily',
-                'realise they are programmed with pessimistic attitude',
-                'learn to deal with depression',
-                'compliment them sincerely',
-                'accept that they like it quiet sometimes',
-                'try to keep a reasonable schedule',
-                'realise that neatness is a necessity',
-                'help them not to become slaves to the family'
+            'how to get along with this': [
+                'know thay you are very sensitive and may get hurt easily',
+                'realise that you are programmed with a pessimistic attitude',
+                'allow you space to deal with probable depression',
+                'know that you appreciate sincere compliments',
+                'acceot accept that you like it quiet sometimes',
+                'try to keep you in a reasonable schedule',
+                'realise that neatness is a necessity for you'
             ]
         }
     ],
@@ -407,10 +405,10 @@ temperaments = {
         },
         {
             'flaws': [
-                'compulsive worker',
+                'are a compulsive worker',
                 'must be in control',
-                'don\'t know how to handle people',
-                'right but unpopular'
+                'may not know how to handle people',
+                'are right but unpopular'
             ]
         },
         {
@@ -438,12 +436,12 @@ temperaments = {
             ]
         },
         {
-            'to get along with this': [
-                'recognise they are born leaders',
-                'insist on two-way communication',
-                'know they don\'t mean to hurt',
-                'try to divide areas of responsibility',
-                'realise they are not compassionate'
+            'how to get along with this': [
+                'recognise that you are a born leader',
+                'insist on two-way communication with you',
+                'know that you don\'t mean to hurt',
+                'try to divide areas of responsibility with you',
+                'realise that you are not compassionate'
             ]
         }
     ],
@@ -507,7 +505,7 @@ temperaments = {
         },
         {
             'positives carried to extremes': [
-                'doesn\'t care about doing anything',
+                'not caring about doing anything',
                 'indifferent',
                 'indecisive'
             ]
@@ -524,21 +522,20 @@ temperaments = {
             ]
         },
         {
-            'how to get along with': [
-                'realise they need direct motivation',
-                'help them set goals and make rewards',
-                'don\'t expect enthusiasm',
-                'realise that putting things off is their form of quiet control',
-                'force them to make decisions',
-                'don\'t heap all the blame on them',
-                'encourage them to accept responsibilities'
+            'how to get along with this': [
+                'realise that you need direct motivation',
+                'know that you need to help to set goals',
+                'not expect enthusiasm from you',
+                'realise that putting things off is your form of quiet control',
+                'understand that you need to be encouraged to make decisions',
+                'not heap all the blame on you',
+                'understand that you need to be encouraged to accept responsibilities'
             ]
         }
     ]
 }
 
 def get_word_id(word):
-    print word
     return words[word][0]
 
 def get_question_set_id(word):
@@ -591,6 +588,6 @@ def get_random_improvement(temperament):
     return descriptions[description_id]
 
 def get_random_how_to_get_along_with(temperament):
-    descriptions = temperaments[temperament][8]['how to get along with']
+    descriptions = temperaments[temperament][8]['how to get along with this']
     description_id = randint(0, len(descriptions)-1)
     return descriptions[description_id]

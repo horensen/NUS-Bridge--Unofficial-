@@ -10,17 +10,24 @@
 	<link href="../stylesheets/bootstrap.css" rel="stylesheet">
   <script src="../scripts/jquery.js"></script>
   <script src="../scripts/bootstrap.js"></script>
-  <script src="../scripts/chart.js"></script>
-	<title>Your Symmetrical Connections | NUS Bridge</title>   
+  <script>
+  $(".header").click(function () {
 
-	<!-- Just for debugging purposes. Don't actually copy this line! -->
-	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-      <![endif]-->
+    $header = $(this);
+    //getting the next element
+    $content = $header.next();
+    //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
+    $content.slideToggle(500, function () {
+        //execute this after slideToggle is done
+        //change text of header based on visibility of content div
+        $header.text(function () {
+            //change text based on condition
+            return $content.is(":visible") ? "Collapse" : "Expand";
+        });
+    });
+  });
+  </script>
+	<title>Your Symmetrical Connections | NUS Bridge</title> 
   </head>
 
   <body>
@@ -48,7 +55,7 @@
               </ul>
             </li>
             <li class="active dropdown">
-              <a href="" class="dropdown-toggle" data-toggle="dropdown">Collective Wisdom For You<b class="caret"></b></a>
+              <a href="" class="dropdown-toggle" data-toggle="dropdown">Analysis<b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="/symmetrical-connections">Symmetrical Connections</a></li>
                 <li><a href="/complementary-connections">Complementary Connections</a></li>
@@ -77,7 +84,7 @@
   				<div class="col-md-12 text-center">
 		  			<h1>Your Symmetrical Connections</h1>
             <br/>
-		  			<p>You are likely to be similar to these people because you have the same aspiration as them and you probably can relate to their personalities. There are some things you might want to learn from them too.</p>
+		  			<p>You are likely to be similar to these people because you have the same aspiration as them and you can relate to their personalities. Take a look at their experiences. Maybe you can learn something from them or reach out to them too.</p>
   				</div>
   			</div>
   		</div>
@@ -85,35 +92,173 @@
 
     <div class="row">
       <div class="container">
-        <div class="col-md-2 text-center">
-          <img src="../images/icon_961.png" class="img-circle" style="height:120px; width:120px; border:3px solid gray;">
-          <h2>89%</h2>
-          <p>Person A</p>
+        <div class="col-md-5" style="border: 1px solid gray; margin-bottom: 50px;">
+          <div class="row">
+            <div class="col-xs-2">
+              <img src="../images/icon_961.png" class="img-circle" style="height:50px; width:50px; border:2px solid gray;">             
+            </div>
+            <div class="col-xs-10">
+              <p><strong><font size="6pt">{{ person_1_percent }}%</strong></font> <font size="4pt">{{ person_1_name }}</font><br/>
+              Born in {{ person_1_dob }}. <span class="glyphicon glyphicon-globe"></span> {{ person_1_country }}<br/>
+              {{ person_1_major }}, {{ person_1_faculty }}<br/>
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">More info <b class="caret"></b></a> <a href="{{ person_1_website}}">(url icon)</a> {{ person_1_networks}}
+              </p>
+            </div>
+            <div class="col-xs-12 panel-collapse collapse" id="collapse1">
+              <p>
+                Skills: {{ person_1_skills }}<br/>
+                Interests: {{ person_1_interests }}<br/>
+                Involvements: {{ person_1_involvements }}<br/>
+                Best Modules: {{ person_1_best_modules }}<br/>
+              </p>
+              <p class="lead">"{{ person_1_advice }}"</p>
+            </div>
+            <div class="col-xs-12" style="border-top: 1px solid gray">
+              Wants to be: {{ person_1_aspirations }}
+            </div>
+          </div>
         </div>
-        <div class="col-md-2 text-center">
-          <img src="../images/icon_961.png" class="img-circle" style="height:120px; width:120px; border:3px solid gray;">
-          <h2>82%</h2>
-          <p>Person B</p>
+        <div class="col-md-5 col-md-offset-1" style="border: 1px solid gray; margin-bottom: 50px;">
+          <div class="row">
+            <div class="col-xs-2">
+              <img src="../images/icon_961.png" class="img-circle" style="height:50px; width:50px; border:2px solid gray;">             
+            </div>
+            <div class="col-xs-10">
+              <p><strong><font size="6pt">{{ person_2_percent }}%</strong></font> <font size="4pt">{{ person_2_name }}</font><br/>
+              Born in {{ person_2_dob }}. <span class="glyphicon glyphicon-globe"></span> {{ person_2_country }}<br/>
+              {{ person_2_major }}, {{ person_2_faculty }}<br/>
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">More info <b class="caret"></b></a> <a href="{{ person_2_website}}">(url icon)</a> {{ person_2_networks}}
+              </p>
+            </div>
+            <div class="col-xs-12 panel-collapse collapse" id="collapse2">
+              <p>
+                Skills: {{ person_2_skills }}<br/>
+                Interests: {{ person_2_interests }}<br/>
+                Involvements: {{ person_2_involvements }}<br/>
+                Best Modules: {{ person_2_best_modules }}<br/>
+              </p>
+              <p class="lead">"{{ person_2_advice }}"</p>
+            </div>
+            <div class="col-xs-12" style="border-top: 1px solid gray">
+              Wants to be: {{ person_2_aspirations }}
+            </div>
+          </div>
         </div>
-        <div class="col-md-2 text-center">
-          <img src="../images/icon_961.png" class="img-circle" style="height:120px; width:120px; border:3px solid gray;">
-          <h2>77%</h2>
-          <p>Person C</p>
+      </div>
+    </div> 
+
+    <div class="row">
+      <div class="container">
+        <div class="col-md-5" style="border: 1px solid gray; margin-bottom: 50px;">
+          <div class="row">
+            <div class="col-xs-2">
+              <img src="../images/icon_961.png" class="img-circle" style="height:50px; width:50px; border:2px solid gray;">             
+            </div>
+            <div class="col-xs-10">
+              <p><strong><font size="6pt">{{ person_3_percent }}%</strong></font> <font size="4pt">{{ person_3_name }}</font><br/>
+              Born in {{ person_3_dob }}. <span class="glyphicon glyphicon-globe"></span> {{ person_3_country }}<br/>
+              {{ person_3_major }}, {{ person_3_faculty }}<br/>
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">More info <b class="caret"></b></a> <a href="{{ person_3_website}}">(url icon)</a> {{ person_3_networks}}
+              </p>
+            </div>
+            <div class="col-xs-12 panel-collapse collapse" id="collapse3">
+              <p>
+                Skills: {{ person_3_skills }}<br/>
+                Interests: {{ person_3_interests }}<br/>
+                Involvements: {{ person_3_involvements }}<br/>
+                Best Modules: {{ person_3_best_modules }}<br/>
+              </p>
+              <p class="lead">"{{ person_3_advice }}"</p>
+            </div>
+            <div class="col-xs-12" style="border-top: 1px solid gray">
+              Wants to be: {{ person_3_aspirations }}
+            </div>
+          </div>
         </div>
-        <div class="col-md-2 text-center">
-          <img src="../images/icon_961.png" class="img-circle" style="height:120px; width:120px; border:3px solid gray;">
-          <h2>73%</h2>
-          <p>Person D</p>
+
+        <div class="col-md-5 col-md-offset-1" style="border: 1px solid gray; margin-bottom: 50px;">
+          <div class="row">
+            <div class="col-xs-2">
+              <img src="../images/icon_961.png" class="img-circle" style="height:50px; width:50px; border:2px solid gray;">             
+            </div>
+            <div class="col-xs-10">
+              <p><strong><font size="6pt">{{ person_4_percent }}%</strong></font> <font size="4pt">{{ person_4_name }}</font><br/>
+              Born in {{ person_4_dob }}. <span class="glyphicon glyphicon-globe"></span> {{ person_4_country }}<br/>
+              {{ person_4_major }}, {{ person_4_faculty }}<br/>
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">More info <b class="caret"></b></a> <a href="{{ person_4_website}}">(url icon)</a> {{ person_4_networks}}
+              </p>
+            </div>
+            <div class="col-xs-12 panel-collapse collapse" id="collapse4">
+              <p>
+                Skills: {{ person_4_skills }}<br/>
+                Interests: {{ person_4_interests }}<br/>
+                Involvements: {{ person_4_involvements }}<br/>
+                Best Modules: {{ person_4_best_modules }}<br/>
+              </p>
+              <p class="lead">"{{ person_4_advice }}"</p>
+            </div>
+            <div class="col-xs-12" style="border-top: 1px solid gray">
+              Wants to be: {{ person_4_aspirations }}
+            </div>
+          </div>
         </div>
-        <div class="col-md-2 text-center">
-          <img src="../images/icon_961.png" class="img-circle" style="height:120px; width:120px; border:3px solid gray;">
-          <h2>70%</h2>
-          <p>Person E</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="container">
+        <div class="col-md-5" style="border: 1px solid gray; margin-bottom: 50px;">
+          <div class="row">
+            <div class="col-xs-2">
+              <img src="../images/icon_961.png" class="img-circle" style="height:50px; width:50px; border:2px solid gray;">             
+            </div>
+            <div class="col-xs-10">
+              <p><strong><font size="6pt">{{ person_5_percent }}%</strong></font> <font size="4pt">{{ person_5_name }}</font><br/>
+              Born in {{ person_5_dob }}. <span class="glyphicon glyphicon-globe"></span> {{ person_5_country }}<br/>
+              {{ person_5_major }}, {{ person_5_faculty }}<br/>
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">More info <b class="caret"></b></a> <a href="{{ person_5_website}}">(url icon)</a> {{ person_5_networks}}
+              </p>
+            </div>
+            <div class="col-xs-12 panel-collapse collapse" id="collapse5">
+              <p>
+                Skills: {{ person_5_skills }}<br/>
+                Interests: {{ person_5_interests }}<br/>
+                Involvements: {{ person_5_involvements }}<br/>
+                Best Modules: {{ person_5_best_modules }}<br/>
+              </p>
+              <p class="lead">"{{ person_5_advice }}"</p>
+            </div>
+            <div class="col-xs-12" style="border-top: 1px solid gray">
+              Wants to be: {{ person_5_aspirations }}
+            </div>
+          </div>
         </div>
-        <div class="col-md-2 text-center">
-          <img src="../images/icon_961.png" class="img-circle" style="height:120px; width:120px; border:3px solid gray;">
-          <h2>69%</h2>
-          <p>Person F</p>
+
+        <div class="col-md-5 col-md-offset-1" style="border: 1px solid gray; margin-bottom: 50px;">
+          <div class="row">
+            <div class="col-xs-2">
+              <img src="../images/icon_961.png" class="img-circle" style="height:50px; width:50px; border:2px solid gray;">             
+            </div>
+            <div class="col-xs-10">
+              <p><strong><font size="6pt">{{ person_6_percent }}%</strong></font> <font size="4pt">{{ person_6_name }}</font><br/>
+              Born in {{ person_6_dob }}. <span class="glyphicon glyphicon-globe"></span> {{ person_6_country }}<br/>
+              {{ person_6_major }}, {{ person_6_faculty }}<br/>
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">More info <b class="caret"></b></a> <a href="{{ person_6_website}}">(url icon)</a> {{ person_6_networks}}
+              </p>
+            </div>
+            <div class="col-xs-12 panel-collapse collapse" id="collapse6">
+              <p>
+                Skills: {{ person_6_skills }}<br/>
+                Interests: {{ person_6_interests }}<br/>
+                Involvements: {{ person_6_involvements }}<br/>
+                Best Modules: {{ person_6_best_modules }}<br/>
+              </p>
+              <p class="lead">"{{ person_6_advice }}"</p>
+            </div>
+            <div class="col-xs-12" style="border-top: 1px solid gray">
+              Wants to be: {{ person_6_aspirations }}
+            </div>
+          </div>
         </div>
       </div>
     </div> 

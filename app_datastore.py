@@ -8,8 +8,6 @@ import four_temperaments
 
 
 
-
-
 # PROFILE INFORMATION
 class ProfileInfo(ndb.Model):
 	student_id = ndb.StringProperty()
@@ -72,11 +70,19 @@ def user_exists(student_id):
 		return False
 
 def get_number_of_users():
+	#test= ProfileInfo.query().fetch()
+	#print test
 	return ProfileInfo.query().count()
-	
 
+def get_other_records():
+	qry = ProfileInfo.query().fetch()
+	return qry
 
-
+def prepare_list(list):
+	temp=''
+	for item in list:
+		temp+=item+', '
+	return temp[:-2]
 
 # ASPIRATIONS
 class Aspirations(ndb.Model):
@@ -229,8 +235,8 @@ def insert_or_update_personality(student_id, words):
 		sanguine_weakness_count = 0
 		choleric_strength_count = 0
 		choleric_weakness_count = 0
-		melancholy_strength_count = 0
-		melancholy_weakness_count = 0
+		melancholic_strength_count = 0
+		melancholic_weakness_count = 0
 		phlegmatic_strength_count = 0
 		phlegmatic_weakness_count = 0
 		for word in words:
@@ -246,10 +252,10 @@ def insert_or_update_personality(student_id, words):
 				choleric_strength_count += 1
 			elif temperament == "Choleric" and sw == "weakness":
 				choleric_weakness_count += 1
-			elif temperament == "Melancholy" and sw == "strength":
-				melancholy_strength_count += 1
-			elif temperament == "Melancholy" and sw == "weakness":
-				melancholy_weakness_count += 1
+			elif temperament == "Melancholic" and sw == "strength":
+				melancholic_strength_count += 1
+			elif temperament == "Melancholic" and sw == "weakness":
+				melancholic_weakness_count += 1
 			elif temperament == "Phlegmatic" and sw == "strength":
 				phlegmatic_strength_count += 1
 			elif temperament == "Phlegmatic" and sw == "weakness":
@@ -261,8 +267,8 @@ def insert_or_update_personality(student_id, words):
 		user_personality.sanguine_weakness_count = sanguine_weakness_count
 		user_personality.choleric_strength_count = choleric_strength_count
 		user_personality.choleric_weakness_count = choleric_weakness_count
-		user_personality.melancholy_strength_count = melancholy_strength_count
-		user_personality.melancholy_weakness_count = melancholy_weakness_count
+		user_personality.melancholy_strength_count = melancholic_strength_count
+		user_personality.melancholy_weakness_count = melancholic_weakness_count
 		user_personality.phlegmatic_strength_count = phlegmatic_strength_count
 		user_personality.phlegmatic_weakness_count = phlegmatic_weakness_count
 		user_personality.put()
@@ -289,8 +295,8 @@ def insert_or_update_personality(student_id, words):
 		sanguine_weakness_count = 0
 		choleric_strength_count = 0
 		choleric_weakness_count = 0
-		melancholy_strength_count = 0
-		melancholy_weakness_count = 0
+		melancholic_strength_count = 0
+		melancholic_weakness_count = 0
 		phlegmatic_strength_count = 0
 		phlegmatic_weakness_count = 0
 		for word in words:
@@ -306,10 +312,10 @@ def insert_or_update_personality(student_id, words):
 				choleric_strength_count += 1
 			elif temperament == "Choleric" and sw == "weakness":
 				choleric_weakness_count += 1
-			elif temperament == "Melancholy" and sw == "strength":
-				melancholy_strength_count += 1
-			elif temperament == "Melancholy" and sw == "weakness":
-				melancholy_weakness_count += 1
+			elif temperament == "Melancholic" and sw == "strength":
+				melancholic_strength_count += 1
+			elif temperament == "Melancholic" and sw == "weakness":
+				melancholic_weakness_count += 1
 			elif temperament == "Phlegmatic" and sw == "strength":
 				phlegmatic_strength_count += 1
 			elif temperament == "Phlegmatic" and sw == "weakness":
@@ -321,8 +327,8 @@ def insert_or_update_personality(student_id, words):
 		user_personality.sanguine_weakness_count = sanguine_weakness_count
 		user_personality.choleric_strength_count = choleric_strength_count
 		user_personality.choleric_weakness_count = choleric_weakness_count
-		user_personality.melancholy_strength_count = melancholy_strength_count
-		user_personality.melancholy_weakness_count = melancholy_weakness_count
+		user_personality.melancholy_strength_count = melancholic_strength_count
+		user_personality.melancholy_weakness_count = melancholic_weakness_count
 		user_personality.phlegmatic_strength_count = phlegmatic_strength_count
 		user_personality.phlegmatic_weakness_count = phlegmatic_weakness_count
 		user_personality.put()
@@ -340,7 +346,7 @@ def insert_or_update_personality(student_id, words):
 		
 
 def get_top_two_traits(student_id, swb):
-	traits = ["Sanguine", "Choleric", "Melancholy", "Phlegmatic"]
+	traits = ["Sanguine", "Choleric", "Melancholic", "Phlegmatic"]
 	trait_count = [0, 0, 0, 0]
 	trait_count = [get_temperament_count(student_id, traits[0], swb), get_temperament_count(student_id, traits[1], swb), get_temperament_count(student_id, traits[2], swb), get_temperament_count(student_id, traits[3], swb)]
 	sorted_counts = copy.copy(trait_count)
@@ -368,9 +374,9 @@ def get_temperament_count(student_id, temperament, swb):
 		return get_personality(student_id).choleric_strength_count
 	elif temperament == "Choleric" and swb == "weakness":
 		return get_personality(student_id).choleric_weakness_count
-	elif temperament == "Melancholy" and swb == "strength":
+	elif temperament == "Melancholic" and swb == "strength":
 		return get_personality(student_id).melancholy_strength_count
-	elif temperament == "Melancholy" and swb == "weakness":
+	elif temperament == "Melancholic" and swb == "weakness":
 		return get_personality(student_id).melancholy_weakness_count
 	elif temperament == "Phlegmatic" and swb == "strength":
 		return get_personality(student_id).phlegmatic_strength_count
@@ -380,7 +386,7 @@ def get_temperament_count(student_id, temperament, swb):
 		return get_personality(student_id).sanguine_strength_count + get_personality(student_id).sanguine_weakness_count
 	elif temperament == "Choleric" and swb == "both":
 		return get_personality(student_id).choleric_strength_count + get_personality(student_id).choleric_weakness_count
-	elif temperament == "Melancholy" and swb == "both":
+	elif temperament == "Melancholic" and swb == "both":
 		return get_personality(student_id).melancholy_strength_count + get_personality(student_id).melancholy_weakness_count
 	elif temperament == "Phlegmatic" and swb == "both":
 		return get_personality(student_id).phlegmatic_strength_count + get_personality(student_id).phlegmatic_weakness_count

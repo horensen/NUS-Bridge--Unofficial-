@@ -11,7 +11,7 @@
     <script src="../scripts/jquery.js"></script>
     <script src="../scripts/bootstrap.js"></script>
     <script src="../scripts/chart.js"></script>
-  	<title>NUS Bridge</title>
+  	<title>Improvement Advisory | NUS Bridge</title>
   </head>
 
   <body>
@@ -39,7 +39,7 @@
               </ul>
             </li>
             <li class="active dropdown">
-              <a href="" class="dropdown-toggle" data-toggle="dropdown">Collective Wisdom For You<b class="caret"></b></a>
+              <a href="" class="dropdown-toggle" data-toggle="dropdown">Analysis<b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="/symmetrical-connections">Symmetrical Connections</a></li>
                 <li><a href="/complementary-connections">Complementary Connections</a></li>
@@ -71,7 +71,82 @@
   			</div>
   		</div>
   	</div>
-    
+
+    <div class="row">
+      <div class="container">
+        <div class="col-md-6 col-md-offset-3 text-center">
+          <h3>Your Strengths</h3>
+          <canvas id="strengths_radar" height="370" width="370"></canvas>
+          <script>
+            var radarChartData = {
+              labels : ["Leader","People","Skill","Strategy"],
+              datasets : [
+                {
+                  fillColor : "rgba(166,222,44,0.5)",
+                  strokeColor : "rgba(98,183,42,1)",
+                  pointColor : "rgba(98,183,42,1)",
+                  pointStrokeColor : "#fff",
+                  data : [{{ choleric_strength_count }},{{ sanguine_strength_count }},{{ phlegmatic_strength_count }},{{ melancholic_strength_count }}]
+                }
+              ]
+            }
+            var myRadar = new Chart(document.getElementById("strengths_radar").getContext("2d")).Radar(radarChartData,{scaleShowLabels : false, pointLabelFontSize : 14});
+          </script>
+          <h4>What may happen if carried to extremes</h4>
+          <p class="lead">Keep up your potential but be mindful that either you will be {{ top_extreme }} or {{ second_extreme }} if you take your strengths too far.</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="container">
+        <div class="col-md-6 col-md-offset-3 text-center">
+          <h3>Your Fears</h3>
+          <canvas id="weaknesses_radar" height="370" width="370"></canvas>
+          <script>
+            var radarChartData = {
+              labels : ["Used","Disapproved","Confronted","Embarrassed"],
+              datasets : [
+                {
+                  fillColor : "rgba(246,84,78,0.5)",
+                  strokeColor : "rgba(200,58,55,1)",
+                  pointColor : "rgba(200,58,55,1)",
+                  pointStrokeColor : "#fff",
+                  data : [{{ choleric_weakness_count }},{{ sanguine_weakness_count }},{{ phlegmatic_weakness_count }},{{ melancholic_weakness_count }}]
+                }
+              ]
+            }
+            var myRadar = new Chart(document.getElementById("weaknesses_radar").getContext("2d")).Radar(radarChartData,{scaleShowLabels : false, pointLabelFontSize : 14});
+          </script>
+          <h4>Plausible underlying weaknesses</h4>
+          <p class="lead">Recognise that you {{ top_flaw }} and {{ second_flaw }}. Your friends would probably {{ top_get_along }} and also {{ second_get_along }}.</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="container">
+        <div class="col-md-6 col-md-offset-3 text-center">
+          <h3>Your Priorities</h3> 
+          <canvas id="overall_radar" height="370" width="370"></canvas>
+          <script>
+            var radarChartData = {
+              labels : ["Result","Interaction","Friendship","Process"],
+              datasets : [
+                {
+                  fillColor : "rgba(151,187,205,0.5)",
+                  strokeColor : "rgba(151,187,205,1)",
+                  pointColor : "rgba(151,187,205,1)",
+                  pointStrokeColor : "#fff",
+                  data : [{{ choleric_count }},{{ sanguine_count }},{{ phlegmatic_count }},{{ melancholic_count }}]
+                }
+              ]
+            }
+            var myRadar = new Chart(document.getElementById("overall_radar").getContext("2d")).Radar(radarChartData,{scaleShowLabels : false, pointLabelFontSize : 14});
+          </script>
+          <h4>What to recognise in yourself</h4>
+          <p class="lead">Occassionally you need to be {{ top_need }} or {{ second_need }}. Try to {{ top_improvement }} or {{ second_improvement }} if you have not.</p>
+        </div>
+      </div>
+    </div>
     
   </body>
   </html>
