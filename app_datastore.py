@@ -3,7 +3,6 @@ from google.appengine.ext import ndb
 from random import randint
 from random import shuffle
 import copy
-import datetime
 import four_temperaments
 
 
