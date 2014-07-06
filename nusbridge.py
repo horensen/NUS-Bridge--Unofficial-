@@ -17,6 +17,7 @@ import os
 import urllib
 import urllib2
 import webapp2
+import symmetrical_connection
 
 # GLOBAL VARIABLES
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + "/templates"), autoescape=True)
@@ -774,7 +775,9 @@ class Profile(BaseHandler):
         else:
             self.redirect(app_domain)
 
-
+class Test(BaseHandler):
+    def get(self):
+        print symmetrical_connection.get_symmetrical(self.session.get('student_id'))
 
 
 
@@ -787,6 +790,7 @@ app = webapp2.WSGIApplication([
     ('/education', Education),
     ('/experience', Experience),
     ('/personality', Personality),
+    ('/testing',Test ),
     ('/symmetrical-connections', SymmetricalConnections),
     ('/complementary-connections', ComplementaryConnections),
     ('/improvement-advisory', ImprovementAdvisory)],

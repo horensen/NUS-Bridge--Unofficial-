@@ -4,15 +4,14 @@ import difflib
 
 def checkTemperaments(list1,list2):
     for item1 in list1:
-        for item2 in list2:
-            if(item1==item2):
-                pass
-            else:
-                return False
+        if item1 in list2:
+            pass
+        else:
+            return False
 
     return True
 
-def get(self):
+def get_symmetrical(std_id):
     # populate the list of user to be compare with
     compare_list = app_datastore.get_other_records()
     symmetrical_list = {}
@@ -21,43 +20,46 @@ def get(self):
     total_num_of_compare_std_asp = 0
     num_of_matching_personality = 0
     #loop through the list to find the common connection
-    curr_user_asp_list = app_datastore.get_aspirations(self.session.get('student_id')).aspirations
-    curr_user_personality_list = app_datastore.get_personality(self.session.get('student_id')).words
-    curr_user_two_temp=app_datastore.get_personality(self.session.get('student_id')).two_dominant_temperaments_both
+    curr_user_asp_list = app_datastore.get_aspirations(std_id).aspirations
+    curr_user_personality_list = app_datastore.get_personality(std_id).words
+    curr_user_two_temp=app_datastore.get_personality(std_id).two_dominant_temperaments_both
     #for loop each item for each other user
     for other_user in compare_list:
         #check if the 2 temperament are the same
-        other_user_two_temp=app_datastore.get_personality(self.session.get('student_id')).two_dominant_temperaments_both
-        if other_user.student_id == self.session.get('student_id'):
-            pass
-        elif(not checkTemperaments(curr_user_two_temp,other_user_two_temp)):
-            pass
-        else:
-            num_of_matching_asp = 0
-            total_num_of_compare_std_asp = 0
-            num_of_matching_personality = 0
-            try:
-                other_asp = app_datastore.get_aspirations(other_user.student_id).aspirations
-                other_personality = app_datastore.get_personality(other_user.student_id).words
-                #count the aspiration part
-                for asp in curr_user_asp_list:
-                    compare = difflib.get_close_matches(asp, other_asp, n=20, cutoff=0.8)
-                    num_of_matching_asp += len(compare)
-                total_num_of_compare_std_asp = len(other_asp)
-                #count the personality part
-                for personality in curr_user_personality_list:
-                    compare = difflib.get_close_matches(personality, other_personality, n=40, cutoff=1)
-                    num_of_matching_personality += len(compare)
-                    #cal using the formula then include the user if more than 80
-                formula = float((float(num_of_matching_asp / total_num_of_compare_std_asp) + float(
-                    num_of_matching_personality / 40.0)) / 2.0) * 100.0
-                result = round(formula, 5)
-                symmetrical_list[other_user.student_id] = result
-            except Exception:
+        try:
+            other_user_two_temp=app_datastore.get_personality(other_user.student_id).two_dominant_temperaments_both
+            if other_user.student_id == std_id:
                 pass
+            elif(not checkTemperaments(curr_user_two_temp,other_user_two_temp)):
+                pass
+            else:
+                num_of_matching_asp = 0
+                total_num_of_compare_std_asp = 0
+                num_of_matching_personality = 0
+                try:
+                    other_asp = app_datastore.get_aspirations(other_user.student_id).aspirations
+                    other_personality = app_datastore.get_personality(other_user.student_id).words
+                    #count the aspiration part
+                    for asp in curr_user_asp_list:
+                        compare = difflib.get_close_matches(asp, other_asp, n=20, cutoff=0.8)
+                        num_of_matching_asp += len(compare)
+                    total_num_of_compare_std_asp = len(other_asp)
+                    #count the personality part
+                    for personality in curr_user_personality_list:
+                        compare = difflib.get_close_matches(personality, other_personality, n=40, cutoff=1)
+                        num_of_matching_personality += len(compare)
+                        #cal using the formula then include the user if more than 80
+                    formula = float((float(num_of_matching_asp / total_num_of_compare_std_asp) + float(
+                        num_of_matching_personality / 40.0)) / 2.0) * 100.0
+                    result = round(formula, 1)
+                    symmetrical_list[other_user.student_id] = result
+                except Exception:
+                    pass
+        except Exception:
+            pass
     sorted_dict=sorted(symmetrical_list,key=symmetrical_list.get, reverse=True)
     result_dict={}
-    for x in xrange(0,6):
+    for x in xrange(0,len(sorted_dict)):
         p_percent='person_'+str(index)+'_percent'
         p_name='person_'+str(index)+'_name'
         p_dob='person_'+str(index)+'_dob'
