@@ -73,6 +73,7 @@ def get_symmetrical(std_id):
         p_advice='person_'+str(index)+'_advice'
         p_aspirations='person_'+str(index)+'_aspirations'
         p_networks='person_'+str(index)+'_networks'
+        p_website='person_'+str(index)+'_website'
         result_dict[p_percent]=symmetrical_list.get(sorted_dict[index])
         result_dict[p_name]=app_datastore.get_user(sorted_dict[index]).name
         result_dict[p_dob]=app_datastore.get_user(sorted_dict[index]).date_of_birth
@@ -86,6 +87,7 @@ def get_symmetrical(std_id):
         result_dict[p_advice]=app_datastore.prepare_list(app_datastore.get_experience(sorted_dict[index]).advices)
         result_dict[p_aspirations]=app_datastore.prepare_list(app_datastore.get_aspirations(sorted_dict[index]).aspirations)
         result_dict[p_networks]=app_datastore.prepare_list(app_datastore.get_user(sorted_dict[index]).social_networks)
+        result_dict[p_website]=app_datastore.get_user(sorted_dict[index]).website
         index+=1
 
     return result_dict
