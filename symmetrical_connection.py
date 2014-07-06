@@ -60,6 +60,7 @@ def get_symmetrical(std_id):
     sorted_dict=sorted(symmetrical_list,key=symmetrical_list.get, reverse=True)
     result_dict={}
     for x in xrange(0,len(sorted_dict)):
+        index=x+1
         p_percent='person_'+str(index)+'_percent'
         p_name='person_'+str(index)+'_name'
         p_dob='person_'+str(index)+'_dob'
