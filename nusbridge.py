@@ -18,6 +18,7 @@ import urllib
 import urllib2
 import webapp2
 import symmetrical_connection
+import complementary_connection
 
 # GLOBAL VARIABLES
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + "/templates"), autoescape=True)
@@ -536,10 +537,9 @@ class SymmetricalConnections(BaseHandler):
 class ComplementaryConnections(BaseHandler):
     def get(self):
         if self.session.get('is_valid') == True:
-            template_values = {
-                'student_name': self.session.get('student_name'),
-                'student_email': self.session.get('student_email')
-            }
+            template_values = complementary_connection.get_complementary(self.session['student_id'])
+            template_values['student_name'] = self.session.get('student_name')
+            template_values['student_email'] = self.session.get('student_email')
             template = jinja_environment.get_template('complementary.html')
             self.response.out.write(template.render(template_values))
         else:
