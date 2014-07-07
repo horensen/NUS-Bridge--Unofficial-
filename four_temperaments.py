@@ -347,7 +347,7 @@ temperaments = {
                 'realise that you are programmed with a pessimistic attitude',
                 'allow you space to deal with probable depression',
                 'know that you appreciate sincere compliments',
-                'acceot accept that you like it quiet sometimes',
+                'accept that you like it quiet sometimes',
                 'try to keep you in a reasonable schedule',
                 'realise that neatness is a necessity for you'
             ]
