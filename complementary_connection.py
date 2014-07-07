@@ -81,6 +81,8 @@ def get_complementary(std_id):
         result_dict[p_dob]=app_datastore.get_user(sorted_dict[index]).date_of_birth
         result_dict[p_country]=app_datastore.get_user(sorted_dict[index]).country
         result_dict[p_major]=app_datastore.get_user(sorted_dict[index]).first_major
+        if (app_datastore.get_user(sorted_dict[index]).second_major != ''):
+            result_dict[p_major] += " and " + app_datastore.get_user(sorted_dict[index]).second_major
         result_dict[p_faculty]=app_datastore.get_user(sorted_dict[index]).faculty
         result_dict[p_skills]=app_datastore.prepare_list(app_datastore.get_experience(sorted_dict[index]).skills_and_knowledge)
         result_dict[p_interests]=app_datastore.prepare_list(app_datastore.get_experience(sorted_dict[index]).interests)

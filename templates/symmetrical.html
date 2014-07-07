@@ -11,99 +11,44 @@
   <script src="../scripts/jquery.js"></script>
   <script src="../scripts/bootstrap.js"></script>
   <script>
-  $(".header").click(function () {
+    $(".header").click(function () {
 
-    $header = $(this);
-    //getting the next element
-    $content = $header.next();
-    //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
-    $content.slideToggle(500, function () {
-        //execute this after slideToggle is done
-        //change text of header based on visibility of content div
-        $header.text(function () {
-            //change text based on condition
-            return $content.is(":visible") ? "Collapse" : "Expand";
-        });
+      $header = $(this);
+      //getting the next element
+      $content = $header.next();
+      //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
+      $content.slideToggle(500, function () {
+          //execute this after slideToggle is done
+          //change text of header based on visibility of content div
+          $header.text(function () {
+              //change text based on condition
+              return $content.is(":visible") ? "Collapse" : "Expand";
+          });
+      });
     });
-  });
   </script>
+
   <style>
-  .profile 
-  {
-      min-height: 355px;
-      display: inline-block;
-      }
-  figcaption.ratings
-  {
-      margin-top:20px;
-      }
-  figcaption.ratings a
-  {
-      color:#f1c40f;
-      font-size:11px;
-      }
-  figcaption.ratings a:hover
-  {
-      color:#f39c12;
-      text-decoration:none;
-      }
-  .divider 
-  {
-      border-top:1px solid rgba(0,0,0,0.1);
-      }
-  .emphasis 
-  {
-      border-top: 4px solid transparent;
-      }
-  .emphasis:hover 
-  {
-      border-top: 4px solid #1abc9c;
-      }
-  .emphasis h2
-  {
-      margin-bottom:0;
-      }
-  span.tags 
-  {
-      background: #1abc9c;
-      border-radius: 2px;
-      color: #f5f5f5;
-      font-weight: bold;
-      padding: 2px 4px;
-      }
-  .dropdown-menu 
-  {
-      background-color: #34495e;    
-      box-shadow: none;
-      -webkit-box-shadow: none;
-      width: 250px;
-      margin-left: -125px;
-      left: 50%;
-      }
-  .dropdown-menu .divider 
-  {
-      background:none;    
-      }
-  .dropdown-menu>li>a
-  {
-      color:#f5f5f5;
-      }
-  .dropup .dropdown-menu 
-  {
-      margin-bottom:10px;
-      }
-  .dropup .dropdown-menu:before 
-  {
-      content: "";
-      border-top: 10px solid #34495e;
-      border-right: 10px solid transparent;
-      border-left: 10px solid transparent;
-      position: absolute;
-      bottom: -10px;
-      left: 50%;
-      margin-left: -10px;
-      z-index: 10;
-      }
+    .profile {
+        /*min-height: 355px;*/
+        display: inline-block;
+    }
+    .divider {
+        border-top:1px solid rgba(0,0,0,0.1);
+    }
+    .emphasis {
+        border-top: 4px solid transparent;
+    }
+    .emphasis h2 {
+        margin-bottom:0;
+    }
+    span.tags {
+        background: #1abc9c;
+        border-radius: 2px;
+        color: #f5f5f5;
+        font-weight: bold;
+        padding: 2px 4px;
+    }
   </style>
 	<title>Your Symmetrical Connections | NUS Bridge</title> 
   </head>
@@ -143,7 +88,7 @@
   				</ul>
   				<ul class="nav navbar-nav navbar-right">
   					<li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ student_name }} <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> {{ student_name }} <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li class="dropdown-header">{{ student_email }}</li>
                 <li class="divider"></li>
@@ -162,7 +107,7 @@
   				<div class="col-md-12 text-center">
 		  			<h1>Your Symmetrical Connections</h1>
             <br/>
-		  			<p>You are likely to be similar to these people because you have the same aspiration as them and you can relate to their personalities. Take a look at their experiences. Maybe you can learn something from them or reach out to them too.</p>
+		  			<p>You are likely to be similar to these people because you have the same aspiration and personality as them. Take a look at their experiences. Discover what you can learn from them or reach out to them.</p>
   				</div>
   			</div>
   		</div>
@@ -170,252 +115,397 @@
 
     <div class="row">
       <div class="container">
-        <div class="col-md-5" style="border: 1px solid gray; margin-bottom: 50px;">
-          <div class="row">
-            <div class="col-xs-2">
-              <img src="../images/icon_961.png" class="img-circle" style="height:50px; width:50px; border:2px solid gray;">             
-            </div>
-            <div class="col-xs-10">
-              <p><strong><font size="6pt">{{ person_1_percent }}%</strong></font> <font size="4pt">{{ person_1_name }}</font><br/>
-              Born in {{ person_1_dob }}. <span class="glyphicon glyphicon-globe"></span> {{ person_1_country }}<br/>
-              {{ person_1_major }}, {{ person_1_faculty }}<br/>
-              <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">More info <b class="caret"></b></a> <a href="{{ person_1_website}}">(url icon)</a> {{ person_1_networks}}
-              </p>
-            </div>
-            <div class="col-xs-12 panel-collapse collapse" id="collapse1">
-              <p>
-                Skills: {{ person_1_skills }}<br/>
-                Interests: {{ person_1_interests }}<br/>
-                Involvements: {{ person_1_involvements }}<br/>
-                Best Modules: {{ person_1_best_modules }}<br/>
-              </p>
-              <p class="lead">"{{ person_1_advice }}"</p>
-            </div>
-            <div class="col-xs-12" style="border-top: 1px solid gray">
-              Wants to be: {{ person_1_aspirations }}
-            </div>
-          </div>
-        </div>
-        <div class="col-md-5 col-md-offset-1" style="border: 1px solid gray; margin-bottom: 50px;">
-          <div class="row">
-            <div class="col-xs-2">
-              <img src="../images/icon_961.png" class="img-circle" style="height:50px; width:50px; border:2px solid gray;">             
-            </div>
-            <div class="col-xs-10">
-              <p><strong><font size="6pt">{{ person_2_percent }}%</strong></font> <font size="4pt">{{ person_2_name }}</font><br/>
-              Born in {{ person_2_dob }}. <span class="glyphicon glyphicon-globe"></span> {{ person_2_country }}<br/>
-              {{ person_2_major }}, {{ person_2_faculty }}<br/>
-              <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">More info <b class="caret"></b></a> <a href="{{ person_2_website}}">(url icon)</a> {{ person_2_networks}}
-              </p>
-            </div>
-            <div class="col-xs-12 panel-collapse collapse" id="collapse2">
-              <p>
-                Skills: {{ person_2_skills }}<br/>
-                Interests: {{ person_2_interests }}<br/>
-                Involvements: {{ person_2_involvements }}<br/>
-                Best Modules: {{ person_2_best_modules }}<br/>
-              </p>
-              <p class="lead">"{{ person_2_advice }}"</p>
-            </div>
-            <div class="col-xs-12" style="border-top: 1px solid gray">
-              Wants to be: {{ person_2_aspirations }}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> 
-
-    <div class="row">
-      <div class="container">
-        <div class="col-md-5" style="border: 1px solid gray; margin-bottom: 50px;">
-          <div class="row">
-            <div class="col-xs-2">
-              <img src="../images/icon_961.png" class="img-circle" style="height:50px; width:50px; border:2px solid gray;">             
-            </div>
-            <div class="col-xs-10">
-              <p><strong><font size="6pt">{{ person_3_percent }}%</strong></font> <font size="4pt">{{ person_3_name }}</font><br/>
-              Born in {{ person_3_dob }}. <span class="glyphicon glyphicon-globe"></span> {{ person_3_country }}<br/>
-              {{ person_3_major }}, {{ person_3_faculty }}<br/>
-              <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">More info <b class="caret"></b></a> <a href="{{ person_3_website}}">(url icon)</a> {{ person_3_networks}}
-              </p>
-            </div>
-            <div class="col-xs-12 panel-collapse collapse" id="collapse3">
-              <p>
-                Skills: {{ person_3_skills }}<br/>
-                Interests: {{ person_3_interests }}<br/>
-                Involvements: {{ person_3_involvements }}<br/>
-                Best Modules: {{ person_3_best_modules }}<br/>
-              </p>
-              <p class="lead">"{{ person_3_advice }}"</p>
-            </div>
-            <div class="col-xs-12" style="border-top: 1px solid gray">
-              Wants to be: {{ person_3_aspirations }}
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-5 col-md-offset-1" style="border: 1px solid gray; margin-bottom: 50px;">
-          <div class="row">
-            <div class="col-xs-2">
-              <img src="../images/icon_961.png" class="img-circle" style="height:50px; width:50px; border:2px solid gray;">             
-            </div>
-            <div class="col-xs-10">
-              <p><strong><font size="6pt">{{ person_4_percent }}%</strong></font> <font size="4pt">{{ person_4_name }}</font><br/>
-              Born in {{ person_4_dob }}. <span class="glyphicon glyphicon-globe"></span> {{ person_4_country }}<br/>
-              {{ person_4_major }}, {{ person_4_faculty }}<br/>
-              <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">More info <b class="caret"></b></a> <a href="{{ person_4_website}}">(url icon)</a> {{ person_4_networks}}
-              </p>
-            </div>
-            <div class="col-xs-12 panel-collapse collapse" id="collapse4">
-              <p>
-                Skills: {{ person_4_skills }}<br/>
-                Interests: {{ person_4_interests }}<br/>
-                Involvements: {{ person_4_involvements }}<br/>
-                Best Modules: {{ person_4_best_modules }}<br/>
-              </p>
-              <p class="lead">"{{ person_4_advice }}"</p>
-            </div>
-            <div class="col-xs-12" style="border-top: 1px solid gray">
-              Wants to be: {{ person_4_aspirations }}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="container">
-        <div class="col-md-5" style="border: 1px solid gray; margin-bottom: 50px;">
-          <div class="row">
-            <div class="col-xs-2">
-              <img src="../images/icon_961.png" class="img-circle" style="height:50px; width:50px; border:2px solid gray;">             
-            </div>
-            <div class="col-xs-10">
-              <p><strong><font size="6pt">{{ person_5_percent }}%</strong></font> <font size="4pt">{{ person_5_name }}</font><br/>
-              Born in {{ person_5_dob }}. <span class="glyphicon glyphicon-globe"></span> {{ person_5_country }}<br/>
-              {{ person_5_major }}, {{ person_5_faculty }}<br/>
-              <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">More info <b class="caret"></b></a> <a href="{{ person_5_website}}">(url icon)</a> {{ person_5_networks}}
-              </p>
-            </div>
-            <div class="col-xs-12 panel-collapse collapse" id="collapse5">
-              <p>
-                Skills: {{ person_5_skills }}<br/>
-                Interests: {{ person_5_interests }}<br/>
-                Involvements: {{ person_5_involvements }}<br/>
-                Best Modules: {{ person_5_best_modules }}<br/>
-              </p>
-              <p class="lead">"{{ person_5_advice }}"</p>
-            </div>
-            <div class="col-xs-12" style="border-top: 1px solid gray">
-              Wants to be: {{ person_5_aspirations }}
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-5 col-md-offset-1" style="border: 1px solid gray; margin-bottom: 50px;">
-          <div class="row">
-            <div class="col-xs-2">
-              <img src="../images/icon_961.png" class="img-circle" style="height:50px; width:50px; border:2px solid gray;">             
-            </div>
-            <div class="col-xs-10">
-              <p><strong><font size="6pt">{{ person_6_percent }}%</strong></font> <font size="4pt">{{ person_6_name }}</font><br/>
-              Born in {{ person_6_dob }}. <span class="glyphicon glyphicon-globe"></span> {{ person_6_country }}<br/>
-              {{ person_6_major }}, {{ person_6_faculty }}<br/>
-              <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">More info <b class="caret"></b></a> <a href="{{ person_6_website}}">(url icon)</a> {{ person_6_networks}}
-              </p>
-            </div>
-            <div class="col-xs-12 panel-collapse collapse" id="collapse6">
-              <p>
-                Skills: {{ person_6_skills }}<br/>
-                Interests: {{ person_6_interests }}<br/>
-                Involvements: {{ person_6_involvements }}<br/>
-                Best Modules: {{ person_6_best_modules }}<br/>
-              </p>
-              <p class="lead">"{{ person_6_advice }}"</p>
-            </div>
-            <div class="col-xs-12" style="border-top: 1px solid gray">
-              Wants to be: {{ person_6_aspirations }}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> 
-
-    <div class="row">
-    <div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6">
-       <div class="well profile">
-            <div class="col-sm-12">
-                <div class="col-xs-12 col-sm-8">
-                    <h2>Nicole Pearson</h2>
-                    <p><strong>About: </strong> Web Designer / UI. </p>
-                    <p><strong>Hobbies: </strong> Read, out with friends, listen to music, draw and learn new things. </p>
-                    <p><strong>Skills: </strong>
-                        <span class="tags">html5</span> 
-                        <span class="tags">css3</span>
-                        <span class="tags">jquery</span>
-                        <span class="tags">bootstrap3</span>
+        {% if person_1_name|length > 0 %}
+        <div class="col-md-6">
+           <div class="well profile">
+                <div class="col-sm-12">
+                  <div class="col-sm-8">
+                    <h2/>{{ person_1_name }}</h2>
+                    <p>{{ person_1_major }}, {{ person_1_faculty }}</p>
+                    <p>
+                      <div class="dropdown">
+                        <a type="button" class="btn btn-{% if person_1_networks == '' %}default{% else %}info{% endif %} dropdown-toggle {% if person_1_networks == '' %}disabled{% endif %}" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span> Social Networks <span class="caret"></span></a>
+                        <ul class="dropdown-menu text-left" role="menu" id="my_networks_1"></ul>
+                        <script>
+                          var temp = "{{ person_1_networks }}";
+                          temp = temp.replace(/\s/g, '');
+                          temp = temp.split(",")
+                          html = ''
+                          for (i = 0; i < temp.length; i++) {
+                            html += "<li><a href=\"http://" + temp[i] + "\">" + temp[i] + "</a></li>"
+                          }
+                          document.getElementById('my_networks_1').innerHTML = html;
+                        </script>
+                        <a href="{{ person_1_website }}" class="btn btn-{% if person_1_networks == '' %}default{% else %}info{% endif %} {% if person_1_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
+                      </div>
                     </p>
-                </div>             
-                <div class="col-xs-12 col-sm-4 text-center">
-                    <figure>
-                        <img src="http://www.localcrimenews.com/wp-content/uploads/2013/07/default-user-icon-profile.png" alt="" class="img-circle img-responsive">
-                        <figcaption class="ratings">
-                            <p>Ratings
-                            <a href="#">
-                                <span class="fa fa-star"></span>
-                            </a>
-                            <a href="#">
-                                <span class="fa fa-star"></span>
-                            </a>
-                            <a href="#">
-                                <span class="fa fa-star"></span>
-                            </a>
-                            <a href="#">
-                                <span class="fa fa-star"></span>
-                            </a>
-                            <a href="#">
-                                 <span class="fa fa-star-o"></span>
-                            </a> 
-                            </p>
-                        </figcaption>
-                    </figure>
+                    <p>Wants to be: <strong id="my_aspirations_1"></strong>
+                    </p> 
+                    <script>
+                          var temp = "{{ person_1_aspirations }}";
+                          temp = temp.split(",")
+                          html = ''
+                          for (i = 0; i < temp.length; i++) {
+                            html += "<span class=\"tags\">" + temp[i] + "</span> "
+                          }
+                          document.getElementById('my_aspirations_1').innerHTML = html;
+                    </script>
+                  </div>            
+                  <div class="col-sm-4">
+                    <img src="../images/icon_961.png" alt="" class="img-circle img-responsive">
+                    <h3 class="text-center"><span class="label label-primary">{{ person_1_percent }}% similar</span></h3>
+                    <p>
+                      {% if person_1_dob != '' %}
+                      <span class="glyphicon glyphicon-user"></span> Born in <strong>{{ person_1_dob }}</strong><br/>
+                      {% endif %}
+                      {% if person_1_country != '' %}
+                      <span class="glyphicon glyphicon-map-marker"></span> From <strong>{{ person_1_country }}</strong><br/>
+                      {% endif %}
+                    </p>
+                  </div>
+                  <div class="col-sm-12">
+                    <p><a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><span class="glyphicon glyphicon-info-sign"></span> More Info <span class="caret"></span></a></p>
+                  </div>
                 </div>
-            </div>            
-            <div class="col-xs-12 divider text-center">
-                <div class="col-xs-12 col-sm-4 emphasis">
-                    <h2><strong> 20,7K </strong></h2>                    
-                    <p><small>Followers</small></p>
-                    <button class="btn btn-success btn-block"><span class="fa fa-plus-circle"></span> Follow </button>
+                <div class="col-xs-12 divider panel-collapse collapse" id="collapse1">
+                  <br/><p class="lead text-center">"{{ person_1_advice }}"</p>
+                  <p>
+                    Skills: <strong>{{ person_1_skills }}</strong><br/>
+                    Interests: <strong>{{ person_1_interests }}</strong><br/>
+                    Involvements: <strong>{{ person_1_involvements }}</strong><br/>
+                    Best Modules: <strong>{{ person_1_best_modules }}</strong><br/>
+                  </p>
                 </div>
-                <div class="col-xs-12 col-sm-4 emphasis">
-                    <h2><strong>245</strong></h2>                    
-                    <p><small>Following</small></p>
-                    <button class="btn btn-info btn-block"><span class="fa fa-user"></span> View Profile </button>
+           </div>                 
+        </div>
+        {% endif %}
+
+        {% if person_2_name|length > 0 %}
+        <div class="col-md-6">
+           <div class="well profile">
+                <div class="col-sm-12">
+                  <div class="col-sm-8">
+                    <h2/>{{ person_2_name }}</h2>
+                    <p>{{ person_2_major }}, {{ person_2_faculty }}</p>
+                    <p>
+                      <div class="dropdown">
+                        <a type="button" class="btn btn-{% if person_2_networks == '' %}default{% else %}info{% endif %} dropdown-toggle {% if person_2_networks == '' %}disabled{% endif %}" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span> Social Networks <span class="caret"></span></a>
+                        <ul class="dropdown-menu text-left" role="menu" id="my_networks_2"></ul>
+                        <script>
+                          var temp = "{{ person_2_networks }}";
+                          temp = temp.replace(/\s/g, '');
+                          temp = temp.split(",")
+                          html = ''
+                          for (i = 0; i < temp.length; i++) {
+                            html += "<li><a href=\"http://" + temp[i] + "\">" + temp[i] + "</a></li>"
+                          }
+                          document.getElementById('my_networks_2').innerHTML = html;
+                        </script>
+                        <a href="{{ person_2_website }}" class="btn btn-{% if person_2_networks == '' %}default{% else %}info{% endif %} {% if person_2_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
+                      </div>
+                    </p>
+                    <p>Wants to be: <strong id="my_aspirations_2"></strong>
+                    </p> 
+                    <script>
+                          var temp = "{{ person_2_aspirations }}";
+                          temp = temp.split(",")
+                          html = ''
+                          for (i = 0; i < temp.length; i++) {
+                            html += "<span class=\"tags\">" + temp[i] + "</span> "
+                          }
+                          document.getElementById('my_aspirations_2').innerHTML = html;
+                    </script>
+                  </div>            
+                  <div class="col-sm-4">
+                    <img src="../images/icon_961.png" alt="" class="img-circle img-responsive">
+                    <h3 class="text-center"><span class="label label-primary">{{ person_2_percent }}% similar</span></h3>
+                    <p>
+                      {% if person_2_dob != '' %}
+                      <span class="glyphicon glyphicon-user"></span> Born in <strong>{{ person_2_dob }}</strong><br/>
+                      {% endif %}
+                      {% if person_2_country != '' %}
+                      <span class="glyphicon glyphicon-map-marker"></span> From <strong>{{ person_2_country }}</strong><br/>
+                      {% endif %}
+                    </p>
+                  </div>
+                  <div class="col-sm-12">
+                    <p><a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><span class="glyphicon glyphicon-info-sign"></span> More Info <span class="caret"></span></a></p>
+                  </div>
                 </div>
-                <div class="col-xs-12 col-sm-4 emphasis">
-                    <h2><strong>43</strong></h2>                    
-                    <p><small>Snippets</small></p>
-                    <div class="btn-group dropup btn-block">
-                      <button type="button" class="btn btn-primary"><span class="fa fa-gear"></span> Options </button>
-                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                        <span class="caret"></span>
-                        <span class="sr-only">Toggle Dropdown</span>
-                      </button>
-                      <ul class="dropdown-menu text-left" role="menu">
-                        <li><a href="#"><span class="fa fa-envelope pull-right"></span> Send an email </a></li>
-                        <li><a href="#"><span class="fa fa-list pull-right"></span> Add or remove from a list  </a></li>
-                        <li class="divider"></li>
-                        <li><a href="#"><span class="fa fa-warning pull-right"></span>Report this user for spam</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#" class="btn disabled" role="button"> Unfollow </a></li>
-                      </ul>
-                    </div>
+                <div class="col-xs-12 divider panel-collapse collapse" id="collapse2">
+                  <br/><p class="lead text-center">"{{ person_2_advice }}"</p>
+                  <p>
+                    Skills: <strong>{{ person_2_skills }}</strong><br/>
+                    Interests: <strong>{{ person_2_interests }}</strong><br/>
+                    Involvements: <strong>{{ person_2_involvements }}</strong><br/>
+                    Best Modules: <strong>{{ person_2_best_modules }}</strong><br/>
+                  </p>
                 </div>
-            </div>
-       </div>                 
-    </div>
-  </div>
-  
+           </div>                 
+        </div>
+        {% endif %}
+
+        {% if person_3_name|length > 0 %}
+        <div class="col-md-6">
+           <div class="well profile">
+                <div class="col-sm-12">
+                  <div class="col-sm-8">
+                    <h2/>{{ person_3_name }}</h2>
+                    <p>{{ person_3_major }}, {{ person_3_faculty }}</p>
+                    <p>
+                      <div class="dropdown">
+                        <a type="button" class="btn btn-{% if person_3_networks == '' %}default{% else %}info{% endif %} dropdown-toggle {% if person_3_networks == '' %}disabled{% endif %}" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span> Social Networks <span class="caret"></span></a>
+                        <ul class="dropdown-menu text-left" role="menu" id="my_networks_3"></ul>
+                        <script>
+                          var temp = "{{ person_3_networks }}";
+                          temp = temp.replace(/\s/g, '');
+                          temp = temp.split(",")
+                          html = ''
+                          for (i = 0; i < temp.length; i++) {
+                            html += "<li><a href=\"http://" + temp[i] + "\">" + temp[i] + "</a></li>"
+                          }
+                          document.getElementById('my_networks_3').innerHTML = html;
+                        </script>
+                        <a href="{{ person_3_website }}" class="btn btn-{% if person_3_networks == '' %}default{% else %}info{% endif %} {% if person_3_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
+                      </div>
+                    </p>
+                    <p>Wants to be: <strong id="my_aspirations_3"></strong>
+                    </p> 
+                    <script>
+                          var temp = "{{ person_3_aspirations }}";
+                          temp = temp.split(",")
+                          html = ''
+                          for (i = 0; i < temp.length; i++) {
+                            html += "<span class=\"tags\">" + temp[i] + "</span> "
+                          }
+                          document.getElementById('my_aspirations_3').innerHTML = html;
+                    </script>
+                  </div>            
+                  <div class="col-sm-4">
+                    <img src="../images/icon_961.png" alt="" class="img-circle img-responsive">
+                    <h3 class="text-center"><span class="label label-primary">{{ person_3_percent }}% similar</span></h3>
+                    <p>
+                      {% if person_3_dob != '' %}
+                      <span class="glyphicon glyphicon-user"></span> Born in <strong>{{ person_3_dob }}</strong><br/>
+                      {% endif %}
+                      {% if person_3_country != '' %}
+                      <span class="glyphicon glyphicon-map-marker"></span> From <strong>{{ person_3_country }}</strong><br/>
+                      {% endif %}
+                    </p>
+                  </div>
+                  <div class="col-sm-12">
+                    <p><a data-toggle="collapse" data-parent="#accordion" href="#collapse3"><span class="glyphicon glyphicon-info-sign"></span> More Info <span class="caret"></span></a></p>
+                  </div>
+                </div>
+                <div class="col-xs-12 divider panel-collapse collapse" id="collapse3">
+                  <br/><p class="lead text-center">"{{ person_3_advice }}"</p>
+                  <p>
+                    Skills: <strong>{{ person_3_skills }}</strong><br/>
+                    Interests: <strong>{{ person_3_interests }}</strong><br/>
+                    Involvements: <strong>{{ person_3_involvements }}</strong><br/>
+                    Best Modules: <strong>{{ person_3_best_modules }}</strong><br/>
+                  </p>
+                </div>
+           </div>                 
+        </div>
+        {% endif %}
+
+        {% if person_4_name|length > 0 %}
+        <div class="col-md-6">
+           <div class="well profile">
+                <div class="col-sm-12">
+                  <div class="col-sm-8">
+                    <h2/>{{ person_4_name }}</h2>
+                    <p>{{ person_4_major }}, {{ person_4_faculty }}</p>
+                    <p>
+                      <div class="dropdown">
+                        <a type="button" class="btn btn-{% if person_4_networks == '' %}default{% else %}info{% endif %} dropdown-toggle {% if person_4_networks == '' %}disabled{% endif %}" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span> Social Networks <span class="caret"></span></a>
+                        <ul class="dropdown-menu text-left" role="menu" id="my_networks_4"></ul>
+                        <script>
+                          var temp = "{{ person_4_networks }}";
+                          temp = temp.replace(/\s/g, '');
+                          temp = temp.split(",")
+                          html = ''
+                          for (i = 0; i < temp.length; i++) {
+                            html += "<li><a href=\"http://" + temp[i] + "\">" + temp[i] + "</a></li>"
+                          }
+                          document.getElementById('my_networks_4').innerHTML = html;
+                        </script>
+                        <a href="{{ person_4_website }}" class="btn btn-{% if person_4_networks == '' %}default{% else %}info{% endif %} {% if person_4_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
+                      </div>
+                    </p>
+                    <p>Wants to be: <strong id="my_aspirations_4"></strong>
+                    </p> 
+                    <script>
+                          var temp = "{{ person_4_aspirations }}";
+                          temp = temp.split(",")
+                          html = ''
+                          for (i = 0; i < temp.length; i++) {
+                            html += "<span class=\"tags\">" + temp[i] + "</span> "
+                          }
+                          document.getElementById('my_aspirations_4').innerHTML = html;
+                    </script>
+                  </div>            
+                  <div class="col-sm-4">
+                    <img src="../images/icon_961.png" alt="" class="img-circle img-responsive">
+                    <h3 class="text-center"><span class="label label-primary">{{ person_4_percent }}% similar</span></h3>
+                    <p>
+                      {% if person_4_dob != '' %}
+                      <span class="glyphicon glyphicon-user"></span> Born in <strong>{{ person_4_dob }}</strong><br/>
+                      {% endif %}
+                      {% if person_4_country != '' %}
+                      <span class="glyphicon glyphicon-map-marker"></span> From <strong>{{ person_4_country }}</strong><br/>
+                      {% endif %}
+                    </p>
+                  </div>
+                  <div class="col-sm-12">
+                    <p><a data-toggle="collapse" data-parent="#accordion" href="#collapse4"><span class="glyphicon glyphicon-info-sign"></span> More Info <span class="caret"></span></a></p>
+                  </div>
+                </div>
+                <div class="col-xs-12 divider panel-collapse collapse" id="collapse4">
+                  <br/><p class="lead text-center">"{{ person_4_advice }}"</p>
+                  <p>
+                    Skills: <strong>{{ person_4_skills }}</strong><br/>
+                    Interests: <strong>{{ person_4_interests }}</strong><br/>
+                    Involvements: <strong>{{ person_4_involvements }}</strong><br/>
+                    Best Modules: <strong>{{ person_4_best_modules }}</strong><br/>
+                  </p>
+                </div>
+           </div>                 
+        </div>
+        {% endif %}
+
+        {% if person_5_name|length > 0 %}
+        <div class="col-md-6">
+           <div class="well profile">
+                <div class="col-sm-12">
+                  <div class="col-sm-8">
+                    <h2/>{{ person_5_name }}</h2>
+                    <p>{{ person_5_major }}, {{ person_5_faculty }}</p>
+                    <p>
+                      <div class="dropdown">
+                        <a type="button" class="btn btn-{% if person_5_networks == '' %}default{% else %}info{% endif %} dropdown-toggle {% if person_5_networks == '' %}disabled{% endif %}" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span> Social Networks <span class="caret"></span></a>
+                        <ul class="dropdown-menu text-left" role="menu" id="my_networks_5"></ul>
+                        <script>
+                          var temp = "{{ person_5_networks }}";
+                          temp = temp.replace(/\s/g, '');
+                          temp = temp.split(",")
+                          html = ''
+                          for (i = 0; i < temp.length; i++) {
+                            html += "<li><a href=\"http://" + temp[i] + "\">" + temp[i] + "</a></li>"
+                          }
+                          document.getElementById('my_networks_5').innerHTML = html;
+                        </script>
+                        <a href="{{ person_5_website }}" class="btn btn-{% if person_5_networks == '' %}default{% else %}info{% endif %} {% if person_5_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
+                      </div>
+                    </p>
+                    <p>Wants to be: <strong id="my_aspirations_5"></strong>
+                    </p> 
+                    <script>
+                          var temp = "{{ person_5_aspirations }}";
+                          temp = temp.split(",")
+                          html = ''
+                          for (i = 0; i < temp.length; i++) {
+                            html += "<span class=\"tags\">" + temp[i] + "</span> "
+                          }
+                          document.getElementById('my_aspirations_5').innerHTML = html;
+                    </script>
+                  </div>            
+                  <div class="col-sm-4">
+                    <img src="../images/icon_961.png" alt="" class="img-circle img-responsive">
+                    <h3 class="text-center"><span class="label label-primary">{{ person_5_percent }}% similar</span></h3>
+                    <p>
+                      {% if person_5_dob != '' %}
+                      <span class="glyphicon glyphicon-user"></span> Born in <strong>{{ person_5_dob }}</strong><br/>
+                      {% endif %}
+                      {% if person_5_country != '' %}
+                      <span class="glyphicon glyphicon-map-marker"></span> From <strong>{{ person_5_country }}</strong><br/>
+                      {% endif %}
+                    </p>
+                  </div>
+                  <div class="col-sm-12">
+                    <p><a data-toggle="collapse" data-parent="#accordion" href="#collapse5"><span class="glyphicon glyphicon-info-sign"></span> More Info <span class="caret"></span></a></p>
+                  </div>
+                </div>
+                <div class="col-xs-12 divider panel-collapse collapse" id="collapse5">
+                  <br/><p class="lead text-center">"{{ person_5_advice }}"</p>
+                  <p>
+                    Skills: <strong>{{ person_5_skills }}</strong><br/>
+                    Interests: <strong>{{ person_5_interests }}</strong><br/>
+                    Involvements: <strong>{{ person_5_involvements }}</strong><br/>
+                    Best Modules: <strong>{{ person_5_best_modules }}</strong><br/>
+                  </p>
+                </div>
+           </div>                 
+        </div>
+        {% endif %}
+
+        {% if person_6_name|length > 0 %}
+        <div class="col-md-6">
+           <div class="well profile">
+                <div class="col-sm-12">
+                  <div class="col-sm-8">
+                    <h2/>{{ person_6_name }}</h2>
+                    <p>{{ person_6_major }}, {{ person_6_faculty }}</p>
+                    <p>
+                      <div class="dropdown">
+                        <a type="button" class="btn btn-{% if person_6_networks == '' %}default{% else %}info{% endif %} dropdown-toggle {% if person_6_networks == '' %}disabled{% endif %}" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span> Social Networks <span class="caret"></span></a>
+                        <ul class="dropdown-menu text-left" role="menu" id="my_networks_6"></ul>
+                        <script>
+                          var temp = "{{ person_6_networks }}";
+                          temp = temp.replace(/\s/g, '');
+                          temp = temp.split(",")
+                          html = ''
+                          for (i = 0; i < temp.length; i++) {
+                            html += "<li><a href=\"http://" + temp[i] + "\">" + temp[i] + "</a></li>"
+                          }
+                          document.getElementById('my_networks_6').innerHTML = html;
+                        </script>
+                        <a href="{{ person_6_website }}" class="btn btn-{% if person_6_networks == '' %}default{% else %}info{% endif %} {% if person_6_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
+                      </div>
+                    </p>
+                    <p>Wants to be: <strong id="my_aspirations_6"></strong>
+                    </p> 
+                    <script>
+                          var temp = "{{ person_6_aspirations }}";
+                          temp = temp.split(",")
+                          html = ''
+                          for (i = 0; i < temp.length; i++) {
+                            html += "<span class=\"tags\">" + temp[i] + "</span> "
+                          }
+                          document.getElementById('my_aspirations_6').innerHTML = html;
+                    </script>
+                  </div>            
+                  <div class="col-sm-4">
+                    <img src="../images/icon_961.png" alt="" class="img-circle img-responsive">
+                    <h3 class="text-center"><span class="label label-primary">{{ person_6_percent }}% similar</span></h3>
+                    <p>
+                      {% if person_6_dob != '' %}
+                      <span class="glyphicon glyphicon-user"></span> Born in <strong>{{ person_6_dob }}</strong><br/>
+                      {% endif %}
+                      {% if person_6_country != '' %}
+                      <span class="glyphicon glyphicon-map-marker"></span> From <strong>{{ person_6_country }}</strong><br/>
+                      {% endif %}
+                    </p>
+                  </div>
+                  <div class="col-sm-12">
+                    <p><a data-toggle="collapse" data-parent="#accordion" href="#collapse6"><span class="glyphicon glyphicon-info-sign"></span> More Info <span class="caret"></span></a></p>
+                  </div>
+                </div>
+                <div class="col-xs-12 divider panel-collapse collapse" id="collapse6">
+                  <br/><p class="lead text-center">"{{ person_6_advice }}"</p>
+                  <p>
+                    Skills: <strong>{{ person_6_skills }}</strong><br/>
+                    Interests: <strong>{{ person_6_interests }}</strong><br/>
+                    Involvements: <strong>{{ person_6_involvements }}</strong><br/>
+                    Best Modules: <strong>{{ person_6_best_modules }}</strong><br/>
+                  </p>
+                </div>
+           </div>                 
+        </div>
+        {% endif %}
+      </div>
+    </div> 
 
   </body>
   </html>
