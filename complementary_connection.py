@@ -78,7 +78,7 @@ def get_complementary(std_id):
         p_aspirations='person_'+str(place_index)+'_aspirations'
         p_networks='person_'+str(place_index)+'_networks'
         p_website='person_'+str(place_index)+'_website'
-        result_dict[p_percent]=int(round(symmetrical_list.get(sorted_dict[index])))
+        result_dict[p_percent]=int(round(complementary_list.get(sorted_dict[index])))
         result_dict[p_name]=app_datastore.get_user(sorted_dict[index]).name
         result_dict[p_dob]=app_datastore.get_user(sorted_dict[index]).date_of_birth
         result_dict[p_country]=app_datastore.get_user(sorted_dict[index]).country
