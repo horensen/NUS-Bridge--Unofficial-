@@ -5,6 +5,8 @@ from google.appengine.api import urlfetch
 from random import randint
 from urlparse import urlparse
 from webapp2_extras import sessions
+import analysis
+import app_datastore
 import cgi
 import datetime
 import difflib
@@ -12,13 +14,11 @@ import HTMLParser
 import four_temperaments
 import jinja2
 import json
-import app_datastore
 import os
 import urllib
 import urllib2
 import webapp2
-import symmetrical_connection
-import complementary_connection
+
 
 # GLOBAL VARIABLES
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + "/templates"), autoescape=True)
@@ -526,7 +526,7 @@ class Personality(BaseHandler):
 class SymmetricalConnections(BaseHandler):
     def get(self):
         if self.session.get('is_valid') == True:
-            template_values = symmetrical_connection.get_symmetrical(self.session['student_id'])
+            template_values = analysis.get_symmetrical(self.session['student_id'])
             template_values['student_name'] = self.session.get('student_name')
             template_values['student_email'] = self.session.get('student_email')
             template = jinja_environment.get_template('symmetrical.html')
@@ -537,7 +537,7 @@ class SymmetricalConnections(BaseHandler):
 class ComplementaryConnections(BaseHandler):
     def get(self):
         if self.session.get('is_valid') == True:
-            template_values = complementary_connection.get_complementary(self.session['student_id'])
+            template_values = analysis.get_complementary(self.session['student_id'])
             template_values['student_name'] = self.session.get('student_name')
             template_values['student_email'] = self.session.get('student_email')
             template = jinja_environment.get_template('complementary.html')
@@ -655,10 +655,6 @@ class Profile(BaseHandler):
         else:
             self.redirect(app_domain)
 
-class Test(BaseHandler):
-    def get(self):
-        print symmetrical_connection.get_symmetrical(self.session.get('student_id'))
-
 
 
 # WEB SERVER GATE INTERFACE
@@ -670,7 +666,6 @@ app = webapp2.WSGIApplication([
     ('/education', Education),
     ('/experience', Experience),
     ('/personality', Personality),
-    ('/testing',Test ),
     ('/symmetrical-connections', SymmetricalConnections),
     ('/complementary-connections', ComplementaryConnections),
     ('/improvement-advisory', ImprovementAdvisory)],
