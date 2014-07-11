@@ -5,8 +5,6 @@ from google.appengine.api import urlfetch
 from random import randint
 from urlparse import urlparse
 from webapp2_extras import sessions
-import analysis
-import app_datastore
 import cgi
 import datetime
 import difflib
@@ -14,11 +12,14 @@ import HTMLParser
 import four_temperaments
 import jinja2
 import json
+import app_datastore
 import os
 import urllib
 import urllib2
 import webapp2
-
+import analysis
+import string
+import random
 
 # GLOBAL VARIABLES
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + "/templates"), autoescape=True)
@@ -46,7 +47,7 @@ class BaseHandler(webapp2.RequestHandler):
 config = {}
 
 config['webapp2_extras.sessions'] = {
-    'secret_key': ivle_api_key
+    'secret_key': ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(16))
 }
 
 
@@ -55,14 +56,6 @@ config['webapp2_extras.sessions'] = {
 
 # INHERITED REQUEST HANDLERS
 class MainPage(BaseHandler):
-    #def post(self):
-        # Redirect to OpenID provider
-        # Declare openId = self.request.get('openId').rstrip()
-        # or openId = 'https://openid.nus.edu.sg/'
-        # Then redirect user to log in using a federated identity
-        # self.redirect(users.create_login_url('/', None, federated_identity=openId)
-        # Or in Google API
-        # self.redirect(self.request.host_url)
 
     def get(self):
         self.session['ivle_token'] = ""
@@ -86,35 +79,23 @@ class Snapshot(BaseHandler):
         self.redirect(app_domain + "snapshot")
 
     def get(self):
-        urlfetch.set_default_fetch_deadline(60)
+        urlfetch.set_default_fetch_deadline(10)
 
         # Retrieve token
         if self.session.get('is_valid') != True:
             self.session['ivle_token'] = self.request.get('token')
             self.session['is_valid'] = json.load(urllib2.urlopen('https://ivle.nus.edu.sg/api/Lapi.svc/Validate?APIKey=' + ivle_api_key + '&Token=' + self.session.get('ivle_token')))['Success']
         
-        # If the user is authenticated and therefore token is not empty
+        # If the user is authenticated and token is not empty
         if self.session.get('is_valid') == True and self.session.get('ivle_token') != '':
 
-            # Retrieve profile information from IVLE and remember for the current browser session
-            if app_datastore.user_exists(self.session.get('student_id')) == False:
-                student_profile_object = json.load(urllib2.urlopen('https://ivle.nus.edu.sg/api/Lapi.svc/Profile_View?APIKey=' + ivle_api_key + '&AuthToken=' + self.session.get('ivle_token')))['Results'][0]
-                self.session['student_id'] = student_profile_object['UserID']
-                self.session['student_name'] = student_profile_object['Name']
-                self.session['student_email'] = student_profile_object['Email']
-                self.session['student_matriculation_year'] = student_profile_object['MatriculationYear']
-                self.session['student_first_major'] = student_profile_object['FirstMajor']
-                self.session['student_second_major'] = student_profile_object['SecondMajor']
-                self.session['student_faculty'] = student_profile_object['Faculty']
-
-            # Initialise values to be populated from datastore
+            # Initialise values
             aspirations_completed = False
             education_completed = False
             experience_completed = False
             personality_completed = False
             aspirations_html = ''
             best_modules_html = ''
-            #skills_and_interests_html = ''
             interests_html = ''
             skills_and_knowledge_html = ''
             strengths_at_work_html = ''
@@ -125,8 +106,26 @@ class Snapshot(BaseHandler):
             advice_html = ''
             social_networks_html=''
 
-            # If the user exists
+            # If the user's session is new
+            if app_datastore.user_exists(self.session.get('student_id')) == False:
+
+                # Retrieve profile information from IVLE and remember for the current browser session
+                student_profile_object = json.load(urllib2.urlopen('https://ivle.nus.edu.sg/api/Lapi.svc/Profile_View?APIKey=' + ivle_api_key + '&AuthToken=' + self.session.get('ivle_token')))['Results'][0]
+                self.session['student_id'] = student_profile_object['UserID']
+                self.session['student_name'] = student_profile_object['Name']
+                self.session['student_email'] = student_profile_object['Email']
+                self.session['student_matriculation_year'] = student_profile_object['MatriculationYear']
+                self.session['student_first_major'] = student_profile_object['FirstMajor']
+                self.session['student_second_major'] = student_profile_object['SecondMajor']
+                self.session['student_faculty'] = student_profile_object['Faculty']
+
+            # If the user exists in the datastore
             if app_datastore.user_exists(self.session['student_id']):
+
+                # Update the email session variable if there is a different email in the datastore than in IVLE
+                if (app_datastore.get_user(self.session['student_id']).email != self.session['student_email']):
+                    self.session['student_email'] = app_datastore.get_user(self.session['student_id']).email
+
                 # Describe existing aspirations
                 try:
                     aspirations = app_datastore.get_aspirations(self.session['student_id']).aspirations
@@ -316,13 +315,13 @@ class Snapshot(BaseHandler):
                 try:
                     social_networks_obj = app_datastore.get_user(self.session['student_id']).social_networks
                     for link in social_networks_obj:
-                        social_networks_html+="<li>"+link+"</li>"
+                        social_networks_html+="<a href=http://" + link + "><li>http://" + link + "</li></a>"
                 except Exception:
                     pass
-               
 
             # else if the user is new
             else:
+
                 # Register into the datastore
                 app_datastore.insert_user(student_profile_object)
                 
@@ -615,23 +614,25 @@ class ImprovementAdvisory(BaseHandler):
 
 class Profile(BaseHandler):
     def post(self):
-        student_country=self.request.get('user_country')
-        student_gender=self.request.get('user_gender')
-        student_website=self.request.get('user_website')
-        student_social_network=self.request.get('networks').split(",,")
+        student_country = self.request.get('user_country')
+        student_gender = self.request.get('user_gender')
+        student_website = self.request.get('user_website')
+        student_email = self.request.get('user_email')
+        student_social_network = self.request.get('networks').split(",,")
 
         if self.session.get('is_valid'):
-            app_datastore.update_user(self.session.get('student_id'),self.request.get("user_dob"),student_gender,student_country,student_website,student_social_network)
+            app_datastore.update_user(self.session.get('student_id'), self.request.get("user_dob"), student_gender, student_country, student_website, student_email, student_social_network)
 
         self.redirect("/profile")
 
     def get(self):
-        std_obj=app_datastore.get_user(self.session.get('student_id'))
-        student_dob=std_obj.date_of_birth
-        student_gender=std_obj.gender
-        student_country=std_obj.country
-        student_website=std_obj.website
-        student_social_network = std_obj.social_networks
+        student_obj = app_datastore.get_user(self.session.get('student_id'))
+        student_dob = student_obj.date_of_birth
+        student_gender = student_obj.gender
+        student_country = student_obj.country
+        student_website = student_obj.website
+        student_email = student_obj.email
+        student_social_network = student_obj.social_networks
         networks_html = ''
 
         try:
@@ -648,6 +649,7 @@ class Profile(BaseHandler):
                 'user_dob': student_dob,
                 'user_country': student_country,
                 'user_website': student_website,
+                'user_email': student_email,
                 'existing_networks': networks_html
             }
             template = jinja_environment.get_template('profile.html')

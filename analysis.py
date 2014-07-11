@@ -2,12 +2,13 @@ from google.appengine.ext import ndb
 import app_datastore
 import difflib
 
-def check_temperaments(list1,list2):
+def similar_temperaments(list1,list2):
     for item1 in list1:
         if item1 in list2:
             pass
         else:
             return False
+
     return True
 
 def get_symmetrical(std_id):
@@ -29,7 +30,7 @@ def get_symmetrical(std_id):
             other_user_two_temp=app_datastore.get_personality(other_user.student_id).two_dominant_temperaments_both
             if other_user.student_id == std_id:
                 pass
-            elif(not check_temperaments(curr_user_two_temp,other_user_two_temp)):
+            elif(not similar_temperaments(curr_user_two_temp,other_user_two_temp)):
                 pass
             else:
                 num_of_matching_asp = 0
@@ -95,7 +96,14 @@ def get_symmetrical(std_id):
 
     return result_dict
 
+def different_temperaments(list1,list2):
+    for item1 in list1:
+        if item1 in list2:
+            pass
+        else:
+            return True
 
+    return False
 
 def get_complementary(std_id):
     # populate the list of user to be compare with
@@ -116,7 +124,7 @@ def get_complementary(std_id):
             other_user_two_temp=app_datastore.get_personality(other_user.student_id).two_dominant_temperaments_both
             if other_user.student_id == std_id:
                 pass
-            elif(not check_temperaments(curr_user_two_temp,other_user_two_temp)):
+            elif(not different_temperaments(curr_user_two_temp,other_user_two_temp)):
                 pass
             else:
                 num_of_matching_asp = 0

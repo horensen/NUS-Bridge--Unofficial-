@@ -1,25 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<link rel="shortcut icon" href="favicon.ico">
-	<link href="../stylesheets/bootstrap.css" rel="stylesheet">
-  <script src="../scripts/jquery.js"></script>
-  <script src="../scripts/bootstrap.js"></script>
-  <title>Snapshot | NUS Bridge</title>   
-
-	<!-- Just for debugging purposes. Don't actually copy this line! -->
-	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-      <![endif]-->
+  <head>
+  	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<meta name="description" content="">
+  	<meta name="author" content="">
+  	<link rel="shortcut icon" href="favicon.ico">
+  	<link href="../stylesheets/bootstrap.css" rel="stylesheet">
+    <script src="../scripts/jquery.js"></script>
+    <script src="../scripts/bootstrap.js"></script>
+    <title>Snapshot | NUS Bridge</title>   
   </head>
 
   <body>
@@ -38,7 +29,7 @@
   				<ul class="nav navbar-nav">
             <li class="active"><a href="/snapshot">Snapshot</a></li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Questionnaires <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-th-list"></span> Questionnaires <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="/aspirations">Aspirations</a></li>
                 <li><a href="/education">Education</a></li>
@@ -61,7 +52,7 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">{{ student_email }}</li>
                 <li class="divider"></li>
-                <li><a href="/profile">Edit profile</a></li>
+                <li><a href="/profile">Edit public profile</a></li>
                 <li><a href="/">Log out</a></li>
               </ul>
             </li>
@@ -164,11 +155,12 @@
                   </p>
 
                   <p class="lead">
-                    As a friend, it seems that you {{ two_stengths_from_two_traits_as_a_friend }}. You are best in {{ two_best_from_two_traits }}.
-                    {% if advice != '' %}
-                      If someone looks up to you for what you strongly believe in, one of the things you like to share is "{{ advice }}".
-                    {% endif %}
+                    As a friend, it seems that you {{ two_stengths_from_two_traits_as_a_friend }}. You are best in {{ two_best_from_two_traits }}.   
                   </p>
+
+                  {% if advice != '' %}
+                  <p class="lead">One of the things you like to share is, "{{ advice }}".</p>
+                  {% endif %}
                 </div>
               </div>
             </div>
