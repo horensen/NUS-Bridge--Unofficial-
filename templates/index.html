@@ -9,9 +9,22 @@
   	<link rel="shortcut icon" href="favicon.ico">
   	<link href="../stylesheets/bootstrap.css" rel="stylesheet">
     <link href="../stylesheets/home-page.css" rel="stylesheet">
+    <style>
+    .navbar-default {
+        background: -webkit-linear-gradient(transparent, transparent); /* For Safari 5.1 to 6.0 */
+        background: -o-linear-gradient(#333333, #333333); /* For Opera 11.1 to 12.0 */
+        background: -moz-linear-gradient(#333333, #333333); /* For Firefox 3.6 to 15 */
+        background: linear-gradient(#333333, #333333); /* Standard syntax (must be last) */
+        /* Dark blue: #0a5175 */
+        /* Bright orange: #db4922 */
+        -webkit-box-shadow: 0 0px 20px rgba(0, 0, 0, 0.175);
+        box-shadow: 0 0px 20px rgba(0, 0, 0, 0.175);
+        border: none;
+    }
+    </style>
     <script src="../scripts/jquery.js"></script>
     <script src="../scripts/bootstrap.js"></script>
-  	<title>NUS Bridge</title>   
+  	<title>NUS Bridge</title>
   </head>
 
   <body>
@@ -19,12 +32,12 @@
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
           <div class="navbar-header">
-            <a class="btn btn-default navbar-toggle" href="{{ login_url }}">Sign In With NUS Account</a> 
+            <a class="btn btn-default navbar-toggle" href="{{ login_url }}">Sign in with NUS account</a> 
             <a class="navbar-brand" href="/">NUS Bridge</a>
           </div>
           <div class="navbar-collapse collapse">
             <div class="navbar-form navbar-right">
-              <a class="btn btn-default" style="background:none; border:1px solid #97300f;" href="{{ login_url }}">Sign In With NUS Account</a> 
+              <a class="btn btn-default" style="background:#db4922; border:1px solid #db4922;" href="{{ login_url }}">Sign in with NUS account</a> 
             </div>
           </div>
         </div>
@@ -32,12 +45,13 @@
     </header>
 
     <!-- Full Page Image Header Area -->
-    <div id="top" class="header">
-        <div class="vert-text" style="padding: 50px 20px 150px 20px">
-            <!--<h1>What goes into achieving your dream?</h1>-->
-            <h3>Discover and learn from interesting connections and experiences in NUS relevant to your aspiration.</h3>
-            <br/><br/><br/>
-            <a href="{{ login_url }}" class="btn btn-primary btn-lg">Sign In With Your NUS Account</a>
+    <div id="top" class="header jumbotron">
+        <div class="text-center vert-text">
+            <div class="container">
+                <div class="col-md-10 col-md-offset-1">
+                <h3>Take the questionnaires. Discover interesting connections and experiences that are relevant to your aspiration.</h3>
+                </div>
+            </div>
         </div>
     </div>
     <!-- /Full Page Image Header Area -->
@@ -45,21 +59,26 @@
     <!-- Intro -->
     <div id="about" class="intro">
         <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-md-offset-3 text-center" style="color: #e6e6e6;">
-                    <h2>What is NUS Bridge?</h2>
-                    <p class="lead">Have you ever had uncertainity in the quest for your hopes while you're still in university?</p>
-                    <p class="lead">While keeping up with technical knowledge is important, we believe that who you know are the most important assets for your personal well-being or professional success. We also believe that knowing your flaws is also a strength because they can work against your goals when you interact with people.</p>
-                    <p class="lead">This is all about you and your goals. In an academic environment, there may be people, other than your friends, who think like you or even better than you too.</p>
-                    <p class="lead">So, we thought about an experiment. We created NUS Bridge to discover interesting people and experiences from the crowd relevant to your aspiration.</p>
-                    <p class="lead">Indeed, this is just a beginning and your contribution to the crowd helps.</p>
+            <div class="row" style="color: #b6b6b6;">
+                <div class="col-md-6 col-md-offset-3 text-center">
+                    <h2 style="color: #fc6621; margin-bottom: 40px;">Does it matter to you?</h2>
                 </div>
+                <div class="col-md-6">
+                    <p class="lead">Have you ever had uncertainity in the quest for your hopes while you're still in university?</p>
+                    <p class="lead">While keeping up with technical knowledge is important, we believe that who you know are the most important assets for your personal well-being or professional success.</p>
+                    <p class="lead">We also believe that knowing your flaws is also a strength because they can work against you or your aspirations when you interact with people.</p>
+                </div>
+                <div class="col-md-6">
+                    <p class="lead">So, we thought about an experiment. We created NUS Bridge to discover your personality, and interesting people and experiences from the crowd relevant to your aspiration.</p>
+                    <p class="lead">As we are constantly influenced by our environment and friends, we also have an effect on our friends too. When you believe that the observed insights from others makes sense, then you feel more confident to learn, act or think in their way (and perhaps successfully too), therefore giving you a better sense of confidence and direction for your aspiration.</p>
+                </div>
+                
             </div>
         </div>
     </div>
     <!-- /Intro -->
 
-    <!-- Services -->
+    <!-- Questionnaires -->
     <div id="services" class="services">
         <div class="container">
             <div class="row">
@@ -70,108 +89,106 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-2 col-md-offset-2 text-center">
+                <div class="col-md-3 text-center">
                     <div class="service-item">
-                        <i class="service-icon fa fa-rocket"></i>
-                        <h4>Your Aspiration</h4>
+                        <i class="service-icon"><img class="img-circle img-responsive" src="../images/icon_14892.png"></i>
+                        <h3>Your Aspiration</h3>
                         <p>What do you want to be or achieve after your graduation?</p>
                     </div>
                 </div>
-                <div class="col-md-2 text-center">
+                <div class="col-md-3 text-center">
                     <div class="service-item">
-                        <i class="service-icon fa fa-magnet"></i>
-                        <h4>Your Education</h4>
+                        <i class="service-icon"><img class="img-circle img-responsive" src="../images/icon_47508.png"></i>
+                        <h3>Your Education</h3>
                         <p>What modules have you done well in?</p>
                     </div>
                 </div>
-                <div class="col-md-2 text-center">
+                <div class="col-md-3 text-center">
                     <div class="service-item">
-                        <i class="service-icon fa fa-shield"></i>
-                        <h4>Your Experience</h4>
+                        <i class="service-icon"><img class="img-circle img-responsive" src="../images/icon_44258.png"></i>
+                        <h3>Your Experience</h3>
                         <p>What do you do, what are you good at, and what do you know?</p>
                     </div>
                 </div>
-                <div class="col-md-2 text-center">
+                <div class="col-md-3 text-center">
                     <div class="service-item">
-                        <i class="service-icon fa fa-pencil"></i>
-                        <h4>Your Personality</h4>
+                        <i class="service-icon"><img class="img-circle img-responsive" src="../images/icon_21308.png"></i>
+                        <h3>Your Personality</h3>
                         <p>What words describe you?</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- /Services -->
+    <!-- /Questionnaires-->
 
-    <!-- Callout -->
     <div class="callout">
         <div class="vert-text">
-            <h1>The Analysis Process</h1>
+            <div class="container">
+                <h1>The Analysis Methodology</h1>
+            </div>
         </div>
     </div>
-    <!-- /Callout -->
 
-    <!-- Portfolio -->
     <div id="portfolio" class="portfolio" style="color: #e6e6e6;">
-        <div class="container">
+        <div class="container" style="color: #b6b6b6;">
             <div class="row">
-                <div class="col-md-4 col-md-offset-4 text-center">
-                    <br/>
-                    <p class="lead">We use the data you provided to analyse the entire 'knowledge capital', which is either overlooked or not obvious. Then, we will produce these results.</p>
-                    <br/><hr>
+                <div class="col-md-10 col-md-offset-1 text-center">
+                    <h2 style="color: #fc6621; margin-bottom: 40px;">We contextually match people who entered the same aspiration as you do, divide them with respect to your personality and present information about their academic backgrounds and experiences.</h2><br/>
                 </div>
             </div>
-            <br/><br/><br/>
             <div class="row">
-                <div class="col-md-4 text-center">
+                <div class="col-sm-5 col-sm-offset-1 text-center">
                     <div class="portfolio-item">
-                        <p>(picture)</p>
-                        <h4>Symmetrical Connections</h4>
-                        <p>People who are similiar to you. Could there be other things that you may learn as they have the same aspiration and personality as you do?</p>
+                        <i class="service-icon" style="border: none;"><img class="img-circle img-responsive" src="../images/icon_31898.png"></i>
+                        <h3>Symmetrical Connections</h3>
+                        <p class="lead">People who are similiar to you</p>
                     </div>
                 </div>
-                <div class="col-md-4 text-center">
+                <div class="col-sm-5 text-center">
                     <div class="portfolio-item">
-                        <p>(picture)</p>
-                        <h4>Complementary Connections</h4>
-                        <p>People who are not like you. Have you ever wondered what else you do not know that may hinder your vision because of your personality?</p>
+                        <i class="service-icon" style="border: none;"><img class="img-circle img-responsive" src="../images/icon_17048.png"></i>
+                        <h3>Complementary Connections</h3>
+                        <p class="lead">People who are not like you</p>
                     </div>
                 </div>
-                <div class="col-md-4 text-center">
-                    <div class="portfolio-item">
-                        <p>(picture)</p>
-                        <h4>Improvement Advisory</h4>
-                        <p>Could there be an interpretation of why you do and act in a certain way that you do not understand because of your personality?</p>
+            </div>
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 text-center">
+                    <br/>
+                    <p class="lead">There is no need to change your personality but you could learn or discover experiences by other people who thought about the same aspiration as you do. You may even be surprised by the results.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h4><a style="text-decoration:none;" data-toggle="collapse" data-parent="#accordion" href="#collapse-science">How is the personality assessed? <span class="caret"></span></a></h4>
+                </div>
+            </div>
+            <br/>
+            <div class="divider panel-collapse collapse" id="collapse-science">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 text-center">
+                        <p class="lead">The test is based on Four Temperaments. In this theory, each person's personality is a blend of two traits from the four – sanguine, choleric, melancholic, phlegmatic. The top two dominant traits are determined by the occurrences of each trait selected, represented by its characteristic. There are 40 questions of 4 choices each.</p>
+
+                        <p class="lead">In addition, based on this theory, you will see a snapshot of your emotions and strengths, and suggested corrections on your weaknesses in the analysis results.</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- /Portfolio -->
 
     <!-- Call to Action -->
     <div class="call-to-action">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
-                    <h3><!--Because collective wisdom matter.-->{{ number_of_users }} people have started so far.</h3>
+                    <h3>{{ number_of_users }} people have started so far.</h3>
                     <a href="{{ login_url }}" class="btn btn-lg btn-primary">Sign In With Your NUS Account</a>
                 </div>
             </div>
         </div>
     </div>
     <!-- /Call to Action -->
-
-    <!-- Map
-    <div id="contact" class="map">
-        <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A&amp;output=embed"></iframe>
-        <br />
-        <small>
-            <a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A"></a>
-        </small>
-        </iframe>
-    </div>
-    /Map -->
 
     <!-- Footer -->
     <footer>
@@ -189,8 +206,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6 col-md-offset-3 text-center" style="color: #aaaaaa;">
-                    <p>DISCLAIMER</p>
-                    <p>No one can guarantee that the analysis presented in this website will work for you as it is not scientifically proven. We hope however that the presented results will benefit you.</p>
+                    <p>DISCLAIMER: No one can guarantee that the results suggested in this website will work for you. We hope however that this website will assist you in a small way to achieve your goals. GRAPHICS: Graduate by Jerry Wang from The Noun Project, High Five by Keith Mulvin from The Noun Project, Mountain Climber by Juan Pablo Bravo from The Noun Project, Network by Nicholas Menghini from The Noun Project, Thinking by Luis Prado from The Noun Project, Venn Diagram by WARPAINT Media Inc. from The Noun Project.</p>
                 </div>
             </div>
         </div>

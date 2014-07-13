@@ -117,6 +117,7 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  margin-top: -60px;
 }
 
 /* Intro */
@@ -160,7 +161,6 @@ i.service-icon {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;
 }
 
 /* Portfolio */
