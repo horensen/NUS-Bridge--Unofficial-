@@ -5,6 +5,7 @@ from google.appengine.api import urlfetch
 from random import randint
 from urlparse import urlparse
 from webapp2_extras import sessions
+from google.appengine.ext import blobstore
 import cgi
 import datetime
 import difflib
@@ -648,7 +649,8 @@ class Profile(BaseHandler):
                 'user_dob': student_dob,
                 'user_country': student_country,
                 'user_website': student_website,
-                'existing_networks': networks_html
+                'existing_networks': networks_html,
+                'upload_url': upload_url
             }
             template = jinja_environment.get_template('profile.html')
             self.response.out.write(template.render(template_values))
