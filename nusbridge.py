@@ -20,6 +20,7 @@ import urllib2
 import webapp2
 import symmetrical_connection
 import complementary_connection
+import upload
 
 # GLOBAL VARIABLES
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + "/templates"), autoescape=True)
@@ -649,18 +650,20 @@ class Profile(BaseHandler):
                 'user_dob': student_dob,
                 'user_country': student_country,
                 'user_website': student_website,
-                'existing_networks': networks_html,
-                'upload_url': upload_url
+                'existing_networks': networks_html
             }
             template = jinja_environment.get_template('profile.html')
             self.response.out.write(template.render(template_values))
         else:
             self.redirect(app_domain)
 
-class Test(BaseHandler):
+class Test(blobstore_handlers.BlobstoreUploadHandler):
     def get(self):
-        print symmetrical_connection.get_symmetrical(self.session.get('student_id'))
-
+        self.response.out.write(upload.load_form())
+    def post(self):
+        upload_files = self.get_uploads('file')  # 'file' is file upload field in the form
+        blob_info = upload_files[0]
+        self.redirect('/profile')
 
 
 # WEB SERVER GATE INTERFACE
