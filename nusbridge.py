@@ -1,7 +1,9 @@
 # LIBRARIES
+from google.appengine.ext import blobstore
 from google.appengine.ext.webapp import blobstore_handlers
 from google.appengine.ext import ndb
 from google.appengine.api import urlfetch
+from google.appengine.api import images
 from random import randint
 from urlparse import urlparse
 from webapp2_extras import sessions
@@ -657,7 +659,57 @@ class Profile(BaseHandler):
         else:
             self.redirect(app_domain)
 
+class UploadPicture(BaseHandler):
+    def get(self):
+        upload_url=blobstore.create_upload_url('/upload')
+        if self.session.get('is_valid') == True:
+            template_values = {
+                'upload_url': upload_url
+            }
+            template = jinja_environment.get_template('upload.html')
+            self.response.out.write(template.render(template_values))
+        else:
+            self.redirect(app_domain)
 
+class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
+    def post(self):
+        upload_files=self.get_uploads('file')
+        blob_info=upload_files[0]
+        self.redirect('/serve/%s' % blob_info.key())
+
+class ServerHandler(BaseHandler,blobstore_handlers.BlobstoreDownloadHandler):
+    def get(self, resource):
+        resource= str(urllib.unquote(resource))
+        student_obj = app_datastore.get_user(self.session.get('student_id'))
+        student_dob = student_obj.date_of_birth
+        student_gender = student_obj.gender
+        student_country = student_obj.country
+        student_website = student_obj.website
+        student_email = student_obj.email
+        student_social_network = student_obj.social_networks
+        networks_html = ''
+        pic=images.get_serving_url(resource,size=None,crop=False,secure_url=None)
+        try:
+            for link in student_social_network:
+                networks_html += "<li>" + link + "</li>"
+        except Exception:
+            pass
+        if self.session.get('is_valid') == True:
+            template_values = {
+                'user_gender': student_gender,
+                'student_name': self.session.get('student_name'),
+                'student_email': self.session.get('student_email'),
+                'user_dob': student_dob,
+                'user_country': student_country,
+                'user_website': student_website,
+                'user_email': student_email,
+                'existing_networks': networks_html,
+                'pic': pic
+            }
+            template = jinja_environment.get_template('profile.html')
+            self.response.out.write(template.render(template_values))
+        else:
+            self.redirect(app_domain)
 
 # WEB SERVER GATE INTERFACE
 app = webapp2.WSGIApplication([
@@ -670,6 +722,9 @@ app = webapp2.WSGIApplication([
     ('/personality', Personality),
     ('/symmetrical-connections', SymmetricalConnections),
     ('/complementary-connections', ComplementaryConnections),
+    ('/testing', UploadPicture),
+    ('/upload', UploadHandler),
+    ('/serve/([^/]+)?', ServerHandler),
     ('/improvement-advisory', ImprovementAdvisory)],
     config=config,
     debug=True)
