@@ -129,9 +129,9 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="/snapshot">Snapshot</a></li>
+            <li><a href="/snapshot"><span class="glyphicon glyphicon-certificate"></span> Snapshot</a></li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Questionnaires <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-th-list"></span> Questionnaires <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="/aspirations">Aspirations</a></li>
                 <li><a href="/education">Education</a></li>
@@ -140,7 +140,7 @@
               </ul>
             </li>
             <li class="dropdown">
-              <a href="" class="dropdown-toggle" data-toggle="dropdown">Analysis<b class="caret"></b></a>
+              <a href="" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-th-large"></span> Analysis<b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="/symmetrical-connections">Symmetrical Connections</a></li>
                 <li><a href="/complementary-connections">Complementary Connections</a></li>
@@ -154,8 +154,8 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">{{ student_email }}</li>
                 <li class="divider"></li>
-                <li><a href="/profile">Edit profile</a></li>
-                <li><a href="/">Log out</a></li>
+                <li><a href="/profile"><span class="glyphicon glyphicon-pencil"></span> Edit public profile</a></li>
+                <li><a href="/"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
               </ul>
             </li>
           </ul>
@@ -168,7 +168,6 @@
       <div class="row">
         <form role="form" method="post" name="profile_form" action="/profile" autocomplete="off" >
           <div class="col-md-6">
-              <h2>Personal Information</h2>
               <h3>Profile Picture</h3>
               <div class="row">
                 <div class="col-md-2">
@@ -188,20 +187,15 @@
                   <h3>Date of Birth</h3>
                     <p>
                       <input class="form-control" id="user_dob" value="{{user_dob}}" type="text" name="user_dob" placeholder="DD/MM/YYYY">
-                      <!-- create javascript to test with this pattern =/^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/ using pattern.test(input) -->
                     </p>
                 </div>
                 <div class="col-md-6">
                   <h3>Gender</h3>
                   <p>
                     <select name="user_gender" class="form-control" id="user_gender">
-
-                      <option value="Undisclosed" {% if user_gender == "Undisclosed" %}selected="selected"{% endif %}>Undisclosed</option>
-
+                      <option value="" {% if user_gender == "" %}selected="selected"{% endif %}></option>
                       <option value="Male" {% if user_gender == "Male" %}selected="selected"{% endif %}>Male</option>
-
                       <option value="Female" {% if user_gender == "Female" %}selected="selected"{% endif %}>Female</option>
-
                     </select>
                   </p>
                 </div>
@@ -212,27 +206,22 @@
               </p>
           </div>
           <div class="col-md-6">
-              <h2>Presence</h2>
               <h3>Website</h3>
               <p>
                 <div class="input-group">
-                  <span class="input-group-addon">URL</span>
-                  <input class="form-control" id="user_website" type="text" name="user_website" placeholder="www.mywebsite.com" value="{{user_website}}">
+                  <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
+                  <input class="form-control" id="user_website" type="text" name="user_website" placeholder="your website URL" value="{{user_website}}">
+                </div>
+              <p>
+              <h3>Email Address</h3>
+              <p>
+                <div class="input-group">
+                  <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+                  <input class="form-control" id="user_email" type="text" name="user_email" placeholder="your email address" value="{{user_email}}">
                 </div>
               <p>
               <h3>Social and Professional Networks</h3>
-              <!--<div class="control-group" id="networks_fields">
-                  <div class="networks_controls"> 
-                    <div class="entry input-group col-md-12">
-                        <input class="form-control" name="networks[]" type="text" placeholder="URL" />
-                        <span class="input-group-btn">
-                          <button class="btn btn-success btn-add-network" type="button"><span class="glyphicon glyphicon-plus"></span></button>
-                        </span>
-                    </div>
-                  </div>
-              </div>-->
               <ul id="networks_tags">
-                
               </ul>
           </div>
         </div>

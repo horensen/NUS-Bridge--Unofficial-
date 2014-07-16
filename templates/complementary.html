@@ -12,7 +12,6 @@
     <script src="../scripts/bootstrap.js"></script>
     <style>
       .profile {
-          /*min-height: 355px;*/
           display: inline-block;
       }
       .divider {
@@ -49,9 +48,9 @@
   			</div>
   			<div class="navbar-collapse collapse">
   				<ul class="nav navbar-nav">
-            <li><a href="/snapshot">Snapshot</a></li>
+            <li><a href="/snapshot"><span class="glyphicon glyphicon-certificate"></span> Snapshot</a></li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Questionnaires <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-th-list"></span> Questionnaires <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="/aspirations">Aspirations</a></li>
                 <li><a href="/education">Education</a></li>
@@ -60,7 +59,7 @@
               </ul>
             </li>
             <li class="active dropdown">
-              <a href="" class="dropdown-toggle" data-toggle="dropdown">Analysis<b class="caret"></b></a>
+              <a href="" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-th-large"></span> Analysis<b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="/symmetrical-connections">Symmetrical Connections</a></li>
                 <li><a href="/complementary-connections">Complementary Connections</a></li>
@@ -74,8 +73,8 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">{{ student_email }}</li>
                 <li class="divider"></li>
-                <li><a href="/profile">Edit profile</a></li>
-                <li><a href="/">Log out</a></li>
+                <li><a href="/profile"><span class="glyphicon glyphicon-pencil"></span> Edit public profile</a></li>
+                <li><a href="/"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
               </ul>
             </li>
   				</ul>
@@ -95,8 +94,8 @@
   		</div>
   	</div>
 
-    <div class="row">
-      <div class="container">
+    <div class="container">
+      <div class="row">
         {% if person_1_name|length > 0 %}
         <div class="col-md-6">
            <div class="well profile">
@@ -226,7 +225,9 @@
            </div>                 
         </div>
         {% endif %}
+      </div>
 
+      <div class="row">
         {% if person_3_name|length > 0 %}
         <div class="col-md-6">
            <div class="well profile">
@@ -356,7 +357,9 @@
            </div>                 
         </div>
         {% endif %}
+      </div>
 
+      <div class="row">
         {% if person_5_name|length > 0 %}
         <div class="col-md-6">
            <div class="well profile">
