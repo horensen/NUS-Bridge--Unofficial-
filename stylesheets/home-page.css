@@ -160,7 +160,6 @@ i.service-icon {
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;
 }
 
 /* Portfolio */
@@ -188,12 +187,6 @@ i.service-icon {
 
 .call-to-action .btn {
   margin: 10px;
-}
-
-/* Map */
-
-.map {
-  height: 500px;
 }
 
 /* Footer */

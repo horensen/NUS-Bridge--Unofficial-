@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,700,500italic,700italic);
 
 /*!
  * Bootswatch v3.1.1+1
@@ -274,7 +274,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
   color: #333333;
@@ -363,7 +363,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 500;
   line-height: 1.1;
   color: inherit;
@@ -3759,7 +3759,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   padding: 9px 10px;
   margin-top: 8px;
   margin-bottom: 8px;
-  background-color: transparent;
+  /*background-color: transparent;*/
+  background-color: #db4922;
   background-image: none;
   border: 1px solid transparent;
   border-radius: 4px;
@@ -3978,11 +3979,13 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   background-color: transparent;
 }
 .navbar-default .navbar-toggle {
-  border-color: #97310e;
+  /*border-color: #97310e;*/
+  border-color: #db4922;
 }
 .navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus {
-  background-color: #97310e;
+  /*background-color: #97310e;*/
+  background-color: #db4922;
 }
 .navbar-default .navbar-toggle .icon-bar {
   background-color: #ffffff;
@@ -3994,7 +3997,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {
-  background-color: #ae3910;
+  /*background-color: #ae3910;*/
+  background-color: #db4922;
   color: #ffffff;
 }
 @media (max-width: 767px) {
