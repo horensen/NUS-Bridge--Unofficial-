@@ -124,7 +124,7 @@
                     <p>{{ person_1_major }}, {{ person_1_faculty }}</p>
                     <p>
                       <div class="dropdown">
-                        <a type="button" class="btn btn-{% if person_1_networks == '' %}default{% else %}info{% endif %} dropdown-toggle {% if person_1_networks == '' %}disabled{% endif %}" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span> Social Networks <span class="caret"></span></a>
+                        <a type="button" class="btn btn-{% if person_1_networks == '' %}default{% else %}info{% endif %} dropdown-toggle {% if person_1_networks == '' %}disabled{% endif %}" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span> Connect <span class="caret"></span></a>
                         <ul class="dropdown-menu text-left" role="menu" id="my_networks_1"></ul>
                         <script>
                           var temp = "{{ person_1_networks }}";
@@ -139,7 +139,7 @@
                         <a href="{{ person_1_website }}" class="btn btn-{% if person_1_website == '' %}default{% else %}info{% endif %} {% if person_1_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
                       </div>
                     </p>
-                    <p>Wants to be:<br/><strong id="my_aspirations_1"></strong>
+                    <p>Aspirations:<br/><strong id="my_aspirations_1"></strong>
                     </p> 
                     <script>
                           var temp = "{{ person_1_aspirations }}";
@@ -168,7 +168,7 @@
                   </div>
                 </div>
                 <div class="col-xs-12 divider panel-collapse collapse" id="collapse1">
-                  <br/><p class="lead text-center">"{{ person_1_advice }}"</p>
+                  <br/>{% if person_1_advice != '' %}<p class="lead text-center">"{{ person_1_advice }}"</p>{% endif %}
                   <p>
                     Skills: <strong>{{ person_1_skills }}</strong><br/>
                     Interests: <strong>{{ person_1_interests }}</strong><br/>
@@ -189,7 +189,7 @@
                     <p>{{ person_2_major }}, {{ person_2_faculty }}</p>
                     <p>
                       <div class="dropdown">
-                        <a type="button" class="btn btn-{% if person_2_networks == '' %}default{% else %}info{% endif %} dropdown-toggle {% if person_2_networks == '' %}disabled{% endif %}" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span> Social Networks <span class="caret"></span></a>
+                        <a type="button" class="btn btn-{% if person_2_networks == '' %}default{% else %}info{% endif %} dropdown-toggle {% if person_2_networks == '' %}disabled{% endif %}" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span> Connect <span class="caret"></span></a>
                         <ul class="dropdown-menu text-left" role="menu" id="my_networks_2"></ul>
                         <script>
                           var temp = "{{ person_2_networks }}";
@@ -204,7 +204,7 @@
                         <a href="{{ person_2_website }}" class="btn btn-{% if person_2_website == '' %}default{% else %}info{% endif %} {% if person_2_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
                       </div>
                     </p>
-                    <p>Wants to be:<br/><strong id="my_aspirations_2"></strong>
+                    <p>Aspirations:<br/><strong id="my_aspirations_2"></strong>
                     </p> 
                     <script>
                           var temp = "{{ person_2_aspirations }}";
@@ -233,7 +233,7 @@
                   </div>
                 </div>
                 <div class="col-xs-12 divider panel-collapse collapse" id="collapse2">
-                  <br/><p class="lead text-center">"{{ person_2_advice }}"</p>
+                  <br/>{% if person_2_advice != '' %}<p class="lead text-center">"{{ person_2_advice }}"</p>{% endif %}
                   <p>
                     Skills: <strong>{{ person_2_skills }}</strong><br/>
                     Interests: <strong>{{ person_2_interests }}</strong><br/>
@@ -254,7 +254,7 @@
                     <p>{{ person_3_major }}, {{ person_3_faculty }}</p>
                     <p>
                       <div class="dropdown">
-                        <a type="button" class="btn btn-{% if person_3_networks == '' %}default{% else %}info{% endif %} dropdown-toggle {% if person_3_networks == '' %}disabled{% endif %}" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span> Social Networks <span class="caret"></span></a>
+                        <a type="button" class="btn btn-{% if person_3_networks == '' %}default{% else %}info{% endif %} dropdown-toggle {% if person_3_networks == '' %}disabled{% endif %}" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span> Connect <span class="caret"></span></a>
                         <ul class="dropdown-menu text-left" role="menu" id="my_networks_3"></ul>
                         <script>
                           var temp = "{{ person_3_networks }}";
@@ -269,7 +269,7 @@
                         <a href="{{ person_3_website }}" class="btn btn-{% if person_3_website == '' %}default{% else %}info{% endif %} {% if person_3_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
                       </div>
                     </p>
-                    <p>Wants to be:<br/><strong id="my_aspirations_3"></strong>
+                    <p>Aspirations:<br/><strong id="my_aspirations_3"></strong>
                     </p> 
                     <script>
                           var temp = "{{ person_3_aspirations }}";
@@ -298,7 +298,7 @@
                   </div>
                 </div>
                 <div class="col-xs-12 divider panel-collapse collapse" id="collapse3">
-                  <br/><p class="lead text-center">"{{ person_3_advice }}"</p>
+                  <br/>{% if person_3_advice != '' %}<p class="lead text-center">"{{ person_3_advice }}"</p>{% endif %}
                   <p>
                     Skills: <strong>{{ person_3_skills }}</strong><br/>
                     Interests: <strong>{{ person_3_interests }}</strong><br/>
@@ -319,7 +319,7 @@
                     <p>{{ person_4_major }}, {{ person_4_faculty }}</p>
                     <p>
                       <div class="dropdown">
-                        <a type="button" class="btn btn-{% if person_4_networks == '' %}default{% else %}info{% endif %} dropdown-toggle {% if person_4_networks == '' %}disabled{% endif %}" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span> Social Networks <span class="caret"></span></a>
+                        <a type="button" class="btn btn-{% if person_4_networks == '' %}default{% else %}info{% endif %} dropdown-toggle {% if person_4_networks == '' %}disabled{% endif %}" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span> Connect <span class="caret"></span></a>
                         <ul class="dropdown-menu text-left" role="menu" id="my_networks_4"></ul>
                         <script>
                           var temp = "{{ person_4_networks }}";
@@ -334,7 +334,7 @@
                         <a href="{{ person_4_website }}" class="btn btn-{% if person_4_website == '' %}default{% else %}info{% endif %} {% if person_4_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
                       </div>
                     </p>
-                    <p>Wants to be:<br/><strong id="my_aspirations_4"></strong>
+                    <p>Aspirations:<br/><strong id="my_aspirations_4"></strong>
                     </p> 
                     <script>
                           var temp = "{{ person_4_aspirations }}";
@@ -363,7 +363,7 @@
                   </div>
                 </div>
                 <div class="col-xs-12 divider panel-collapse collapse" id="collapse4">
-                  <br/><p class="lead text-center">"{{ person_4_advice }}"</p>
+                  <br/>{% if person_4_advice != '' %}<p class="lead text-center">"{{ person_4_advice }}"</p>{% endif %}
                   <p>
                     Skills: <strong>{{ person_4_skills }}</strong><br/>
                     Interests: <strong>{{ person_4_interests }}</strong><br/>
@@ -384,7 +384,7 @@
                     <p>{{ person_5_major }}, {{ person_5_faculty }}</p>
                     <p>
                       <div class="dropdown">
-                        <a type="button" class="btn btn-{% if person_5_networks == '' %}default{% else %}info{% endif %} dropdown-toggle {% if person_5_networks == '' %}disabled{% endif %}" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span> Social Networks <span class="caret"></span></a>
+                        <a type="button" class="btn btn-{% if person_5_networks == '' %}default{% else %}info{% endif %} dropdown-toggle {% if person_5_networks == '' %}disabled{% endif %}" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span> Connect <span class="caret"></span></a>
                         <ul class="dropdown-menu text-left" role="menu" id="my_networks_5"></ul>
                         <script>
                           var temp = "{{ person_5_networks }}";
@@ -399,7 +399,7 @@
                         <a href="{{ person_5_website }}" class="btn btn-{% if person_5_website == '' %}default{% else %}info{% endif %} {% if person_5_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
                       </div>
                     </p>
-                    <p>Wants to be:<br/><strong id="my_aspirations_5"></strong>
+                    <p>Aspirations:<br/><strong id="my_aspirations_5"></strong>
                     </p> 
                     <script>
                           var temp = "{{ person_5_aspirations }}";
@@ -428,7 +428,7 @@
                   </div>
                 </div>
                 <div class="col-xs-12 divider panel-collapse collapse" id="collapse5">
-                  <br/><p class="lead text-center">"{{ person_5_advice }}"</p>
+                  <br/>{% if person_5_advice != '' %}<p class="lead text-center">"{{ person_5_advice }}"</p>{% endif %}
                   <p>
                     Skills: <strong>{{ person_5_skills }}</strong><br/>
                     Interests: <strong>{{ person_5_interests }}</strong><br/>
@@ -449,7 +449,7 @@
                     <p>{{ person_6_major }}, {{ person_6_faculty }}</p>
                     <p>
                       <div class="dropdown">
-                        <a type="button" class="btn btn-{% if person_6_networks == '' %}default{% else %}info{% endif %} dropdown-toggle {% if person_6_networks == '' %}disabled{% endif %}" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span> Social Networks <span class="caret"></span></a>
+                        <a type="button" class="btn btn-{% if person_6_networks == '' %}default{% else %}info{% endif %} dropdown-toggle {% if person_6_networks == '' %}disabled{% endif %}" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span> Connect <span class="caret"></span></a>
                         <ul class="dropdown-menu text-left" role="menu" id="my_networks_6"></ul>
                         <script>
                           var temp = "{{ person_6_networks }}";
@@ -464,7 +464,7 @@
                         <a href="{{ person_6_website }}" class="btn btn-{% if person_6_website == '' %}default{% else %}info{% endif %} {% if person_6_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
                       </div>
                     </p>
-                    <p>Wants to be:<br/><strong id="my_aspirations_6"></strong>
+                    <p>Aspirations:<br/><strong id="my_aspirations_6"></strong>
                     </p> 
                     <script>
                           var temp = "{{ person_6_aspirations }}";
@@ -493,7 +493,7 @@
                   </div>
                 </div>
                 <div class="col-xs-12 divider panel-collapse collapse" id="collapse6">
-                  <br/><p class="lead text-center">"{{ person_6_advice }}"</p>
+                  <br/>{% if person_6_advice != '' %}<p class="lead text-center">"{{ person_6_advice }}"</p>{% endif %}
                   <p>
                     Skills: <strong>{{ person_6_skills }}</strong><br/>
                     Interests: <strong>{{ person_6_interests }}</strong><br/>
