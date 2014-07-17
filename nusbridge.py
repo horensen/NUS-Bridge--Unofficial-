@@ -636,7 +636,11 @@ class Profile(BaseHandler):
         student_email = student_obj.email
         student_social_network = student_obj.social_networks
         networks_html = ''
-
+        try:
+            image_key=app_datastore.get_pic(self.session.get('student_id'))
+            image=images.get_serving_url(str(image_key),size=None,crop=False,secure_url=None)
+        except Exception:
+            image='../images/icon_21308.png'
         try:
             for link in student_social_network:
                 networks_html += "<li>" + link + "</li>"
@@ -652,6 +656,7 @@ class Profile(BaseHandler):
                 'user_country': student_country,
                 'user_website': student_website,
                 'user_email': student_email,
+                'pic':image,
                 'existing_networks': networks_html
             }
             template = jinja_environment.get_template('profile.html')
@@ -671,45 +676,13 @@ class UploadPicture(BaseHandler):
         else:
             self.redirect(app_domain)
 
-class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
+class UploadHandler(blobstore_handlers.BlobstoreUploadHandler,BaseHandler):
     def post(self):
         upload_files=self.get_uploads('file')
         blob_info=upload_files[0]
-        self.redirect('/serve/%s' % blob_info.key())
+        app_datastore.insert_or_update_pic(self.session.get('student_id'),blob_info.key())
+        self.redirect('/profile')
 
-class ServerHandler(BaseHandler,blobstore_handlers.BlobstoreDownloadHandler):
-    def get(self, resource):
-        resource= str(urllib.unquote(resource))
-        student_obj = app_datastore.get_user(self.session.get('student_id'))
-        student_dob = student_obj.date_of_birth
-        student_gender = student_obj.gender
-        student_country = student_obj.country
-        student_website = student_obj.website
-        student_email = student_obj.email
-        student_social_network = student_obj.social_networks
-        networks_html = ''
-        pic=images.get_serving_url(resource,size=None,crop=False,secure_url=None)
-        try:
-            for link in student_social_network:
-                networks_html += "<li>" + link + "</li>"
-        except Exception:
-            pass
-        if self.session.get('is_valid') == True:
-            template_values = {
-                'user_gender': student_gender,
-                'student_name': self.session.get('student_name'),
-                'student_email': self.session.get('student_email'),
-                'user_dob': student_dob,
-                'user_country': student_country,
-                'user_website': student_website,
-                'user_email': student_email,
-                'existing_networks': networks_html,
-                'pic': pic
-            }
-            template = jinja_environment.get_template('profile.html')
-            self.response.out.write(template.render(template_values))
-        else:
-            self.redirect(app_domain)
 
 # WEB SERVER GATE INTERFACE
 app = webapp2.WSGIApplication([
@@ -722,9 +695,8 @@ app = webapp2.WSGIApplication([
     ('/personality', Personality),
     ('/symmetrical-connections', SymmetricalConnections),
     ('/complementary-connections', ComplementaryConnections),
-    ('/testing', UploadPicture),
+    ('/picture', UploadPicture),
     ('/upload', UploadHandler),
-    ('/serve/([^/]+)?', ServerHandler),
     ('/improvement-advisory', ImprovementAdvisory)],
     config=config,
     debug=True)

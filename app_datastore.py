@@ -94,16 +94,25 @@ class Picture(ndb.Model):
     image = ndb.BlobKeyProperty()
 
 
-def store_pic(std_id):
-    user_key = ndb.Key("NUSBridge", std_id)
-    picture = Picture(parent=user_key)
-    picture.student_id = std_id
+def insert_or_update_pic(student_id, image_key):
+    user_key = ndb.Key("NUSBridge", "Picture")
+    qry = Picture.query(ancestor=user_key)
+    result=qry.filter(Picture.student_id == student_id).fetch()
+    if result:
+        user_pic = result[0]
+        user_pic.image=image_key
+        user_pic.put()
+    else:
+        user_key = ndb.Key("NUSBridge", "Picture")
+        user_pic = Picture(parent=user_key)
+        user_pic.student_id = student_id
+        user_pic.image = image_key
+        user_pic.put()
 
-
-def get_pic(std_id):
-    qry = Picture.query(ancestor=ndb.Key("NUSBridge", std_id))
-    result = qry.filter
-
+def get_pic(student_id):
+    qry = Picture.query(ancestor=ndb.Key("NUSBridge", "Picture"))
+    result = qry.filter(Picture.student_id==student_id).fetch()
+    return result[0].image
 
 # ASPIRATIONS
 class Aspirations(ndb.Model):
