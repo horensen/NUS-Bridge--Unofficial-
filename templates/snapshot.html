@@ -10,6 +10,11 @@
   	<link href="../stylesheets/bootstrap.css" rel="stylesheet">
     <script src="../scripts/jquery.js"></script>
     <script src="../scripts/bootstrap.js"></script>
+    <style>
+      .keyword {
+        border-bottom: 1px black dotted;
+      }
+    </style>
     <title>Snapshot | NUS Bridge</title>   
   </head>
 
@@ -136,21 +141,21 @@
                     {% if aspirations == '' %}
                       This is a good time to think about your future. 
                         {% if interests != '' %}
-                          Consider your interests in {{ interests }}. 
+                          Consider your interests in <span class="keyword">{{ interests }}</span>. 
                         {% endif %}
                         {% if skills != '' %}
-                          Focus on your abilities in {{ skills }}. 
+                          Focus on your abilities in <span class="keyword">{{ skills }}</span>. 
                         {% endif %}
                         Your opinions about your dream matter more than anyone else's. Put them to use and truly excel in life.
                     {% else %}
-                      You want to be {{ aspirations }} after your graduation. You appreciate learning about {{ interests }}, and you are good at {{ skills }}.
+                      You want to be <span class="keyword">{{ aspirations }}</span> after your graduation. You appreciate learning about <span class="keyword">{{ interests }}</span>, and you are good at <span class="keyword">{{ skills }}</span>.
                     {% endif %}
                   </p>
 
                   <p class="lead">
                     Generally you {{ two_emotions_from_two_traits }}. At work, you {{ two_strengths_from_two_traits_at_work }}.
                     {% if involvements != '' %}
-                      You would probably use what you have learned from {{ involvements }}.
+                      You would probably use what you have learned from <span class="keyword">{{ involvements }}</span>.
                     {% endif %}
                   </p>
 
@@ -159,7 +164,7 @@
                   </p>
 
                   {% if advice != '' %}
-                  <p class="lead">One of the things you like to share is, "{{ advice }}".</p>
+                  <p class="lead">One of the things you like to share is, "<span class="keyword">{{ advice }}</span>".</p>
                   {% endif %}
                 </div>
               </div>
