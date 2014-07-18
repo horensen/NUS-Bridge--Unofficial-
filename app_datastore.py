@@ -146,6 +146,13 @@ def insert_or_update_aspirations(student_id, aspirations):
         user_aspirations.completed = True
         user_aspirations.put()
 
+def asp_exists(student_id):
+    qry = Aspirations.query(ancestor=ndb.Key("NUSBridge", "Aspirations"))
+    result = qry.filter(Aspirations.student_id == student_id).fetch()
+    if result:
+        return True
+    else:
+        return False
 
 # EDUCATION
 class Education(ndb.Model):
@@ -176,6 +183,13 @@ def insert_or_update_education(student_id, best_modules):
         user_education.completed = True
         user_education.put()
 
+def education_exists(student_id):
+    qry = Education.query(ancestor=ndb.Key("NUSBridge", "Education"))
+    result = qry.filter(Education.student_id == student_id).fetch()
+    if result:
+        return True
+    else:
+        return False
 
 # EXPERIENCE
 class Experience(ndb.Model):
@@ -234,6 +248,13 @@ def get_number_of_advices(student_id):
 def get_random_advice(student_id):
     return get_experience(student_id).advices[randint(0, get_number_of_advices(student_id) - 1)]
 
+def experience_exists(student_id):
+    qry = Experience.query(ancestor=ndb.Key("NUSBridge", "Experience"))
+    result = qry.filter(Experience.student_id == student_id).fetch()
+    if result:
+        return True
+    else:
+        return False
 
 # PERSONALITY
 class Personality(ndb.Model):
@@ -432,4 +453,11 @@ def get_temperament_count(student_id, temperament, swb):
     elif temperament == "Phlegmatic" and swb == "both":
         return get_personality(student_id).phlegmatic_strength_count + get_personality(
             student_id).phlegmatic_weakness_count
-		
+
+def personality_exists(student_id):
+    qry = Personality.query(ancestor=ndb.Key("NUSBridge", "Personality"))
+    result = qry.filter(Personality.student_id == student_id).fetch()
+    if result:
+        return True
+    else:
+        return False

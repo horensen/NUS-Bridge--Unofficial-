@@ -1,238 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <link rel="shortcut icon" href="favicon.ico">
-  <link href="../stylesheets/bootstrap.css" rel="stylesheet">
-  <link href="../stylesheets/jquery-ui.css" rel="stylesheet">
-  <link href="../stylesheets/jquery.tagit.css" rel="stylesheet">
-  <script src="../scripts/jquery.js"></script>
-  <script src="../scripts/jquery-ui.js"></script>
-  <script src="../scripts/bootstrap.js"></script>
-  <script src="../scripts/tag-it.js"></script>
-  <script>
-    $(document).ready(function(){
-      // References:
-      // - https://github.com/aehlke/tag-it
-      // - http://jqueryui.com/autocomplete/#remote
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="shortcut icon" href="favicon.ico">
+        <link href="../stylesheets/bootstrap.css" rel="stylesheet">
+        <link href="../stylesheets/jquery-ui.css" rel="stylesheet">
+        <link href="../stylesheets/jquery.tagit.css" rel="stylesheet">
+        <script src="../scripts/jquery.js"></script>
+        <script src="../scripts/jquery-ui.js"></script>
+        <script src="../scripts/bootstrap.js"></script>
+        <script src="../scripts/tag-it.js"></script>
+        <script>
+            $(document).ready(function(){
+                // References:
+                // - https://github.com/aehlke/tag-it
+                // - http://jqueryui.com/autocomplete/#remote
 
-      var temp = "{{ existing_networks }}";
-      temp = temp.replace(/&lt;/g, "<");
-      temp = temp.replace(/&gt;/g, ">");
-      document.getElementById('networks_tags').innerHTML = temp;
+                var temp = "{{ existing_networks }}";
+                temp = temp.replace(/&lt;/g, "<");
+                temp = temp.replace(/&gt;/g, ">");
+                document.getElementById('networks_tags').innerHTML = temp;
 
-      $("#networks_tags").tagit({
-        // Options
-        fieldName: "networks",
-        availableTags: [],
-        autocomplete: {
-          delay: 0,
-          minLength: 2
-        },
-        showAutocompleteOnFocus: true,
-        removeConfirmation: true,
-        caseSensitive: false,
-        allowDuplicates: false,
-        allowSpaces: true,
-        readOnly: false,
-        tagLimit: null,
-        singleField: true,
-        singleFieldDelimiter: ',,',
-        singleFieldNode: null,
-        tabIndex: null,
-        placeholderText: '',
+                $("#networks_tags").tagit({
+                    // Options
+                    fieldName: "networks",
+                    availableTags: [],
+                    autocomplete: {
+                        delay: 0,
+                        minLength: 2
+                    },
+                    showAutocompleteOnFocus: true,
+                    removeConfirmation: true,
+                    caseSensitive: false,
+                    allowDuplicates: false,
+                    allowSpaces: true,
+                    readOnly: false,
+                    tagLimit: null,
+                    singleField: true,
+                    singleFieldDelimiter: ',,',
+                    singleFieldNode: null,
+                    tabIndex: null,
+                    placeholderText: '',
 
-        // Events
-        beforeTagAdded: function(event, ui) {
-            console.log(ui.tag);
-        },
-        afterTagAdded: function(event, ui) {
-            console.log(ui.tag);
-        },
-        beforeTagRemoved: function(event, ui) {
-            console.log(ui.tag);
-        },
-        onTagExists: function(event, ui) {
-            console.log(ui.tag);
-        },
-        onTagClicked: function(event, ui) {
-            console.log(ui.tag);
-        },
-        onTagLimitExceeded: function(event, ui) {
-            console.log(ui.tag);
-        }
-      });
-    });
-  </script>
-  <script>
-    $(document).on('click', '.btn-add-network', function(e)
-      {
-          e.preventDefault();
-          var controlForm = $('.networks_controls'),
-              currentEntry = $(this).parents('.entry:first'),
-              newEntry = $(currentEntry.clone()).appendTo(controlForm);
+                    // Events
+                    beforeTagAdded: function(event, ui) {
+                        console.log(ui.tag);
+                    },
+                    afterTagAdded: function(event, ui) {
+                        console.log(ui.tag);
+                    },
+                    beforeTagRemoved: function(event, ui) {
+                        console.log(ui.tag);
+                    },
+                    onTagExists: function(event, ui) {
+                        console.log(ui.tag);
+                    },
+                    onTagClicked: function(event, ui) {
+                        console.log(ui.tag);
+                    },
+                    onTagLimitExceeded: function(event, ui) {
+                        console.log(ui.tag);
+                    }
+                });
+            });
+        </script>
+        <script>
+            $(document).on('click', '.btn-add-network', function(e)
+                           {
+                               e.preventDefault();
+                               var controlForm = $('.networks_controls'),
+                                   currentEntry = $(this).parents('.entry:first'),
+                                   newEntry = $(currentEntry.clone()).appendTo(controlForm);
 
-          newEntry.find('input').val('');
-          controlForm.find('.entry:not(:last) .btn-add-network')
-              .removeClass('btn-add-network').addClass('btn-remove-network')
-              .removeClass('btn-success').addClass('btn-danger')
-              .html('<span class="glyphicon glyphicon-minus"></span>');
-      }).on('click', '.btn-remove-network', function(e)
-      {
-      $(this).parents('.entry:first').remove();
+                               newEntry.find('input').val('');
+                               controlForm.find('.entry:not(:last) .btn-add-network')
+                               .removeClass('btn-add-network').addClass('btn-remove-network')
+                               .removeClass('btn-success').addClass('btn-danger')
+                               .html('<span class="glyphicon glyphicon-minus"></span>');
+                           }).on('click', '.btn-remove-network', function(e)
+                                 {
+                                     $(this).parents('.entry:first').remove();
 
-      e.preventDefault();
-      return false;
-    });
-  </script>
-  <script>
-    function validateDate(){
-      pattern = /^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/;
-      oForm = document.forms[0]; 
-      oText = oForm.elements["user_dob"];
-      text_val = oText.value;
-      if (pattern.test(text_val) || text_val == ''){
-        return true;
-      } else {
-		    alert("Enter your date of birth in DD/MM/YYYY format.");
-			return false;
-      }
-    }
-  </script>
-  <style>
-    .entry:not(:first-of-type){
-        margin-top: 10px;
-    }
+                                     e.preventDefault();
+                                     return false;
+                                 });
+        </script>
+        <script>
+            function validateDate(){
+                pattern = /^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/;
+                oForm = document.forms[0]; 
+                oText = oForm.elements["user_dob"];
+                text_val = oText.value;
+                if (pattern.test(text_val) || text_val == ''){
+                    return true;
+                } else {
+                    alert("Enter your date of birth in DD/MM/YYYY format.");
+                    return false;
+                }
+            }
+        </script>
+        <style>
+            .entry:not(:first-of-type){
+                margin-top: 10px;
+            }
 
-    .glyphicon{
-        font-size: 12px;
-    }
-  </style>
-  <title>Profile | NUS Bridge</title>
-  </head>
+            .glyphicon{
+                font-size: 12px;
+            }
+        </style>
+        <title>Profile | NUS Bridge</title>
+    </head>
 
-  <body>
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/snapshot">NUS Bridge</a>
+    <body>
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/snapshot">NUS Bridge</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/snapshot"><span class="glyphicon glyphicon-certificate"></span> Snapshot</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-th-list"></span> Questionnaires <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/aspirations">Aspirations</a></li>
+                                <li><a href="/education">Education</a></li>
+                                <li><a href="/experience">Experience</a></li>
+                                <li><a href="/personality">Personality</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-th-large"></span> Analysis<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/symmetrical-connections">Symmetrical Connections</a></li>
+                                <li><a href="/complementary-connections">Complementary Connections</a></li>
+                                <li><a href="/improvement-advisory">Improvement Advisory</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> {{ student_name }} <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-header">{{ student_email }}</li>
+                                <li class="divider"></li>
+                                <li><a href="/profile"><span class="glyphicon glyphicon-pencil"></span> Edit public profile</a></li>
+                                <li><a href="/"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="/snapshot"><span class="glyphicon glyphicon-certificate"></span> Snapshot</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-th-list"></span> Questionnaires <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="/aspirations">Aspirations</a></li>
-                <li><a href="/education">Education</a></li>
-                <li><a href="/experience">Experience</a></li>
-                <li><a href="/personality">Personality</a></li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a href="" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-th-large"></span> Analysis<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="/symmetrical-connections">Symmetrical Connections</a></li>
-                <li><a href="/complementary-connections">Complementary Connections</a></li>
-                <li><a href="/improvement-advisory">Improvement Advisory</a></li>
-              </ul>
-            </li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li class="active dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> {{ student_name }} <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li class="dropdown-header">{{ student_email }}</li>
-                <li class="divider"></li>
-                <li><a href="/profile"><span class="glyphicon glyphicon-pencil"></span> Edit public profile</a></li>
-                <li><a href="/"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <br/><br/><br/><br/>
+        <br/><br/><br/><br/>
 
-    <div class="container">
-      <div class="row">
-        <form role="form" method="post" name="profile_form" action="/profile" autocomplete="off" >
-          <div class="col-md-6">
-              <h3>Profile Picture</h3>
-              <div class="row">
-                <div class="col-md-2">
-                  <p>
-                    <img src="{{pic}}" class="img-circle" style="height:60px; width:60px; border:1px solid gray;">
-                  </p>
+        <div class="container">
+            <form role="form" method="post" name="profile_form" action="/profile" autocomplete="off">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="well">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <p class="text-center">
+                                        <img src="{% if pic != '' %}{{ pic }}{% else %}../images/icon_961.png{{ endif }}" class="img-circle img-responsive" style="border:1px solid gray;">
+                                    </p>
+                                </div>
+                                <div class="col-md-10">
+                                    <p class="text-center">
+                                        <input class="btn btn-default btn-block form-control" type="file" name="user_picture" accept="image/*">
+                                        <small>Upload a high-quality square photo</small>
+                                    <p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="well">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Date of Birth</h5>
+                                    <p>
+                                        <input class="form-control" id="user_dob" value="{{user_dob}}" type="text" name="user_dob" placeholder="DD/MM/YYYY">
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>Gender</h5>
+                                    <p>
+                                        <select name="user_gender" class="form-control" id="user_gender">
+                                            <option value="" {% if user_gender == "" %}selected="selected"{% endif %}></option>
+                                            <option value="Male" {% if user_gender == "Male" %}selected="selected"{% endif %}>Male</option>
+                                            <option value="Female" {% if user_gender == "Female" %}selected="selected"{% endif %}>Female</option>
+                                        </select>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h5>Country</h5>
+                                    <p>
+                                        <input class="form-control" id="user_country" type="text" name="user_country"value="{{user_country}}">
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="well">
+                            <h5>Website</h5>
+                            <p>
+                            <div class="input-group">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
+                                <input class="form-control" id="user_website" type="text" name="user_website" placeholder="your website URL" value="{{user_website}}">
+                            </div>
+                            <p>
+                            <h5>Email Address</h5>
+                            <p>
+                            <div class="input-group">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+                                <input class="form-control" id="user_email" type="text" name="user_email" placeholder="your email address" value="{{user_email}}">
+                            </div>
+                            <p>
+                            <h5>Social and Professional Networks</h5>
+                            <ul id="networks_tags">
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-10">
-                  <p>
-                    <input class="form-control" type="file" name="user_picture" accept="image/*">
-                    <small>Upload a high-quality square photo</small>
-                  <p>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <button class="btn btn-success btn-block btn-lg" onclick="return validateDate()" type="submit">Update Profile</button><br/><br/>
+                    </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <h3>Date of Birth</h3>
-                    <p>
-                      <input class="form-control" id="user_dob" value="{{user_dob}}" type="text" name="user_dob" placeholder="DD/MM/YYYY">
-                    </p>
-                </div>
-                <div class="col-md-6">
-                  <h3>Gender</h3>
-                  <p>
-                    <select name="user_gender" class="form-control" id="user_gender">
-                      <option value="" {% if user_gender == "" %}selected="selected"{% endif %}></option>
-                      <option value="Male" {% if user_gender == "Male" %}selected="selected"{% endif %}>Male</option>
-                      <option value="Female" {% if user_gender == "Female" %}selected="selected"{% endif %}>Female</option>
-                    </select>
-                  </p>
-                </div>
-              </div>
-              <h3>Country</h3>
-              <p>
-                  <input class="form-control" id="user_country" type="text" name="user_country"value="{{user_country}}">
-              </p>
-          </div>
-          <div class="col-md-6">
-              <h3>Website</h3>
-              <p>
-                <div class="input-group">
-                  <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
-                  <input class="form-control" id="user_website" type="text" name="user_website" placeholder="your website URL" value="{{user_website}}">
-                </div>
-              <p>
-              <h3>Email Address</h3>
-              <p>
-                <div class="input-group">
-                  <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
-                  <input class="form-control" id="user_email" type="text" name="user_email" placeholder="your email address" value="{{user_email}}">
-                </div>
-              <p>
-              <h3>Social and Professional Networks</h3>
-              <ul id="networks_tags">
-              </ul>
-          </div>
+            </form>
         </div>
-      <div class="row">
-        <div class="col-md-12">
-          <br/>
-          <button class="btn btn-success btn-block btn-lg" onclick="return validateDate()" type="submit">Save</button><br/><br/>
-        </div>
-      </div>
-      </form>
-    </div>
-    
-  </body>
-  </html>
+    </body>
+</html>

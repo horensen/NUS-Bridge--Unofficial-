@@ -26,38 +26,42 @@ def get_symmetrical(std_id):
     curr_user_two_temp=app_datastore.get_personality(std_id).two_dominant_temperaments_both
     #for loop each item for each other user
     for other_user in compare_list:
-        #check if the 2 temperament are the same
-        try:
-            other_user_two_temp=app_datastore.get_personality(other_user.student_id).two_dominant_temperaments_both
-            if other_user.student_id == std_id:
-                pass
-            elif(not similar_temperaments(curr_user_two_temp,other_user_two_temp)):
-                pass
-            else:
-                num_of_matching_asp = 0
-                total_num_of_compare_std_asp = 0
-                num_of_matching_personality = 0
-                try:
-                    other_asp = app_datastore.get_aspirations(other_user.student_id).aspirations
-                    other_personality = app_datastore.get_personality(other_user.student_id).words
-                    #count the aspiration part
-                    for asp in curr_user_asp_list:
-                        compare = difflib.get_close_matches(asp, other_asp, n=20, cutoff=0.8)
-                        num_of_matching_asp += len(compare)
-                    total_num_of_compare_std_asp = len(other_asp)
-                    #count the personality part
-                    for personality in curr_user_personality_list:
-                        compare = difflib.get_close_matches(personality, other_personality, n=40, cutoff=1)
-                        num_of_matching_personality += len(compare)
-                        #cal using the formula then include the user if more than 80
-                    formula = float((float(num_of_matching_asp / total_num_of_compare_std_asp) + float(
-                        num_of_matching_personality / 40.0)) / 2.0) * 100.0
-                    result = round(formula, 1)
-                    symmetrical_list[other_user.student_id] = result
-                except Exception:
+        if (app_datastore.asp_exists(other_user.student_id) and app_datastore.personality_exists(other_user.student_id) and app_datastore.experience_exists(other_user.student_id) and app_datastore.education_exists(other_user.student_id)):
+            try:
+                other_user_two_temp=app_datastore.get_personality(other_user.student_id).two_dominant_temperaments_both
+                if other_user.student_id == std_id:
                     pass
-        except Exception:
+                elif(not similar_temperaments(curr_user_two_temp,other_user_two_temp)):
+                    pass
+                else:
+                    num_of_matching_asp = 0
+                    total_num_of_compare_std_asp = 0
+                    num_of_matching_personality = 0
+                    try:
+                        other_asp = app_datastore.get_aspirations(other_user.student_id).aspirations
+                        other_personality = app_datastore.get_personality(other_user.student_id).words
+                        #count the aspiration part
+                        for asp in curr_user_asp_list:
+                            compare = difflib.get_close_matches(asp, other_asp, n=20, cutoff=0.8)
+                            num_of_matching_asp += len(compare)
+                        total_num_of_compare_std_asp = len(other_asp)
+                        #count the personality part
+                        for personality in curr_user_personality_list:
+                            compare = difflib.get_close_matches(personality, other_personality, n=40, cutoff=1)
+                            num_of_matching_personality += len(compare)
+                            #cal using the formula then include the user if more than 80
+                        formula = float((float(num_of_matching_asp / total_num_of_compare_std_asp) + float(
+                            num_of_matching_personality / 40.0)) / 2.0) * 100.0
+                        result = round(formula, 1)
+                        symmetrical_list[other_user.student_id] = result
+                    except Exception:
+                        pass
+            except Exception:
+                pass
+        #check if the 2 temperament are the same
+        else:
             pass
+            
     sorted_dict=sorted(symmetrical_list,key=symmetrical_list.get, reverse=True)
     result_dict={}
     place_index=0
@@ -121,40 +125,43 @@ def get_complementary(std_id):
     curr_user_two_temp=app_datastore.get_personality(std_id).two_dominant_temperaments_both
     #for loop each item for each other user
     for other_user in compare_list:
-        #check if the 2 temperament are the same
-        try:
-            other_user_two_temp=app_datastore.get_personality(other_user.student_id).two_dominant_temperaments_both
-            if other_user.student_id == std_id:
-                pass
-            elif(not different_temperaments(curr_user_two_temp,other_user_two_temp)):
-                pass
-            else:
-                num_of_matching_asp = 0
-                total_num_of_compare_std_asp = 0
-                num_of_matching_personality=0
-                num_of_not_matching_personality = 0
-                try:
-                    other_asp = app_datastore.get_aspirations(other_user.student_id).aspirations
-                    other_personality = app_datastore.get_personality(other_user.student_id).words
-                    #count the aspiration part
-                    for asp in curr_user_asp_list:
-                        compare = difflib.get_close_matches(asp, other_asp, n=20, cutoff=0.8)
-                        num_of_matching_asp += len(compare)
-                    total_num_of_compare_std_asp = len(other_asp)
-                    #count the personality part
-                    for personality in curr_user_personality_list:
-                        compare = difflib.get_close_matches(personality, other_personality, n=40, cutoff=1)
-                        num_of_matching_personality += len(compare)
-                        #cal using the formula then include the user if more than 80
-                    num_of_not_matching_personality=40-num_of_matching_personality
-                    formula = float((float(num_of_matching_asp / total_num_of_compare_std_asp) + float(
-                        num_of_not_matching_personality / 40.0)) / 2.0) * 100.0
-                    result = round(formula, 1)
-                    complementary_list[other_user.student_id] = result
-                except Exception:
+        if (app_datastore.asp_exists(other_user.student_id) and app_datastore.personality_exists(other_user.student_id) and app_datastore.experience_exists(other_user.student_id) and app_datastore.education_exists(other_user.student_id)):
+            try:
+                other_user_two_temp=app_datastore.get_personality(other_user.student_id).two_dominant_temperaments_both
+                if other_user.student_id == std_id:
                     pass
-        except Exception:
+                elif(not different_temperaments(curr_user_two_temp,other_user_two_temp)):
+                    pass
+                else:
+                    num_of_matching_asp = 0
+                    total_num_of_compare_std_asp = 0
+                    num_of_matching_personality=0
+                    num_of_not_matching_personality = 0
+                    try:
+                        other_asp = app_datastore.get_aspirations(other_user.student_id).aspirations
+                        other_personality = app_datastore.get_personality(other_user.student_id).words
+                        #count the aspiration part
+                        for asp in curr_user_asp_list:
+                            compare = difflib.get_close_matches(asp, other_asp, n=20, cutoff=0.8)
+                            num_of_matching_asp += len(compare)
+                        total_num_of_compare_std_asp = len(other_asp)
+                        #count the personality part
+                        for personality in curr_user_personality_list:
+                            compare = difflib.get_close_matches(personality, other_personality, n=40, cutoff=1)
+                            num_of_matching_personality += len(compare)
+                            #cal using the formula then include the user if more than 80
+                        num_of_not_matching_personality=40-num_of_matching_personality
+                        formula = float((float(num_of_matching_asp / total_num_of_compare_std_asp) + float(
+                            num_of_not_matching_personality / 40.0)) / 2.0) * 100.0
+                        result = round(formula, 1)
+                        complementary_list[other_user.student_id] = result
+                    except Exception:
+                        pass
+            except Exception:
+                pass
+        else:
             pass
+        
     sorted_dict=sorted(complementary_list,key=complementary_list.get, reverse=True)
     result_dict={}
     place_index=0
@@ -176,29 +183,16 @@ def get_complementary(std_id):
         p_aspirations='person_'+str(place_index)+'_aspirations'
         p_networks='person_'+str(place_index)+'_networks'
         p_website='person_'+str(place_index)+'_website'
-        logging.debug("Getting complementarity percentage...")
         result_dict[p_percent]=int(round(complementary_list.get(sorted_dict[index])))
-        logging.debug("Added " + str(result_dict[p_percent]))
-        logging.debug("Getting name...")
         result_dict[p_name]=app_datastore.get_user(sorted_dict[index]).name
         logging.debug("Added " + result_dict[p_name])
-        logging.debug("Getting date of birth...")
         result_dict[p_dob]=app_datastore.get_user(sorted_dict[index]).date_of_birth
-        logging.debug("Added " + result_dict[p_dob])
-        logging.debug("Getting country...")
         result_dict[p_country]=app_datastore.get_user(sorted_dict[index]).country
-        logging.debug("Added " + result_dict[p_country])
-        logging.debug("Getting major...")
         result_dict[p_major]=app_datastore.get_user(sorted_dict[index]).first_major
         if (app_datastore.get_user(sorted_dict[index]).second_major != ''):
             result_dict[p_major] += " and " + app_datastore.get_user(sorted_dict[index]).second_major
-        logging.debug("Added " + result_dict[p_major])
-        logging.debug("Getting faculty...")
         result_dict[p_faculty]=app_datastore.get_user(sorted_dict[index]).faculty
-        logging.debug("Added " + result_dict[p_faculty])
-        logging.debug("Getting skills and knowledge...")
         result_dict[p_skills]=app_datastore.prepare_list(app_datastore.get_experience(sorted_dict[index]).skills_and_knowledge)
-        logging.debug("Added " + result_dict[p_skills])
         result_dict[p_interests]=app_datastore.prepare_list(app_datastore.get_experience(sorted_dict[index]).interests)
         result_dict[p_involvements]=app_datastore.prepare_list(app_datastore.get_experience(sorted_dict[index]).involvements)
         result_dict[p_module]=app_datastore.prepare_list(app_datastore.get_education(sorted_dict[index]).best_modules)
