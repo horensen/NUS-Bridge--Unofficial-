@@ -1,6 +1,7 @@
 from google.appengine.ext import ndb
 import app_datastore
 import difflib
+import logging
 
 def similar_temperaments(list1,list2):
     for item1 in list1:
@@ -107,6 +108,7 @@ def different_temperaments(list1,list2):
 
 def get_complementary(std_id):
     # populate the list of user to be compare with
+    logging.debug("Getting complementary connections for " + std_id + "...")
     compare_list = app_datastore.get_other_records()
     complementary_list = {}
     index=0
@@ -156,7 +158,9 @@ def get_complementary(std_id):
     sorted_dict=sorted(complementary_list,key=complementary_list.get, reverse=True)
     result_dict={}
     place_index=0
+    logging.debug("Length of sorted_dict: " + str(len(sorted_dict)))
     for x in xrange(0,len(sorted_dict)):
+        logging.debug("Current values: x = " + str(x) + ", index = " + str(index) + ", place_index = " + str(place_index))
         place_index=x+1
         p_percent='person_'+str(place_index)+'_percent'
         p_name='person_'+str(place_index)+'_name'
@@ -172,15 +176,29 @@ def get_complementary(std_id):
         p_aspirations='person_'+str(place_index)+'_aspirations'
         p_networks='person_'+str(place_index)+'_networks'
         p_website='person_'+str(place_index)+'_website'
+        logging.debug("Getting complementarity percentage...")
         result_dict[p_percent]=int(round(complementary_list.get(sorted_dict[index])))
+        logging.debug("Added " + str(result_dict[p_percent]))
+        logging.debug("Getting name...")
         result_dict[p_name]=app_datastore.get_user(sorted_dict[index]).name
+        logging.debug("Added " + result_dict[p_name])
+        logging.debug("Getting date of birth...")
         result_dict[p_dob]=app_datastore.get_user(sorted_dict[index]).date_of_birth
+        logging.debug("Added " + result_dict[p_dob])
+        logging.debug("Getting country...")
         result_dict[p_country]=app_datastore.get_user(sorted_dict[index]).country
+        logging.debug("Added " + result_dict[p_country])
+        logging.debug("Getting major...")
         result_dict[p_major]=app_datastore.get_user(sorted_dict[index]).first_major
         if (app_datastore.get_user(sorted_dict[index]).second_major != ''):
             result_dict[p_major] += " and " + app_datastore.get_user(sorted_dict[index]).second_major
+        logging.debug("Added " + result_dict[p_major])
+        logging.debug("Getting faculty...")
         result_dict[p_faculty]=app_datastore.get_user(sorted_dict[index]).faculty
+        logging.debug("Added " + result_dict[p_faculty])
+        logging.debug("Getting skills and knowledge...")
         result_dict[p_skills]=app_datastore.prepare_list(app_datastore.get_experience(sorted_dict[index]).skills_and_knowledge)
+        logging.debug("Added " + result_dict[p_skills])
         result_dict[p_interests]=app_datastore.prepare_list(app_datastore.get_experience(sorted_dict[index]).interests)
         result_dict[p_involvements]=app_datastore.prepare_list(app_datastore.get_experience(sorted_dict[index]).involvements)
         result_dict[p_module]=app_datastore.prepare_list(app_datastore.get_education(sorted_dict[index]).best_modules)

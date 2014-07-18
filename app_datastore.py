@@ -6,6 +6,7 @@ from random import shuffle
 import copy
 import four_temperaments
 from google.appengine.ext import blobstore
+import logging
 
 
 
@@ -81,9 +82,11 @@ def get_other_records():
     return qry
 
 
-def prepare_list(list):
+def prepare_list(list_of_items):
+    logging.debug(str(list_of_items) + " passed into prepare_list()")
     temp = ''
-    for item in list:
+    for item in list_of_items:
+        logging.debug("Current item: " + item)
         temp += item + ', '
     return temp[:-2]
 
@@ -185,8 +188,11 @@ class Experience(ndb.Model):
 
 
 def get_experience(student_id):
+    logging.debug("Querying Experience entity...")
     qry = Experience.query(ancestor=ndb.Key("NUSBridge", "Experience"))
+    logging.debug("Queried. Filtering by " + student_id + "...")
     result = qry.filter(Experience.student_id == student_id).fetch()
+    logging.debug("Filtered. Returning result...")
     return result[0]
 
 
