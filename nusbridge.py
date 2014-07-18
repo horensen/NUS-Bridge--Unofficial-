@@ -1,12 +1,14 @@
 # LIBRARIES
+from google.appengine.api import urlfetch
+from google.appengine.api import images
 from google.appengine.ext import blobstore
 from google.appengine.ext.webapp import blobstore_handlers
 from google.appengine.ext import ndb
-from google.appengine.api import urlfetch
-from google.appengine.api import images
 from random import randint
 from urlparse import urlparse
 from webapp2_extras import sessions
+import analysis
+import app_datastore
 import cgi
 import datetime
 import difflib
@@ -14,14 +16,14 @@ import HTMLParser
 import four_temperaments
 import jinja2
 import json
-import app_datastore
+import logging
 import os
+import random
+import string
 import urllib
 import urllib2
 import webapp2
-import analysis
-import string
-import random
+
 
 # GLOBAL VARIABLES
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + "/templates"), autoescape=True)
@@ -49,7 +51,7 @@ class BaseHandler(webapp2.RequestHandler):
 config = {}
 
 config['webapp2_extras.sessions'] = {
-    'secret_key': ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(16))
+    'secret_key': ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(15))
 }
 
 
@@ -120,6 +122,9 @@ class Snapshot(BaseHandler):
                 self.session['student_first_major'] = student_profile_object['FirstMajor']
                 self.session['student_second_major'] = student_profile_object['SecondMajor']
                 self.session['student_faculty'] = student_profile_object['Faculty']
+                self.session['log_identity'] = self.session.get('student_name') + " (" + self.session.get('student_id') + ")" 
+
+                logging.info(self.session.get('log_identity') + " has logged in")
 
             # If the user exists in the datastore
             if app_datastore.user_exists(self.session['student_id']):
@@ -667,21 +672,32 @@ class Profile(BaseHandler):
 class UploadPicture(BaseHandler):
     def get(self):
         upload_url=blobstore.create_upload_url('/upload')
+        logging.debug("Created blobstore upload URL: /upload")
+
         if self.session.get('is_valid') == True:
+            logging.debug("Current authenticated user is " + self.session.get('log_identity'))
             template_values = {
                 'upload_url': upload_url
             }
+            logging.debug("Prepared template values")
             template = jinja_environment.get_template('upload.html')
+            logging.debug("Retrieved template")
             self.response.out.write(template.render(template_values))
+            logging.debug("Template rendered with its values")
         else:
+            logging.debug("No authenticated user found. Redirecting to home page...")
             self.redirect(app_domain)
+            logging.debug("Redirected to home page")
 
 class UploadHandler(blobstore_handlers.BlobstoreUploadHandler,BaseHandler):
     def post(self):
         upload_files=self.get_uploads('file')
         blob_info=upload_files[0]
+        logging.debug("Uploaded file get from " + self.session.get('log_identity'))
         app_datastore.insert_or_update_pic(self.session.get('student_id'),blob_info.key())
+        logging.debug("Successfully inserted to blobstore. Redirecting to profile page...")
         self.redirect('/profile')
+        logging.debug("Redirected to profile page")
 
 
 # WEB SERVER GATE INTERFACE
