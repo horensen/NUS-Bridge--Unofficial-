@@ -657,7 +657,7 @@ class Profile(BaseHandler):
             image_key=app_datastore.get_pic(self.session.get('student_id'))
             image=images.get_serving_url(str(image_key),size=None,crop=False,secure_url=None)
         except Exception:
-            image='../images/icon_21308.png'
+            image='../images/icon_961.png'
         try:
             for link in student_social_network:
                 networks_html += "<li>" + link + "</li>"
@@ -709,7 +709,6 @@ class UploadHandler(blobstore_handlers.BlobstoreUploadHandler,BaseHandler):
         app_datastore.insert_or_update_pic(self.session.get('student_id'),blob_info.key())
         logging.debug("Successfully inserted to blobstore. Redirecting to profile page...")
         self.redirect('/profile')
-        logging.debug("Redirected to profile page")
 
 
 # WEB SERVER GATE INTERFACE
