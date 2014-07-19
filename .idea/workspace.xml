@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b7f1c72f-ec5a-42d8-8282-93384da23409" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\jpjf\Desktop\nusbridge\templates\upload.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_datastore.py" afterPath="$PROJECT_DIR$/app_datastore.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nusbridge.py" afterPath="$PROJECT_DIR$/nusbridge.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="nusbridge.iws" />
@@ -291,7 +288,11 @@
       <created>1405787071779</created>
       <updated>1405787071779</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="competed get pic url function">
+      <created>1405789278355</created>
+      <updated>1405789278355</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -334,7 +335,8 @@
       <TodoPanelSettings />
     </option>
     <MESSAGE value="complete upload function&#10;less the retrieve image function&#10;still working on unused blob object" />
-    <option name="LAST_COMMIT_MESSAGE" value="complete upload function&#10;less the retrieve image function&#10;still working on unused blob object" />
+    <MESSAGE value="competed get pic url function" />
+    <option name="LAST_COMMIT_MESSAGE" value="competed get pic url function" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
