@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b7f1c72f-ec5a-42d8-8282-93384da23409" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\jpjf\Desktop\nusbridge\.idea\workspace.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/nusbridge.iml" afterPath="$PROJECT_DIR$/.idea/nusbridge.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_datastore.py" afterPath="$PROJECT_DIR$/app_datastore.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nusbridge.py" afterPath="$PROJECT_DIR$/nusbridge.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/profile.html" afterPath="$PROJECT_DIR$/templates/profile.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="nusbridge.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -168,12 +164,18 @@
       <created>1405785348605</created>
       <updated>1405785348605</updated>
     </task>
+    <task id="LOCAL-00001" summary="complete upload function&#10;less the retrieve image function&#10;still working on unused blob object">
+      <created>1405787025733</created>
+      <updated>1405787025733</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
     <editor active="true" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -208,6 +210,8 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
+    <MESSAGE value="complete upload function&#10;less the retrieve image function&#10;still working on unused blob object" />
+    <option name="LAST_COMMIT_MESSAGE" value="complete upload function&#10;less the retrieve image function&#10;still working on unused blob object" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
