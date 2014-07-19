@@ -631,16 +631,19 @@ class ImprovementAdvisory(BaseHandler):
             self.redirect(app_domain)
 
 
-class Profile(BaseHandler):
+class Profile(BaseHandler,blobstore_handlers.BlobstoreUploadHandler):
     def post(self):
         student_country = self.request.get('user_country')
         student_gender = self.request.get('user_gender')
         student_website = self.request.get('user_website')
         student_email = self.request.get('user_email')
         student_social_network = self.request.get('networks').split(",,")
-
+        upload_files=self.get_uploads('file')
+        if upload_files:
+            blob_info=upload_files[0]
+            app_datastore.insert_or_update_pic(self.session.get('student_id'),blob_info.key())
         if self.session.get('is_valid'):
-            app_datastore.update_user(self.session.get('student_id'), self.request.get("user_dob"), student_gender, student_country, student_website, student_email, student_social_network)
+            app_datastore.update_user(self.session.get('student_id'), self.request.get("user_dob"), student_gender, student_country, student_website, student_social_network)
 
         self.redirect("/profile")
 
@@ -653,6 +656,7 @@ class Profile(BaseHandler):
         student_email = student_obj.email
         student_social_network = student_obj.social_networks
         networks_html = ''
+        upload_url=blobstore.create_upload_url('/profile')
         try:
             image_key=app_datastore.get_pic(self.session.get('student_id'))
             image=images.get_serving_url(str(image_key),size=None,crop=False,secure_url=None)
@@ -673,6 +677,7 @@ class Profile(BaseHandler):
                 'user_country': student_country,
                 'user_website': student_website,
                 'user_email': student_email,
+                'upload_url': upload_url,
                 'pic':image,
                 'existing_networks': networks_html
             }
@@ -681,34 +686,6 @@ class Profile(BaseHandler):
         else:
             self.redirect(app_domain)
 
-class UploadPicture(BaseHandler):
-    def get(self):
-        upload_url=blobstore.create_upload_url('/upload')
-        logging.debug("Created blobstore upload URL: /upload")
-
-        if self.session.get('is_valid') == True:
-            logging.debug("Current authenticated user is " + self.session.get('log_identity'))
-            template_values = {
-                'upload_url': upload_url
-            }
-            logging.debug("Prepared template values")
-            template = jinja_environment.get_template('upload.html')
-            logging.debug("Retrieved template")
-            self.response.out.write(template.render(template_values))
-            logging.debug("Template rendered with its values")
-        else:
-            logging.debug("No authenticated user found. Redirecting to home page...")
-            self.redirect(app_domain)
-            logging.debug("Redirected to home page")
-
-class UploadHandler(blobstore_handlers.BlobstoreUploadHandler,BaseHandler):
-    def post(self):
-        upload_files=self.get_uploads('file')
-        blob_info=upload_files[0]
-        logging.debug("Uploaded file get from " + self.session.get('log_identity'))
-        app_datastore.insert_or_update_pic(self.session.get('student_id'),blob_info.key())
-        logging.debug("Successfully inserted to blobstore. Redirecting to profile page...")
-        self.redirect('/profile')
 
 
 # WEB SERVER GATE INTERFACE
@@ -722,8 +699,6 @@ app = webapp2.WSGIApplication([
     ('/personality', Personality),
     ('/symmetrical-connections', SymmetricalConnections),
     ('/complementary-connections', ComplementaryConnections),
-    ('/picture', UploadPicture),
-    ('/upload', UploadHandler),
     ('/improvement-advisory', ImprovementAdvisory)],
     config=config,
     debug=True)

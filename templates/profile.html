@@ -165,19 +165,20 @@
         <br/><br/><br/><br/>
 
         <div class="container">
-            <form role="form" method="post" name="profile_form" action="/profile" autocomplete="off">
+            <form role="form" method="post" name="profile_form" action="{{upload_url}}" enctype="multipart/form-data" autocomplete="off">
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="well">
                             <div class="row">
                                 <div class="col-md-2">
                                     <p class="text-center">
-                                        <img src="{% if pic != '' %}{{ pic }}{% else %}../images/icon_961.png{% endif %}" class="img-circle img-responsive" style="border:1px solid gray;">
+                                        <!--<img src="{% if pic != '' %}{{ pic }}{% else %}../images/icon_961.png{% endif %}" class="img-circle img-responsive" style="border:1px solid gray;">-->
+                                        <img src="{{pic}}" class="img-circle img-responsive" style="border:1px solid gray;">
                                     </p>
                                 </div>
                                 <div class="col-md-10">
                                     <p class="text-center">
-                                        <input class="btn btn-default btn-block form-control" type="file" name="user_picture" accept="image/*">
+                                        <input class="btn btn-default btn-block form-control" type="file" name="file" accept="image/*">
                                         <small>Upload a high-quality square photo</small>
                                     <p>
                                 </div>

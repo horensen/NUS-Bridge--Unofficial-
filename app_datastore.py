@@ -117,6 +117,14 @@ def get_pic(student_id):
     result = qry.filter(Picture.student_id==student_id).fetch()
     return result[0].image
 
+def pic_exists(student_id):
+    qry = Picture.query(ancestor=ndb.Key("NUSBridge", "Picture"))
+    result = qry.filter(Picture.student_id == student_id).fetch()
+    if result:
+        return True
+    else:
+        return False
+
 # ASPIRATIONS
 class Aspirations(ndb.Model):
     student_id = ndb.StringProperty()
