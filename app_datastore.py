@@ -1,5 +1,6 @@
 # LIBRARIES
 from google.appengine.ext import ndb
+from google.appengine.api import images
 import datetime
 from random import randint
 from random import shuffle
@@ -124,6 +125,14 @@ def pic_exists(student_id):
         return True
     else:
         return False
+
+def get_pic_url(student_id):
+    try:
+        image_key=get_pic(student_id)
+        image=images.get_serving_url(str(image_key),size=None,crop=False,secure_url=None)
+    except Exception:
+        image='../images/icon_961.png'
+    return image
 
 # ASPIRATIONS
 class Aspirations(ndb.Model):

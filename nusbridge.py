@@ -657,11 +657,7 @@ class Profile(BaseHandler,blobstore_handlers.BlobstoreUploadHandler):
         student_social_network = student_obj.social_networks
         networks_html = ''
         upload_url=blobstore.create_upload_url('/profile')
-        try:
-            image_key=app_datastore.get_pic(self.session.get('student_id'))
-            image=images.get_serving_url(str(image_key),size=None,crop=False,secure_url=None)
-        except Exception:
-            image='../images/icon_961.png'
+        image=app_datastore.get_pic_url(self.session.get('student_id'))
         try:
             for link in student_social_network:
                 networks_html += "<li>" + link + "</li>"
