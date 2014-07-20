@@ -81,6 +81,7 @@ def get_symmetrical(std_id):
         p_aspirations='person_'+str(place_index)+'_aspirations'
         p_networks='person_'+str(place_index)+'_networks'
         p_website='person_'+str(place_index)+'_website'
+        p_pic='person_'+str(place_index)+'_pic'
         result_dict[p_percent]=int(round(symmetrical_list.get(sorted_dict[index])))
         result_dict[p_name]=app_datastore.get_user(sorted_dict[index]).name
         result_dict[p_dob]=app_datastore.get_user(sorted_dict[index]).date_of_birth
@@ -97,6 +98,7 @@ def get_symmetrical(std_id):
         result_dict[p_aspirations]=app_datastore.prepare_list(app_datastore.get_aspirations(sorted_dict[index]).aspirations)
         result_dict[p_networks]=app_datastore.prepare_list(app_datastore.get_user(sorted_dict[index]).social_networks)
         result_dict[p_website]=app_datastore.get_user(sorted_dict[index]).website
+        result_dict[p_pic]=app_datastore.get_pic_url(sorted_dict[index])
         index+=1
 
     return result_dict
@@ -183,6 +185,8 @@ def get_complementary(std_id):
         p_aspirations='person_'+str(place_index)+'_aspirations'
         p_networks='person_'+str(place_index)+'_networks'
         p_website='person_'+str(place_index)+'_website'
+        p_email='person_'+str(place_index)+'_email'
+        p_pic='person_'+str(place_index)+'_pic'
         result_dict[p_percent]=int(round(complementary_list.get(sorted_dict[index])))
         result_dict[p_name]=app_datastore.get_user(sorted_dict[index]).name
         logging.debug("Added " + result_dict[p_name])
@@ -200,6 +204,8 @@ def get_complementary(std_id):
         result_dict[p_aspirations]=app_datastore.prepare_list(app_datastore.get_aspirations(sorted_dict[index]).aspirations)
         result_dict[p_networks]=app_datastore.prepare_list(app_datastore.get_user(sorted_dict[index]).social_networks)
         result_dict[p_website]=app_datastore.get_user(sorted_dict[index]).website
+        result_dict[p_pic]=app_datastore.get_pic_url(sorted_dict[index])
+        result_dict[p_email]=app_datastore.get_user(sorted_dict[index]).email
         index+=1
 
     return result_dict
