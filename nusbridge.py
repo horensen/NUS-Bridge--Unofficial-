@@ -150,7 +150,6 @@ class Snapshot(BaseHandler):
                         elif aspiration_id + 1 == number_of_aspirations:
                             aspirations_html += " or "
                         aspiration_id += 1
-                    logging.debug("Aspirations retrieved.")
                 except Exception:
                     pass
 
@@ -180,7 +179,6 @@ class Snapshot(BaseHandler):
                             elif i + 1 == number_of_best_modules:
                                 best_modules_html += " and "
                             i += 1
-                    logging.debug("Best modules retrieved.")
                 except Exception:
                     pass
 
@@ -209,7 +207,6 @@ class Snapshot(BaseHandler):
                             elif i + 1 == len(interests):
                                 interests_html += " and "
                             i += 1
-                    logging.debug("Interests retrieved.")
                 except Exception:
                     pass
 
@@ -239,7 +236,6 @@ class Snapshot(BaseHandler):
                             elif i + 1 == len(sk):
                                 skills_and_knowledge_html += " and "
                             i += 1
-                    logging.debug("Skills and knowledge retrieved.")
                 except Exception:
                     pass
 
@@ -251,7 +247,6 @@ class Snapshot(BaseHandler):
                     phrase1 = four_temperaments.get_random_at_work(trait1)
                     phrase2 = four_temperaments.get_random_at_work(trait2)
                     strengths_at_work_html = phrase1 + " and " + phrase2
-                    logging.debug("Two strengths at work retrieved.")
                 except Exception:
                     pass
 
@@ -280,7 +275,6 @@ class Snapshot(BaseHandler):
                             elif i + 1 == len(involvements):
                                 involvements_html += " or "
                             i += 1
-                    logging.debug("Involvements retrieved.")
                 except Exception:
                     pass
 
@@ -292,7 +286,6 @@ class Snapshot(BaseHandler):
                     phrase1 = four_temperaments.get_random_emotion(trait1)
                     phrase2 = four_temperaments.get_random_emotion(trait2)
                     emotions_html = phrase1 + " and " + phrase2
-                    logging.debug("Two emotions retrieved.")
                 except Exception:
                     pass
 
@@ -304,7 +297,6 @@ class Snapshot(BaseHandler):
                     phrase1 = four_temperaments.get_random_as_a_friend(trait1)
                     phrase2 = four_temperaments.get_random_as_a_friend(trait2)
                     strengths_as_a_friend_html = phrase1 + " and " + phrase2
-                    logging.debug("Two strengths as a friend retrieved.")
                 except Exception:
                     pass
 
@@ -316,7 +308,6 @@ class Snapshot(BaseHandler):
                     phrase1 = four_temperaments.get_random_best_in(trait1)
                     phrase2 = four_temperaments.get_random_best_in(trait2)
                     personality_best_html = phrase1 + " and " + phrase2
-                    logging.debug("Best of personality retrieved.")
                 except Exception:
                     pass
 
@@ -324,7 +315,6 @@ class Snapshot(BaseHandler):
                 try:
                     advice_html = app_datastore.get_random_advice(self.session['student_id'])
                     experience_completed = app_datastore.get_experience(self.session['student_id']).completed
-                    logging.debug("Random advice retrieved.")
                 except Exception:
                     pass
 
@@ -333,7 +323,6 @@ class Snapshot(BaseHandler):
                     social_networks_obj = app_datastore.get_user(self.session['student_id']).social_networks
                     for link in social_networks_obj:
                         social_networks_html+="<a href=http://" + link + "><li>http://" + link + "</li></a>"
-                    logging.debug("Social networks retrieved.")
                 except Exception:
                     pass
 

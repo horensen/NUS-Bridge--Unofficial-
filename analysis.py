@@ -116,7 +116,6 @@ def different_temperaments(list1,list2):
 
 def get_complementary(std_id):
     # populate the list of user to be compare with
-    logging.debug("Getting complementary connections for " + std_id + "...")
     compare_list = app_datastore.get_other_records()
     complementary_list = {}
     index=0
@@ -169,9 +168,7 @@ def get_complementary(std_id):
     sorted_dict=sorted(complementary_list,key=complementary_list.get, reverse=True)
     result_dict={}
     place_index=0
-    logging.debug("Length of sorted_dict: " + str(len(sorted_dict)))
     for x in xrange(0,len(sorted_dict)):
-        logging.debug("Current values: x = " + str(x) + ", index = " + str(index) + ", place_index = " + str(place_index))
         place_index=x+1
         p_percent='person_'+str(place_index)+'_percent'
         p_name='person_'+str(place_index)+'_name'
@@ -191,7 +188,6 @@ def get_complementary(std_id):
         p_pic='person_'+str(place_index)+'_pic'
         result_dict[p_percent]=int(round(complementary_list.get(sorted_dict[index])))
         result_dict[p_name]=app_datastore.get_user(sorted_dict[index]).name
-        logging.debug("Added " + result_dict[p_name])
         result_dict[p_dob]=app_datastore.get_user(sorted_dict[index]).date_of_birth
         result_dict[p_country]=app_datastore.get_user(sorted_dict[index]).country
         result_dict[p_major]=app_datastore.get_user(sorted_dict[index]).first_major
