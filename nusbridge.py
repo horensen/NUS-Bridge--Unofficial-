@@ -1,12 +1,14 @@
 # LIBRARIES
+from google.appengine.api import urlfetch
+from google.appengine.api import images
 from google.appengine.ext import blobstore
 from google.appengine.ext.webapp import blobstore_handlers
 from google.appengine.ext import ndb
-from google.appengine.api import urlfetch
-from google.appengine.api import images
 from random import randint
 from urlparse import urlparse
 from webapp2_extras import sessions
+import analysis
+import app_datastore
 import cgi
 import datetime
 import difflib
@@ -14,14 +16,14 @@ import HTMLParser
 import four_temperaments
 import jinja2
 import json
-import app_datastore
+import logging
 import os
+import random
+import string
 import urllib
 import urllib2
 import webapp2
-import analysis
-import string
-import random
+
 
 # GLOBAL VARIABLES
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + "/templates"), autoescape=True)
@@ -49,7 +51,7 @@ class BaseHandler(webapp2.RequestHandler):
 config = {}
 
 config['webapp2_extras.sessions'] = {
-    'secret_key': ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(16))
+    'secret_key': ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(15))
 }
 
 
@@ -120,6 +122,9 @@ class Snapshot(BaseHandler):
                 self.session['student_first_major'] = student_profile_object['FirstMajor']
                 self.session['student_second_major'] = student_profile_object['SecondMajor']
                 self.session['student_faculty'] = student_profile_object['Faculty']
+                self.session['log_identity'] = self.session.get('student_name') + " (" + self.session.get('student_id') + ")" 
+
+                logging.debug(self.session.get('log_identity') + " has logged in")
 
             # If the user exists in the datastore
             if app_datastore.user_exists(self.session['student_id']):
@@ -145,6 +150,7 @@ class Snapshot(BaseHandler):
                         elif aspiration_id + 1 == number_of_aspirations:
                             aspirations_html += " or "
                         aspiration_id += 1
+                    logging.debug("Aspirations retrieved.")
                 except Exception:
                     pass
 
@@ -174,6 +180,7 @@ class Snapshot(BaseHandler):
                             elif i + 1 == number_of_best_modules:
                                 best_modules_html += " and "
                             i += 1
+                    logging.debug("Best modules retrieved.")
                 except Exception:
                     pass
 
@@ -202,6 +209,7 @@ class Snapshot(BaseHandler):
                             elif i + 1 == len(interests):
                                 interests_html += " and "
                             i += 1
+                    logging.debug("Interests retrieved.")
                 except Exception:
                     pass
 
@@ -231,6 +239,7 @@ class Snapshot(BaseHandler):
                             elif i + 1 == len(sk):
                                 skills_and_knowledge_html += " and "
                             i += 1
+                    logging.debug("Skills and knowledge retrieved.")
                 except Exception:
                     pass
 
@@ -242,6 +251,7 @@ class Snapshot(BaseHandler):
                     phrase1 = four_temperaments.get_random_at_work(trait1)
                     phrase2 = four_temperaments.get_random_at_work(trait2)
                     strengths_at_work_html = phrase1 + " and " + phrase2
+                    logging.debug("Two strengths at work retrieved.")
                 except Exception:
                     pass
 
@@ -270,6 +280,7 @@ class Snapshot(BaseHandler):
                             elif i + 1 == len(involvements):
                                 involvements_html += " or "
                             i += 1
+                    logging.debug("Involvements retrieved.")
                 except Exception:
                     pass
 
@@ -281,6 +292,7 @@ class Snapshot(BaseHandler):
                     phrase1 = four_temperaments.get_random_emotion(trait1)
                     phrase2 = four_temperaments.get_random_emotion(trait2)
                     emotions_html = phrase1 + " and " + phrase2
+                    logging.debug("Two emotions retrieved.")
                 except Exception:
                     pass
 
@@ -292,6 +304,7 @@ class Snapshot(BaseHandler):
                     phrase1 = four_temperaments.get_random_as_a_friend(trait1)
                     phrase2 = four_temperaments.get_random_as_a_friend(trait2)
                     strengths_as_a_friend_html = phrase1 + " and " + phrase2
+                    logging.debug("Two strengths as a friend retrieved.")
                 except Exception:
                     pass
 
@@ -303,6 +316,7 @@ class Snapshot(BaseHandler):
                     phrase1 = four_temperaments.get_random_best_in(trait1)
                     phrase2 = four_temperaments.get_random_best_in(trait2)
                     personality_best_html = phrase1 + " and " + phrase2
+                    logging.debug("Best of personality retrieved.")
                 except Exception:
                     pass
 
@@ -310,6 +324,7 @@ class Snapshot(BaseHandler):
                 try:
                     advice_html = app_datastore.get_random_advice(self.session['student_id'])
                     experience_completed = app_datastore.get_experience(self.session['student_id']).completed
+                    logging.debug("Random advice retrieved.")
                 except Exception:
                     pass
 
@@ -318,6 +333,7 @@ class Snapshot(BaseHandler):
                     social_networks_obj = app_datastore.get_user(self.session['student_id']).social_networks
                     for link in social_networks_obj:
                         social_networks_html+="<a href=http://" + link + "><li>http://" + link + "</li></a>"
+                    logging.debug("Social networks retrieved.")
                 except Exception:
                     pass
 
@@ -326,6 +342,7 @@ class Snapshot(BaseHandler):
 
                 # Register into the datastore
                 app_datastore.insert_user(student_profile_object)
+                logging.debug(self.session.get('log_identity') + " registered.")
                 
             template_values = {
                 # Jumbotron
@@ -614,16 +631,24 @@ class ImprovementAdvisory(BaseHandler):
             self.redirect(app_domain)
 
 
-class Profile(BaseHandler):
+class Profile(BaseHandler,blobstore_handlers.BlobstoreUploadHandler):
     def post(self):
         student_country = self.request.get('user_country')
         student_gender = self.request.get('user_gender')
         student_website = self.request.get('user_website')
         student_email = self.request.get('user_email')
         student_social_network = self.request.get('networks').split(",,")
-
+        upload_files=self.get_uploads('file')
+        if upload_files:
+            #do cleanup on the unused blob object
+            blob_key=app_datastore.get_pic(self.session.get('student_id'))
+            blob_info=blobstore.BlobInfo.get(blob_key)
+            blob_info.delete()
+            #insert the blob key into the datastore
+            blob_info=upload_files[0]
+            app_datastore.insert_or_update_pic(self.session.get('student_id'),blob_info.key())
         if self.session.get('is_valid'):
-            app_datastore.update_user(self.session.get('student_id'), self.request.get("user_dob"), student_gender, student_country, student_website, student_email, student_social_network)
+            app_datastore.update_user(self.session.get('student_id'), self.request.get("user_dob"), student_gender, student_country, student_website, student_social_network)
 
         self.redirect("/profile")
 
@@ -636,11 +661,8 @@ class Profile(BaseHandler):
         student_email = student_obj.email
         student_social_network = student_obj.social_networks
         networks_html = ''
-        try:
-            image_key=app_datastore.get_pic(self.session.get('student_id'))
-            image=images.get_serving_url(str(image_key),size=None,crop=False,secure_url=None)
-        except Exception:
-            image='../images/icon_21308.png'
+        upload_url=blobstore.create_upload_url('/profile')
+        image=app_datastore.get_pic_url(self.session.get('student_id'))
         try:
             for link in student_social_network:
                 networks_html += "<li>" + link + "</li>"
@@ -656,6 +678,7 @@ class Profile(BaseHandler):
                 'user_country': student_country,
                 'user_website': student_website,
                 'user_email': student_email,
+                'upload_url': upload_url,
                 'pic':image,
                 'existing_networks': networks_html
             }
@@ -664,24 +687,6 @@ class Profile(BaseHandler):
         else:
             self.redirect(app_domain)
 
-class UploadPicture(BaseHandler):
-    def get(self):
-        upload_url=blobstore.create_upload_url('/upload')
-        if self.session.get('is_valid') == True:
-            template_values = {
-                'upload_url': upload_url
-            }
-            template = jinja_environment.get_template('upload.html')
-            self.response.out.write(template.render(template_values))
-        else:
-            self.redirect(app_domain)
-
-class UploadHandler(blobstore_handlers.BlobstoreUploadHandler,BaseHandler):
-    def post(self):
-        upload_files=self.get_uploads('file')
-        blob_info=upload_files[0]
-        app_datastore.insert_or_update_pic(self.session.get('student_id'),blob_info.key())
-        self.redirect('/profile')
 
 
 # WEB SERVER GATE INTERFACE
@@ -695,8 +700,6 @@ app = webapp2.WSGIApplication([
     ('/personality', Personality),
     ('/symmetrical-connections', SymmetricalConnections),
     ('/complementary-connections', ComplementaryConnections),
-    ('/picture', UploadPicture),
-    ('/upload', UploadHandler),
     ('/improvement-advisory', ImprovementAdvisory)],
     config=config,
     debug=True)

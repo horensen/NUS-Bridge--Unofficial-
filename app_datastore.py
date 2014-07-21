@@ -1,11 +1,13 @@
 # LIBRARIES
 from google.appengine.ext import ndb
+from google.appengine.api import images
 import datetime
 from random import randint
 from random import shuffle
 import copy
 import four_temperaments
 from google.appengine.ext import blobstore
+import logging
 
 
 
@@ -81,9 +83,11 @@ def get_other_records():
     return qry
 
 
-def prepare_list(list):
+def prepare_list(list_of_items):
+    logging.debug(str(list_of_items) + " passed into prepare_list()")
     temp = ''
-    for item in list:
+    for item in list_of_items:
+        logging.debug("Current item: " + item)
         temp += item + ', '
     return temp[:-2]
 
@@ -114,6 +118,22 @@ def get_pic(student_id):
     result = qry.filter(Picture.student_id==student_id).fetch()
     return result[0].image
 
+def pic_exists(student_id):
+    qry = Picture.query(ancestor=ndb.Key("NUSBridge", "Picture"))
+    result = qry.filter(Picture.student_id == student_id).fetch()
+    if result:
+        return True
+    else:
+        return False
+
+def get_pic_url(student_id):
+    try:
+        image_key=get_pic(student_id)
+        image=images.get_serving_url(str(image_key),size=None,crop=False,secure_url=None)
+    except Exception:
+        image='../images/icon_961.png'
+    return image
+
 # ASPIRATIONS
 class Aspirations(ndb.Model):
     student_id = ndb.StringProperty()
@@ -143,6 +163,13 @@ def insert_or_update_aspirations(student_id, aspirations):
         user_aspirations.completed = True
         user_aspirations.put()
 
+def asp_exists(student_id):
+    qry = Aspirations.query(ancestor=ndb.Key("NUSBridge", "Aspirations"))
+    result = qry.filter(Aspirations.student_id == student_id).fetch()
+    if result:
+        return True
+    else:
+        return False
 
 # EDUCATION
 class Education(ndb.Model):
@@ -173,6 +200,13 @@ def insert_or_update_education(student_id, best_modules):
         user_education.completed = True
         user_education.put()
 
+def education_exists(student_id):
+    qry = Education.query(ancestor=ndb.Key("NUSBridge", "Education"))
+    result = qry.filter(Education.student_id == student_id).fetch()
+    if result:
+        return True
+    else:
+        return False
 
 # EXPERIENCE
 class Experience(ndb.Model):
@@ -185,8 +219,11 @@ class Experience(ndb.Model):
 
 
 def get_experience(student_id):
+    logging.debug("Querying Experience entity...")
     qry = Experience.query(ancestor=ndb.Key("NUSBridge", "Experience"))
+    logging.debug("Queried. Filtering by " + student_id + "...")
     result = qry.filter(Experience.student_id == student_id).fetch()
+    logging.debug("Filtered. Returning result...")
     return result[0]
 
 
@@ -228,6 +265,13 @@ def get_number_of_advices(student_id):
 def get_random_advice(student_id):
     return get_experience(student_id).advices[randint(0, get_number_of_advices(student_id) - 1)]
 
+def experience_exists(student_id):
+    qry = Experience.query(ancestor=ndb.Key("NUSBridge", "Experience"))
+    result = qry.filter(Experience.student_id == student_id).fetch()
+    if result:
+        return True
+    else:
+        return False
 
 # PERSONALITY
 class Personality(ndb.Model):
@@ -426,4 +470,11 @@ def get_temperament_count(student_id, temperament, swb):
     elif temperament == "Phlegmatic" and swb == "both":
         return get_personality(student_id).phlegmatic_strength_count + get_personality(
             student_id).phlegmatic_weakness_count
-		
+
+def personality_exists(student_id):
+    qry = Personality.query(ancestor=ndb.Key("NUSBridge", "Personality"))
+    result = qry.filter(Personality.student_id == student_id).fetch()
+    if result:
+        return True
+    else:
+        return False

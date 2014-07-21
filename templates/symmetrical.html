@@ -30,7 +30,6 @@
 
   <style>
     .profile {
-        /*min-height: 355px;*/
         display: inline-block;
     }
     .divider {
@@ -137,6 +136,8 @@
                           document.getElementById('my_networks_1').innerHTML = html;
                         </script>
                         <a href="{{ person_1_website }}" class="btn btn-{% if person_1_website == '' %}default{% else %}info{% endif %} {% if person_1_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
+
+                        <a href="{{ person_1_email }}" class="btn btn-{% if person_1_email == '' %}default{% else %}info{% endif %} {% if person_1_email == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-envelope"></span> Email</a>
                       </div>
                     </p>
                     <p>Aspirations:<br/><strong id="my_aspirations_1"></strong>
@@ -152,7 +153,7 @@
                     </script>
                   </div>            
                   <div class="col-sm-4">
-                    <img src="../images/icon_961.png" alt="" class="img-circle img-responsive">
+                    <img src="{{person_1_pic}}" alt="" class="img-circle img-responsive">
                     <h1 class="text-center"><span class="label label-primary">{{ person_1_percent }}%</span></h1>
                     <p>
                       {% if person_1_dob != '' %}
@@ -202,6 +203,8 @@
                           document.getElementById('my_networks_2').innerHTML = html;
                         </script>
                         <a href="{{ person_2_website }}" class="btn btn-{% if person_2_website == '' %}default{% else %}info{% endif %} {% if person_2_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
+
+                        <a href="{{ person_2_email }}" class="btn btn-{% if person_2_email == '' %}default{% else %}info{% endif %} {% if person_2_email == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-envelope"></span> Email</a>
                       </div>
                     </p>
                     <p>Aspirations:<br/><strong id="my_aspirations_2"></strong>
@@ -217,7 +220,7 @@
                     </script>
                   </div>            
                   <div class="col-sm-4">
-                    <img src="../images/icon_961.png" alt="" class="img-circle img-responsive">
+                    <img src="{{person_2_pic}}" alt="" class="img-circle img-responsive">
                     <h1 class="text-center"><span class="label label-primary">{{ person_2_percent }}%</span></h1>
                     <p>
                       {% if person_2_dob != '' %}
@@ -267,6 +270,8 @@
                           document.getElementById('my_networks_3').innerHTML = html;
                         </script>
                         <a href="{{ person_3_website }}" class="btn btn-{% if person_3_website == '' %}default{% else %}info{% endif %} {% if person_3_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
+
+                        <a href="{{ person_3_email }}" class="btn btn-{% if person_3_email == '' %}default{% else %}info{% endif %} {% if person_3_email == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-envelope"></span> Email</a>
                       </div>
                     </p>
                     <p>Aspirations:<br/><strong id="my_aspirations_3"></strong>
@@ -282,7 +287,7 @@
                     </script>
                   </div>            
                   <div class="col-sm-4">
-                    <img src="../images/icon_961.png" alt="" class="img-circle img-responsive">
+                    <img src="{{person_3_pic}}" alt="" class="img-circle img-responsive">
                     <h1 class="text-center"><span class="label label-primary">{{ person_3_percent }}%</span></h1>
                     <p>
                       {% if person_3_dob != '' %}
@@ -332,6 +337,8 @@
                           document.getElementById('my_networks_4').innerHTML = html;
                         </script>
                         <a href="{{ person_4_website }}" class="btn btn-{% if person_4_website == '' %}default{% else %}info{% endif %} {% if person_4_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
+
+                        <a href="{{ person_4_email }}" class="btn btn-{% if person_4_email == '' %}default{% else %}info{% endif %} {% if person_4_email == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-envelope"></span> Email</a>
                       </div>
                     </p>
                     <p>Aspirations:<br/><strong id="my_aspirations_4"></strong>
@@ -347,7 +354,7 @@
                     </script>
                   </div>            
                   <div class="col-sm-4">
-                    <img src="../images/icon_961.png" alt="" class="img-circle img-responsive">
+                    <img src="{{person_4_pic}}" alt="" class="img-circle img-responsive">
                     <h1 class="text-center"><span class="label label-primary">{{ person_4_percent }}%</span></h1>
                     <p>
                       {% if person_4_dob != '' %}
@@ -397,6 +404,8 @@
                           document.getElementById('my_networks_5').innerHTML = html;
                         </script>
                         <a href="{{ person_5_website }}" class="btn btn-{% if person_5_website == '' %}default{% else %}info{% endif %} {% if person_5_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
+
+                        <a href="{{ person_5_email }}" class="btn btn-{% if person_5_email == '' %}default{% else %}info{% endif %} {% if person_5_email == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-envelope"></span> Email</a>
                       </div>
                     </p>
                     <p>Aspirations:<br/><strong id="my_aspirations_5"></strong>
@@ -412,7 +421,7 @@
                     </script>
                   </div>            
                   <div class="col-sm-4">
-                    <img src="../images/icon_961.png" alt="" class="img-circle img-responsive">
+                    <img src="{{person_5_pic}}" alt="" class="img-circle img-responsive">
                     <h1 class="text-center"><span class="label label-primary">{{ person_5_percent }}%</span></h1>
                     <p>
                       {% if person_5_dob != '' %}
@@ -462,6 +471,8 @@
                           document.getElementById('my_networks_6').innerHTML = html;
                         </script>
                         <a href="{{ person_6_website }}" class="btn btn-{% if person_6_website == '' %}default{% else %}info{% endif %} {% if person_6_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
+
+                        <a href="{{ person_6_email }}" class="btn btn-{% if person_6_email == '' %}default{% else %}info{% endif %} {% if person_6_email == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-envelope"></span> Email</a>
                       </div>
                     </p>
                     <p>Aspirations:<br/><strong id="my_aspirations_6"></strong>
@@ -477,7 +488,7 @@
                     </script>
                   </div>            
                   <div class="col-sm-4">
-                    <img src="../images/icon_961.png" alt="" class="img-circle img-responsive">
+                    <img src="{{person_6_pic}}" alt="" class="img-circle img-responsive">
                     <h1 class="text-center"><span class="label label-primary">{{ person_6_percent }}%</span></h1>
                     <p>
                       {% if person_6_dob != '' %}

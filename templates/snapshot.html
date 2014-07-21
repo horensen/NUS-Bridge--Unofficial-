@@ -10,6 +10,11 @@
   	<link href="../stylesheets/bootstrap.css" rel="stylesheet">
     <script src="../scripts/jquery.js"></script>
     <script src="../scripts/bootstrap.js"></script>
+    <style>
+      .keyword {
+        border-bottom: 1px black dotted;
+      }
+    </style>
     <title>Snapshot | NUS Bridge</title>   
   </head>
 
@@ -75,45 +80,29 @@
   	</div>
 
     {% if aspirations_completed != True or education_completed != True or experience_completed != True or personality_completed != True %}
-    <div class="well" style="border-radius: 0px;">
-      <div class="container">
+    <div class="container">
+      <div class="well">
         <div class="row">
           <div class="col-md-12 text-center">
-            <h4>Complete all questionnaires to see a brief summary about you. The data will be analysed to find interesting connections and experiences which you can learn from.</h4>
+            <h4>Complete the questionnaires.<br/></br/>When you're done, you'll be able to proceed to the Analysis to find connections and experiences relevant to your goals.</h4>
           <br/>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-3">
-            {% if aspirations_completed == False %}
-            <a href="/aspirations" class="btn btn-primary btn-lg btn-block">Your Aspirations</a>
-            {% else %}
-            <a href="/aspirations" class="btn btn-success btn-lg btn-block">Your Aspirations</a>
-            {% endif %}
+          <div class="col-sm-3">
+            <a href="/aspirations" class="btn btn-{% if aspirations_completed == False %}primary{% else %}success{% endif %} btn-lg btn-block"><img class="img-circle img-responsive" style="border: 2px solid white; width: 140px; display: inline-block; text-align: center;" src="../images/icon_14892.png"><br/></br/>Your Aspirations</a>
             <br/>
           </div>
-          <div class="col-md-3">
-            {% if education_completed == False %}
-            <a href="/education" class="btn btn-primary btn-lg btn-block">Your Education</a>
-            {% else %}
-            <a href="/education" class="btn btn-success btn-lg btn-block">Your Education</a>
-            {% endif %}
+          <div class="col-sm-3">
+            <a href="/education" class="btn btn-{% if education_completed == False %}primary{% else %}success{% endif %} btn-lg btn-block"><img class="img-circle img-responsive" style="border: 2px solid white; width: 140px; display: inline-block; text-align: center;" src="../images/icon_47508.png"><br/></br/>Your Education</a>
             <br/>
           </div>
-          <div class="col-md-3">
-            {% if experience_completed == False %}
-            <a href="/experience" class="btn btn-primary btn-lg btn-block">Your Experience</a>
-            {% else %}
-            <a href="/experience" class="btn btn-success btn-lg btn-block">Your Experience</a>
-            {% endif %}
+          <div class="col-sm-3">     
+            <a href="/experience" class="btn btn-{% if experience_completed == False %}primary{% else %}success{% endif %} btn-lg btn-block"><img class="img-circle img-responsive" style="border: 2px solid white; width: 140px; display: inline-block; text-align: center;" src="../images/icon_44258.png"><br/></br/>Your Experience</a>
             <br/>
           </div>
-          <div class="col-md-3">
-            {% if personality_completed == False %}
-            <a href="/personality" class="btn btn-primary btn-lg btn-block">Your Personality</a>
-            {% else %}
-            <a href="/personality" class="btn btn-success btn-lg btn-block">Your Personality</a>
-            {% endif %}
+          <div class="col-sm-3">
+            <a href="/personality" class="btn btn-{% if personality_completed == False %}primary{% else %}success{% endif %} btn-lg btn-block"><img class="img-circle img-responsive" style="border: 2px solid white; width: 140px; display: inline-block; text-align: center;" src="../images/icon_21308.png"><br/></br/>Your Personality</a>
             <br/>
           </div>
         </div>
@@ -123,62 +112,72 @@
   	<div class="container">
       <div class="row">
          <div class="col-md-8">
-            <div class="panel panel-default">
-              <div class="panel-heading">Briefly About You</div>
-                <div class="panel-body">
-                  <!--{% if best_modules != '' %}
-                    <p class="lead">
-                      Keep up the good work and the knowledge you acquired from {{ best_modules }}.
-                    </p>
-                  {% endif %}-->
-
-                  <p class="lead">
-                    {% if aspirations == '' %}
-                      This is a good time to think about your future. 
-                        {% if interests != '' %}
-                          Consider your interests in {{ interests }}. 
-                        {% endif %}
-                        {% if skills != '' %}
-                          Focus on your abilities in {{ skills }}. 
-                        {% endif %}
-                        Your opinions about your dream matter more than anyone else's. Put them to use and truly excel in life.
-                    {% else %}
-                      You want to be {{ aspirations }} after your graduation. You appreciate learning about {{ interests }}, and you are good at {{ skills }}.
-                    {% endif %}
-                  </p>
-
-                  <p class="lead">
-                    Generally you {{ two_emotions_from_two_traits }}. At work, you {{ two_strengths_from_two_traits_at_work }}.
-                    {% if involvements != '' %}
-                      You would probably use what you have learned from {{ involvements }}.
-                    {% endif %}
-                  </p>
-
-                  <p class="lead">
-                    As a friend, it seems that you {{ two_stengths_from_two_traits_as_a_friend }}. You are best in {{ two_best_from_two_traits }}.   
-                  </p>
-
-                  {% if advice != '' %}
-                  <p class="lead">One of the things you like to share is, "{{ advice }}".</p>
-                  {% endif %}
+            <div class="well">
+              <h4>These are the people who share the same aspirations as you.</h4>
+              <p>Find out more about their experiences and academic backgrounds.</p><br/>
+              <div class="row text-center">
+                <div class="col-md-6">
+                  <p><a href="/symmetrical-connections" class="btn btn-success btn-block btn-lg">Your Symmetrical Connections</a>
+                  </p><p>the top 6 whose personalities are similar to you</p>
+                </div>
+                <div class="col-md-6">
+                  <p><a href="/complementary-connections" class="btn btn-success btn-block btn-lg">Your Complementary Connections</a></p>
+                  <p>the top 6 whose personalities are different from you</p>
                 </div>
               </div>
             </div>
-          <div class="col-md-4">
-            <div class="panel panel-default">
-              <div class="panel-heading">Personal Information</div>
-              <div class="panel-body">
-                <p>Gender: <b>{{ gender }}</b></p>
-                <p>Country: <b>{{ country }}</b></p>
-                <p>Date of Birth: <b>{{ date_of_birth }}</b></p>
-              </div>
+           
+            <div class="well">
+              <a class="pull-right" href="/aspirations">Restart Questionnaires</a>
+              <h4>Briefly About You</h4>
+              <p class="lead">
+                {% if aspirations == '' %}
+                  This is a good time to think about your future. 
+                    {% if interests != '' %}
+                      Consider your interests in <span class="keyword">{{ interests }}</span>. 
+                    {% endif %}
+                    {% if skills != '' %}
+                      Focus on your abilities in <span class="keyword">{{ skills }}</span>. 
+                    {% endif %}
+                    Your opinions about your dream matter more than anyone else's. Put them to use and truly excel in life.
+                {% else %}
+                  You want to be <span class="keyword">{{ aspirations }}</span> after your graduation. You appreciate learning about <span class="keyword">{{ interests }}</span>, and you are good at <span class="keyword">{{ skills }}</span>.
+                {% endif %}
+              </p>
+
+              <p class="lead">
+                Generally you {{ two_emotions_from_two_traits }}. At work, you {{ two_strengths_from_two_traits_at_work }}.
+                {% if involvements != '' %}
+                  You would probably use what you have learned from <span class="keyword">{{ involvements }}</span>.
+                {% endif %}
+              </p>
+
+              <p class="lead">
+                As a friend, it seems that you {{ two_stengths_from_two_traits_as_a_friend }}. You are best in {{ two_best_from_two_traits }}.   
+              </p>
+
+              {% if advice != '' %}
+              <p class="lead">One of the things you like to share is, "<span class="keyword">{{ advice }}</span>".</p>
+              {% endif %}
+              
+              <p>
+                <a href="/improvement-advisory">Find out about your strengths, your fears and your priorities when working together with others.</a>
+              </p>
             </div>
-            <div class="panel panel-default">
-              <div class="panel-heading">Presence</div>
-              <div class="panel-body">
-                <p>Website: <b>{{ website }}</b></p>
-                <p>Social Networks:</p><b><ul id="social_networks_li"></ul></b>                     
-              </div>
+          </div>
+          <div class="col-md-4">
+            <div class="well">
+              <a class="pull-right" href="/profile">Edit</a>
+              <h4>Personal Information</h4>
+              <p>Gender: {% if gender != '' %}<b>{{ gender }}</b>{% else %}Undisclosed{% endif %}</p>
+              <p>Country: {% if country != '' %}<b>{{ country }}</b>{% else %}Undisclosed{% endif %}</p>
+              <p>Date of Birth: {% if date_of_birth != '' %}<b>{{ date_of_birth }}</b>{% else %}Undisclosed{% endif %}</p>
+            </div>
+            <div class="well">
+              <a class="pull-right" href="/profile">Edit</a>
+              <h4>Online Presence</h4>
+              <p>Website: {% if website != '' %}<b>{{ website }}</b>{% else %}None{% endif %}</p>
+              <p>Social Networks:</p><b><ul id="social_networks_li">None</ul></b>
               <script>
                 var social_networks = "{{ social_networks }}";
                 social_networks = social_networks.replace(/&lt;/g, "<");
