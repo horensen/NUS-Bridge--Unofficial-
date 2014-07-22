@@ -25,10 +25,16 @@
       temp = temp.replace(/&gt;/g, ">");
       document.getElementById('aspirations_tags').innerHTML = temp;
 
+      var all_aspirations = "{{ all_aspirations }}";
+      all_aspirations = all_aspirations.replace(/&#34;/g, "\"");
+      all_aspirations = all_aspirations.replace(/&#39;/g, "'");
+      all_aspirations = all_aspirations.replace(/&amp;/g, "&");
+      var arrayOfAllAspirations = all_aspirations.split(',');
+
       $("#aspirations_tags").tagit({
         // Options
         fieldName: "aspirations",
-        availableTags: [],
+        availableTags: arrayOfAllAspirations,
         autocomplete: {
           delay: 0,
           minLength: 2
@@ -44,27 +50,8 @@
         singleFieldDelimiter: ',',
         singleFieldNode: null,
         tabIndex: null,
-        placeholderText: '',
+        placeholderText: 'You want to be a/an...'
 
-        // Events
-        beforeTagAdded: function(event, ui) {
-            console.log(ui.tag);
-        },
-        afterTagAdded: function(event, ui) {
-            console.log(ui.tag);
-        },
-        beforeTagRemoved: function(event, ui) {
-            console.log(ui.tag);
-        },
-        onTagExists: function(event, ui) {
-            console.log(ui.tag);
-        },
-        onTagClicked: function(event, ui) {
-            console.log(ui.tag);
-        },
-        onTagLimitExceeded: function(event, ui) {
-            console.log(ui.tag);
-        }
       });
     });
   </script>

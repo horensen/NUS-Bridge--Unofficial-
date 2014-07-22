@@ -387,7 +387,8 @@ class Aspirations(BaseHandler):
             template_values = {
                 'student_name': self.session.get('student_name'),
                 'student_email': self.session.get('student_email'),
-                'existing_aspirations': aspirations_html
+                'existing_aspirations': aspirations_html,
+                'all_aspirations' : ''
             }
             template = jinja_environment.get_template('aspirations.html')
 

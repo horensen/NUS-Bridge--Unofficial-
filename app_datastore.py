@@ -131,7 +131,7 @@ def get_pic_url(student_id):
         image_key=get_pic(student_id)
         image=images.get_serving_url(str(image_key),size=None,crop=False,secure_url=None)
     except Exception:
-        image='../images/icon_961.png'
+        image='../images/user_icon.png'
     return image
 
 # ASPIRATIONS
