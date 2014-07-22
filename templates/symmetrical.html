@@ -526,6 +526,278 @@
         </div>
         {% endif %}
       </div>
+
+      <div class="row">
+        {% if person_7_name|length > 0 %}
+        <div class="col-md-6">
+           <div class="well profile">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <h2/>{{ person_7_name }}</h2>
+                    <p>{{ person_7_major }}, {{ person_7_faculty }}</p>
+                    <p>
+                      <div class="dropdown">
+                        <a type="button" class="btn btn-{% if person_7_networks == '' %}default{% else %}info{% endif %} dropdown-toggle {% if person_7_networks == '' %}disabled{% endif %}" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span> Connect <span class="caret"></span></a>
+                        <ul class="dropdown-menu text-left" role="menu" id="my_networks_7"></ul>
+                        <script>
+                          var temp = "{{ person_7_networks }}";
+                          temp = temp.replace(/\s/g, '');
+                          temp = temp.split(",")
+                          html = ''
+                          for (i = 0; i < temp.length; i++) {
+                            html += "<li><a href=\"http://" + temp[i] + "\">" + temp[i] + "</a></li>"
+                          }
+                          document.getElementById('my_networks_7').innerHTML = html;
+                        </script>
+                        <a href="{{ person_7_website }}" class="btn btn-{% if person_7_website == '' %}default{% else %}info{% endif %} {% if person_7_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
+                        <a href="mailto:{{person_7_email}}" class="btn btn-{% if person_7_email == '' %}default{% else %}info{% endif %} {% if person_7_email == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Email</a>
+                      </div>
+                    </p>
+                    <p>Aspirations:<br/><strong id="my_aspirations_7"></strong>
+                    </p> 
+                    <script>
+                          var temp = "{{ person_7_aspirations }}";
+                          temp = temp.split(",")
+                          html = ''
+                          for (i = 0; i < temp.length; i++) {
+                            html += "<span class=\"tags\">" + temp[i] + "</span> "
+                          }
+                          document.getElementById('my_aspirations_7').innerHTML = html;
+                    </script>
+                  </div>            
+                  <div class="col-sm-4">
+                    <img src="{{person_7_pic}}" alt="" class="img-circle img-responsive">
+                    <h1 class="text-center"><span class="label label-primary">{{ person_7_percent }}%</span></h1>
+                    <br/>
+                    <p>
+                      {% if person_7_dob != '' %}
+                      <span class="glyphicon glyphicon-user"></span> Born in <strong>{{ person_7_dob }}</strong><br/>
+                      {% endif %}
+                      {% if person_7_country != '' %}
+                      <span class="glyphicon glyphicon-map-marker"></span> From <strong>{{ person_7_country }}</strong><br/>
+                      {% endif %}
+                    </p>
+                  </div>
+                  <div class="col-sm-12">
+                    <p><a data-toggle="collapse" data-parent="#accordion" href="#collapse7"><span class="glyphicon glyphicon-info-sign"></span> More Info <span class="caret"></span></a></p>
+                  </div>
+                </div>
+                <div class="col-xs-12 divider panel-collapse collapse" id="collapse7">
+                  <br/>{% if person_7_advice != '' %}<p class="lead text-center">"{{ person_7_advice }}"</p>{% endif %}
+                  <p>
+                    Skills: <strong>{{ person_7_skills }}</strong><br/>
+                    Interests: <strong>{{ person_7_interests }}</strong><br/>
+                    Involvements: <strong>{{ person_7_involvements }}</strong><br/>
+                    Best Modules: <strong>{{ person_7_best_modules }}</strong><br/>
+                  </p>
+                </div>
+           </div>                 
+        </div>
+        {% endif %}
+
+        {% if person_8_name|length > 0 %}
+        <div class="col-md-6">
+           <div class="well profile">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <h2/>{{ person_8_name }}</h2>
+                    <p>{{ person_8_major }}, {{ person_8_faculty }}</p>
+                    <p>
+                      <div class="dropdown">
+                        <a type="button" class="btn btn-{% if person_8_networks == '' %}default{% else %}info{% endif %} dropdown-toggle {% if person_8_networks == '' %}disabled{% endif %}" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span> Connect <span class="caret"></span></a>
+                        <ul class="dropdown-menu text-left" role="menu" id="my_networks_8"></ul>
+                        <script>
+                          var temp = "{{ person_8_networks }}";
+                          temp = temp.replace(/\s/g, '');
+                          temp = temp.split(",")
+                          html = ''
+                          for (i = 0; i < temp.length; i++) {
+                            html += "<li><a href=\"http://" + temp[i] + "\">" + temp[i] + "</a></li>"
+                          }
+                          document.getElementById('my_networks_8').innerHTML = html;
+                        </script>
+                        <a href="{{ person_8_website }}" class="btn btn-{% if person_8_website == '' %}default{% else %}info{% endif %} {% if person_8_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
+                        <a href="mailto:{{person_8_email}}" class="btn btn-{% if person_8_email == '' %}default{% else %}info{% endif %} {% if person_8_email == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Email</a>
+                      </div>
+                    </p>
+                    <p>Aspirations:<br/><strong id="my_aspirations_8"></strong>
+                    </p> 
+                    <script>
+                          var temp = "{{ person_8_aspirations }}";
+                          temp = temp.split(",")
+                          html = ''
+                          for (i = 0; i < temp.length; i++) {
+                            html += "<span class=\"tags\">" + temp[i] + "</span> "
+                          }
+                          document.getElementById('my_aspirations_8').innerHTML = html;
+                    </script>
+                  </div>            
+                  <div class="col-sm-4">
+                    <img src="{{person_8_pic}}" alt="" class="img-circle img-responsive">
+                    <h1 class="text-center"><span class="label label-primary">{{ person_8_percent }}%</span></h1>
+                    <br/>
+                    <p>
+                      {% if person_8_dob != '' %}
+                      <span class="glyphicon glyphicon-user"></span> Born in <strong>{{ person_8_dob }}</strong><br/>
+                      {% endif %}
+                      {% if person_8_country != '' %}
+                      <span class="glyphicon glyphicon-map-marker"></span> From <strong>{{ person_8_country }}</strong><br/>
+                      {% endif %}
+                    </p>
+                  </div>
+                  <div class="col-sm-12">
+                    <p><a data-toggle="collapse" data-parent="#accordion" href="#collapse8"><span class="glyphicon glyphicon-info-sign"></span> More Info <span class="caret"></span></a></p>
+                  </div>
+                </div>
+                <div class="col-xs-12 divider panel-collapse collapse" id="collapse8">
+                  <br/>{% if person_8_advice != '' %}<p class="lead text-center">"{{ person_8_advice }}"</p>{% endif %}
+                  <p>
+                    Skills: <strong>{{ person_8_skills }}</strong><br/>
+                    Interests: <strong>{{ person_8_interests }}</strong><br/>
+                    Involvements: <strong>{{ person_8_involvements }}</strong><br/>
+                    Best Modules: <strong>{{ person_8_best_modules }}</strong><br/>
+                  </p>
+                </div>
+           </div>                 
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="row">
+        {% if person_9_name|length > 0 %}
+        <div class="col-md-6">
+           <div class="well profile">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <h2/>{{ person_9_name }}</h2>
+                    <p>{{ person_9_major }}, {{ person_9_faculty }}</p>
+                    <p>
+                      <div class="dropdown">
+                        <a type="button" class="btn btn-{% if person_9_networks == '' %}default{% else %}info{% endif %} dropdown-toggle {% if person_9_networks == '' %}disabled{% endif %}" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span> Connect <span class="caret"></span></a>
+                        <ul class="dropdown-menu text-left" role="menu" id="my_networks_9"></ul>
+                        <script>
+                          var temp = "{{ person_9_networks }}";
+                          temp = temp.replace(/\s/g, '');
+                          temp = temp.split(",")
+                          html = ''
+                          for (i = 0; i < temp.length; i++) {
+                            html += "<li><a href=\"http://" + temp[i] + "\">" + temp[i] + "</a></li>"
+                          }
+                          document.getElementById('my_networks_9').innerHTML = html;
+                        </script>
+                        <a href="{{ person_9_website }}" class="btn btn-{% if person_9_website == '' %}default{% else %}info{% endif %} {% if person_9_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
+                        <a href="mailto:{{person_9_email}}" class="btn btn-{% if person_9_email == '' %}default{% else %}info{% endif %} {% if person_9_email == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Email</a>
+                      </div>
+                    </p>
+                    <p>Aspirations:<br/><strong id="my_aspirations_9"></strong>
+                    </p> 
+                    <script>
+                          var temp = "{{ person_9_aspirations }}";
+                          temp = temp.split(",")
+                          html = ''
+                          for (i = 0; i < temp.length; i++) {
+                            html += "<span class=\"tags\">" + temp[i] + "</span> "
+                          }
+                          document.getElementById('my_aspirations_9').innerHTML = html;
+                    </script>
+                  </div>            
+                  <div class="col-sm-4">
+                    <img src="{{person_9_pic}}" alt="" class="img-circle img-responsive">
+                    <h1 class="text-center"><span class="label label-primary">{{ person_9_percent }}%</span></h1>
+                    <br/>
+                    <p>
+                      {% if person_9_dob != '' %}
+                      <span class="glyphicon glyphicon-user"></span> Born in <strong>{{ person_9_dob }}</strong><br/>
+                      {% endif %}
+                      {% if person_9_country != '' %}
+                      <span class="glyphicon glyphicon-map-marker"></span> From <strong>{{ person_9_country }}</strong><br/>
+                      {% endif %}
+                    </p>
+                  </div>
+                  <div class="col-sm-12">
+                    <p><a data-toggle="collapse" data-parent="#accordion" href="#collapse9"><span class="glyphicon glyphicon-info-sign"></span> More Info <span class="caret"></span></a></p>
+                  </div>
+                </div>
+                <div class="col-xs-12 divider panel-collapse collapse" id="collapse9">
+                  <br/>{% if person_9_advice != '' %}<p class="lead text-center">"{{ person_9_advice }}"</p>{% endif %}
+                  <p>
+                    Skills: <strong>{{ person_9_skills }}</strong><br/>
+                    Interests: <strong>{{ person_9_interests }}</strong><br/>
+                    Involvements: <strong>{{ person_9_involvements }}</strong><br/>
+                    Best Modules: <strong>{{ person_9_best_modules }}</strong><br/>
+                  </p>
+                </div>
+           </div>                 
+        </div>
+        {% endif %}
+
+        {% if person_10_name|length > 0 %}
+        <div class="col-md-6">
+           <div class="well profile">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <h2/>{{ person_10_name }}</h2>
+                    <p>{{ person_10_major }}, {{ person_10_faculty }}</p>
+                    <p>
+                      <div class="dropdown">
+                        <a type="button" class="btn btn-{% if person_10_networks == '' %}default{% else %}info{% endif %} dropdown-toggle {% if person_10_networks == '' %}disabled{% endif %}" data-toggle="dropdown"><span class="glyphicon glyphicon-globe"></span> Connect <span class="caret"></span></a>
+                        <ul class="dropdown-menu text-left" role="menu" id="my_networks_10"></ul>
+                        <script>
+                          var temp = "{{ person_10_networks }}";
+                          temp = temp.replace(/\s/g, '');
+                          temp = temp.split(",")
+                          html = ''
+                          for (i = 0; i < temp.length; i++) {
+                            html += "<li><a href=\"http://" + temp[i] + "\">" + temp[i] + "</a></li>"
+                          }
+                          document.getElementById('my_networks_10').innerHTML = html;
+                        </script>
+                        <a href="{{ person_10_website }}" class="btn btn-{% if person_10_website == '' %}default{% else %}info{% endif %} {% if person_10_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
+                        <a href="mailto:{{person_10_email}}" class="btn btn-{% if person_10_email == '' %}default{% else %}info{% endif %} {% if person_10_email == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Email</a>
+                      </div>
+                    </p>
+                    <p>Aspirations:<br/><strong id="my_aspirations_10"></strong>
+                    </p> 
+                    <script>
+                          var temp = "{{ person_10_aspirations }}";
+                          temp = temp.split(",")
+                          html = ''
+                          for (i = 0; i < temp.length; i++) {
+                            html += "<span class=\"tags\">" + temp[i] + "</span> "
+                          }
+                          document.getElementById('my_aspirations_10').innerHTML = html;
+                    </script>
+                  </div>            
+                  <div class="col-sm-4">
+                    <img src="{{person_10_pic}}" alt="" class="img-circle img-responsive">
+                    <h1 class="text-center"><span class="label label-primary">{{ person_10_percent }}%</span></h1>
+                    <br/>
+                    <p>
+                      {% if person_10_dob != '' %}
+                      <span class="glyphicon glyphicon-user"></span> Born in <strong>{{ person_10_dob }}</strong><br/>
+                      {% endif %}
+                      {% if person_10_country != '' %}
+                      <span class="glyphicon glyphicon-map-marker"></span> From <strong>{{ person_10_country }}</strong><br/>
+                      {% endif %}
+                    </p>
+                  </div>
+                  <div class="col-sm-12">
+                    <p><a data-toggle="collapse" data-parent="#accordion" href="#collapse10"><span class="glyphicon glyphicon-info-sign"></span> More Info <span class="caret"></span></a></p>
+                  </div>
+                </div>
+                <div class="col-xs-12 divider panel-collapse collapse" id="collapse10">
+                  <br/>{% if person_10_advice != '' %}<p class="lead text-center">"{{ person_10_advice }}"</p>{% endif %}
+                  <p>
+                    Skills: <strong>{{ person_10_skills }}</strong><br/>
+                    Interests: <strong>{{ person_10_interests }}</strong><br/>
+                    Involvements: <strong>{{ person_10_involvements }}</strong><br/>
+                    Best Modules: <strong>{{ person_10_best_modules }}</strong><br/>
+                  </p>
+                </div>
+           </div>                 
+        </div>
+        {% endif %}
+      </div>
     </div> 
 
   </body>
