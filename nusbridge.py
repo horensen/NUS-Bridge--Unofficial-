@@ -347,9 +347,9 @@ class Snapshot(BaseHandler):
                 'experience_completed': experience_completed,
                 'personality_completed': personality_completed,
                 'best_modules': best_modules_html,
-                'aspirations': aspirations_html,
-                'interests': interests_html,
-                'skills': skills_and_knowledge_html,
+                'aspirations': aspirations_html.lower(),
+                'interests': interests_html.lower(),
+                'skills': skills_and_knowledge_html.lower(),
                 'two_emotions_from_two_traits': emotions_html,
                 'two_strengths_from_two_traits_at_work': strengths_at_work_html,
                 'involvements': involvements_html,
@@ -372,6 +372,8 @@ class Snapshot(BaseHandler):
 class Aspirations(BaseHandler):
     def get(self):
         if self.session.get('is_valid') == True:
+            urlfetch.set_default_fetch_deadline(60)
+
             # Retrieve existing user aspirations
             aspirations_html = ""
             try:
