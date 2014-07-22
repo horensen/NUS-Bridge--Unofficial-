@@ -131,7 +131,14 @@ def get_pic_url(student_id):
         image_key=get_pic(student_id)
         image=images.get_serving_url(str(image_key),size=None,crop=False,secure_url=None)
     except Exception:
-        image='../images/user_icon.png'
+        student_gender = get_user(student_id).gender
+        if student_gender.lower() == 'male':
+            image = '../images/male_icon.png'
+        elif student_gender.lower() == 'female':
+            image = '../images/female_icon.png'
+        else:
+            image = '../images/student_icon.png'
+
     return image
 
 # ASPIRATIONS

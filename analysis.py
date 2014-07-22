@@ -70,6 +70,7 @@ def get_symmetrical(std_id):
         p_percent='person_'+str(place_index)+'_percent'
         p_name='person_'+str(place_index)+'_name'
         p_dob='person_'+str(place_index)+'_dob'
+        p_gender='person_'+str(place_index)+'_gender'
         p_country='person_'+str(place_index)+'_country'
         p_major='person_'+str(place_index)+'_major'
         p_faculty='person_'+str(place_index)+'_faculty'
@@ -86,6 +87,7 @@ def get_symmetrical(std_id):
         result_dict[p_percent]=int(round(symmetrical_list.get(sorted_dict[index])))
         result_dict[p_name]=app_datastore.get_user(sorted_dict[index]).name
         result_dict[p_dob]=app_datastore.get_user(sorted_dict[index]).date_of_birth
+        result_dict[p_gender]=app_datastore.get_user(sorted_dict[index]).gender
         result_dict[p_country]=app_datastore.get_user(sorted_dict[index]).country
         result_dict[p_major]=app_datastore.get_user(sorted_dict[index]).first_major
         if (app_datastore.get_user(sorted_dict[index]).second_major != ''):
