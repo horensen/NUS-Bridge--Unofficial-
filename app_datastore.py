@@ -53,11 +53,7 @@ def insert_user(student_profile_object):
     nus_user.put()
 
 
-<<<<<<< HEAD
 def update_user(student_id, email, date_of_birth, gender, country, website, social_networks):
-=======
-def update_user(student_id, date_of_birth, gender, country, website, social_networks, email):
->>>>>>> FETCH_HEAD
     qry = ProfileInfo.query(ancestor=ndb.Key("NUSBridge", "ProfileInfo"))
     result = qry.filter(ProfileInfo.student_id == student_id).fetch()
     nus_user = result[0]
