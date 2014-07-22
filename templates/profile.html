@@ -44,27 +44,7 @@
                     singleFieldDelimiter: ',,',
                     singleFieldNode: null,
                     tabIndex: null,
-                    placeholderText: '',
-
-                    // Events
-                    beforeTagAdded: function(event, ui) {
-                        console.log(ui.tag);
-                    },
-                    afterTagAdded: function(event, ui) {
-                        console.log(ui.tag);
-                    },
-                    beforeTagRemoved: function(event, ui) {
-                        console.log(ui.tag);
-                    },
-                    onTagExists: function(event, ui) {
-                        console.log(ui.tag);
-                    },
-                    onTagClicked: function(event, ui) {
-                        console.log(ui.tag);
-                    },
-                    onTagLimitExceeded: function(event, ui) {
-                        console.log(ui.tag);
-                    }
+                    placeholderText: 'http://'
                 });
             });
         </script>
@@ -218,7 +198,7 @@
                             <h5>Website</h5>
                             <p>
                             <div class="input-group">
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span> http://</span>
                                 <input class="form-control" id="user_website" type="text" name="user_website" placeholder="your website URL" value="{{user_website}}">
                             </div>
                             <p>
