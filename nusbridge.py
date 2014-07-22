@@ -637,7 +637,7 @@ class Profile(BaseHandler,blobstore_handlers.BlobstoreUploadHandler):
             blob_info=upload_files[0]
             app_datastore.insert_or_update_pic(self.session.get('student_id'),blob_info.key())
         if self.session.get('is_valid'):
-            app_datastore.update_user(self.session.get('student_id'), self.request.get("user_dob"), student_gender, student_country, student_website, student_social_network)
+            app_datastore.update_user(self.session.get('student_id'), self.request.get("user_dob"), student_gender, student_country, student_website, student_social_network, student_email)
 
         self.redirect("/profile")
 
