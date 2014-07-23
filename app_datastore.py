@@ -175,7 +175,10 @@ def get_all_asp():
     temp=[]
     for item in qry:
         for asp in item.aspirations:
-            temp.append(asp)
+            if asp in temp:
+                pass
+            else:
+                temp.append(asp)
     return prepare_list(temp)
 
 def asp_exists(student_id):
