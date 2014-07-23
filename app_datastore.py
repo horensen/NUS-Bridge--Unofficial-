@@ -170,6 +170,11 @@ def insert_or_update_aspirations(student_id, aspirations):
         user_aspirations.completed = True
         user_aspirations.put()
 
+def get_all_asp(student_id):
+    qry = Aspirations.query(ancestor=ndb.Key("NUSBridge", "Aspirations"))
+    result=qry.fetch()
+    return prepare_list(result)
+
 def asp_exists(student_id):
     qry = Aspirations.query(ancestor=ndb.Key("NUSBridge", "Aspirations"))
     result = qry.filter(Aspirations.student_id == student_id).fetch()
