@@ -386,7 +386,7 @@ class Aspirations(BaseHandler):
             # Retrieve a list of all aspirations from the datastore
             all_aspirations_html = ''
             try:
-                all_aspirations_html = app_datastore.get_all_asp()
+                all_aspirations_html = app_datastore.get_all_aspirations()
             except Exception:
                 pass
             print all_aspirations_html
@@ -501,6 +501,30 @@ class Experience(BaseHandler):
             except Exception:
                 pass
 
+            # Retrieve a list of all skills
+            all_skills_html = ''
+            try:
+                all_skills_html = app_datastore.get_all_skills()
+            except Exception:
+                pass
+            print all_skills_html
+
+            # Retrieve a list of all interests
+            all_interests_html = ''
+            try:
+                all_interests_html = app_datastore.get_all_interests()
+            except Exception:
+                pass
+            print all_interests_html
+
+            # Retrieve a list of all involvements
+            all_involvements_html = ''
+            try:
+                all_involvements_html = app_datastore.get_all_involvements()
+            except Exception:
+                pass
+            print all_involvements_html
+
             # Prepare template values and template
             template_values = {
                 'student_name': self.session.get('student_name'),
@@ -508,7 +532,10 @@ class Experience(BaseHandler):
                 'existing_skills': skills_html,
                 'existing_interests': interests_html,
                 'existing_involvements': involvements_html,
-                'existing_advices': advices_html
+                'existing_advices': advices_html,
+                'all_skills': all_skills_html,
+                'all_interests': all_interests_html,
+                'all_involvements': all_involvements_html
             }
             template = jinja_environment.get_template('experience.html')
 

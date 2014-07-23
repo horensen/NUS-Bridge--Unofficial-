@@ -40,13 +40,31 @@
       temp = temp.replace(/&gt;/g, ">");
       document.getElementById('advices_tags').innerHTML = temp;
 
+      var all_skills = "{{ all_skills }}";
+      all_skills = all_skills.replace(/&#34;/g, "\"");
+      all_skills = all_skills.replace(/&#39;/g, "'");
+      all_skills = all_skills.replace(/&amp;/g, "&");
+      var arrayOfAllSkills = all_skills.split(', ');
+
+      var all_interests = "{{ all_interests }}";
+      all_interests = all_interests.replace(/&#34;/g, "\"");
+      all_interests = all_interests.replace(/&#39;/g, "'");
+      all_interests = all_interests.replace(/&amp;/g, "&");
+      var arrayOfAllInterests = all_interests.split(', ');
+
+      var all_involvements = "{{ all_involvements }}";
+      all_involvements = all_involvements.replace(/&#34;/g, "\"");
+      all_involvements = all_involvements.replace(/&#39;/g, "'");
+      all_involvements = all_involvements.replace(/&amp;/g, "&");
+      var arrayOfAllInvolvements = all_involvements.split(', ');
+
       $("#skills_tags").tagit({
         // Options
         fieldName: "skills",
-        availableTags: null,
+        availableTags: arrayOfAllSkills,
         autocomplete: {
           delay: 0,
-          minLength: 2
+          minLength: 3
         },
         showAutocompleteOnFocus: true,
         removeConfirmation: true,
@@ -65,10 +83,10 @@
       $("#interests_tags").tagit({
         // Options
         fieldName: "interests",
-        availableTags: null,
+        availableTags: arrayOfAllInterests,
         autocomplete: {
           delay: 0,
-          minLength: 2
+          minLength: 3
         },
         showAutocompleteOnFocus: true,
         removeConfirmation: true,
@@ -87,10 +105,10 @@
       $("#involvements_tags").tagit({
         // Options
         fieldName: "involvements",
-        availableTags: null,
+        availableTags: arrayOfAllInvolvements,
         autocomplete: {
           delay: 0,
-          minLength: 2
+          minLength: 3
         },
         showAutocompleteOnFocus: true,
         removeConfirmation: true,

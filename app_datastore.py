@@ -170,7 +170,7 @@ def insert_or_update_aspirations(student_id, aspirations):
         user_aspirations.completed = True
         user_aspirations.put()
 
-def get_all_asp():
+def get_all_aspirations():
     qry = Aspirations.query().fetch()
     temp=[]
     for item in qry:
@@ -181,7 +181,7 @@ def get_all_asp():
                 temp.append(asp.lower())
     return prepare_list(temp)
 
-def asp_exists(student_id):
+def aspiration_exists(student_id):
     qry = Aspirations.query(ancestor=ndb.Key("NUSBridge", "Aspirations"))
     result = qry.filter(Aspirations.student_id == student_id).fetch()
     if result:
@@ -263,6 +263,42 @@ def insert_or_update_experience(student_id, skills_and_knowledge, interests, inv
         user_experience.advices = advices
         user_experience.completed = True
         user_experience.put()
+
+
+def get_all_skills():
+    qry = Experience.query().fetch()
+    temp=[]
+    for item in qry:
+        for skill in item.skills_and_knowledge:
+            if skill.lower() in temp:
+                pass
+            else:
+                temp.append(skill.lower())
+    return prepare_list(temp)
+
+
+def get_all_interests():
+    qry = Experience.query().fetch()
+    temp=[]
+    for item in qry:
+        for interest in item.interests:
+            if interest.lower() in temp:
+                pass
+            else:
+                temp.append(interest.lower())
+    return prepare_list(temp)
+
+
+def get_all_involvements():
+    qry = Experience.query().fetch()
+    temp=[]
+    for item in qry:
+        for involvement in item.involvements:
+            if involvement.lower() in temp:
+                pass
+            else:
+                temp.append(involvement.lower())
+    return prepare_list(temp)
 
 
 def get_number_of_skills(student_id):

@@ -26,7 +26,7 @@ def get_symmetrical(std_id):
     curr_user_two_temp=app_datastore.get_personality(std_id).two_dominant_temperaments_both
     #for loop each item for each other user
     for other_user in compare_list:
-        if (app_datastore.asp_exists(other_user.student_id) and app_datastore.personality_exists(other_user.student_id) and app_datastore.experience_exists(other_user.student_id) and app_datastore.education_exists(other_user.student_id)):
+        if (app_datastore.aspiration_exists(other_user.student_id) and app_datastore.personality_exists(other_user.student_id) and app_datastore.experience_exists(other_user.student_id) and app_datastore.education_exists(other_user.student_id)):
             try:
                 other_user_two_temp=app_datastore.get_personality(other_user.student_id).two_dominant_temperaments_both
                 if other_user.student_id == std_id:
@@ -130,7 +130,7 @@ def get_complementary(std_id):
     curr_user_two_temp=app_datastore.get_personality(std_id).two_dominant_temperaments_both
     #for loop each item for each other user
     for other_user in compare_list:
-        if (app_datastore.asp_exists(other_user.student_id) and app_datastore.personality_exists(other_user.student_id) and app_datastore.experience_exists(other_user.student_id) and app_datastore.education_exists(other_user.student_id)):
+        if (app_datastore.aspiration_exists(other_user.student_id) and app_datastore.personality_exists(other_user.student_id) and app_datastore.experience_exists(other_user.student_id) and app_datastore.education_exists(other_user.student_id)):
             try:
                 other_user_two_temp=app_datastore.get_personality(other_user.student_id).two_dominant_temperaments_both
                 if other_user.student_id == std_id:
