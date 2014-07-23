@@ -175,7 +175,7 @@ def get_all_asp():
     temp=[]
     for item in qry:
         for asp in item.aspirations:
-            if asp in temp:
+            if asp.lower() in temp:
                 pass
             else:
                 temp.append(asp.lower())
