@@ -386,7 +386,7 @@ class Aspirations(BaseHandler):
             # Retrieve a list of all aspirations from the datastore
             all_aspirations_html = ''
             try:
-                all_aspirations_html = app_datastore.get_all_asp(self.session['student_id'])
+                all_aspirations_html = app_datastore.get_all_asp()
             except Exception:
                 pass
             print all_aspirations_html

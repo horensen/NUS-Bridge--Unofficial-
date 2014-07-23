@@ -170,7 +170,7 @@ def insert_or_update_aspirations(student_id, aspirations):
         user_aspirations.completed = True
         user_aspirations.put()
 
-def get_all_asp(student_id):
+def get_all_asp():
     qry = Aspirations.query(ancestor=ndb.Key("NUSBridge", "Aspirations"))
     result=qry.fetch()
     temp=[]
