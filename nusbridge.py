@@ -383,12 +383,20 @@ class Aspirations(BaseHandler):
             except Exception:
                 pass
 
+            # Retrieve a list of all aspirations from the datastore
+            all_aspirations_html = ''
+            try:
+                all_aspirations_html = app_datastore.get_all_asp(self.session['student_id'])
+            except Exception:
+                pass
+            print all_aspirations_html
+
             # Prepare template values and template
             template_values = {
                 'student_name': self.session.get('student_name'),
                 'student_email': self.session.get('student_email'),
                 'existing_aspirations': aspirations_html,
-                'all_aspirations' : ''
+                'all_aspirations': all_aspirations_html
             }
             template = jinja_environment.get_template('aspirations.html')
 
