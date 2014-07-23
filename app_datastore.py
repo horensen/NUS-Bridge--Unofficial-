@@ -171,11 +171,11 @@ def insert_or_update_aspirations(student_id, aspirations):
         user_aspirations.put()
 
 def get_all_asp():
-    qry = Aspirations.query(ancestor=ndb.Key("NUSBridge", "Aspirations"))
-    result=qry.fetch()
+    qry = Aspirations.query().fetch()
     temp=[]
-    for item in result:
-        temp.append(item.aspirations)
+    for item in qry:
+        for asp in item.aspirations:
+            temp.append(asp)
     return prepare_list(temp)
 
 def asp_exists(student_id):
