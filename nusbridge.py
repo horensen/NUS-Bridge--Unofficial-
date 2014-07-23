@@ -150,7 +150,6 @@ class Snapshot(BaseHandler):
                         elif aspiration_id + 1 == number_of_aspirations:
                             aspirations_html += " or "
                         aspiration_id += 1
-                    logging.debug("Aspirations retrieved.")
                 except Exception:
                     pass
 
@@ -180,7 +179,6 @@ class Snapshot(BaseHandler):
                             elif i + 1 == number_of_best_modules:
                                 best_modules_html += " and "
                             i += 1
-                    logging.debug("Best modules retrieved.")
                 except Exception:
                     pass
 
@@ -209,7 +207,6 @@ class Snapshot(BaseHandler):
                             elif i + 1 == len(interests):
                                 interests_html += " and "
                             i += 1
-                    logging.debug("Interests retrieved.")
                 except Exception:
                     pass
 
@@ -239,7 +236,6 @@ class Snapshot(BaseHandler):
                             elif i + 1 == len(sk):
                                 skills_and_knowledge_html += " and "
                             i += 1
-                    logging.debug("Skills and knowledge retrieved.")
                 except Exception:
                     pass
 
@@ -251,7 +247,6 @@ class Snapshot(BaseHandler):
                     phrase1 = four_temperaments.get_random_at_work(trait1)
                     phrase2 = four_temperaments.get_random_at_work(trait2)
                     strengths_at_work_html = phrase1 + " and " + phrase2
-                    logging.debug("Two strengths at work retrieved.")
                 except Exception:
                     pass
 
@@ -280,7 +275,6 @@ class Snapshot(BaseHandler):
                             elif i + 1 == len(involvements):
                                 involvements_html += " or "
                             i += 1
-                    logging.debug("Involvements retrieved.")
                 except Exception:
                     pass
 
@@ -292,7 +286,6 @@ class Snapshot(BaseHandler):
                     phrase1 = four_temperaments.get_random_emotion(trait1)
                     phrase2 = four_temperaments.get_random_emotion(trait2)
                     emotions_html = phrase1 + " and " + phrase2
-                    logging.debug("Two emotions retrieved.")
                 except Exception:
                     pass
 
@@ -304,7 +297,6 @@ class Snapshot(BaseHandler):
                     phrase1 = four_temperaments.get_random_as_a_friend(trait1)
                     phrase2 = four_temperaments.get_random_as_a_friend(trait2)
                     strengths_as_a_friend_html = phrase1 + " and " + phrase2
-                    logging.debug("Two strengths as a friend retrieved.")
                 except Exception:
                     pass
 
@@ -316,7 +308,6 @@ class Snapshot(BaseHandler):
                     phrase1 = four_temperaments.get_random_best_in(trait1)
                     phrase2 = four_temperaments.get_random_best_in(trait2)
                     personality_best_html = phrase1 + " and " + phrase2
-                    logging.debug("Best of personality retrieved.")
                 except Exception:
                     pass
 
@@ -324,7 +315,6 @@ class Snapshot(BaseHandler):
                 try:
                     advice_html = app_datastore.get_random_advice(self.session['student_id'])
                     experience_completed = app_datastore.get_experience(self.session['student_id']).completed
-                    logging.debug("Random advice retrieved.")
                 except Exception:
                     pass
 
@@ -333,7 +323,6 @@ class Snapshot(BaseHandler):
                     social_networks_obj = app_datastore.get_user(self.session['student_id']).social_networks
                     for link in social_networks_obj:
                         social_networks_html+="<a href=http://" + link + "><li>http://" + link + "</li></a>"
-                    logging.debug("Social networks retrieved.")
                 except Exception:
                     pass
 
@@ -358,9 +347,9 @@ class Snapshot(BaseHandler):
                 'experience_completed': experience_completed,
                 'personality_completed': personality_completed,
                 'best_modules': best_modules_html,
-                'aspirations': aspirations_html,
-                'interests': interests_html,
-                'skills': skills_and_knowledge_html,
+                'aspirations': aspirations_html.lower(),
+                'interests': interests_html.lower(),
+                'skills': skills_and_knowledge_html.lower(),
                 'two_emotions_from_two_traits': emotions_html,
                 'two_strengths_from_two_traits_at_work': strengths_at_work_html,
                 'involvements': involvements_html,
@@ -383,6 +372,8 @@ class Snapshot(BaseHandler):
 class Aspirations(BaseHandler):
     def get(self):
         if self.session.get('is_valid') == True:
+            urlfetch.set_default_fetch_deadline(60)
+
             # Retrieve existing user aspirations
             aspirations_html = ""
             try:
@@ -392,11 +383,20 @@ class Aspirations(BaseHandler):
             except Exception:
                 pass
 
+            # Retrieve a list of all aspirations from the datastore
+            all_aspirations_html = ''
+            try:
+                all_aspirations_html = app_datastore.get_all_asp()
+            except Exception:
+                pass
+            print all_aspirations_html
+
             # Prepare template values and template
             template_values = {
                 'student_name': self.session.get('student_name'),
                 'student_email': self.session.get('student_email'),
-                'existing_aspirations': aspirations_html
+                'existing_aspirations': aspirations_html,
+                'all_aspirations': all_aspirations_html
             }
             template = jinja_environment.get_template('aspirations.html')
 
@@ -648,7 +648,7 @@ class Profile(BaseHandler,blobstore_handlers.BlobstoreUploadHandler):
             blob_info=upload_files[0]
             app_datastore.insert_or_update_pic(self.session.get('student_id'),blob_info.key())
         if self.session.get('is_valid'):
-            app_datastore.update_user(self.session.get('student_id'), self.request.get("user_dob"), student_gender, student_country, student_website, student_social_network)
+            app_datastore.update_user(self.session.get('student_id'), student_email, self.request.get("user_dob"), student_gender, student_country, student_website, student_social_network)
 
         self.redirect("/profile")
 

@@ -53,15 +53,17 @@ def insert_user(student_profile_object):
     nus_user.put()
 
 
-def update_user(student_id, date_of_birth, gender, country, website, social_networks):
+def update_user(student_id, email, date_of_birth, gender, country, website, social_networks):
     qry = ProfileInfo.query(ancestor=ndb.Key("NUSBridge", "ProfileInfo"))
     result = qry.filter(ProfileInfo.student_id == student_id).fetch()
     nus_user = result[0]
+    nus_user.email = email
     nus_user.date_of_birth = date_of_birth
     nus_user.gender = gender
     nus_user.country = country
     nus_user.website = website
     nus_user.social_networks = social_networks
+    nus_user.email=email
     nus_user.put()
 
 
@@ -84,10 +86,8 @@ def get_other_records():
 
 
 def prepare_list(list_of_items):
-    logging.debug(str(list_of_items) + " passed into prepare_list()")
     temp = ''
     for item in list_of_items:
-        logging.debug("Current item: " + item)
         temp += item + ', '
     return temp[:-2]
 
@@ -131,7 +131,14 @@ def get_pic_url(student_id):
         image_key=get_pic(student_id)
         image=images.get_serving_url(str(image_key),size=None,crop=False,secure_url=None)
     except Exception:
-        image='../images/icon_961.png'
+        student_gender = get_user(student_id).gender
+        if student_gender.lower() == 'male':
+            image = '../images/male_icon.png'
+        elif student_gender.lower() == 'female':
+            image = '../images/female_icon.png'
+        else:
+            image = '../images/student_icon.png'
+
     return image
 
 # ASPIRATIONS
@@ -162,6 +169,17 @@ def insert_or_update_aspirations(student_id, aspirations):
         user_aspirations.aspirations = aspirations
         user_aspirations.completed = True
         user_aspirations.put()
+
+def get_all_asp():
+    qry = Aspirations.query().fetch()
+    temp=[]
+    for item in qry:
+        for asp in item.aspirations:
+            if asp.lower() in temp:
+                pass
+            else:
+                temp.append(asp.lower())
+    return prepare_list(temp)
 
 def asp_exists(student_id):
     qry = Aspirations.query(ancestor=ndb.Key("NUSBridge", "Aspirations"))
@@ -219,11 +237,8 @@ class Experience(ndb.Model):
 
 
 def get_experience(student_id):
-    logging.debug("Querying Experience entity...")
     qry = Experience.query(ancestor=ndb.Key("NUSBridge", "Experience"))
-    logging.debug("Queried. Filtering by " + student_id + "...")
     result = qry.filter(Experience.student_id == student_id).fetch()
-    logging.debug("Filtered. Returning result...")
     return result[0]
 
 

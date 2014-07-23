@@ -70,6 +70,7 @@ def get_symmetrical(std_id):
         p_percent='person_'+str(place_index)+'_percent'
         p_name='person_'+str(place_index)+'_name'
         p_dob='person_'+str(place_index)+'_dob'
+        p_gender='person_'+str(place_index)+'_gender'
         p_country='person_'+str(place_index)+'_country'
         p_major='person_'+str(place_index)+'_major'
         p_faculty='person_'+str(place_index)+'_faculty'
@@ -82,9 +83,11 @@ def get_symmetrical(std_id):
         p_networks='person_'+str(place_index)+'_networks'
         p_website='person_'+str(place_index)+'_website'
         p_pic='person_'+str(place_index)+'_pic'
+        p_email='person_'+str(place_index)+'_email'
         result_dict[p_percent]=int(round(symmetrical_list.get(sorted_dict[index])))
         result_dict[p_name]=app_datastore.get_user(sorted_dict[index]).name
         result_dict[p_dob]=app_datastore.get_user(sorted_dict[index]).date_of_birth
+        result_dict[p_gender]=app_datastore.get_user(sorted_dict[index]).gender
         result_dict[p_country]=app_datastore.get_user(sorted_dict[index]).country
         result_dict[p_major]=app_datastore.get_user(sorted_dict[index]).first_major
         if (app_datastore.get_user(sorted_dict[index]).second_major != ''):
@@ -99,6 +102,7 @@ def get_symmetrical(std_id):
         result_dict[p_networks]=app_datastore.prepare_list(app_datastore.get_user(sorted_dict[index]).social_networks)
         result_dict[p_website]=app_datastore.get_user(sorted_dict[index]).website
         result_dict[p_pic]=app_datastore.get_pic_url(sorted_dict[index])
+        result_dict[p_email]=app_datastore.get_user(sorted_dict[index]).email
         index+=1
 
     return result_dict
@@ -114,7 +118,6 @@ def different_temperaments(list1,list2):
 
 def get_complementary(std_id):
     # populate the list of user to be compare with
-    logging.debug("Getting complementary connections for " + std_id + "...")
     compare_list = app_datastore.get_other_records()
     complementary_list = {}
     index=0
@@ -167,9 +170,7 @@ def get_complementary(std_id):
     sorted_dict=sorted(complementary_list,key=complementary_list.get, reverse=True)
     result_dict={}
     place_index=0
-    logging.debug("Length of sorted_dict: " + str(len(sorted_dict)))
     for x in xrange(0,len(sorted_dict)):
-        logging.debug("Current values: x = " + str(x) + ", index = " + str(index) + ", place_index = " + str(place_index))
         place_index=x+1
         p_percent='person_'+str(place_index)+'_percent'
         p_name='person_'+str(place_index)+'_name'
@@ -189,7 +190,6 @@ def get_complementary(std_id):
         p_pic='person_'+str(place_index)+'_pic'
         result_dict[p_percent]=int(round(complementary_list.get(sorted_dict[index])))
         result_dict[p_name]=app_datastore.get_user(sorted_dict[index]).name
-        logging.debug("Added " + result_dict[p_name])
         result_dict[p_dob]=app_datastore.get_user(sorted_dict[index]).date_of_birth
         result_dict[p_country]=app_datastore.get_user(sorted_dict[index]).country
         result_dict[p_major]=app_datastore.get_user(sorted_dict[index]).first_major

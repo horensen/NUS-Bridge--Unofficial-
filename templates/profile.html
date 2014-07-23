@@ -10,6 +10,8 @@
         <link href="../stylesheets/bootstrap.css" rel="stylesheet">
         <link href="../stylesheets/jquery-ui.css" rel="stylesheet">
         <link href="../stylesheets/jquery.tagit.css" rel="stylesheet">
+        <link href="../stylesheets/datepicker.css" rel="stylesheet">
+        <script src="../scripts/datepicker.js"></script>
         <script src="../scripts/jquery.js"></script>
         <script src="../scripts/jquery-ui.js"></script>
         <script src="../scripts/bootstrap.js"></script>
@@ -44,27 +46,7 @@
                     singleFieldDelimiter: ',,',
                     singleFieldNode: null,
                     tabIndex: null,
-                    placeholderText: '',
-
-                    // Events
-                    beforeTagAdded: function(event, ui) {
-                        console.log(ui.tag);
-                    },
-                    afterTagAdded: function(event, ui) {
-                        console.log(ui.tag);
-                    },
-                    beforeTagRemoved: function(event, ui) {
-                        console.log(ui.tag);
-                    },
-                    onTagExists: function(event, ui) {
-                        console.log(ui.tag);
-                    },
-                    onTagClicked: function(event, ui) {
-                        console.log(ui.tag);
-                    },
-                    onTagLimitExceeded: function(event, ui) {
-                        console.log(ui.tag);
-                    }
+                    placeholderText: 'http://'
                 });
             });
         </script>
@@ -172,7 +154,7 @@
                             <div class="row">
                                 <div class="col-md-2">
                                     <p class="text-center">
-                                        <!--<img src="{% if pic != '' %}{{ pic }}{% else %}../images/icon_961.png{% endif %}" class="img-circle img-responsive" style="border:1px solid gray;">-->
+                                        <!--<img src="{% if pic != '' %}{{ pic }}{% else %}../images/user_icon.png{% endif %}" class="img-circle img-responsive" style="border:1px solid gray;">-->
                                         <img src="{{pic}}" class="img-circle img-responsive" style="border:1px solid gray;">
                                     </p>
                                 </div>
@@ -218,7 +200,7 @@
                             <h5>Website</h5>
                             <p>
                             <div class="input-group">
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span></span>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-globe"></span> http://</span>
                                 <input class="form-control" id="user_website" type="text" name="user_website" placeholder="your website URL" value="{{user_website}}">
                             </div>
                             <p>
