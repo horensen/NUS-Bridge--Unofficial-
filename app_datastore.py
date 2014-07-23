@@ -178,7 +178,7 @@ def get_all_asp():
             if asp in temp:
                 pass
             else:
-                temp.append(asp)
+                temp.append(asp.lower())
     return prepare_list(temp)
 
 def asp_exists(student_id):
