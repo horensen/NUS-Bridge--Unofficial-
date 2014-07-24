@@ -389,7 +389,6 @@ class Aspirations(BaseHandler):
                 all_aspirations_html = app_datastore.get_all_aspirations()
             except Exception:
                 pass
-            print all_aspirations_html
 
             # Prepare template values and template
             template_values = {
@@ -507,7 +506,6 @@ class Experience(BaseHandler):
                 all_skills_html = app_datastore.get_all_skills()
             except Exception:
                 pass
-            print all_skills_html
 
             # Retrieve a list of all interests
             all_interests_html = ''
@@ -515,7 +513,6 @@ class Experience(BaseHandler):
                 all_interests_html = app_datastore.get_all_interests()
             except Exception:
                 pass
-            print all_interests_html
 
             # Retrieve a list of all involvements
             all_involvements_html = ''
@@ -523,7 +520,6 @@ class Experience(BaseHandler):
                 all_involvements_html = app_datastore.get_all_involvements()
             except Exception:
                 pass
-            print all_involvements_html
 
             # Prepare template values and template
             template_values = {
