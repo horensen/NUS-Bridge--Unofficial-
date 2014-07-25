@@ -663,10 +663,13 @@ class Profile(BaseHandler,blobstore_handlers.BlobstoreUploadHandler):
         student_social_network = self.request.get('networks').split(",,")
         upload_files=self.get_uploads('file')
         if upload_files:
-            #do cleanup on the unused blob object
-            blob_key=app_datastore.get_pic(self.session.get('student_id'))
-            blob_info=blobstore.BlobInfo.get(blob_key)
-            blob_info.delete()
+            try:
+                #do cleanup on the unused blob object
+                blob_key=app_datastore.get_pic(self.session.get('student_id'))
+                blob_info=blobstore.BlobInfo.get(blob_key)
+                blob_info.delete()
+            except Exception:
+                pass
             #insert the blob key into the datastore
             blob_info=upload_files[0]
             app_datastore.insert_or_update_pic(self.session.get('student_id'),blob_info.key())
