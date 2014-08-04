@@ -400,7 +400,11 @@ class Aspirations(BaseHandler):
                 'student_name': self.session.get('student_name'),
                 'student_email': self.session.get('student_email'),
                 'existing_aspirations': aspirations_html,
-                'all_aspirations': all_aspirations_html
+                'all_aspirations': all_aspirations_html,
+                'aspirations_completed': self.session.get('aspirations_completed'),
+                'education_completed': self.session.get('education_completed'),
+                'experience_completed': self.session.get('experience_completed'),
+                'personality_completed': self.session.get('personality_completed')
             }
             template = jinja_environment.get_template('aspirations.html')
 
@@ -448,7 +452,11 @@ class Education(BaseHandler):
                 'student_email': self.session.get('student_email'),
                 'list_of_modules_taken': list_of_modules_taken,
                 'number_of_modules_taken': number_of_modules_taken,
-                'existing_best_modules': best_modules_html
+                'existing_best_modules': best_modules_html,
+                'aspirations_completed': self.session.get('aspirations_completed'),
+                'education_completed': self.session.get('education_completed'),
+                'experience_completed': self.session.get('experience_completed'),
+                'personality_completed': self.session.get('personality_completed')
             }
             template = jinja_environment.get_template('education.html')
 
@@ -536,7 +544,11 @@ class Experience(BaseHandler):
                 'existing_advices': advices_html,
                 'all_skills': all_skills_html,
                 'all_interests': all_interests_html,
-                'all_involvements': all_involvements_html
+                'all_involvements': all_involvements_html,
+                'aspirations_completed': self.session.get('aspirations_completed'),
+                'education_completed': self.session.get('education_completed'),
+                'experience_completed': self.session.get('experience_completed'),
+                'personality_completed': self.session.get('personality_completed')
             }
             template = jinja_environment.get_template('experience.html')
 
@@ -562,7 +574,11 @@ class Personality(BaseHandler):
         if self.session.get('is_valid') == True:
             template_values = {
                 'student_name': self.session.get('student_name'),
-                'student_email': self.session.get('student_email')
+                'student_email': self.session.get('student_email'),
+                'aspirations_completed': self.session.get('aspirations_completed'),
+                'education_completed': self.session.get('education_completed'),
+                'experience_completed': self.session.get('experience_completed'),
+                'personality_completed': self.session.get('personality_completed')
             }
             template = jinja_environment.get_template('personality.html')
             self.response.out.write(template.render(template_values))
@@ -575,6 +591,10 @@ class SymmetricalConnections(BaseHandler):
             template_values = analysis.get_symmetrical(self.session['student_id'])
             template_values['student_name'] = self.session.get('student_name')
             template_values['student_email'] = self.session.get('student_email')
+            template_values['aspirations_completed'] = self.session.get('aspirations_completed')
+            template_values['education_completed'] = self.session.get('education_completed')
+            template_values['experience_completed'] = self.session.get('experience_completed')
+            template_values['personality_completed'] = self.session.get('personality_completed')
             template = jinja_environment.get_template('symmetrical.html')
             self.response.out.write(template.render(template_values))
         else:
@@ -586,6 +606,10 @@ class ComplementaryConnections(BaseHandler):
             template_values = analysis.get_complementary(self.session['student_id'])
             template_values['student_name'] = self.session.get('student_name')
             template_values['student_email'] = self.session.get('student_email')
+            template_values['aspirations_completed'] = self.session.get('aspirations_completed')
+            template_values['education_completed'] = self.session.get('education_completed')
+            template_values['experience_completed'] = self.session.get('experience_completed')
+            template_values['personality_completed'] = self.session.get('personality_completed')
             template = jinja_environment.get_template('complementary.html')
             self.response.out.write(template.render(template_values))
         else:
@@ -651,7 +675,11 @@ class ImprovementAdvisory(BaseHandler):
                 'top_need': top_need,
                 'second_need': second_need,
                 'top_improvement': top_improvement,
-                'second_improvement': second_improvement
+                'second_improvement': second_improvement,
+                'aspirations_completed': self.session.get('aspirations_completed'),
+                'education_completed': self.session.get('education_completed'),
+                'experience_completed': self.session.get('experience_completed'),
+                'personality_completed': self.session.get('personality_completed')
             }
             template = jinja_environment.get_template('improvement.html')
             self.response.out.write(template.render(template_values))
@@ -711,7 +739,11 @@ class Profile(BaseHandler,blobstore_handlers.BlobstoreUploadHandler):
                 'user_email': student_email,
                 'upload_url': upload_url,
                 'pic':image,
-                'existing_networks': networks_html
+                'existing_networks': networks_html,
+                'aspirations_completed': self.session.get('aspirations_completed'),
+                'education_completed': self.session.get('education_completed'),
+                'experience_completed': self.session.get('experience_completed'),
+                'personality_completed': self.session.get('personality_completed')
             }
             template = jinja_environment.get_template('profile.html')
             self.response.out.write(template.render(template_values))
