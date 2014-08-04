@@ -343,9 +343,9 @@ temperaments = {
         },
         {
             'how to get along with this': [
-                'know thay you are very sensitive and may get hurt easily',
+                'know that you are very sensitive and may get hurt easily',
                 'realise that you are programmed with a pessimistic attitude',
-                'allow you space to deal with probable depression',
+                'allow yourself space to deal with probable depression',
                 'know that you appreciate sincere compliments',
                 'accept that you like it quiet sometimes',
                 'try to keep you in a reasonable schedule',
