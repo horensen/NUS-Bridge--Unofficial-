@@ -332,6 +332,11 @@ class Snapshot(BaseHandler):
                 # Register into the datastore
                 app_datastore.insert_user(student_profile_object)
                 logging.debug(self.session.get('log_identity') + " registered.")
+
+            self.session['aspirations_completed'] = aspirations_completed
+            self.session['education_completed'] = education_completed
+            self.session['experience_completed'] = experience_completed
+            self.session['personality_completed'] = personality_completed
                 
             template_values = {
                 # Jumbotron
