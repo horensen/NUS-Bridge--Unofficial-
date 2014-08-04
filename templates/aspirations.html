@@ -83,6 +83,7 @@
                 <li><a href="/personality">Personality</a></li>
               </ul>
             </li>
+            {% if aspirations_completed == True and education_completed == True and experience_completed == True and personality_completed == True %}
             <li class="dropdown">
               <a href="" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-th-large"></span> Analysis<b class="caret"></b></a>
               <ul class="dropdown-menu">
@@ -91,6 +92,7 @@
                 <li><a href="/improvement-advisory">Improvement Advisory</a></li>
               </ul>
             </li>
+            {% endif %}
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
