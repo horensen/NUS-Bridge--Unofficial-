@@ -256,7 +256,7 @@ temperaments = {
                 'realise that may have a tendancy to talk without thinking first',
                 'realise that you like variety and flexibility',
                 'need help to keep yourself from accepting more than what you can do',
-                'you would appreciate praises for everything you accomplish',
+                'know that you appreciate praises for everything you accomplish',
                 'know that you are a circumstantial person',
                 'realise that you mean well'
             ]
@@ -348,7 +348,7 @@ temperaments = {
                 'allow yourself space to deal with probable depression',
                 'know that you appreciate sincere compliments',
                 'accept that you like it quiet sometimes',
-                'try to keep you in a reasonable schedule',
+                'try to keep yourself in a reasonable schedule',
                 'realise that neatness is a necessity for you'
             ]
         }
@@ -438,9 +438,9 @@ temperaments = {
         {
             'how to get along with this': [
                 'recognise that you are a born leader',
-                'insist on two-way communication with you',
+                'insist on two-way communication',
                 'know that you don\'t mean to hurt',
-                'try to divide areas of responsibility with you',
+                'try to divide areas of responsibility',
                 'realise that you are not compassionate'
             ]
         }
@@ -525,10 +525,10 @@ temperaments = {
             'how to get along with this': [
                 'realise that you need direct motivation',
                 'know that you need to help to set goals',
-                'not expect enthusiasm from you',
+                'not expect enthusiasm from yourself',
                 'realise that putting things off is your form of quiet control',
                 'understand that you need to be encouraged to make decisions',
-                'not heap all the blame on you',
+                'not heap all the blame on yourself',
                 'understand that you need to be encouraged to accept responsibilities'
             ]
         }
