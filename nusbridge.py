@@ -28,7 +28,7 @@ import webapp2
 # GLOBAL VARIABLES
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + "/templates"), autoescape=True)
 app_domain = 'http://nusbridge.appspot.com/'
-ivle_api_key = 'O3nIU9c7l8jqYXfBMJlJN'
+ivle_api_key = '' # IMPORTANT: INSERT API KEY
 
 # BASE REQUEST HANDLER (SESSION MANAGEMENT)
 class BaseHandler(webapp2.RequestHandler):
