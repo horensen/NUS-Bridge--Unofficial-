@@ -27,8 +27,8 @@ import webapp2
 
 # GLOBAL VARIABLES
 jinja_environment = jinja2.Environment(loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + "/templates"), autoescape=True)
-app_domain = 'http://nusbridge.appspot.com/'
-ivle_api_key = '' # IMPORTANT: INSERT API KEY
+app_domain = 'https://nusbridge.appspot.com/'
+ivle_api_key = 'O3nIU9c7l8jqYXfBMJlJN' # IMPORTANT: INSERT API KEY
 
 # BASE REQUEST HANDLER (SESSION MANAGEMENT)
 class BaseHandler(webapp2.RequestHandler):
@@ -64,6 +64,7 @@ class MainPage(BaseHandler):
     def get(self):
         self.session['ivle_token'] = ""
         self.session['is_valid'] = False
+        self.session['student_id'] = ""
 
         template_values = {
             'login_url': 'https://ivle.nus.edu.sg/api/login/?apikey=' + ivle_api_key + '&url=' + app_domain + 'snapshot',
