@@ -323,7 +323,14 @@ class Snapshot(BaseHandler):
                 try:
                     social_networks_obj = app_datastore.get_user(self.session['student_id']).social_networks
                     for link in social_networks_obj:
-                        social_networks_html+="<a href=http://" + link + "><li>http://" + link + "</li></a>"
+                        
+                        # Append "http://" if any web addresses do not have that
+                        if "http://" in link or "https://" in link:
+                            link = link
+                        elif link != "":
+                            link = "http://" + link
+
+                        social_networks_html+="<a href=" + link + "><li>" + link + "</li></a>"
                 except Exception:
                     pass
 
@@ -332,12 +339,21 @@ class Snapshot(BaseHandler):
 
                 # Register into the datastore
                 app_datastore.insert_user(student_profile_object)
-                logging.debug(self.session.get('log_identity') + " registered.")
+                logging.debug(self.session.get('log_identity') + " registered")
 
+            # Determine whether the respective questionnaires are completed
             self.session['aspirations_completed'] = aspirations_completed
             self.session['education_completed'] = education_completed
             self.session['experience_completed'] = experience_completed
             self.session['personality_completed'] = personality_completed
+
+            # Append "http://" if any web addresses do not have that
+            website_html = app_datastore.get_user(self.session['student_id']).website
+            if "http://" in website_html or "https://" in website_html:
+                website_html = website_html
+            elif website_html != "":
+                website_html = "http://" + website_html
+
                 
             template_values = {
                 # Jumbotron
@@ -366,7 +382,7 @@ class Snapshot(BaseHandler):
                 'gender': app_datastore.get_user(self.session['student_id']).gender,
                 'country': app_datastore.get_user(self.session['student_id']).country,
                 'date_of_birth': app_datastore.get_user(self.session['student_id']).date_of_birth,
-                'website': app_datastore.get_user(self.session['student_id']).website,
+                'website': website_html,
                 'social_networks': social_networks_html
             }
 

@@ -113,11 +113,16 @@
                           temp = temp.split(",")
                           html = ''
                           for (i = 0; i < temp.length; i++) {
-                            html += "<li><a href=\"http://" + temp[i] + "\">" + temp[i] + "</a></li>"
+                            if (temp[i].indexOf("http://") > -1 || temp[i].indexOf("https://") > -1) {
+                              temp[i] = temp[i]
+                            } else if (temp[i] != "") {
+                              temp[i] = "http://" + temp[i]
+                            }
+                            html += "<li><a href=" + temp[i] + ">" + temp[i] + "</a></li>"
                           }
                           document.getElementById('my_networks_1').innerHTML = html;
                         </script>
-                        <a href="{{ person_1_website }}" class="btn btn-{% if person_1_website == '' %}default{% else %}info{% endif %} {% if person_1_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
+                        <a href="http://{{ person_1_website }}" class="btn btn-{% if person_1_website == '' %}default{% else %}info{% endif %} {% if person_1_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
                         <a href="mailto:{{person_1_email}}" class="btn btn-{% if person_1_email == '' %}default{% else %}info{% endif %} {% if person_1_email == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Email</a>
                       </div>
                     </p>
@@ -180,11 +185,16 @@
                           temp = temp.split(",")
                           html = ''
                           for (i = 0; i < temp.length; i++) {
-                            html += "<li><a href=\"http://" + temp[i] + "\">" + temp[i] + "</a></li>"
+                            if (temp[i].indexOf("http://") > -1 || temp[i].indexOf("https://") > -1) {
+                              temp[i] = temp[i]
+                            } else if (temp[i] != "") {
+                              temp[i] = "http://" + temp[i]
+                            }
+                            html += "<li><a href=" + temp[i] + ">" + temp[i] + "</a></li>"
                           }
                           document.getElementById('my_networks_2').innerHTML = html;
                         </script>
-                        <a href="{{ person_2_website }}" class="btn btn-{% if person_2_website == '' %}default{% else %}info{% endif %} {% if person_2_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
+                        <a href="http://{{ person_2_website }}" class="btn btn-{% if person_2_website == '' %}default{% else %}info{% endif %} {% if person_2_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
                         <a href="mailto:{{person_2_email}}" class="btn btn-{% if person_2_email == '' %}default{% else %}info{% endif %} {% if person_2_email == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Email</a>
                       </div>
                     </p>
@@ -249,11 +259,16 @@
                           temp = temp.split(",")
                           html = ''
                           for (i = 0; i < temp.length; i++) {
-                            html += "<li><a href=\"http://" + temp[i] + "\">" + temp[i] + "</a></li>"
+                            if (temp[i].indexOf("http://") > -1 || temp[i].indexOf("https://") > -1) {
+                              temp[i] = temp[i]
+                            } else if (temp[i] != "") {
+                              temp[i] = "http://" + temp[i]
+                            }
+                            html += "<li><a href=" + temp[i] + ">" + temp[i] + "</a></li>"
                           }
                           document.getElementById('my_networks_3').innerHTML = html;
                         </script>
-                        <a href="{{ person_3_website }}" class="btn btn-{% if person_3_website == '' %}default{% else %}info{% endif %} {% if person_3_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
+                        <a href="http://{{ person_3_website }}" class="btn btn-{% if person_3_website == '' %}default{% else %}info{% endif %} {% if person_3_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
                         <a href="mailto:{{person_3_email}}" class="btn btn-{% if person_3_email == '' %}default{% else %}info{% endif %} {% if person_3_email == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Email</a>
                       </div>
                     </p>
@@ -316,11 +331,16 @@
                           temp = temp.split(",")
                           html = ''
                           for (i = 0; i < temp.length; i++) {
-                            html += "<li><a href=\"http://" + temp[i] + "\">" + temp[i] + "</a></li>"
+                            if (temp[i].indexOf("http://") > -1 || temp[i].indexOf("https://") > -1) {
+                              temp[i] = temp[i]
+                            } else if (temp[i] != "") {
+                              temp[i] = "http://" + temp[i]
+                            }
+                            html += "<li><a href=" + temp[i] + ">" + temp[i] + "</a></li>"
                           }
                           document.getElementById('my_networks_4').innerHTML = html;
                         </script>
-                        <a href="{{ person_4_website }}" class="btn btn-{% if person_4_website == '' %}default{% else %}info{% endif %} {% if person_4_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
+                        <a href="http://{{ person_4_website }}" class="btn btn-{% if person_4_website == '' %}default{% else %}info{% endif %} {% if person_4_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
                         <a href="mailto:{{person_4_email}}" class="btn btn-{% if person_4_email == '' %}default{% else %}info{% endif %} {% if person_4_email == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Email</a>
                       </div>
                     </p>
@@ -385,11 +405,16 @@
                           temp = temp.split(",")
                           html = ''
                           for (i = 0; i < temp.length; i++) {
-                            html += "<li><a href=\"http://" + temp[i] + "\">" + temp[i] + "</a></li>"
+                            if (temp[i].indexOf("http://") > -1 || temp[i].indexOf("https://") > -1) {
+                              temp[i] = temp[i]
+                            } else if (temp[i] != "") {
+                              temp[i] = "http://" + temp[i]
+                            }
+                            html += "<li><a href=" + temp[i] + ">" + temp[i] + "</a></li>"
                           }
                           document.getElementById('my_networks_5').innerHTML = html;
                         </script>
-                        <a href="{{ person_5_website }}" class="btn btn-{% if person_5_website == '' %}default{% else %}info{% endif %} {% if person_5_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
+                        <a href="http://{{ person_5_website }}" class="btn btn-{% if person_5_website == '' %}default{% else %}info{% endif %} {% if person_5_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
                         <a href="mailto:{{person_5_email}}" class="btn btn-{% if person_5_email == '' %}default{% else %}info{% endif %} {% if person_5_email == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Email</a>
                       </div>
                     </p>
@@ -452,11 +477,16 @@
                           temp = temp.split(",")
                           html = ''
                           for (i = 0; i < temp.length; i++) {
-                            html += "<li><a href=\"http://" + temp[i] + "\">" + temp[i] + "</a></li>"
+                            if (temp[i].indexOf("http://") > -1 || temp[i].indexOf("https://") > -1) {
+                              temp[i] = temp[i]
+                            } else if (temp[i] != "") {
+                              temp[i] = "http://" + temp[i]
+                            }
+                            html += "<li><a href=" + temp[i] + ">" + temp[i] + "</a></li>"
                           }
                           document.getElementById('my_networks_6').innerHTML = html;
                         </script>
-                        <a href="{{ person_6_website }}" class="btn btn-{% if person_6_website == '' %}default{% else %}info{% endif %} {% if person_6_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
+                        <a href="http://{{ person_6_website }}" class="btn btn-{% if person_6_website == '' %}default{% else %}info{% endif %} {% if person_6_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
                         <a href="mailto:{{person_6_email}}" class="btn btn-{% if person_6_email == '' %}default{% else %}info{% endif %} {% if person_6_email == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Email</a>
                       </div>
                     </p>
@@ -521,11 +551,16 @@
                           temp = temp.split(",")
                           html = ''
                           for (i = 0; i < temp.length; i++) {
-                            html += "<li><a href=\"http://" + temp[i] + "\">" + temp[i] + "</a></li>"
+                            if (temp[i].indexOf("http://") > -1 || temp[i].indexOf("https://") > -1) {
+                              temp[i] = temp[i]
+                            } else if (temp[i] != "") {
+                              temp[i] = "http://" + temp[i]
+                            }
+                            html += "<li><a href=" + temp[i] + ">" + temp[i] + "</a></li>"
                           }
                           document.getElementById('my_networks_7').innerHTML = html;
                         </script>
-                        <a href="{{ person_7_website }}" class="btn btn-{% if person_7_website == '' %}default{% else %}info{% endif %} {% if person_7_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
+                        <a href="http://{{ person_7_website }}" class="btn btn-{% if person_7_website == '' %}default{% else %}info{% endif %} {% if person_7_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
                         <a href="mailto:{{person_7_email}}" class="btn btn-{% if person_7_email == '' %}default{% else %}info{% endif %} {% if person_7_email == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Email</a>
                       </div>
                     </p>
@@ -588,11 +623,16 @@
                           temp = temp.split(",")
                           html = ''
                           for (i = 0; i < temp.length; i++) {
-                            html += "<li><a href=\"http://" + temp[i] + "\">" + temp[i] + "</a></li>"
+                            if (temp[i].indexOf("http://") > -1 || temp[i].indexOf("https://") > -1) {
+                              temp[i] = temp[i]
+                            } else if (temp[i] != "") {
+                              temp[i] = "http://" + temp[i]
+                            }
+                            html += "<li><a href=" + temp[i] + ">" + temp[i] + "</a></li>"
                           }
                           document.getElementById('my_networks_8').innerHTML = html;
                         </script>
-                        <a href="{{ person_8_website }}" class="btn btn-{% if person_8_website == '' %}default{% else %}info{% endif %} {% if person_8_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
+                        <a href="http://{{ person_8_website }}" class="btn btn-{% if person_8_website == '' %}default{% else %}info{% endif %} {% if person_8_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
                         <a href="mailto:{{person_8_email}}" class="btn btn-{% if person_8_email == '' %}default{% else %}info{% endif %} {% if person_8_email == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Email</a>
                       </div>
                     </p>
@@ -657,11 +697,16 @@
                           temp = temp.split(",")
                           html = ''
                           for (i = 0; i < temp.length; i++) {
-                            html += "<li><a href=\"http://" + temp[i] + "\">" + temp[i] + "</a></li>"
+                            if (temp[i].indexOf("http://") > -1 || temp[i].indexOf("https://") > -1) {
+                              temp[i] = temp[i]
+                            } else if (temp[i] != "") {
+                              temp[i] = "http://" + temp[i]
+                            }
+                            html += "<li><a href=" + temp[i] + ">" + temp[i] + "</a></li>"
                           }
                           document.getElementById('my_networks_9').innerHTML = html;
                         </script>
-                        <a href="{{ person_9_website }}" class="btn btn-{% if person_9_website == '' %}default{% else %}info{% endif %} {% if person_9_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
+                        <a href="http://{{ person_9_website }}" class="btn btn-{% if person_9_website == '' %}default{% else %}info{% endif %} {% if person_9_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
                         <a href="mailto:{{person_9_email}}" class="btn btn-{% if person_9_email == '' %}default{% else %}info{% endif %} {% if person_9_email == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Email</a>
                       </div>
                     </p>
@@ -724,11 +769,16 @@
                           temp = temp.split(",")
                           html = ''
                           for (i = 0; i < temp.length; i++) {
-                            html += "<li><a href=\"http://" + temp[i] + "\">" + temp[i] + "</a></li>"
+                            if (temp[i].indexOf("http://") > -1 || temp[i].indexOf("https://") > -1) {
+                              temp[i] = temp[i]
+                            } else if (temp[i] != "") {
+                              temp[i] = "http://" + temp[i]
+                            }
+                            html += "<li><a href=" + temp[i] + ">" + temp[i] + "</a></li>"
                           }
                           document.getElementById('my_networks_10').innerHTML = html;
                         </script>
-                        <a href="{{ person_10_website }}" class="btn btn-{% if person_10_website == '' %}default{% else %}info{% endif %} {% if person_10_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
+                        <a href="http://{{ person_10_website }}" class="btn btn-{% if person_10_website == '' %}default{% else %}info{% endif %} {% if person_10_website == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Website</a>
                         <a href="mailto:{{person_10_email}}" class="btn btn-{% if person_10_email == '' %}default{% else %}info{% endif %} {% if person_10_email == '' %}disabled{% endif %}"><span class="glyphicon glyphicon-link"></span> Email</a>
                       </div>
                     </p>

@@ -178,7 +178,7 @@
             <div class="well">
               <a class="pull-right" href="/profile">Edit</a>
               <h4>Online Presence</h4>
-              <p>Website: {% if website != '' %}<b>{{ website }}</b>{% else %}None{% endif %}</p>
+              <p>Website: {% if website != '' %}<b><a href="{{ website }}">{{ website }}</a></b>{% else %}None{% endif %}</p>
               <p>Social Networks:</p><b><ul id="social_networks_li">None</ul></b>
               <script>
                 var social_networks = "{{ social_networks }}";
