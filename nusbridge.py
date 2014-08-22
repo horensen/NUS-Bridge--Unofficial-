@@ -767,11 +767,31 @@ class Profile(BaseHandler,blobstore_handlers.BlobstoreUploadHandler):
         else:
             self.redirect(app_domain)
 
+class Stats(BaseHandler):
+    def get(self):
+        user_count = app_datastore.get_number_of_users()
+        #asp_list = app_datastore.get_all_aspirations()
+        #asp_dict={}
+        #for asp in asp_list:
+        #    if (asp in asp_dict):
+        #        asp_dict[asp]=asp_dict.get(asp)+1
+        #    else:
+        #        asp_dict[asp]=1
+        #sorted_dict=sorted(asp_dict,key=asp_dict.get, reverse=True)
+        #common_asp=sorted_dict[0]
 
+        template_values = {
+            'user_count': user_count,
+        #    'most_common_asp': common_asp,
+        #    'count_of_most_common_asp': 0
+        }
+        template = jinja_environment.get_template('stats.html')
+        self.response.out.write(template.render(template_values))
 
 # WEB SERVER GATE INTERFACE
 app = webapp2.WSGIApplication([
     ('/', MainPage),
+    ('/stats', Stats),
     ('/profile', Profile),
     ('/snapshot', Snapshot),
     ('/aspirations', Aspirations),
